@@ -35,4 +35,4 @@ Compiling the swc
 - Set alc-on to use the alchemy compiler
 - change directory to your RecastAS3\recast_alchemy directory
 - run the command: make
-- swc is outputed to bin/recast.swc
+- swc is outputed to recast_alchemy/recast.swc
