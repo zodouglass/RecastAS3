@@ -7,3 +7,12 @@ bin-release/
 .flexProperties
 .settings/
 .project
+
+#alchemy files
+*.o
+*.achacks.as
+*.achacks.exe
+*.achacks.exe.bc
+*.achacks.o
+*.achacks.swc
+*.achacks.abc
