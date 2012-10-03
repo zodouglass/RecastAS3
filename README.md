@@ -17,10 +17,10 @@ TODO
 
 Directories
 ============
-as3_demo_2d 		- simple 2d example (project file included for FlashDevelop)
-recast_alchemy 		- alchemy wrapper classes to compile C++ code to swc. Also includes latest swc build.
-recast_alchemy/demo - Modified files from the recastnavigation/RecastDemo project (removing debug drawing code)
-recastnavigation 	- C++ source code from recastnavigation project (https://code.google.com/p/recastnavigation/). Using revision 343 (June 02, 2012)
+- as3_demo_2d 		- simple 2d example (project file included for FlashDevelop)
+- recast_alchemy 		- alchemy wrapper classes to compile C++ code to swc. Also includes latest swc build.
+- recast_alchemy/demo - Modified files from the recastnavigation/RecastDemo project (removing debug drawing code)
+- recastnavigation 	- C++ source code from recastnavigation project (https://code.google.com/p/recastnavigation/). Using revision 343 (June 02, 2012)
 
 Howto
 ======
