@@ -1,6 +1,10 @@
-CC=g++
-CFLAGS=-O3 -g -Wall -swc --combine -o
-OUTPUT_SWC=recast.swc
+include Makefile.common
+
+CC="$(FLASCC)/usr/bin/g++"
+#CFLAGS=-O3 -g -Wall -swc --combine -o
+CFLAGS=-O4
+#OUTPUT_SWC=recast.swc
+OUTPUT_SWC=-emit-swc=recast.navigation -o recast.swc
 OUTPUT_OBJ=./obj
 
 DETOUR_OBJS=${OUTPUT_OBJ}/DetourAlloc.o  ${OUTPUT_OBJ}/DetourCommon.o  ${OUTPUT_OBJ}/DetourNavMesh.o  ${OUTPUT_OBJ}/DetourNavMeshBuilder.o  ${OUTPUT_OBJ}/DetourNavMeshQuery.o  ${OUTPUT_OBJ}/DetourNode.o
@@ -75,7 +79,7 @@ RecastDemo:
 	${CC} -Wall -c ${ALL_INCS} -o ${OUTPUT_OBJ}/InputGeom.o ${RECAST_DEMO_SOURCE}/InputGeom.cpp
 	${CC} -Wall -c ${ALL_INCS} -o ${OUTPUT_OBJ}/Sample.o ${RECAST_DEMO_SOURCE}/Sample.cpp
 	${CC} -Wall -c ${ALL_INCS} -o ${OUTPUT_OBJ}/SoloMesh.o ${RECAST_DEMO_SOURCE}/SoloMesh.cpp
-	gcc -Wall -c -o ${OUTPUT_OBJ}/fastlz.o ${RECAST_DEMO_SOURCE}/fastlz.c
+	"$(FLASCC)/usr/bin/gcc" -Wall -c -o ${OUTPUT_OBJ}/fastlz.o ${RECAST_DEMO_SOURCE}/fastlz.c
 	${CC} -Wall -c ${ALL_INCS} -o ${OUTPUT_OBJ}/Sample_TempObstacles.o ${RECAST_DEMO_SOURCE}/Sample_TempObstacles.cpp
 	
 #${CC} -Wall -c ${ALL_INCS} ${RECAST_DEMO_SOURCE}/Sample_SoloMesh.cpp
@@ -83,13 +87,42 @@ RecastDemo:
 
 clean:
 	rm ./obj/*.o
-	rm *.achacks.o
-	rm *.achacks.as
-	rm *.achacks.swc
-	rm *.achacks.exe
-	rm *.achacks.exe.bc
-	rm *.achacks.abc
 
 
 swc: 
-	${CC} ${ALL_INCS} main.cpp ${CFLAGS} ${OUTPUT_SWC} ${ALL_OBJS} -lm
+	${CC} ${ALL_INCS} $(BASE_CFLAGS) ${CFLAGS} main.cpp ${OUTPUT_SWC} ${ALL_OBJS}
+	#${CC} ${ALL_INCS} $(BASE_CFLAGS) ${CFLAGS} as3api.cpp main.cpp ${OUTPUT_SWC} ${ALL_OBJS} -lm
+
+swig:
+	
+	#swig from swig.h and swigmain.cpp
+	#"$(FLASCC)/usr/bin/swig" -as3 -module Recast -outdir . -includeall $(ALL_INCS) -ignoremissing -o Recast_wrapper.c swig.h
+	#$(AS3COMPILERARGS) -import $(call nativepath,$(FLASCC)/usr/lib/builtin.abc) -import $(call nativepath,$(FLASCC)/usr/lib/playerglobal.abc) Recast.as
+	#mv Recast.as Recast.as3
+	#"$(FLASCC)/usr/bin/g++" $(BASE_CFLAGS) Recast.abc Recast_wrapper.c swigmain.cpp -emit-swc=recast.navigation.Recast -o Recast.swc
+
+	#swig from recast.i file
+	# Generate the SWIG wrappers
+	PATH="$(call unixpath,$(FLASCC)/usr/bin):$(PATH)" swig -as3 -package org.recastnavigation -c++ -DBT_USE_DOUBLE_PRECISION $(ALL_INCS) -module Recast recast.i &> build/swig.log
+	mv Recast_wrap.cxx build
+	mv Recast.as build
+	
+	# Compile the SWIG AS3 wrappers
+	java -jar $(call nativepath,$(FLASCC)/usr/lib/asc2.jar) -import $(call nativepath,$(FLASCC)/usr/lib/builtin.abc) -import $(call nativepath,$(FLASCC)/usr/lib/playerglobal.abc) build/Recast.as
+
+	# Compile the SWIG C++ wrappers
+	PATH="$(call unixpath,$(FLASCC)/usr/bin):$(PATH)" g++ $(BASE_CFLAGS) -DBT_USE_DOUBLE_PRECISION $(ALL_INCS) build/Recast_wrap.cxx -O4 -c
+	mv Recast_wrap.o build
+
+	# protect the required symbols in the LTO exports file
+	cp -f exports.txt build/
+	chmod u+rw build/exports.txt
+	PATH="$(call unixpath,$(FLASCC)/usr/bin):$(PATH)" nm build/Recast_wrap.o | grep " T " | awk '{print $$3}' | sed 's/__/_/' >> build/exports.txt
+
+	# Link the final library
+	PATH="$(call unixpath,$(FLASCC)/usr/bin):$(PATH)" g++ $(BASE_CFLAGS) -DBT_USE_DOUBLE_PRECISION $(ALL_INCS) main.cpp \
+	build/Recast_wrap.o build/Recast.abc \
+	-Wl,--start-group \
+	-Wl,--end-group \
+	-emit-swc=org.recastnavigation -O4 -flto-api=exports.txt $(EXTRA_OPTS) -o build/Recast.swc
+

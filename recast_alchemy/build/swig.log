@@ -1,0 +1,19 @@
+../recastnavigation/Recast/Include/Recast.h:107: Warning 502: Overloaded constructor ignored.  rcContext::rcContext()
+../recastnavigation/Recast/Include/Recast.h:107: Warning 502: Previous declaration is rcContext::rcContext(bool)
+../recastnavigation/Recast/Include/Recast.h:131: Warning 314: 'label' is an AS3 keyword, renaming to '_label'
+../recastnavigation/Recast/Include/Recast.h:135: Warning 314: 'label' is an AS3 keyword, renaming to '_label'
+../recastnavigation/Recast/Include/Recast.h:140: Warning 314: 'label' is an AS3 keyword, renaming to '_label'
+../recastnavigation/Recast/Include/Recast.h:804: Warning 501: Overloaded declaration ignored.  rcRasterizeTriangle(rcContext *,float const *,float const *,float const *,unsigned char const,rcHeightfield &)
+../recastnavigation/Recast/Include/Recast.h:804: Warning 501: Previous declaration is rcRasterizeTriangle(rcContext *,float const *,float const *,float const *,unsigned char const,rcHeightfield &,int const)
+../recastnavigation/Recast/Include/Recast.h:819: Warning 501: Overloaded declaration ignored.  rcRasterizeTriangles(rcContext *,float const *,int const,int const *,unsigned char const *,int const,rcHeightfield &)
+../recastnavigation/Recast/Include/Recast.h:819: Warning 501: Previous declaration is rcRasterizeTriangles(rcContext *,float const *,int const,int const *,unsigned char const *,int const,rcHeightfield &,int const)
+../recastnavigation/Recast/Include/Recast.h:834: Warning 501: Overloaded declaration ignored.  rcRasterizeTriangles(rcContext *,float const *,int const,unsigned short const *,unsigned char const *,int const,rcHeightfield &,int const)
+../recastnavigation/Recast/Include/Recast.h:819: Warning 501: Previous declaration is rcRasterizeTriangles(rcContext *,float const *,int const,int const *,unsigned char const *,int const,rcHeightfield &,int const)
+../recastnavigation/Recast/Include/Recast.h:834: Warning 501: Overloaded declaration ignored.  rcRasterizeTriangles(rcContext *,float const *,int const,unsigned short const *,unsigned char const *,int const,rcHeightfield &)
+../recastnavigation/Recast/Include/Recast.h:819: Warning 501: Previous declaration is rcRasterizeTriangles(rcContext *,float const *,int const,int const *,unsigned char const *,int const,rcHeightfield &,int const)
+../recastnavigation/Recast/Include/Recast.h:846: Warning 501: Overloaded declaration ignored.  rcRasterizeTriangles(rcContext *,float const *,unsigned char const *,int const,rcHeightfield &,int const)
+../recastnavigation/Recast/Include/Recast.h:819: Warning 501: Previous declaration is rcRasterizeTriangles(rcContext *,float const *,int const,int const *,unsigned char const *,int const,rcHeightfield &,int const)
+../recastnavigation/Recast/Include/Recast.h:846: Warning 501: Overloaded declaration ignored.  rcRasterizeTriangles(rcContext *,float const *,unsigned char const *,int const,rcHeightfield &)
+../recastnavigation/Recast/Include/Recast.h:819: Warning 501: Previous declaration is rcRasterizeTriangles(rcContext *,float const *,int const,int const *,unsigned char const *,int const,rcHeightfield &,int const)
+../recastnavigation/Recast/Include/Recast.h:1070: Warning 501: Overloaded declaration ignored.  rcBuildContours(rcContext *,rcCompactHeightfield &,float const,int const,rcContourSet &)
+../recastnavigation/Recast/Include/Recast.h:1070: Warning 501: Previous declaration is rcBuildContours(rcContext *,rcCompactHeightfield &,float const,int const,rcContourSet &,int const)

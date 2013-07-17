@@ -24,15 +24,13 @@ Directories
 
 Requirements
 ============
-- Cygwin (for windows): http://www.cygwin.com/
-- Adobe Alchemy toolkit: http://labs.adobe.com/technologies/alchemy/
-- Follow the getting started document for Adobe Alchemy to configure cygwin to use the alchemy compiler: http://labs.adobe.com/wiki/index.php/Alchemy:Documentation:Getting_Started
-- To make sure you are using the correct compiler, run the command "which gcc" in cygwin. Should output /cygdrive/c/path_to_your_alchemy_toolkit/alchemy-cygwin-v0.5a/achacks/gcc
+- Compile with Adobe Crossbridge (formely Alchemy): https://github.com/adobe-flash/crossbridge
+- Read the readme after installation
 
 Compiling the swc
 ==================
-- open cygwin.
-- Set alc-on to use the alchemy compiler
+- open cygwin from Crossbridge
 - change directory to your RecastAS3\recast_alchemy directory
-- run the command: make
+- run the command: make all FLASCC=/cygdrive/c/sdk/Crossbridge_1.0.1/sdk/ FLEX=/cygdrive/c/sdk/flex_sdk_4.6.0.23201B_air_3.2/
+	(changing the locations as necessary)
 - swc is outputed to recast_alchemy/recast.swc
