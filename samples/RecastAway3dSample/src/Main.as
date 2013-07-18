@@ -5,11 +5,14 @@ package
 	import away3d.containers.View3D;
 	import away3d.controllers.FirstPersonController;
 	import away3d.controllers.HoverController;
+	import away3d.core.pick.PickingColliderType;
 	import away3d.debug.AwayStats;
 	import away3d.entities.Mesh;
 	import away3d.events.AssetEvent;
+	import away3d.events.MouseEvent3D;
 	import away3d.library.AssetLibrary;
 	import away3d.library.assets.AssetType;
+	import away3d.lights.DirectionalLight;
 	import away3d.lights.PointLight;
 	import away3d.loaders.parsers.OBJParser;
 	import away3d.loaders.parsers.Parsers;
@@ -20,6 +23,7 @@ package
 	import away3d.materials.methods.FresnelSpecularMethod;
 	import away3d.materials.methods.SubsurfaceScatteringDiffuseMethod;
 	import away3d.materials.TextureMaterial;
+	import away3d.primitives.CubeGeometry;
 	import away3d.primitives.PlaneGeometry;
 	import away3d.textures.BitmapTexture;
 	import away3d.utils.Cast;
@@ -27,11 +31,19 @@ package
 	import flash.display.StageAlign;
 	import flash.display.StageScaleMode;
 	import flash.events.Event;
+	import flash.events.KeyboardEvent;
+	import flash.events.MouseEvent;
 	import flash.geom.Vector3D;
+	import flash.ui.Keyboard;
 	import flash.utils.ByteArray;
+	import flash.utils.Dictionary;
 	import org.recastnavigation.AS3_rcContext;
 	import org.recastnavigation.CModule;
 	import org.recastnavigation.dtCrowd;
+	import org.recastnavigation.dtCrowdAgent;
+	import org.recastnavigation.dtCrowdAgentParams;
+	import org.recastnavigation.dtNavMeshQuery;
+	import org.recastnavigation.findNearestPoly2;
 	import org.recastnavigation.InputGeom;
 	import org.recastnavigation.Sample_TempObstacles;
 	
@@ -78,10 +90,12 @@ package
 			initMaterials();
 			initLights();
 			initObjects();
+			initListeners();
 		}
 		
 		private function initRecast():void
 		{
+			CModule.startAsync(this);
 			
 			//load the mesh file into recast
 			var b:ByteArray = new myObjFile();
@@ -129,10 +143,15 @@ package
 			//build mesh
 			sample.setContext(as3LogContext.swigCPtr);
 			sample.handleMeshChanged(geom.swigCPtr);
+			sample.handleSettings();
 			
 			var startTime:Number = new Date().valueOf();
 			var buildSuccess:Boolean = sample.handleBuild();
 			trace("build time", new Date().valueOf() - startTime, "ms");
+			
+			crowd = new dtCrowd();
+			crowd.swigCPtr = sample.getCrowd();
+			crowd.init(MAX_AGENTS, MAX_AGENT_RADIUS, sample.getNavMesh() );
 		}
 		
 		private function initEngine():void
@@ -142,23 +161,31 @@ package
  
 			view = new View3D();
 			
-			view.camera.z = -600;
-			view.camera.y = 500;
-			view.camera.lookAt(new Vector3D());
+			
+			camera = view.camera;
+			camera.lens.far = 14000;
+			camera.lens.near = .05;
+			camera.x = -30;
+			camera.y = 46;
+			camera.z = -30;
+			//view.camera.lookAt(new Vector3D());
 			
 			_plane = new Mesh(new PlaneGeometry(700, 700), new TextureMaterial(Cast.bitmapTexture(FloorDiffuse)));
 			_plane.material.lightPicker = lightPicker;
-			view.scene.addChild(_plane);
+			//view.scene.addChild(_plane);
  
 			//setup controller to be used on the camera
 			
-			//firstPersonCameraController = new FirstPersonController(view.camera);
+			cameraController = new FirstPersonController(camera, 180, 0, -80, 80);
+			cameraController.fly = true;
+			cameraController.panAngle = 396;
+			cameraController.tiltAngle = 31;
  
 			addChild(view);
  
-			addChild(new AwayStats(view));
+			awayStats = new AwayStats(view);
+			addChild(awayStats);
 			
-			addEventListener(Event.ENTER_FRAME, _onEnterFrame);
 
 		}
 		
@@ -166,9 +193,9 @@ package
 		{
 			//setup custom bitmap material
 			geomMaterial = new TextureMaterial(new BitmapTexture(new Diffuse().bitmapData));
-			//geomMaterial.normalMap = new BitmapTexture(new Normal().bitmapData);
-			//geomMaterial.specularMap = new BitmapTexture(new Specular().bitmapData);
-			//geomMaterial.lightPicker = lightPicker;
+			geomMaterial.normalMap = new BitmapTexture(new Normal().bitmapData);
+			geomMaterial.specularMap = new BitmapTexture(new Specular().bitmapData);
+			geomMaterial.lightPicker = lightPicker;
 			//geomMaterial.gloss = 10;
 			//geomMaterial.specular = 3;
 			//geomMaterial.ambientColor = 0x303040;
@@ -196,13 +223,21 @@ package
 		{
 			light = new PointLight();
 			light.x = 0;
-			light.z = 0;
+			light.y = 100;
 			light.color = 0xffddbb;
-			light.ambient = 1;
+			light.ambient = 0.2;
 			
-			lightPicker = new StaticLightPicker([light]);
+			light2 = new DirectionalLight();
+			light2.direction = new Vector3D(1, -1, 1);
+			light2.color = 0xece9d3;
+			light2.ambient = 0.8;
+			light2.diffuse = 0.5;
+			
+			lightPicker = new StaticLightPicker([light2]);
  
-			view.scene.addChild(light);
+//			view.scene.addChild(light);
+
+
 		}
 		
 		private function initObjects():void
@@ -218,7 +253,10 @@ package
 		{
 			if (event.asset.assetType == AssetType.MESH) {
 				geomMesh = event.asset as Mesh;
-				geomMesh.geometry.scale(10); //TODO scale cannot be performed on mesh when using sub-surface diffuse method
+				//geomMesh.geometry.scale(10); 
+				geomMesh.mouseEnabled = true;
+				geomMesh.pickingCollider = PickingColliderType.AS3_BEST_HIT;
+				geomMesh.addEventListener(MouseEvent3D.CLICK, onMeshClick );
 				//geomMesh.y = -50;
 				//geomMesh.rotationY = 180;
 				//geomMesh.material =  new TextureMaterial(Cast.bitmapTexture(Diffuse));
@@ -232,14 +270,206 @@ package
 			}
 		}
 		
+		private function onMeshClick(e:MouseEvent3D):void
+		{
+			trace(e.scenePosition);
+			
+			if ( e.shiftKey ) //add agent
+			{
+				var idx:int = addAgentNear( e.scenePosition );
+				
+				//test the location
+				var agent:dtCrowdAgent = new dtCrowdAgent();
+				agent.swigCPtr = crowd.getAgent(idx);
+				
+				trace("agent added at " + CModule.readFloat( agent.npos ), CModule.readFloat( agent.npos + 4 ), CModule.readFloat( agent.npos + 8));
+				//agentObjectsByAgendIdx[ idx ].x = CModule.readFloat( agent.npos );
+				//agentObjectsByAgendIdx[ idx ].y = CModule.readFloat( agent.npos +4 );
+				//agentObjectsByAgendIdx[ idx ].z = CModule.readFloat( agent.npos +8 );
+			}
+		}
+		
+		private function addAgentNear(scenePosition:Vector3D):int
+		{
+			var cube:CubeGeometry = new CubeGeometry(1, 1, 1);
+			var cubeMesh:Mesh = new Mesh(cube, new ColorMaterial(0xff0000, 0.5));
+			cubeMesh.position = scenePosition;
+			view.scene.addChild(cubeMesh);
+			
+			var posPtr:int = CModule.alloca(12);
+			CModule.writeFloat(posPtr, scenePosition.x);
+			CModule.writeFloat(posPtr + 4, scenePosition.y);
+			CModule.writeFloat(posPtr + 8, scenePosition.z);
+			
+			var params:dtCrowdAgentParams = dtCrowdAgentParams.create();
+			params.radius  = MAX_AGENT_RADIUS;
+			params.height  = 2;
+			params.maxAcceleration = MAX_ACCEL;
+			params.maxSpeed = MAX_SPEED;
+			params.collisionQueryRange = 12;
+			params.pathOptimizationRange = 30;
+			
+			//params.updateFlags = "0";
+			//params.obstacleAvoidanceType = 1.0;
+			//params.updateFlags |= "1";
+			
+			var idx:int = crowd.addAgent(posPtr, params.swigCPtr );
+			
+			var navquery:dtNavMeshQuery  = new dtNavMeshQuery();
+			navquery.swigCPtr =  sample.getNavMeshQuery();
+			//const dtQueryFilter* filter = crowd->getFilter();
+			//const float* ext = crowd->getQueryExtents();
+
+			var targetRef:int = CModule.alloca(4);
+			var targetPos:int = CModule.alloca(12);
+			
+			var statusPtr:int = navquery.findNearestPoly(posPtr, crowd.getQueryExtents(), crowd.getFilter(), targetRef, targetPos);
+			//var status:int = findNearestPoly2(navquery, posPtr, crowd.getQueryExtents(), crowd.getFilter(), targetRef, targetPos);
+			
+			trace(CModule.readFloat(targetPos), CModule.readFloat(targetPos+4), CModule.readFloat(targetPos+8));
+			
+			var test1:Number = CModule.readFloat(targetRef);
+			var test2:Number = CModule.readFloat(targetPos);
+		
+			if (targetRef > 0)
+				crowd.requestMoveTarget(idx, targetRef, targetPos);
+			
+			agentObjectsByAgendIdx[ idx ] = cubeMesh;
+			
+			return idx;
+		}
 		/**
 		 * render loop
 		 */
-		private function _onEnterFrame(e:Event):void
+		private function onEnterFrame(e:Event):void
 		{
+			
+			//set the camera height based on the terrain (with smoothing)
+			///camera.y += 0.2*(terrain.getHeightAt(camera.x, camera.z) + 20 - camera.y);
+			
+			if (move) {
+				cameraController.panAngle = 0.3*(stage.mouseX - lastMouseX) + lastPanAngle;
+				cameraController.tiltAngle = 0.3*(stage.mouseY - lastMouseY) + lastTiltAngle;
+				
+			}
+			
+			if (walkSpeed || walkAcceleration) {
+				walkSpeed = (walkSpeed + walkAcceleration)*drag;
+				if (Math.abs(walkSpeed) < 0.01)
+					walkSpeed = 0;
+				cameraController.incrementWalk(walkSpeed);
+			}
+			
+			//trace(camera.x, camera.y, camera.z, cameraController.panAngle, cameraController.tiltAngle);
+			
+			if (strafeSpeed || strafeAcceleration) {
+				strafeSpeed = (strafeSpeed + strafeAcceleration)*drag;
+				if (Math.abs(strafeSpeed) < 0.01)
+					strafeSpeed = 0;
+				cameraController.incrementStrafe(strafeSpeed);
+			}
+			
+			
 			view.render();
 		}
+		
+		private function initListeners():void
+		{
+			addEventListener(Event.ENTER_FRAME, onEnterFrame);
+			stage.addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
+			stage.addEventListener(MouseEvent.MOUSE_UP, onMouseUp);
+			stage.addEventListener(Event.RESIZE, onResize);
+			stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
+			stage.addEventListener(KeyboardEvent.KEY_UP, onKeyUp);
+			//onResize();
+		}
 
+		/**
+		 * Key down listener for camera control
+		 */
+		private function onKeyDown(event:KeyboardEvent):void
+		{
+			switch (event.keyCode) {
+				case Keyboard.UP:
+				case Keyboard.W:
+					walkAcceleration = walkIncrement;
+					break;
+				case Keyboard.DOWN:
+				case Keyboard.S:
+					walkAcceleration = -walkIncrement;
+					break;
+				case Keyboard.LEFT:
+				case Keyboard.A:
+					strafeAcceleration = -strafeIncrement;
+					break;
+				case Keyboard.RIGHT:
+				case Keyboard.D:
+					strafeAcceleration = strafeIncrement;
+					break;
+			}
+		}
+		
+		/**
+		 * Key up listener for camera control
+		 */
+		private function onKeyUp(event:KeyboardEvent):void
+		{
+			switch (event.keyCode) {
+				case Keyboard.UP:
+				case Keyboard.W:
+				case Keyboard.DOWN:
+				case Keyboard.S:
+					walkAcceleration = 0;
+					break;
+				case Keyboard.LEFT:
+				case Keyboard.A:
+				case Keyboard.RIGHT:
+				case Keyboard.D:
+					strafeAcceleration = 0;
+					break;
+				
+			}
+		}
+		/**
+		 * Mouse down listener for navigation
+		 */
+		private function onMouseDown(event:MouseEvent):void
+		{
+			move = true;
+			lastPanAngle = cameraController.panAngle;
+			lastTiltAngle = cameraController.tiltAngle;
+			lastMouseX = stage.mouseX;
+			lastMouseY = stage.mouseY;
+			stage.addEventListener(Event.MOUSE_LEAVE, onStageMouseLeave);
+		}
+		
+		/**
+		 * Mouse up listener for navigation
+		 */
+		private function onMouseUp(event:MouseEvent):void
+		{
+			move = false;
+			stage.removeEventListener(Event.MOUSE_LEAVE, onStageMouseLeave);
+		}
+		
+		/**
+		 * Mouse stage leave listener for navigation
+		 */
+		private function onStageMouseLeave(event:Event):void
+		{
+			move = false;
+			stage.removeEventListener(Event.MOUSE_LEAVE, onStageMouseLeave);
+		}
+		
+		/**
+		 * stage listener for resize events
+		 */
+		private function onResize(event:Event = null):void
+		{
+			view.width = stage.stageWidth;
+			view.height = stage.stageHeight;
+			awayStats.x = stage.stageWidth - awayStats.width;
+		}
  
 		
 		//recast variables
@@ -247,10 +477,12 @@ package
 		private var geom:InputGeom;
 		private var crowd:dtCrowd;
 		
+		private var agentObjectsByAgendIdx:Dictionary = new Dictionary();
+		
 		//engine variables
 		private var view:View3D;
-		private var cameraController:HoverController;
-		private var firstPersonCameraController:FirstPersonController;
+		private var camera:Camera3D;
+		private var cameraController:FirstPersonController;
 		
 		//material objects
 		private var geomMaterial:TextureMaterial;
@@ -262,7 +494,26 @@ package
 		private var _plane:Mesh;
 		private var geomMesh:Mesh;
 		private var light:PointLight;
+		private var light2:DirectionalLight;
 		private var lightPicker:StaticLightPicker;
+		
+		//rotation variables
+		private var move:Boolean = false;
+		private var lastPanAngle:Number;
+		private var lastTiltAngle:Number;
+		private var lastMouseX:Number;
+		private var lastMouseY:Number;
+		
+		//movement variables
+		private var drag:Number = 0.5;
+		private var walkIncrement:Number = 2;
+		private var strafeIncrement:Number = 2;
+		private var walkSpeed:Number = 10;
+		private var strafeSpeed:Number = 10;
+		private var walkAcceleration:Number = 0;
+		private var strafeAcceleration:Number = 0;
+		
+		private var awayStats:AwayStats;
 	}
 	
 }

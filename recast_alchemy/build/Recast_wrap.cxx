@@ -198,6 +198,79 @@ template <typename T> T SwigValueInit() {
 	#include "Sample_TempObstacles.h"
 
 
+void findNearestPoly2() __attribute__((used,
+	annotate("as3sig:public function findNearestPoly2(self, center:int, extents:int, filter:int, nearestRef:int, nearestPt:int):int"),
+	annotate("as3package:org.recastnavigation")));
+
+void findNearestPoly2() {
+  dtNavMeshQuery *arg1 = (dtNavMeshQuery *) 0 ;
+  float *arg2 = (float *) 0 ;
+  float *arg3 = (float *) 0 ;
+  dtQueryFilter *arg4 = (dtQueryFilter *) 0 ;
+  dtPolyRef *arg5 = (dtPolyRef *) 0 ;
+  float *arg6 = (float *) 0 ;
+  int arg5Loc;
+  int arg6Loc;
+  dtStatus result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, center);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, extents);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, filter);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, nearestRef);
+  }
+  {
+    AS3_GetScalarFromVar(arg6, nearestPt);
+  }
+
+//test trace
+/*
+   float bmin[3], bmax[3];
+	dtVsub(bmin, (float const *)arg2, (float const *)arg3);
+	dtVadd(bmax, (float const *)arg2, (float const *)arg3);
+
+   AS3_DeclareVar(as3bMinX, Number);
+   AS3_DeclareVar(as3bMinY, Number);
+   AS3_DeclareVar(as3bMinZ, Number);
+   AS3_DeclareVar(as3bMaxX, Number);
+   AS3_DeclareVar(as3bMaxY, Number);
+   AS3_DeclareVar(as3bMaxZ, Number);
+   AS3_CopyScalarToVar( as3bMinX, bmin[0] );
+   AS3_CopyScalarToVar( as3bMinY, bmin[1] );
+   AS3_CopyScalarToVar( as3bMinZ, bmin[2] );
+
+   AS3_CopyScalarToVar( as3bMaxX, bmax[0] );
+   AS3_CopyScalarToVar( as3bMaxY, bmax[1] );
+   AS3_CopyScalarToVar( as3bMaxZ, bmax[2] );
+   AS3_Trace(as3bMinX);
+   AS3_Trace(as3bMinY);
+   AS3_Trace(as3bMinZ);
+   AS3_Trace(as3bMaxX);
+   AS3_Trace(as3bMaxY);
+   AS3_Trace(as3bMaxZ);
+*/
+
+  result = (dtStatus)((dtNavMeshQuery const *)arg1)->findNearestPoly((float const *)arg2,(float const *)arg3,(dtQueryFilter const *)arg4,(dtPolyRef *)arg5,(float *)arg6);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+
 __attribute__((annotate("as3sig:public function _wrap_DU_PI_get():Number")))
 void _wrap_DU_PI_get() {
   float result ;

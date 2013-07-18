@@ -30,5 +30,5 @@ int main()
     // not return normally. Returning normally would cause the static
     // destructors to be executed leaving the library in an unuseable state.
     
-    AS3_GoAsync();
+    //AS3_GoAsync();
 }
