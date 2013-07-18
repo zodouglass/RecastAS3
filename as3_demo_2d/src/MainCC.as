@@ -12,9 +12,20 @@ package
 {
 	//import cmodule.recast.CLibInit;
 	//import cmodule.recast.MemUser;
-	import org.recastnavigation.CModule
+	import flash.utils.getTimer;
+	import org.recastnavigation.AS3_rcContext;
+	import org.recastnavigation.CModule;
+	import org.recastnavigation.dtCrowd;
+	import org.recastnavigation.dtCrowdAgent;
+	import org.recastnavigation.dtCrowdAgentDebugInfo;
+	import org.recastnavigation.dtCrowdAgentParams;
+	import org.recastnavigation.dtMeshTile;
+	import org.recastnavigation.dtNavMesh;
+	import org.recastnavigation.dtNavMeshQuery;
+	import org.recastnavigation.dtPoly;
+	import org.recastnavigation.dtQueryFilter;
 	import org.recastnavigation.InputGeom;
-	import org.recastnavigation.Recast;
+	import org.recastnavigation.rcMeshLoaderObj;
 	import org.recastnavigation.Sample_TempObstacles;
 	
 	import flash.display.MovieClip;
@@ -44,7 +55,7 @@ package
 		private static var MAX_SPEED:Number = 4.5; //3.5
 		private static var MAX_ACCEL:Number = 8.5; //8.0
 		
-		private static var SCALE:Number = 10;
+		private static var SCALE:Number = 1;
 		
 		
 		private var lib:Object;
@@ -65,6 +76,10 @@ package
 		private var obstacleRefs:Array = [];
 		
 		private var sample:Sample_TempObstacles;
+		private var geom:InputGeom;
+		private var crowd:dtCrowd;
+		private var crowdDebugPtr:int;
+		private var targetPosPtr:int;
 
 		public function MainCC() 
 		{
@@ -78,19 +93,20 @@ package
 		{
 			stage.removeEventListener(Event.ADDED_TO_STAGE, init);
 			
+		//	CModule.vfs.console = this
 			CModule.startAsync(this);
 			
 			//load the mesh file into recast
 			var b:ByteArray = new myObjFile();
 			CModule.vfs.addFile(OBJ_FILE, b ); //formly CLibInit.supplyFile from Alchemy
 			
-			sample = new Sample_TempObstacles();
-			var geom:InputGeom = new InputGeom();
+			var as3LogContext:AS3_rcContext = AS3_rcContext.create();
+			sample = Sample_TempObstacles.create();
+			geom = InputGeom.create();
 			
-			/*
-			loadMesh( OBJ_FILE );
+			var loadResult:Boolean = geom.loadMesh(as3LogContext.swigCPtr, OBJ_FILE);
+			trace("loadMesh", loadResult);
 			
-			//set mesh settings		
 			var m_cellSize:Number = 0.3,
 			m_cellHeight:Number = 0.2,
 			m_agentHeight:Number = 3.0,
@@ -107,35 +123,44 @@ package
 			m_tileSize:int = 48,
 			m_maxObstacles:int = 1024;
 			
-			meshSettings(m_cellSize, 
-							m_cellHeight, 
-							m_agentHeight, 
-							m_agentRadius, 
-							m_agentMaxClimb, 
-							m_agentMaxSlope, 
-							m_regionMinSize, 
-							m_regionMergeSize, 
-							m_edgeMaxLen, 
-							m_edgeMaxError, 
-							m_vertsPerPoly, 
-							m_detailSampleDist, 
-							m_detailSampleMaxError, 
-							m_tileSize, 
-							m_maxObstacles);
-							
-			//build the mesh
+			//update mesh settings
+			sample.m_cellSize = m_cellSize;
+			sample.m_cellHeight = m_cellHeight;
+			sample.m_agentHeight = m_agentHeight;
+			sample.m_agentRadius = m_agentRadius;
+			sample.m_agentMaxClimb = m_agentMaxClimb;
+			sample.m_agentMaxSlope = m_agentMaxSlope;
+			sample.m_regionMinSize = m_regionMinSize;
+			sample.m_regionMergeSize = m_regionMergeSize;
+			sample.m_edgeMaxLen = m_edgeMaxLen;
+			sample.m_edgeMaxError = m_edgeMaxError;
+			sample.m_vertsPerPoly = m_vertsPerPoly;
+			sample.m_detailSampleDist = m_detailSampleDist;
+			sample.m_detailSampleMaxError = m_detailSampleMaxError;
+			sample.m_tileSize = m_tileSize;
+			sample.m_maxObstacles = m_maxObstacles;
+			
+			//build mesh
+			sample.setContext(as3LogContext.swigCPtr);
+			sample.handleMeshChanged(geom.swigCPtr);
+			
 			var startTime:Number = new Date().valueOf();
-			buildMesh( );
+			var buildSuccess:Boolean = sample.handleBuild();
+			
 			trace("build time", new Date().valueOf() - startTime, "ms");
 			
-			//draw the 3d mesh in top down-2D
-			var triPtr:int = getTris();
-			var ntris:int = getTriCount();
-			trace("ntris ", ntris);
+			trace("buildsuccess", buildSuccess);
+			
+			var meshLoader:rcMeshLoaderObj = new rcMeshLoaderObj();
+			meshLoader.swigCPtr = geom.getMesh();
+			
+			var triPtr:int = meshLoader.getTris();
+			var ntris:int = meshLoader.getTriCount();
+			
 			var tris:Vector.<int> = CModule.readIntVector(triPtr, ntris * 3); 
 			
-			var vertPtr:int = getVerts();
-			var nVerts:int = getVertCount();
+			var vertPtr:int = meshLoader.getVerts()
+			var nVerts:int = meshLoader.getVertCount();
 			
 			var verts:Vector.<Point> = new Vector.<Point>();
 			var p:Point;
@@ -147,23 +172,45 @@ package
 			}
 			debugDrawMesh(tris, verts); //try obj mesh
 			
-			initCrowd(MAX_AGENTS, MAX_AGENT_RADIUS);
 			
+			crowd = new dtCrowd();
+			crowd.swigCPtr = sample.getCrowd();
 			
+			var crowdInit:Boolean = crowd.init(MAX_AGENTS, MAX_AGENT_RADIUS, sample.getNavMesh() );
+			trace("crowdInit", crowdInit);
 			
-			//var maxTiles:int = lib.getMaxTiles();
-			var crowdInit:Boolean = lib.initCrowd(MAX_AGENTS, MAX_AGENT_RADIUS); //maxagents, max agent radius
+			var debug:dtCrowdAgentDebugInfo = dtCrowdAgentDebugInfo.create();
+			crowdDebugPtr = debug.swigCPtr;
 			
+			// Make polygons with 'disabled' flag invalid.
+			//crowd. getEditableFilter()->setExcludeFlags(SAMPLE_POLYFLAGS_DISABLED);
 			
+			var navMesh:dtNavMesh = new dtNavMesh();
+			navMesh.swigCPtr = sample.getNavMesh();
+			
+			for ( i = 0; i < navMesh.getMaxTiles(); i++ )
+			{
+				var meshTile:dtMeshTile = new dtMeshTile();
+				meshTile.swigCPtr = navMesh.getTile(i);
+				
+				var verts:Vector.<Number> = meshTile.
+			}
+			/*
 			tiles = lib.getTiles();
 			drawNavMesh(tiles);
 			
+			stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
+			*/
+			
+			
 			//add 'game loop' and update crowd
-			setInterval( updateCrowd, 33 );
+			this.stage.addEventListener(Event.ENTER_FRAME, updateCrowd );
 			
 			this.stage.addEventListener(MouseEvent.CLICK, onClick );
 			this.stage.addEventListener(MouseEvent.RIGHT_CLICK, onRightClick );
 			this.stage.addEventListener(MouseEvent.MIDDLE_CLICK, onMiddleClick );
+			
+			
 			
 			this.scaleX = this.scaleY = SCALE;
 			this.x = 300;
@@ -191,11 +238,10 @@ package
 			
 			this.addChild(targetSprite);
 			
-			stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
-			*/
+			targetPosPtr= CModule.alloca(12); 
 		}
 		
-		/*
+		
 		private function onKeyDown(e:KeyboardEvent):void
 		{
 			switch(e.keyCode)
@@ -258,7 +304,13 @@ package
 		{
 			trace("add target ", this.mouseX, this.mouseY);
 			
-			var agentId:int = addAgent(this.mouseX, this.mouseY);
+			
+			var posPtr:int = CModule.alloca(12); //x,y,z floats, 32 bits (4 bytes) each
+			CModule.writeFloat(posPtr, this.mouseX);//x
+			CModule.writeFloat(posPtr + 4, OBJ_HEIGHT); //y
+			CModule.writeFloat(posPtr + 8, mouseY); //z
+			
+			var agentIdx:int = addAgent(posPtr);
 			
 			var agentSprite:MovieClip = new MovieClip();
 			agentSprite.graphics.beginFill(0xff0000);
@@ -266,33 +318,59 @@ package
 			agentSprite.graphics.endFill();
 			agentSprite.x = this.mouseX;
 			agentSprite.y = this.mouseY;
-			agentSprite["idx"] = agentId;
+			agentSprite["idx"] = agentIdx;
 			this.addChild(agentSprite);
 			agentSprite.addEventListener(MouseEvent.RIGHT_CLICK, removeAgent );
 			agentSprites.push(agentSprite);
 			
 			//get the agent position in memory
-			var agentPtr:uint = lib.getAgentPosition(agentId);
-			agentPtrs.push(agentPtr);
+			//var agentPtr:uint = lib.getAgentPosition(agentId);
+			var agentPtr:uint = crowd.getAgent(agentIdx);
+			var agent:dtCrowdAgent = new dtCrowdAgent();
+			agent.swigCPtr = agentPtr;
+			agentPtrs.push(agent.npos);
 			
-			var ux:Number = memUser._mrf(agentPtr);
-			var uy:Number = memUser._mrf(agentPtr + 4); // + 4 since a float takes up 4 bytes
-			var uz:Number = memUser._mrf(agentPtr + 8);
+			
+			trace("agentIdx", agentIdx);
+			trace("agentPtr", agentPtr);
+			trace("agent.npos", agent.npos);
+			trace("agent.targetPos", agent.targetPos);
+			
+			var ux:Number = CModule.readFloat(posPtr);
+			var uy:Number =  CModule.readFloat(posPtr + 4); // + 4 since a float takes up 4 bytes
+			var uz:Number =  CModule.readFloat(posPtr + 8);
 			trace("agent added at ", ux, uy, uz );
 		}
 		
-		private function addAgent(ax:Number, ay:Number):int
+		private function addAgent(posPtr:int):int
 		{
 			
-			var radius:Number = MAX_AGENT_RADIUS;
-			var height:Number = 2;
-			var maxAccel:Number = MAX_ACCEL;
-			var maxSpeed:Number = MAX_SPEED;
-			var collisionQueryRange:Number = 12.0;
-			var pathOptimizationRange:Number = 30.0;
+			var params:dtCrowdAgentParams = dtCrowdAgentParams.create();
+			params.maxAcceleration = MAX_ACCEL;
+			params.radius = MAX_AGENT_RADIUS;
+			params.height = 2;
+			params.maxSpeed = MAX_SPEED;
+			params.collisionQueryRange = 12;
+			params.pathOptimizationRange = 30;
 			
-			var agentId:int = lib.addAgent(ax, OBJ_HEIGHT, ay, radius, height, maxAccel, maxSpeed, collisionQueryRange, pathOptimizationRange);
-			return agentId;
+			//var agentId:int = crowd.addAgent(ax, OBJ_HEIGHT, ay, radius, height, maxAccel, maxSpeed, collisionQueryRange, pathOptimizationRange);
+			var agentIdx:int = crowd.addAgent(posPtr, params.swigCPtr);
+			
+			//moveagent
+			var navquery:dtNavMeshQuery = new dtNavMeshQuery();
+			navquery.swigCPtr = sample.getNavMeshQuery();
+			
+			var filter:dtQueryFilter = new dtQueryFilter();
+			filter.swigCPtr = crowd.getFilter();
+			
+			var dtPolyRefPtr:int;
+			var nearestResult:int = navquery.findNearestPoly(posPtr, crowd.getQueryExtents(), crowd.getFilter(), dtPolyRefPtr, targetPosPtr);
+			if ( nearestResult > 0 )
+			{
+				crowd.requestMoveTarget(agentIdx, nearestResult, targetPosPtr);
+			}
+			
+			return agentIdx;
 		}
 		
 		private function removeAgent(e:MouseEvent):void
@@ -319,8 +397,13 @@ package
 			for ( var i:int = 0; i < agentSprites.length; i++ )
 			{
 				var idx:int = i;
-				lib.moveAgent(idx, this.mouseX, OBJ_HEIGHT, this.mouseY); 
+				
+				moveAgent(idx, this.mouseX, this.mouseY, OBJ_HEIGHT );
+				//lib.moveAgent(idx, this.mouseX, OBJ_HEIGHT, this.mouseY); 
+				
+				//trace("moveto", nearestResult, dtPolyRefPtr, targetPosPtr);
 				//moveVelocity(idx);
+				
 			}
 			
 			//move one
@@ -328,6 +411,31 @@ package
 			//lib.moveAgent(idx, this.mouseX, OBJ_HEIGHT, this.mouseY);
 		}
 		
+		private function moveAgent(idx:int, x:Number, y:Number, z:Number):void
+		{
+			var navquery:dtNavMeshQuery = new dtNavMeshQuery();
+			navquery.swigCPtr = sample.getNavMeshQuery();
+			
+			var filter:dtQueryFilter = new dtQueryFilter();
+			filter.swigCPtr = crowd.getFilter();
+			
+			var posPtr:int = CModule.alloca(12); //x,y,z floats, 32 bits (4 bytes) each
+			CModule.writeFloat(posPtr, x);//x
+			CModule.writeFloat(posPtr + 4, y); //z
+			CModule.writeFloat(posPtr + 8,  z); //y
+		
+		
+			var dtPolyRefPtr:int;
+			var nearestResult:int = navquery.findNearestPoly(posPtr, crowd.getQueryExtents(), crowd.getFilter(), dtPolyRefPtr, targetPosPtr);
+			if ( nearestResult > 0 )
+			{
+				crowd.requestMoveTarget(idx, nearestResult, targetPosPtr);
+			}
+			
+			//CModule.free(posPtr);
+		}
+		
+		/*
 		private function moveVelocity(idx:int):void
 		{
 			var ux:Number = getAgentX(idx);
@@ -342,11 +450,16 @@ package
 			agentSprite["idx"] = agentId;
 			
 			lib.requestMoveVelocity(agentId, -diff.x * MAX_SPEED, 0, -diff.y * MAX_SPEED );
-		}
+		}*/
 		
-		private function updateCrowd():void
+		private var mLastFrameTimestamp:Number = 0;
+		private function updateCrowd(e:Event=null):void
 		{
-			lib.update(0.03); //pass dt in seconds
+			var now:Number = getTimer() / 1000.0;
+            var passedTime:Number = now - mLastFrameTimestamp;
+            mLastFrameTimestamp = now;
+			
+			crowd.update(passedTime, crowdDebugPtr); //todo - debug in
 			drawAgents();
 		}
 		
@@ -368,7 +481,7 @@ package
 		private function getAgentX(i:int):Number
 		{
 			var agentPtr:uint = agentPtrs[i]; //get the memory address of the agents position
-			var ux:Number = memUser._mrf(agentPtr);
+			var ux:Number = CModule.readFloat(agentPtr);//memUser._mrf(agentPtr);
 			
 			return ux;
 		}
@@ -376,7 +489,7 @@ package
 		private function getAgentY(i:int):Number
 		{
 			var agentPtr:uint = agentPtrs[i]; //get the memory address of the agents position
-			var uy:Number = memUser._mrf(agentPtr + 4); // + 4 since a float takes up 4 bytes
+			var uy:Number =  CModule.readFloat(agentPtr + 4); // + 4 since a float takes up 4 bytes
 			
 			return uy;
 		}
@@ -385,7 +498,7 @@ package
 		private function getAgentZ(i:int):Number
 		{
 			var agentPtr:uint = agentPtrs[i]; //get the memory address of the agents position
-			var uz:Number = memUser._mrf(agentPtr + 8);
+			var uz:Number =  CModule.readFloat(agentPtr + 8);
 			
 			return uz;
 		}
@@ -453,7 +566,7 @@ package
 			}
 			
 		}
-		*/
+		
 		
 		private function debugDrawMesh(tris:Vector.<int>, verts:Vector.<Point>):void
 		{

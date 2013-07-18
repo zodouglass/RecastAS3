@@ -98,6 +98,798 @@ import com.adobe.flascc.swig.*;
 import flash.utils.ByteArray;
 
 public class Recast {
+	public static function get DU_PI():Number {
+		return _wrap_DU_PI_get();
+	}
+
+	public static function get DU_DRAW_POINTS():int{
+		return _wrap_DU_DRAW_POINTS();
+	}
+
+	public static function get DU_DRAW_LINES():int{
+		return _wrap_DU_DRAW_LINES();
+	}
+
+	public static function get DU_DRAW_TRIS():int{
+		return _wrap_DU_DRAW_TRIS();
+	}
+
+	public static function get DU_DRAW_QUADS():int{
+		return _wrap_DU_DRAW_QUADS();
+	}
+
+	public static function duRGBA(r:int, g:int, b:int, a:int):int {
+		return _wrap_duRGBA(r, g, b, a);
+	}
+
+	public static function duRGBAf(fr:Number, fg:Number, fb:Number, fa:Number):int {
+		return _wrap_duRGBAf(fr, fg, fb, fa);
+	}
+
+	public static function duIntToCol(i:int, a:int):int {
+		return _wrap_duIntToCol(i, a);
+	}
+
+	public static function duMultCol(col:int, d:int):int {
+		return _wrap_duMultCol(col, d);
+	}
+
+	public static function duDarkenCol(col:int):int {
+		return _wrap_duDarkenCol(col);
+	}
+
+	public static function duLerpCol(ca:int, cb:int, u:int):int {
+		return _wrap_duLerpCol(ca, cb, u);
+	}
+
+	public static function duTransCol(c:int, a:int):int {
+		return _wrap_duTransCol(c, a);
+	}
+
+	public static function duCalcBoxColors(colors:int, colTop:int, colSide:int):void {
+		_wrap_duCalcBoxColors(colors, colTop, colSide);
+	}
+
+	public static function duDebugDrawCylinderWire(dd:int, minx:Number, miny:Number, minz:Number, maxx:Number, maxy:Number, maxz:Number, col:int, lineWidth:Number):void {
+		_wrap_duDebugDrawCylinderWire(dd, minx, miny, minz, maxx, maxy, maxz, col, lineWidth);
+	}
+
+	public static function duDebugDrawBoxWire(dd:int, minx:Number, miny:Number, minz:Number, maxx:Number, maxy:Number, maxz:Number, col:int, lineWidth:Number):void {
+		_wrap_duDebugDrawBoxWire(dd, minx, miny, minz, maxx, maxy, maxz, col, lineWidth);
+	}
+
+	public static function duDebugDrawArc(dd:int, x0:Number, y0:Number, z0:Number, x1:Number, y1:Number, z1:Number, h:Number, as0:Number, as1:Number, col:int, lineWidth:Number):void {
+		_wrap_duDebugDrawArc(dd, x0, y0, z0, x1, y1, z1, h, as0, as1, col, lineWidth);
+	}
+
+	public static function duDebugDrawArrow(dd:int, x0:Number, y0:Number, z0:Number, x1:Number, y1:Number, z1:Number, as0:Number, as1:Number, col:int, lineWidth:Number):void {
+		_wrap_duDebugDrawArrow(dd, x0, y0, z0, x1, y1, z1, as0, as1, col, lineWidth);
+	}
+
+	public static function duDebugDrawCircle(dd:int, x:Number, y:Number, z:Number, r:Number, col:int, lineWidth:Number):void {
+		_wrap_duDebugDrawCircle(dd, x, y, z, r, col, lineWidth);
+	}
+
+	public static function duDebugDrawCross(dd:int, x:Number, y:Number, z:Number, size:Number, col:int, lineWidth:Number):void {
+		_wrap_duDebugDrawCross(dd, x, y, z, size, col, lineWidth);
+	}
+
+	public static function duDebugDrawBox(dd:int, minx:Number, miny:Number, minz:Number, maxx:Number, maxy:Number, maxz:Number, fcol:int):void {
+		_wrap_duDebugDrawBox(dd, minx, miny, minz, maxx, maxy, maxz, fcol);
+	}
+
+	public static function duDebugDrawCylinder(dd:int, minx:Number, miny:Number, minz:Number, maxx:Number, maxy:Number, maxz:Number, col:int):void {
+		_wrap_duDebugDrawCylinder(dd, minx, miny, minz, maxx, maxy, maxz, col);
+	}
+
+	public static function duDebugDrawGridXZ(dd:int, ox:Number, oy:Number, oz:Number, w:int, h:int, size:Number, col:int, lineWidth:Number):void {
+		_wrap_duDebugDrawGridXZ(dd, ox, oy, oz, w, h, size, col, lineWidth);
+	}
+
+	public static function duAppendCylinderWire(dd:int, minx:Number, miny:Number, minz:Number, maxx:Number, maxy:Number, maxz:Number, col:int):void {
+		_wrap_duAppendCylinderWire(dd, minx, miny, minz, maxx, maxy, maxz, col);
+	}
+
+	public static function duAppendBoxWire(dd:int, minx:Number, miny:Number, minz:Number, maxx:Number, maxy:Number, maxz:Number, col:int):void {
+		_wrap_duAppendBoxWire(dd, minx, miny, minz, maxx, maxy, maxz, col);
+	}
+
+	public static function duAppendBoxPoints(dd:int, minx:Number, miny:Number, minz:Number, maxx:Number, maxy:Number, maxz:Number, col:int):void {
+		_wrap_duAppendBoxPoints(dd, minx, miny, minz, maxx, maxy, maxz, col);
+	}
+
+	public static function duAppendArc(dd:int, x0:Number, y0:Number, z0:Number, x1:Number, y1:Number, z1:Number, h:Number, as0:Number, as1:Number, col:int):void {
+		_wrap_duAppendArc(dd, x0, y0, z0, x1, y1, z1, h, as0, as1, col);
+	}
+
+	public static function duAppendArrow(dd:int, x0:Number, y0:Number, z0:Number, x1:Number, y1:Number, z1:Number, as0:Number, as1:Number, col:int):void {
+		_wrap_duAppendArrow(dd, x0, y0, z0, x1, y1, z1, as0, as1, col);
+	}
+
+	public static function duAppendCircle(dd:int, x:Number, y:Number, z:Number, r:Number, col:int):void {
+		_wrap_duAppendCircle(dd, x, y, z, r, col);
+	}
+
+	public static function duAppendCross(dd:int, x:Number, y:Number, z:Number, size:Number, col:int):void {
+		_wrap_duAppendCross(dd, x, y, z, size, col);
+	}
+
+	public static function duAppendBox(dd:int, minx:Number, miny:Number, minz:Number, maxx:Number, maxy:Number, maxz:Number, fcol:int):void {
+		_wrap_duAppendBox(dd, minx, miny, minz, maxx, maxy, maxz, fcol);
+	}
+
+	public static function duAppendCylinder(dd:int, minx:Number, miny:Number, minz:Number, maxx:Number, maxy:Number, maxz:Number, col:int):void {
+		_wrap_duAppendCylinder(dd, minx, miny, minz, maxx, maxy, maxz, col);
+	}
+
+	public static function get DU_DRAWNAVMESH_OFFMESHCONS():int{
+		return _wrap_DU_DRAWNAVMESH_OFFMESHCONS();
+	}
+
+	public static function get DU_DRAWNAVMESH_CLOSEDLIST():int{
+		return _wrap_DU_DRAWNAVMESH_CLOSEDLIST();
+	}
+
+	public static function get DU_DRAWNAVMESH_COLOR_TILES():int{
+		return _wrap_DU_DRAWNAVMESH_COLOR_TILES();
+	}
+
+	public static function duDebugDrawNavMesh(dd:int, mesh:int, flags:String):void {
+		_wrap_duDebugDrawNavMesh(dd, mesh, flags);
+	}
+
+	public static function duDebugDrawNavMeshWithClosedList(dd:int, mesh:int, query:int, flags:String):void {
+		_wrap_duDebugDrawNavMeshWithClosedList(dd, mesh, query, flags);
+	}
+
+	public static function duDebugDrawNavMeshNodes(dd:int, query:int):void {
+		_wrap_duDebugDrawNavMeshNodes(dd, query);
+	}
+
+	public static function duDebugDrawNavMeshBVTree(dd:int, mesh:int):void {
+		_wrap_duDebugDrawNavMeshBVTree(dd, mesh);
+	}
+
+	public static function duDebugDrawNavMeshPortals(dd:int, mesh:int):void {
+		_wrap_duDebugDrawNavMeshPortals(dd, mesh);
+	}
+
+	public static function duDebugDrawNavMeshPolysWithFlags(dd:int, mesh:int, polyFlags:int, col:int):void {
+		_wrap_duDebugDrawNavMeshPolysWithFlags(dd, mesh, polyFlags, col);
+	}
+
+	public static function duDebugDrawNavMeshPoly(dd:int, mesh:int, ref:int, col:int):void {
+		_wrap_duDebugDrawNavMeshPoly(dd, mesh, ref, col);
+	}
+
+	public static function duDebugDrawTileCacheLayerAreas(dd:int, layer:int, cs:Number, ch:Number):void {
+		_wrap_duDebugDrawTileCacheLayerAreas(dd, layer, cs, ch);
+	}
+
+	public static function duDebugDrawTileCacheLayerRegions(dd:int, layer:int, cs:Number, ch:Number):void {
+		_wrap_duDebugDrawTileCacheLayerRegions(dd, layer, cs, ch);
+	}
+
+	public static function duDebugDrawTileCacheContours(dd:int, lcset:int, orig:int, cs:Number, ch:Number):void {
+		_wrap_duDebugDrawTileCacheContours(dd, lcset, orig, cs, ch);
+	}
+
+	public static function duDebugDrawTileCachePolyMesh(dd:int, lmesh:int, orig:int, cs:Number, ch:Number):void {
+		_wrap_duDebugDrawTileCachePolyMesh(dd, lmesh, orig, cs, ch);
+	}
+
+	public static function duDebugDrawTriMesh(dd:int, verts:int, nverts:int, tris:int, normals:int, ntris:int, flags:int, texScale:Number):void {
+		_wrap_duDebugDrawTriMesh(dd, verts, nverts, tris, normals, ntris, flags, texScale);
+	}
+
+	public static function duDebugDrawTriMeshSlope(dd:int, verts:int, nverts:int, tris:int, normals:int, ntris:int, walkableSlopeAngle:Number, texScale:Number):void {
+		_wrap_duDebugDrawTriMeshSlope(dd, verts, nverts, tris, normals, ntris, walkableSlopeAngle, texScale);
+	}
+
+	public static function duDebugDrawHeightfieldSolid(dd:int, hf:int):void {
+		_wrap_duDebugDrawHeightfieldSolid(dd, hf);
+	}
+
+	public static function duDebugDrawHeightfieldWalkable(dd:int, hf:int):void {
+		_wrap_duDebugDrawHeightfieldWalkable(dd, hf);
+	}
+
+	public static function duDebugDrawCompactHeightfieldSolid(dd:int, chf:int):void {
+		_wrap_duDebugDrawCompactHeightfieldSolid(dd, chf);
+	}
+
+	public static function duDebugDrawCompactHeightfieldRegions(dd:int, chf:int):void {
+		_wrap_duDebugDrawCompactHeightfieldRegions(dd, chf);
+	}
+
+	public static function duDebugDrawCompactHeightfieldDistance(dd:int, chf:int):void {
+		_wrap_duDebugDrawCompactHeightfieldDistance(dd, chf);
+	}
+
+	public static function duDebugDrawHeightfieldLayer(dd:int, layer:int, idx:int):void {
+		_wrap_duDebugDrawHeightfieldLayer(dd, layer, idx);
+	}
+
+	public static function duDebugDrawHeightfieldLayers(dd:int, lset:int):void {
+		_wrap_duDebugDrawHeightfieldLayers(dd, lset);
+	}
+
+	public static function duDebugDrawRegionConnections(dd:int, cset:int, alpha:Number):void {
+		_wrap_duDebugDrawRegionConnections(dd, cset, alpha);
+	}
+
+	public static function duDebugDrawRawContours(dd:int, cset:int, alpha:Number):void {
+		_wrap_duDebugDrawRawContours(dd, cset, alpha);
+	}
+
+	public static function duDebugDrawContours(dd:int, cset:int, alpha:Number):void {
+		_wrap_duDebugDrawContours(dd, cset, alpha);
+	}
+
+	public static function duDebugDrawPolyMesh(dd:int, mesh:int):void {
+		_wrap_duDebugDrawPolyMesh(dd, mesh);
+	}
+
+	public static function duDebugDrawPolyMeshDetail(dd:int, dmesh:int):void {
+		_wrap_duDebugDrawPolyMeshDetail(dd, dmesh);
+	}
+
+	public static function get DT_ALLOC_PERM():int{
+		return _wrap_DT_ALLOC_PERM();
+	}
+
+	public static function get DT_ALLOC_TEMP():int{
+		return _wrap_DT_ALLOC_TEMP();
+	}
+
+	public static function dtSqrt(x:Number):Number {
+		return _wrap_dtSqrt(x);
+	}
+
+	public static function dtVcross(dest:int, v1:int, v2:int):void {
+		_wrap_dtVcross(dest, v1, v2);
+	}
+
+	public static function dtVdot(v1:int, v2:int):Number {
+		return _wrap_dtVdot(v1, v2);
+	}
+
+	public static function dtVmad(dest:int, v1:int, v2:int, s:Number):void {
+		_wrap_dtVmad(dest, v1, v2, s);
+	}
+
+	public static function dtVlerp(dest:int, v1:int, v2:int, t:Number):void {
+		_wrap_dtVlerp(dest, v1, v2, t);
+	}
+
+	public static function dtVadd(dest:int, v1:int, v2:int):void {
+		_wrap_dtVadd(dest, v1, v2);
+	}
+
+	public static function dtVsub(dest:int, v1:int, v2:int):void {
+		_wrap_dtVsub(dest, v1, v2);
+	}
+
+	public static function dtVscale(dest:int, v:int, t:Number):void {
+		_wrap_dtVscale(dest, v, t);
+	}
+
+	public static function dtVmin(mn:int, v:int):void {
+		_wrap_dtVmin(mn, v);
+	}
+
+	public static function dtVmax(mx:int, v:int):void {
+		_wrap_dtVmax(mx, v);
+	}
+
+	public static function dtVset(dest:int, x:Number, y:Number, z:Number):void {
+		_wrap_dtVset(dest, x, y, z);
+	}
+
+	public static function dtVcopy(dest:int, a:int):void {
+		_wrap_dtVcopy(dest, a);
+	}
+
+	public static function dtVlen(v:int):Number {
+		return _wrap_dtVlen(v);
+	}
+
+	public static function dtVlenSqr(v:int):Number {
+		return _wrap_dtVlenSqr(v);
+	}
+
+	public static function dtVdist(v1:int, v2:int):Number {
+		return _wrap_dtVdist(v1, v2);
+	}
+
+	public static function dtVdistSqr(v1:int, v2:int):Number {
+		return _wrap_dtVdistSqr(v1, v2);
+	}
+
+	public static function dtVdist2D(v1:int, v2:int):Number {
+		return _wrap_dtVdist2D(v1, v2);
+	}
+
+	public static function dtVdist2DSqr(v1:int, v2:int):Number {
+		return _wrap_dtVdist2DSqr(v1, v2);
+	}
+
+	public static function dtVnormalize(v:int):void {
+		_wrap_dtVnormalize(v);
+	}
+
+	public static function dtVequal(p0:int, p1:int):Boolean {
+		return _wrap_dtVequal(p0, p1);
+	}
+
+	public static function dtVdot2D(u:int, v:int):Number {
+		return _wrap_dtVdot2D(u, v);
+	}
+
+	public static function dtVperp2D(u:int, v:int):Number {
+		return _wrap_dtVperp2D(u, v);
+	}
+
+	public static function dtTriArea2D(a:int, b:int, c:int):Number {
+		return _wrap_dtTriArea2D(a, b, c);
+	}
+
+	public static function dtOverlapQuantBounds(amin:int, amax:int, bmin:int, bmax:int):Boolean {
+		return _wrap_dtOverlapQuantBounds(amin, amax, bmin, bmax);
+	}
+
+	public static function dtOverlapBounds(amin:int, amax:int, bmin:int, bmax:int):Boolean {
+		return _wrap_dtOverlapBounds(amin, amax, bmin, bmax);
+	}
+
+	public static function dtClosestPtPointTriangle(closest:int, p:int, a:int, b:int, c:int):void {
+		_wrap_dtClosestPtPointTriangle(closest, p, a, b, c);
+	}
+
+	public static function dtClosestHeightPointTriangle(p:int, a:int, b:int, c:int, h:int):Boolean {
+		return _wrap_dtClosestHeightPointTriangle(p, a, b, c, h);
+	}
+
+	public static function dtIntersectSegmentPoly2D(p0:int, p1:int, verts:int, nverts:int, tmin:int, tmax:int, segMin:int, segMax:int):Boolean {
+		return _wrap_dtIntersectSegmentPoly2D(p0, p1, verts, nverts, tmin, tmax, segMin, segMax);
+	}
+
+	public static function dtPointInPolygon(pt:int, verts:int, nverts:int):Boolean {
+		return _wrap_dtPointInPolygon(pt, verts, nverts);
+	}
+
+	public static function dtDistancePtPolyEdgesSqr(pt:int, verts:int, nverts:int, ed:int, et:int):Boolean {
+		return _wrap_dtDistancePtPolyEdgesSqr(pt, verts, nverts, ed, et);
+	}
+
+	public static function dtDistancePtSegSqr2D(pt:int, p:int, q:int, t:int):Number {
+		return _wrap_dtDistancePtSegSqr2D(pt, p, q, t);
+	}
+
+	public static function dtCalcPolyCenter(tc:int, idx:int, nidx:int, verts:int):void {
+		_wrap_dtCalcPolyCenter(tc, idx, nidx, verts);
+	}
+
+	public static function dtOverlapPolyPoly2D(polya:int, npolya:int, polyb:int, npolyb:int):Boolean {
+		return _wrap_dtOverlapPolyPoly2D(polya, npolya, polyb, npolyb);
+	}
+
+	public static function dtNextPow2(v:int):int {
+		return _wrap_dtNextPow2(v);
+	}
+
+	public static function dtIlog2(v:int):int {
+		return _wrap_dtIlog2(v);
+	}
+
+	public static function dtAlign4(x:int):int {
+		return _wrap_dtAlign4(x);
+	}
+
+	public static function dtOppositeTile(side:int):int {
+		return _wrap_dtOppositeTile(side);
+	}
+
+	public static function dtSwapByte(a:int, b:int):void {
+		_wrap_dtSwapByte(a, b);
+	}
+
+	public static function dtSwapEndian(v:int):void {
+		_wrap_dtSwapEndian(v);
+	}
+
+	public static function dtRandomPointInConvexPoly(pts:int, npts:int, areas:int, s:Number, t:Number, out:int):void {
+		_wrap_dtRandomPointInConvexPoly(pts, npts, areas, s, t, out);
+	}
+
+	public static function get DT_VERTS_PER_POLYGON():int {
+		return _wrap_DT_VERTS_PER_POLYGON_get();
+	}
+
+	public static function get DT_NAVMESH_MAGIC():int {
+		return _wrap_DT_NAVMESH_MAGIC_get();
+	}
+
+	public static function get DT_NAVMESH_VERSION():int {
+		return _wrap_DT_NAVMESH_VERSION_get();
+	}
+
+	public static function get DT_NAVMESH_STATE_MAGIC():int {
+		return _wrap_DT_NAVMESH_STATE_MAGIC_get();
+	}
+
+	public static function get DT_NAVMESH_STATE_VERSION():int {
+		return _wrap_DT_NAVMESH_STATE_VERSION_get();
+	}
+
+	public static function get DT_EXT_LINK():int {
+		return _wrap_DT_EXT_LINK_get();
+	}
+
+	public static function get DT_NULL_LINK():int {
+		return _wrap_DT_NULL_LINK_get();
+	}
+
+	public static function get DT_OFFMESH_CON_BIDIR():int {
+		return _wrap_DT_OFFMESH_CON_BIDIR_get();
+	}
+
+	public static function get DT_MAX_AREAS():int {
+		return _wrap_DT_MAX_AREAS_get();
+	}
+
+	public static function get DT_TILE_FREE_DATA():int{
+		return _wrap_DT_TILE_FREE_DATA();
+	}
+
+	public static function get DT_STRAIGHTPATH_START():int{
+		return _wrap_DT_STRAIGHTPATH_START();
+	}
+
+	public static function get DT_STRAIGHTPATH_END():int{
+		return _wrap_DT_STRAIGHTPATH_END();
+	}
+
+	public static function get DT_STRAIGHTPATH_OFFMESH_CONNECTION():int{
+		return _wrap_DT_STRAIGHTPATH_OFFMESH_CONNECTION();
+	}
+
+	public static function get DT_POLYTYPE_GROUND():int{
+		return _wrap_DT_POLYTYPE_GROUND();
+	}
+
+	public static function get DT_POLYTYPE_OFFMESH_CONNECTION():int{
+		return _wrap_DT_POLYTYPE_OFFMESH_CONNECTION();
+	}
+
+	public static function dtAllocNavMesh():int {
+		return _wrap_dtAllocNavMesh();
+	}
+
+	public static function dtFreeNavMesh(navmesh:int):void {
+		_wrap_dtFreeNavMesh(navmesh);
+	}
+
+	public static function dtCreateNavMeshData(params:int, outData:int, outDataSize:int):Boolean {
+		return _wrap_dtCreateNavMeshData(params, outData, outDataSize);
+	}
+
+	public static function dtNavMeshHeaderSwapEndian(data:int, dataSize:int):Boolean {
+		return _wrap_dtNavMeshHeaderSwapEndian(data, dataSize);
+	}
+
+	public static function dtNavMeshDataSwapEndian(data:int, dataSize:int):Boolean {
+		return _wrap_dtNavMeshDataSwapEndian(data, dataSize);
+	}
+
+	public static function dtAllocNavMeshQuery():int {
+		return _wrap_dtAllocNavMeshQuery();
+	}
+
+	public static function dtFreeNavMeshQuery(query:int):void {
+		_wrap_dtFreeNavMeshQuery(query);
+	}
+
+	public static function get DT_NODE_OPEN():int{
+		return _wrap_DT_NODE_OPEN();
+	}
+
+	public static function get DT_NODE_CLOSED():int{
+		return _wrap_DT_NODE_CLOSED();
+	}
+
+	public static function get DT_NULL_IDX():int {
+		return _wrap_DT_NULL_IDX_get();
+	}
+
+	public static function get DT_FAILURE():int {
+		return _wrap_DT_FAILURE_get();
+	}
+
+	public static function get DT_SUCCESS():int {
+		return _wrap_DT_SUCCESS_get();
+	}
+
+	public static function get DT_IN_PROGRESS():int {
+		return _wrap_DT_IN_PROGRESS_get();
+	}
+
+	public static function get DT_STATUS_DETAIL_MASK():int {
+		return _wrap_DT_STATUS_DETAIL_MASK_get();
+	}
+
+	public static function get DT_WRONG_MAGIC():int {
+		return _wrap_DT_WRONG_MAGIC_get();
+	}
+
+	public static function get DT_WRONG_VERSION():int {
+		return _wrap_DT_WRONG_VERSION_get();
+	}
+
+	public static function get DT_OUT_OF_MEMORY():int {
+		return _wrap_DT_OUT_OF_MEMORY_get();
+	}
+
+	public static function get DT_INVALID_PARAM():int {
+		return _wrap_DT_INVALID_PARAM_get();
+	}
+
+	public static function get DT_BUFFER_TOO_SMALL():int {
+		return _wrap_DT_BUFFER_TOO_SMALL_get();
+	}
+
+	public static function get DT_OUT_OF_NODES():int {
+		return _wrap_DT_OUT_OF_NODES_get();
+	}
+
+	public static function get DT_PARTIAL_RESULT():int {
+		return _wrap_DT_PARTIAL_RESULT_get();
+	}
+
+	public static function dtStatusSucceed(status:int):Boolean {
+		return _wrap_dtStatusSucceed(status);
+	}
+
+	public static function dtStatusFailed(status:int):Boolean {
+		return _wrap_dtStatusFailed(status);
+	}
+
+	public static function dtStatusInProgress(status:int):Boolean {
+		return _wrap_dtStatusInProgress(status);
+	}
+
+	public static function dtStatusDetail(status:int, detail:int):Boolean {
+		return _wrap_dtStatusDetail(status, detail);
+	}
+
+	public static function get DT_CROWDAGENT_MAX_NEIGHBOURS():int {
+		return _wrap_DT_CROWDAGENT_MAX_NEIGHBOURS_get();
+	}
+
+	public static function get DT_CROWDAGENT_MAX_CORNERS():int {
+		return _wrap_DT_CROWDAGENT_MAX_CORNERS_get();
+	}
+
+	public static function get DT_CROWD_MAX_OBSTAVOIDANCE_PARAMS():int {
+		return _wrap_DT_CROWD_MAX_OBSTAVOIDANCE_PARAMS_get();
+	}
+
+	public static function get DT_CROWDAGENT_STATE_INVALID():int{
+		return _wrap_DT_CROWDAGENT_STATE_INVALID();
+	}
+
+	public static function get DT_CROWDAGENT_STATE_WALKING():int{
+		return _wrap_DT_CROWDAGENT_STATE_WALKING();
+	}
+
+	public static function get DT_CROWDAGENT_STATE_OFFMESH():int{
+		return _wrap_DT_CROWDAGENT_STATE_OFFMESH();
+	}
+
+	public static function get DT_CROWDAGENT_TARGET_NONE():int{
+		return _wrap_DT_CROWDAGENT_TARGET_NONE();
+	}
+
+	public static function get DT_CROWDAGENT_TARGET_FAILED():int{
+		return _wrap_DT_CROWDAGENT_TARGET_FAILED();
+	}
+
+	public static function get DT_CROWDAGENT_TARGET_VALID():int{
+		return _wrap_DT_CROWDAGENT_TARGET_VALID();
+	}
+
+	public static function get DT_CROWDAGENT_TARGET_REQUESTING():int{
+		return _wrap_DT_CROWDAGENT_TARGET_REQUESTING();
+	}
+
+	public static function get DT_CROWDAGENT_TARGET_WAITING_FOR_QUEUE():int{
+		return _wrap_DT_CROWDAGENT_TARGET_WAITING_FOR_QUEUE();
+	}
+
+	public static function get DT_CROWDAGENT_TARGET_WAITING_FOR_PATH():int{
+		return _wrap_DT_CROWDAGENT_TARGET_WAITING_FOR_PATH();
+	}
+
+	public static function get DT_CROWDAGENT_TARGET_VELOCITY():int{
+		return _wrap_DT_CROWDAGENT_TARGET_VELOCITY();
+	}
+
+	public static function get DT_CROWD_ANTICIPATE_TURNS():int{
+		return _wrap_DT_CROWD_ANTICIPATE_TURNS();
+	}
+
+	public static function get DT_CROWD_OBSTACLE_AVOIDANCE():int{
+		return _wrap_DT_CROWD_OBSTACLE_AVOIDANCE();
+	}
+
+	public static function get DT_CROWD_SEPARATION():int{
+		return _wrap_DT_CROWD_SEPARATION();
+	}
+
+	public static function get DT_CROWD_OPTIMIZE_VIS():int{
+		return _wrap_DT_CROWD_OPTIMIZE_VIS();
+	}
+
+	public static function get DT_CROWD_OPTIMIZE_TOPO():int{
+		return _wrap_DT_CROWD_OPTIMIZE_TOPO();
+	}
+
+	public static function dtAllocCrowd():int {
+		return _wrap_dtAllocCrowd();
+	}
+
+	public static function dtFreeCrowd(ptr:int):void {
+		_wrap_dtFreeCrowd(ptr);
+	}
+
+	public static function dtAllocObstacleAvoidanceDebugData():int {
+		return _wrap_dtAllocObstacleAvoidanceDebugData();
+	}
+
+	public static function dtFreeObstacleAvoidanceDebugData(ptr:int):void {
+		_wrap_dtFreeObstacleAvoidanceDebugData(ptr);
+	}
+
+	public static function get DT_MAX_PATTERN_DIVS():int {
+		return _wrap_DT_MAX_PATTERN_DIVS_get();
+	}
+
+	public static function get DT_MAX_PATTERN_RINGS():int {
+		return _wrap_DT_MAX_PATTERN_RINGS_get();
+	}
+
+	public static function dtAllocObstacleAvoidanceQuery():int {
+		return _wrap_dtAllocObstacleAvoidanceQuery();
+	}
+
+	public static function dtFreeObstacleAvoidanceQuery(ptr:int):void {
+		_wrap_dtFreeObstacleAvoidanceQuery(ptr);
+	}
+
+	public static function dtMergeCorridorStartMoved(path:int, npath:int, maxPath:int, visited:int, nvisited:int):int {
+		return _wrap_dtMergeCorridorStartMoved(path, npath, maxPath, visited, nvisited);
+	}
+
+	public static function dtMergeCorridorEndMoved(path:int, npath:int, maxPath:int, visited:int, nvisited:int):int {
+		return _wrap_dtMergeCorridorEndMoved(path, npath, maxPath, visited, nvisited);
+	}
+
+	public static function dtMergeCorridorStartShortcut(path:int, npath:int, maxPath:int, visited:int, nvisited:int):int {
+		return _wrap_dtMergeCorridorStartShortcut(path, npath, maxPath, visited, nvisited);
+	}
+
+	public static function get DT_PATHQ_INVALID():int {
+		return _wrap_DT_PATHQ_INVALID_get();
+	}
+
+	public static function dtAllocProximityGrid():int {
+		return _wrap_dtAllocProximityGrid();
+	}
+
+	public static function dtFreeProximityGrid(ptr:int):void {
+		_wrap_dtFreeProximityGrid(ptr);
+	}
+
+	public static function get DT_COMPRESSEDTILE_FREE_DATA():int{
+		return _wrap_DT_COMPRESSEDTILE_FREE_DATA();
+	}
+
+	public static function get DT_OBSTACLE_EMPTY():int{
+		return _wrap_DT_OBSTACLE_EMPTY();
+	}
+
+	public static function get DT_OBSTACLE_PROCESSING():int{
+		return _wrap_DT_OBSTACLE_PROCESSING();
+	}
+
+	public static function get DT_OBSTACLE_PROCESSED():int{
+		return _wrap_DT_OBSTACLE_PROCESSED();
+	}
+
+	public static function get DT_OBSTACLE_REMOVING():int{
+		return _wrap_DT_OBSTACLE_REMOVING();
+	}
+
+	public static function get DT_MAX_TOUCHED_TILES():int {
+		return _wrap_DT_MAX_TOUCHED_TILES_get();
+	}
+
+	public static function dtAllocTileCache():int {
+		return _wrap_dtAllocTileCache();
+	}
+
+	public static function dtFreeTileCache(tc:int):void {
+		_wrap_dtFreeTileCache(tc);
+	}
+
+	public static function get DT_TILECACHE_MAGIC():int {
+		return _wrap_DT_TILECACHE_MAGIC_get();
+	}
+
+	public static function get DT_TILECACHE_VERSION():int {
+		return _wrap_DT_TILECACHE_VERSION_get();
+	}
+
+	public static function get DT_TILECACHE_NULL_AREA():String {
+		return _wrap_DT_TILECACHE_NULL_AREA_get();
+	}
+
+	public static function get DT_TILECACHE_WALKABLE_AREA():String {
+		return _wrap_DT_TILECACHE_WALKABLE_AREA_get();
+	}
+
+	public static function get DT_TILECACHE_NULL_IDX():int {
+		return _wrap_DT_TILECACHE_NULL_IDX_get();
+	}
+
+	public static function dtBuildTileCacheLayer(comp:int, header:int, heights:int, areas:int, cons:int, outData:int, outDataSize:int):int {
+		return _wrap_dtBuildTileCacheLayer(comp, header, heights, areas, cons, outData, outDataSize);
+	}
+
+	public static function dtFreeTileCacheLayer(alloc:int, layer:int):void {
+		_wrap_dtFreeTileCacheLayer(alloc, layer);
+	}
+
+	public static function dtDecompressTileCacheLayer(alloc:int, comp:int, compressed:int, compressedSize:int, layerOut:int):int {
+		return _wrap_dtDecompressTileCacheLayer(alloc, comp, compressed, compressedSize, layerOut);
+	}
+
+	public static function dtAllocTileCacheContourSet(alloc:int):int {
+		return _wrap_dtAllocTileCacheContourSet(alloc);
+	}
+
+	public static function dtFreeTileCacheContourSet(alloc:int, cset:int):void {
+		_wrap_dtFreeTileCacheContourSet(alloc, cset);
+	}
+
+	public static function dtAllocTileCachePolyMesh(alloc:int):int {
+		return _wrap_dtAllocTileCachePolyMesh(alloc);
+	}
+
+	public static function dtFreeTileCachePolyMesh(alloc:int, lmesh:int):void {
+		_wrap_dtFreeTileCachePolyMesh(alloc, lmesh);
+	}
+
+	public static function dtMarkCylinderArea(layer:int, orig:int, cs:Number, ch:Number, pos:int, radius:Number, height:Number, areaId:String):int {
+		return _wrap_dtMarkCylinderArea(layer, orig, cs, ch, pos, radius, height, areaId);
+	}
+
+	public static function dtBuildTileCacheRegions(alloc:int, layer:int, walkableClimb:int):int {
+		return _wrap_dtBuildTileCacheRegions(alloc, layer, walkableClimb);
+	}
+
+	public static function dtBuildTileCacheContours(alloc:int, layer:int, walkableClimb:int, maxError:Number, lcset:int):int {
+		return _wrap_dtBuildTileCacheContours(alloc, layer, walkableClimb, maxError, lcset);
+	}
+
+	public static function dtBuildTileCachePolyMesh(alloc:int, lcset:int, mesh:int):int {
+		return _wrap_dtBuildTileCachePolyMesh(alloc, lcset, mesh);
+	}
+
+	public static function dtTileCacheHeaderSwapEndian(data:int, dataSize:int):Boolean {
+		return _wrap_dtTileCacheHeaderSwapEndian(data, dataSize);
+	}
+
 	public static function get RC_PI():Number {
 		return _wrap_RC_PI_get();
 	}
@@ -510,6 +1302,42 @@ public class Recast {
 		return _wrap_rcMergePolyMeshDetails(ctx, meshes, nmeshes, mesh);
 	}
 
+	public static function get RC_ALLOC_PERM():int{
+		return _wrap_RC_ALLOC_PERM();
+	}
+
+	public static function get RC_ALLOC_TEMP():int{
+		return _wrap_RC_ALLOC_TEMP();
+	}
+
+	public static function rcAllocSetCustom(allocFunc:Function, freeFunc:Function):void {
+		_wrap_rcAllocSetCustom(allocFunc, freeFunc);
+	}
+
+	public static function rcAlloc(size:int, hint:int):int {
+		return _wrap_rcAlloc(size, hint);
+	}
+
+	public static function rcFree(ptr:int):void {
+		_wrap_rcFree(ptr);
+	}
+
+	public static function rcCreateChunkyTriMesh(verts:int, tris:int, ntris:int, trisPerChunk:int, cm:int):Boolean {
+		return _wrap_rcCreateChunkyTriMesh(verts, tris, ntris, trisPerChunk, cm);
+	}
+
+	public static function rcGetChunksOverlappingRect(cm:int, bmin:int, bmax:int, ids:int, maxIds:int):int {
+		return _wrap_rcGetChunksOverlappingRect(cm, bmin, bmax, ids, maxIds);
+	}
+
+	public static function rcGetChunksOverlappingSegment(cm:int, p:int, q:int, ids:int, maxIds:int):int {
+		return _wrap_rcGetChunksOverlappingSegment(cm, p, q, ids, maxIds);
+	}
+
+	public static function get MAX_CONVEXVOL_PTS():int {
+		return _wrap_MAX_CONVEXVOL_PTS_get();
+	}
+
 	public static function get SAMPLE_POLYAREA_GROUND():int{
 		return _wrap_SAMPLE_POLYAREA_GROUND();
 	}
@@ -558,11 +1386,3370 @@ public class Recast {
 		return _wrap_SAMPLE_POLYFLAGS_ALL();
 	}
 
-	public static function get MAX_CONVEXVOL_PTS():int {
-		return _wrap_MAX_CONVEXVOL_PTS_get();
+}
+
+public class duDebugDraw {
+	public var swigCPtr:int;
+	public function destroy():void {
+		_wrap_delete_duDebugDraw(swigCPtr);
+	}
+
+	public function depthMask(state:Boolean):void {
+		_wrap_duDebugDraw_depthMask(swigCPtr, state);
+	}
+
+	public function texture(state:Boolean):void {
+		_wrap_duDebugDraw_texture(swigCPtr, state);
+	}
+
+	public function begin(prim:int):void {
+		_wrap_duDebugDraw_begin(swigCPtr, prim);
+	}
+
+	public function vertex(pos:int, color:int):void {
+		_wrap_duDebugDraw_vertex(swigCPtr, pos, color);
+	}
+
+	public function vertexXYZ(x:Number, y:Number, z:Number, color:int):void {
+		_wrap_duDebugDraw_vertexXYZ(swigCPtr, x, y, z, color);
+	}
+
+	public function vertexUV(pos:int, color:int, uv:int):void {
+		_wrap_duDebugDraw_vertexUV(swigCPtr, pos, color, uv);
+	}
+
+	public function vertexXYZUV(x:Number, y:Number, z:Number, color:int, u:Number, v:Number):void {
+		_wrap_duDebugDraw_vertexXYZUV(swigCPtr, x, y, z, color, u, v);
+	}
+
+	public function end():void {
+		_wrap_duDebugDraw_end(swigCPtr);
 	}
 
 }
+
+
+public class duDisplayList extends duDebugDraw {
+	override public function destroy():void {
+		_wrap_delete_duDisplayList(swigCPtr);
+	}
+
+	override public function depthMask(state:Boolean):void {
+		_wrap_duDisplayList_depthMask(swigCPtr, state);
+	}
+
+	override public function begin(prim:int):void {
+		_wrap_duDisplayList_begin(swigCPtr, prim);
+	}
+
+	override public function vertexXYZ(x:Number, y:Number, z:Number, color:int):void {
+		_wrap_duDisplayList_vertexXYZ(swigCPtr, x, y, z, color);
+	}
+
+	override public function vertex(pos:int, color:int):void {
+		_wrap_duDisplayList_vertex(swigCPtr, pos, color);
+	}
+
+	override public function end():void {
+		_wrap_duDisplayList_end(swigCPtr);
+	}
+
+	public function clear():void {
+		_wrap_duDisplayList_clear(swigCPtr);
+	}
+
+	public function draw(dd:int):void {
+		_wrap_duDisplayList_draw(swigCPtr, dd);
+	}
+
+}
+
+
+public class dtPoly {
+	public var swigCPtr:int;
+	public function set firstLink(firstLink:int):void {
+		_wrap_dtPoly_firstLink_set(swigCPtr, firstLink);
+	}
+
+	public function get firstLink():int {
+		return _wrap_dtPoly_firstLink_get(swigCPtr);
+	}
+
+	public function set verts(verts:int):void {
+		_wrap_dtPoly_verts_set(swigCPtr, verts);
+	}
+
+	public function get verts():int {
+		return _wrap_dtPoly_verts_get(swigCPtr);
+	}
+
+	public function set neis(neis:int):void {
+		_wrap_dtPoly_neis_set(swigCPtr, neis);
+	}
+
+	public function get neis():int {
+		return _wrap_dtPoly_neis_get(swigCPtr);
+	}
+
+	public function set flags(flags:int):void {
+		_wrap_dtPoly_flags_set(swigCPtr, flags);
+	}
+
+	public function get flags():int {
+		return _wrap_dtPoly_flags_get(swigCPtr);
+	}
+
+	public function set vertCount(vertCount:String):void {
+		_wrap_dtPoly_vertCount_set(swigCPtr, vertCount);
+	}
+
+	public function get vertCount():String {
+		return _wrap_dtPoly_vertCount_get(swigCPtr);
+	}
+
+	public function set areaAndtype(areaAndtype:String):void {
+		_wrap_dtPoly_areaAndtype_set(swigCPtr, areaAndtype);
+	}
+
+	public function get areaAndtype():String {
+		return _wrap_dtPoly_areaAndtype_get(swigCPtr);
+	}
+
+	public function setArea(a:String):void {
+		_wrap_dtPoly_setArea(swigCPtr, a);
+	}
+
+	public function setType(t:String):void {
+		_wrap_dtPoly_setType(swigCPtr, t);
+	}
+
+	public function getArea():String {
+		return _wrap_dtPoly_getArea(swigCPtr);
+	}
+
+	public function getType():String {
+		return _wrap_dtPoly_getType(swigCPtr);
+	}
+
+	public static function create():dtPoly {
+		var obj = new dtPoly();
+		obj.swigCPtr = _wrap_new_dtPoly();
+		return obj;
+	}
+
+	public function destroy():void {
+		_wrap_delete_dtPoly(swigCPtr);
+	}
+
+}
+
+
+public class dtPolyDetail {
+	public var swigCPtr:int;
+	public function set vertBase(vertBase:int):void {
+		_wrap_dtPolyDetail_vertBase_set(swigCPtr, vertBase);
+	}
+
+	public function get vertBase():int {
+		return _wrap_dtPolyDetail_vertBase_get(swigCPtr);
+	}
+
+	public function set triBase(triBase:int):void {
+		_wrap_dtPolyDetail_triBase_set(swigCPtr, triBase);
+	}
+
+	public function get triBase():int {
+		return _wrap_dtPolyDetail_triBase_get(swigCPtr);
+	}
+
+	public function set vertCount(vertCount:String):void {
+		_wrap_dtPolyDetail_vertCount_set(swigCPtr, vertCount);
+	}
+
+	public function get vertCount():String {
+		return _wrap_dtPolyDetail_vertCount_get(swigCPtr);
+	}
+
+	public function set triCount(triCount:String):void {
+		_wrap_dtPolyDetail_triCount_set(swigCPtr, triCount);
+	}
+
+	public function get triCount():String {
+		return _wrap_dtPolyDetail_triCount_get(swigCPtr);
+	}
+
+	public static function create():dtPolyDetail {
+		var obj = new dtPolyDetail();
+		obj.swigCPtr = _wrap_new_dtPolyDetail();
+		return obj;
+	}
+
+	public function destroy():void {
+		_wrap_delete_dtPolyDetail(swigCPtr);
+	}
+
+}
+
+
+public class dtLink {
+	public var swigCPtr:int;
+	public function set ref(ref:int):void {
+		_wrap_dtLink_ref_set(swigCPtr, ref);
+	}
+
+	public function get ref():int {
+		return _wrap_dtLink_ref_get(swigCPtr);
+	}
+
+	public function set next(next:int):void {
+		_wrap_dtLink_next_set(swigCPtr, next);
+	}
+
+	public function get next():int {
+		return _wrap_dtLink_next_get(swigCPtr);
+	}
+
+	public function set edge(edge:String):void {
+		_wrap_dtLink_edge_set(swigCPtr, edge);
+	}
+
+	public function get edge():String {
+		return _wrap_dtLink_edge_get(swigCPtr);
+	}
+
+	public function set side(side:String):void {
+		_wrap_dtLink_side_set(swigCPtr, side);
+	}
+
+	public function get side():String {
+		return _wrap_dtLink_side_get(swigCPtr);
+	}
+
+	public function set bmin(bmin:String):void {
+		_wrap_dtLink_bmin_set(swigCPtr, bmin);
+	}
+
+	public function get bmin():String {
+		return _wrap_dtLink_bmin_get(swigCPtr);
+	}
+
+	public function set bmax(bmax:String):void {
+		_wrap_dtLink_bmax_set(swigCPtr, bmax);
+	}
+
+	public function get bmax():String {
+		return _wrap_dtLink_bmax_get(swigCPtr);
+	}
+
+	public static function create():dtLink {
+		var obj = new dtLink();
+		obj.swigCPtr = _wrap_new_dtLink();
+		return obj;
+	}
+
+	public function destroy():void {
+		_wrap_delete_dtLink(swigCPtr);
+	}
+
+}
+
+
+public class dtBVNode {
+	public var swigCPtr:int;
+	public function set bmin(bmin:int):void {
+		_wrap_dtBVNode_bmin_set(swigCPtr, bmin);
+	}
+
+	public function get bmin():int {
+		return _wrap_dtBVNode_bmin_get(swigCPtr);
+	}
+
+	public function set bmax(bmax:int):void {
+		_wrap_dtBVNode_bmax_set(swigCPtr, bmax);
+	}
+
+	public function get bmax():int {
+		return _wrap_dtBVNode_bmax_get(swigCPtr);
+	}
+
+	public function set i(i:int):void {
+		_wrap_dtBVNode_i_set(swigCPtr, i);
+	}
+
+	public function get i():int {
+		return _wrap_dtBVNode_i_get(swigCPtr);
+	}
+
+	public static function create():dtBVNode {
+		var obj = new dtBVNode();
+		obj.swigCPtr = _wrap_new_dtBVNode();
+		return obj;
+	}
+
+	public function destroy():void {
+		_wrap_delete_dtBVNode(swigCPtr);
+	}
+
+}
+
+
+public class dtOffMeshConnection {
+	public var swigCPtr:int;
+	public function set pos(pos:int):void {
+		_wrap_dtOffMeshConnection_pos_set(swigCPtr, pos);
+	}
+
+	public function get pos():int {
+		return _wrap_dtOffMeshConnection_pos_get(swigCPtr);
+	}
+
+	public function set rad(rad:Number):void {
+		_wrap_dtOffMeshConnection_rad_set(swigCPtr, rad);
+	}
+
+	public function get rad():Number {
+		return _wrap_dtOffMeshConnection_rad_get(swigCPtr);
+	}
+
+	public function set poly(poly:int):void {
+		_wrap_dtOffMeshConnection_poly_set(swigCPtr, poly);
+	}
+
+	public function get poly():int {
+		return _wrap_dtOffMeshConnection_poly_get(swigCPtr);
+	}
+
+	public function set flags(flags:String):void {
+		_wrap_dtOffMeshConnection_flags_set(swigCPtr, flags);
+	}
+
+	public function get flags():String {
+		return _wrap_dtOffMeshConnection_flags_get(swigCPtr);
+	}
+
+	public function set side(side:String):void {
+		_wrap_dtOffMeshConnection_side_set(swigCPtr, side);
+	}
+
+	public function get side():String {
+		return _wrap_dtOffMeshConnection_side_get(swigCPtr);
+	}
+
+	public function set userId(userId:int):void {
+		_wrap_dtOffMeshConnection_userId_set(swigCPtr, userId);
+	}
+
+	public function get userId():int {
+		return _wrap_dtOffMeshConnection_userId_get(swigCPtr);
+	}
+
+	public static function create():dtOffMeshConnection {
+		var obj = new dtOffMeshConnection();
+		obj.swigCPtr = _wrap_new_dtOffMeshConnection();
+		return obj;
+	}
+
+	public function destroy():void {
+		_wrap_delete_dtOffMeshConnection(swigCPtr);
+	}
+
+}
+
+
+public class dtMeshHeader {
+	public var swigCPtr:int;
+	public function set magic(magic:int):void {
+		_wrap_dtMeshHeader_magic_set(swigCPtr, magic);
+	}
+
+	public function get magic():int {
+		return _wrap_dtMeshHeader_magic_get(swigCPtr);
+	}
+
+	public function set version(version:int):void {
+		_wrap_dtMeshHeader_version_set(swigCPtr, version);
+	}
+
+	public function get version():int {
+		return _wrap_dtMeshHeader_version_get(swigCPtr);
+	}
+
+	public function set x(x:int):void {
+		_wrap_dtMeshHeader_x_set(swigCPtr, x);
+	}
+
+	public function get x():int {
+		return _wrap_dtMeshHeader_x_get(swigCPtr);
+	}
+
+	public function set y(y:int):void {
+		_wrap_dtMeshHeader_y_set(swigCPtr, y);
+	}
+
+	public function get y():int {
+		return _wrap_dtMeshHeader_y_get(swigCPtr);
+	}
+
+	public function set layer(layer:int):void {
+		_wrap_dtMeshHeader_layer_set(swigCPtr, layer);
+	}
+
+	public function get layer():int {
+		return _wrap_dtMeshHeader_layer_get(swigCPtr);
+	}
+
+	public function set userId(userId:int):void {
+		_wrap_dtMeshHeader_userId_set(swigCPtr, userId);
+	}
+
+	public function get userId():int {
+		return _wrap_dtMeshHeader_userId_get(swigCPtr);
+	}
+
+	public function set polyCount(polyCount:int):void {
+		_wrap_dtMeshHeader_polyCount_set(swigCPtr, polyCount);
+	}
+
+	public function get polyCount():int {
+		return _wrap_dtMeshHeader_polyCount_get(swigCPtr);
+	}
+
+	public function set vertCount(vertCount:int):void {
+		_wrap_dtMeshHeader_vertCount_set(swigCPtr, vertCount);
+	}
+
+	public function get vertCount():int {
+		return _wrap_dtMeshHeader_vertCount_get(swigCPtr);
+	}
+
+	public function set maxLinkCount(maxLinkCount:int):void {
+		_wrap_dtMeshHeader_maxLinkCount_set(swigCPtr, maxLinkCount);
+	}
+
+	public function get maxLinkCount():int {
+		return _wrap_dtMeshHeader_maxLinkCount_get(swigCPtr);
+	}
+
+	public function set detailMeshCount(detailMeshCount:int):void {
+		_wrap_dtMeshHeader_detailMeshCount_set(swigCPtr, detailMeshCount);
+	}
+
+	public function get detailMeshCount():int {
+		return _wrap_dtMeshHeader_detailMeshCount_get(swigCPtr);
+	}
+
+	public function set detailVertCount(detailVertCount:int):void {
+		_wrap_dtMeshHeader_detailVertCount_set(swigCPtr, detailVertCount);
+	}
+
+	public function get detailVertCount():int {
+		return _wrap_dtMeshHeader_detailVertCount_get(swigCPtr);
+	}
+
+	public function set detailTriCount(detailTriCount:int):void {
+		_wrap_dtMeshHeader_detailTriCount_set(swigCPtr, detailTriCount);
+	}
+
+	public function get detailTriCount():int {
+		return _wrap_dtMeshHeader_detailTriCount_get(swigCPtr);
+	}
+
+	public function set bvNodeCount(bvNodeCount:int):void {
+		_wrap_dtMeshHeader_bvNodeCount_set(swigCPtr, bvNodeCount);
+	}
+
+	public function get bvNodeCount():int {
+		return _wrap_dtMeshHeader_bvNodeCount_get(swigCPtr);
+	}
+
+	public function set offMeshConCount(offMeshConCount:int):void {
+		_wrap_dtMeshHeader_offMeshConCount_set(swigCPtr, offMeshConCount);
+	}
+
+	public function get offMeshConCount():int {
+		return _wrap_dtMeshHeader_offMeshConCount_get(swigCPtr);
+	}
+
+	public function set offMeshBase(offMeshBase:int):void {
+		_wrap_dtMeshHeader_offMeshBase_set(swigCPtr, offMeshBase);
+	}
+
+	public function get offMeshBase():int {
+		return _wrap_dtMeshHeader_offMeshBase_get(swigCPtr);
+	}
+
+	public function set walkableHeight(walkableHeight:Number):void {
+		_wrap_dtMeshHeader_walkableHeight_set(swigCPtr, walkableHeight);
+	}
+
+	public function get walkableHeight():Number {
+		return _wrap_dtMeshHeader_walkableHeight_get(swigCPtr);
+	}
+
+	public function set walkableRadius(walkableRadius:Number):void {
+		_wrap_dtMeshHeader_walkableRadius_set(swigCPtr, walkableRadius);
+	}
+
+	public function get walkableRadius():Number {
+		return _wrap_dtMeshHeader_walkableRadius_get(swigCPtr);
+	}
+
+	public function set walkableClimb(walkableClimb:Number):void {
+		_wrap_dtMeshHeader_walkableClimb_set(swigCPtr, walkableClimb);
+	}
+
+	public function get walkableClimb():Number {
+		return _wrap_dtMeshHeader_walkableClimb_get(swigCPtr);
+	}
+
+	public function set bmin(bmin:int):void {
+		_wrap_dtMeshHeader_bmin_set(swigCPtr, bmin);
+	}
+
+	public function get bmin():int {
+		return _wrap_dtMeshHeader_bmin_get(swigCPtr);
+	}
+
+	public function set bmax(bmax:int):void {
+		_wrap_dtMeshHeader_bmax_set(swigCPtr, bmax);
+	}
+
+	public function get bmax():int {
+		return _wrap_dtMeshHeader_bmax_get(swigCPtr);
+	}
+
+	public function set bvQuantFactor(bvQuantFactor:Number):void {
+		_wrap_dtMeshHeader_bvQuantFactor_set(swigCPtr, bvQuantFactor);
+	}
+
+	public function get bvQuantFactor():Number {
+		return _wrap_dtMeshHeader_bvQuantFactor_get(swigCPtr);
+	}
+
+	public static function create():dtMeshHeader {
+		var obj = new dtMeshHeader();
+		obj.swigCPtr = _wrap_new_dtMeshHeader();
+		return obj;
+	}
+
+	public function destroy():void {
+		_wrap_delete_dtMeshHeader(swigCPtr);
+	}
+
+}
+
+
+public class dtMeshTile {
+	public var swigCPtr:int;
+	public function set salt(salt:int):void {
+		_wrap_dtMeshTile_salt_set(swigCPtr, salt);
+	}
+
+	public function get salt():int {
+		return _wrap_dtMeshTile_salt_get(swigCPtr);
+	}
+
+	public function set linksFreeList(linksFreeList:int):void {
+		_wrap_dtMeshTile_linksFreeList_set(swigCPtr, linksFreeList);
+	}
+
+	public function get linksFreeList():int {
+		return _wrap_dtMeshTile_linksFreeList_get(swigCPtr);
+	}
+
+	public function set header(header:int):void {
+		_wrap_dtMeshTile_header_set(swigCPtr, header);
+	}
+
+	public function get header():int {
+		return _wrap_dtMeshTile_header_get(swigCPtr);
+	}
+
+	public function set polys(polys:int):void {
+		_wrap_dtMeshTile_polys_set(swigCPtr, polys);
+	}
+
+	public function get polys():int {
+		return _wrap_dtMeshTile_polys_get(swigCPtr);
+	}
+
+	public function set verts(verts:int):void {
+		_wrap_dtMeshTile_verts_set(swigCPtr, verts);
+	}
+
+	public function get verts():int {
+		return _wrap_dtMeshTile_verts_get(swigCPtr);
+	}
+
+	public function set links(links:int):void {
+		_wrap_dtMeshTile_links_set(swigCPtr, links);
+	}
+
+	public function get links():int {
+		return _wrap_dtMeshTile_links_get(swigCPtr);
+	}
+
+	public function set detailMeshes(detailMeshes:int):void {
+		_wrap_dtMeshTile_detailMeshes_set(swigCPtr, detailMeshes);
+	}
+
+	public function get detailMeshes():int {
+		return _wrap_dtMeshTile_detailMeshes_get(swigCPtr);
+	}
+
+	public function set detailVerts(detailVerts:int):void {
+		_wrap_dtMeshTile_detailVerts_set(swigCPtr, detailVerts);
+	}
+
+	public function get detailVerts():int {
+		return _wrap_dtMeshTile_detailVerts_get(swigCPtr);
+	}
+
+	public function set detailTris(detailTris:int):void {
+		_wrap_dtMeshTile_detailTris_set(swigCPtr, detailTris);
+	}
+
+	public function get detailTris():int {
+		return _wrap_dtMeshTile_detailTris_get(swigCPtr);
+	}
+
+	public function set bvTree(bvTree:int):void {
+		_wrap_dtMeshTile_bvTree_set(swigCPtr, bvTree);
+	}
+
+	public function get bvTree():int {
+		return _wrap_dtMeshTile_bvTree_get(swigCPtr);
+	}
+
+	public function set offMeshCons(offMeshCons:int):void {
+		_wrap_dtMeshTile_offMeshCons_set(swigCPtr, offMeshCons);
+	}
+
+	public function get offMeshCons():int {
+		return _wrap_dtMeshTile_offMeshCons_get(swigCPtr);
+	}
+
+	public function set data(data:int):void {
+		_wrap_dtMeshTile_data_set(swigCPtr, data);
+	}
+
+	public function get data():int {
+		return _wrap_dtMeshTile_data_get(swigCPtr);
+	}
+
+	public function set dataSize(dataSize:int):void {
+		_wrap_dtMeshTile_dataSize_set(swigCPtr, dataSize);
+	}
+
+	public function get dataSize():int {
+		return _wrap_dtMeshTile_dataSize_get(swigCPtr);
+	}
+
+	public function set flags(flags:int):void {
+		_wrap_dtMeshTile_flags_set(swigCPtr, flags);
+	}
+
+	public function get flags():int {
+		return _wrap_dtMeshTile_flags_get(swigCPtr);
+	}
+
+	public function set next(next:int):void {
+		_wrap_dtMeshTile_next_set(swigCPtr, next);
+	}
+
+	public function get next():int {
+		return _wrap_dtMeshTile_next_get(swigCPtr);
+	}
+
+	public static function create():dtMeshTile {
+		var obj = new dtMeshTile();
+		obj.swigCPtr = _wrap_new_dtMeshTile();
+		return obj;
+	}
+
+	public function destroy():void {
+		_wrap_delete_dtMeshTile(swigCPtr);
+	}
+
+}
+
+
+public class dtNavMeshParams {
+	public var swigCPtr:int;
+	public function set orig(orig:int):void {
+		_wrap_dtNavMeshParams_orig_set(swigCPtr, orig);
+	}
+
+	public function get orig():int {
+		return _wrap_dtNavMeshParams_orig_get(swigCPtr);
+	}
+
+	public function set tileWidth(tileWidth:Number):void {
+		_wrap_dtNavMeshParams_tileWidth_set(swigCPtr, tileWidth);
+	}
+
+	public function get tileWidth():Number {
+		return _wrap_dtNavMeshParams_tileWidth_get(swigCPtr);
+	}
+
+	public function set tileHeight(tileHeight:Number):void {
+		_wrap_dtNavMeshParams_tileHeight_set(swigCPtr, tileHeight);
+	}
+
+	public function get tileHeight():Number {
+		return _wrap_dtNavMeshParams_tileHeight_get(swigCPtr);
+	}
+
+	public function set maxTiles(maxTiles:int):void {
+		_wrap_dtNavMeshParams_maxTiles_set(swigCPtr, maxTiles);
+	}
+
+	public function get maxTiles():int {
+		return _wrap_dtNavMeshParams_maxTiles_get(swigCPtr);
+	}
+
+	public function set maxPolys(maxPolys:int):void {
+		_wrap_dtNavMeshParams_maxPolys_set(swigCPtr, maxPolys);
+	}
+
+	public function get maxPolys():int {
+		return _wrap_dtNavMeshParams_maxPolys_get(swigCPtr);
+	}
+
+	public static function create():dtNavMeshParams {
+		var obj = new dtNavMeshParams();
+		obj.swigCPtr = _wrap_new_dtNavMeshParams();
+		return obj;
+	}
+
+	public function destroy():void {
+		_wrap_delete_dtNavMeshParams(swigCPtr);
+	}
+
+}
+
+
+public class dtNavMesh {
+	public var swigCPtr:int;
+	public static function create():dtNavMesh {
+		var obj = new dtNavMesh();
+		obj.swigCPtr = _wrap_new_dtNavMesh();
+		return obj;
+	}
+
+	public function destroy():void {
+		_wrap_delete_dtNavMesh(swigCPtr);
+	}
+
+	public function init(params:int):int {
+		return _wrap_dtNavMesh_init(swigCPtr, params);
+	}
+
+	public function getParams():int {
+		return _wrap_dtNavMesh_getParams(swigCPtr);
+	}
+
+	public function addTile(data:int, dataSize:int, flags:int, lastRef:int, result:int):int {
+		return _wrap_dtNavMesh_addTile(swigCPtr, data, dataSize, flags, lastRef, result);
+	}
+
+	public function removeTile(ref:int, data:int, dataSize:int):int {
+		return _wrap_dtNavMesh_removeTile(swigCPtr, ref, data, dataSize);
+	}
+
+	public function calcTileLoc(pos:int, tx:int, ty:int):void {
+		_wrap_dtNavMesh_calcTileLoc(swigCPtr, pos, tx, ty);
+	}
+
+	public function getTileAt(x:int, y:int, layer:int):int {
+		return _wrap_dtNavMesh_getTileAt(swigCPtr, x, y, layer);
+	}
+
+	public function getTilesAt(x:int, y:int, tiles:int, maxTiles:int):int {
+		return _wrap_dtNavMesh_getTilesAt(swigCPtr, x, y, tiles, maxTiles);
+	}
+
+	public function getTileRefAt(x:int, y:int, layer:int):int {
+		return _wrap_dtNavMesh_getTileRefAt(swigCPtr, x, y, layer);
+	}
+
+	public function getTileRef(tile:int):int {
+		return _wrap_dtNavMesh_getTileRef(swigCPtr, tile);
+	}
+
+	public function getTileByRef(ref:int):int {
+		return _wrap_dtNavMesh_getTileByRef(swigCPtr, ref);
+	}
+
+	public function getMaxTiles():int {
+		return _wrap_dtNavMesh_getMaxTiles(swigCPtr);
+	}
+
+	public function getTile(i:int):int {
+		return _wrap_dtNavMesh_getTile(swigCPtr, i);
+	}
+
+	public function getTileAndPolyByRef(ref:int, tile:int, poly:int):int {
+		return _wrap_dtNavMesh_getTileAndPolyByRef(swigCPtr, ref, tile, poly);
+	}
+
+	public function getTileAndPolyByRefUnsafe(ref:int, tile:int, poly:int):void {
+		_wrap_dtNavMesh_getTileAndPolyByRefUnsafe(swigCPtr, ref, tile, poly);
+	}
+
+	public function isValidPolyRef(ref:int):Boolean {
+		return _wrap_dtNavMesh_isValidPolyRef(swigCPtr, ref);
+	}
+
+	public function getPolyRefBase(tile:int):int {
+		return _wrap_dtNavMesh_getPolyRefBase(swigCPtr, tile);
+	}
+
+	public function getOffMeshConnectionPolyEndPoints(prevRef:int, polyRef:int, startPos:int, endPos:int):int {
+		return _wrap_dtNavMesh_getOffMeshConnectionPolyEndPoints(swigCPtr, prevRef, polyRef, startPos, endPos);
+	}
+
+	public function getOffMeshConnectionByRef(ref:int):int {
+		return _wrap_dtNavMesh_getOffMeshConnectionByRef(swigCPtr, ref);
+	}
+
+	public function setPolyFlags(ref:int, flags:int):int {
+		return _wrap_dtNavMesh_setPolyFlags(swigCPtr, ref, flags);
+	}
+
+	public function getPolyFlags(ref:int, resultFlags:int):int {
+		return _wrap_dtNavMesh_getPolyFlags(swigCPtr, ref, resultFlags);
+	}
+
+	public function setPolyArea(ref:int, area:String):int {
+		return _wrap_dtNavMesh_setPolyArea(swigCPtr, ref, area);
+	}
+
+	public function getPolyArea(ref:int, resultArea:int):int {
+		return _wrap_dtNavMesh_getPolyArea(swigCPtr, ref, resultArea);
+	}
+
+	public function getTileStateSize(tile:int):int {
+		return _wrap_dtNavMesh_getTileStateSize(swigCPtr, tile);
+	}
+
+	public function storeTileState(tile:int, data:int, maxDataSize:int):int {
+		return _wrap_dtNavMesh_storeTileState(swigCPtr, tile, data, maxDataSize);
+	}
+
+	public function restoreTileState(tile:int, data:int, maxDataSize:int):int {
+		return _wrap_dtNavMesh_restoreTileState(swigCPtr, tile, data, maxDataSize);
+	}
+
+	public function encodePolyId(salt:int, it:int, ip:int):int {
+		return _wrap_dtNavMesh_encodePolyId(swigCPtr, salt, it, ip);
+	}
+
+	public function decodePolyId(ref:int, salt:int, it:int, ip:int):void {
+		_wrap_dtNavMesh_decodePolyId(swigCPtr, ref, salt, it, ip);
+	}
+
+	public function decodePolyIdSalt(ref:int):int {
+		return _wrap_dtNavMesh_decodePolyIdSalt(swigCPtr, ref);
+	}
+
+	public function decodePolyIdTile(ref:int):int {
+		return _wrap_dtNavMesh_decodePolyIdTile(swigCPtr, ref);
+	}
+
+	public function decodePolyIdPoly(ref:int):int {
+		return _wrap_dtNavMesh_decodePolyIdPoly(swigCPtr, ref);
+	}
+
+}
+
+
+public class dtNavMeshCreateParams {
+	public var swigCPtr:int;
+	public function set verts(verts:int):void {
+		_wrap_dtNavMeshCreateParams_verts_set(swigCPtr, verts);
+	}
+
+	public function get verts():int {
+		return _wrap_dtNavMeshCreateParams_verts_get(swigCPtr);
+	}
+
+	public function set vertCount(vertCount:int):void {
+		_wrap_dtNavMeshCreateParams_vertCount_set(swigCPtr, vertCount);
+	}
+
+	public function get vertCount():int {
+		return _wrap_dtNavMeshCreateParams_vertCount_get(swigCPtr);
+	}
+
+	public function set polys(polys:int):void {
+		_wrap_dtNavMeshCreateParams_polys_set(swigCPtr, polys);
+	}
+
+	public function get polys():int {
+		return _wrap_dtNavMeshCreateParams_polys_get(swigCPtr);
+	}
+
+	public function set polyFlags(polyFlags:int):void {
+		_wrap_dtNavMeshCreateParams_polyFlags_set(swigCPtr, polyFlags);
+	}
+
+	public function get polyFlags():int {
+		return _wrap_dtNavMeshCreateParams_polyFlags_get(swigCPtr);
+	}
+
+	public function set polyAreas(polyAreas:int):void {
+		_wrap_dtNavMeshCreateParams_polyAreas_set(swigCPtr, polyAreas);
+	}
+
+	public function get polyAreas():int {
+		return _wrap_dtNavMeshCreateParams_polyAreas_get(swigCPtr);
+	}
+
+	public function set polyCount(polyCount:int):void {
+		_wrap_dtNavMeshCreateParams_polyCount_set(swigCPtr, polyCount);
+	}
+
+	public function get polyCount():int {
+		return _wrap_dtNavMeshCreateParams_polyCount_get(swigCPtr);
+	}
+
+	public function set nvp(nvp:int):void {
+		_wrap_dtNavMeshCreateParams_nvp_set(swigCPtr, nvp);
+	}
+
+	public function get nvp():int {
+		return _wrap_dtNavMeshCreateParams_nvp_get(swigCPtr);
+	}
+
+	public function set detailMeshes(detailMeshes:int):void {
+		_wrap_dtNavMeshCreateParams_detailMeshes_set(swigCPtr, detailMeshes);
+	}
+
+	public function get detailMeshes():int {
+		return _wrap_dtNavMeshCreateParams_detailMeshes_get(swigCPtr);
+	}
+
+	public function set detailVerts(detailVerts:int):void {
+		_wrap_dtNavMeshCreateParams_detailVerts_set(swigCPtr, detailVerts);
+	}
+
+	public function get detailVerts():int {
+		return _wrap_dtNavMeshCreateParams_detailVerts_get(swigCPtr);
+	}
+
+	public function set detailVertsCount(detailVertsCount:int):void {
+		_wrap_dtNavMeshCreateParams_detailVertsCount_set(swigCPtr, detailVertsCount);
+	}
+
+	public function get detailVertsCount():int {
+		return _wrap_dtNavMeshCreateParams_detailVertsCount_get(swigCPtr);
+	}
+
+	public function set detailTris(detailTris:int):void {
+		_wrap_dtNavMeshCreateParams_detailTris_set(swigCPtr, detailTris);
+	}
+
+	public function get detailTris():int {
+		return _wrap_dtNavMeshCreateParams_detailTris_get(swigCPtr);
+	}
+
+	public function set detailTriCount(detailTriCount:int):void {
+		_wrap_dtNavMeshCreateParams_detailTriCount_set(swigCPtr, detailTriCount);
+	}
+
+	public function get detailTriCount():int {
+		return _wrap_dtNavMeshCreateParams_detailTriCount_get(swigCPtr);
+	}
+
+	public function set offMeshConVerts(offMeshConVerts:int):void {
+		_wrap_dtNavMeshCreateParams_offMeshConVerts_set(swigCPtr, offMeshConVerts);
+	}
+
+	public function get offMeshConVerts():int {
+		return _wrap_dtNavMeshCreateParams_offMeshConVerts_get(swigCPtr);
+	}
+
+	public function set offMeshConRad(offMeshConRad:int):void {
+		_wrap_dtNavMeshCreateParams_offMeshConRad_set(swigCPtr, offMeshConRad);
+	}
+
+	public function get offMeshConRad():int {
+		return _wrap_dtNavMeshCreateParams_offMeshConRad_get(swigCPtr);
+	}
+
+	public function set offMeshConFlags(offMeshConFlags:int):void {
+		_wrap_dtNavMeshCreateParams_offMeshConFlags_set(swigCPtr, offMeshConFlags);
+	}
+
+	public function get offMeshConFlags():int {
+		return _wrap_dtNavMeshCreateParams_offMeshConFlags_get(swigCPtr);
+	}
+
+	public function set offMeshConAreas(offMeshConAreas:int):void {
+		_wrap_dtNavMeshCreateParams_offMeshConAreas_set(swigCPtr, offMeshConAreas);
+	}
+
+	public function get offMeshConAreas():int {
+		return _wrap_dtNavMeshCreateParams_offMeshConAreas_get(swigCPtr);
+	}
+
+	public function set offMeshConDir(offMeshConDir:int):void {
+		_wrap_dtNavMeshCreateParams_offMeshConDir_set(swigCPtr, offMeshConDir);
+	}
+
+	public function get offMeshConDir():int {
+		return _wrap_dtNavMeshCreateParams_offMeshConDir_get(swigCPtr);
+	}
+
+	public function set offMeshConUserID(offMeshConUserID:int):void {
+		_wrap_dtNavMeshCreateParams_offMeshConUserID_set(swigCPtr, offMeshConUserID);
+	}
+
+	public function get offMeshConUserID():int {
+		return _wrap_dtNavMeshCreateParams_offMeshConUserID_get(swigCPtr);
+	}
+
+	public function set offMeshConCount(offMeshConCount:int):void {
+		_wrap_dtNavMeshCreateParams_offMeshConCount_set(swigCPtr, offMeshConCount);
+	}
+
+	public function get offMeshConCount():int {
+		return _wrap_dtNavMeshCreateParams_offMeshConCount_get(swigCPtr);
+	}
+
+	public function set userId(userId:int):void {
+		_wrap_dtNavMeshCreateParams_userId_set(swigCPtr, userId);
+	}
+
+	public function get userId():int {
+		return _wrap_dtNavMeshCreateParams_userId_get(swigCPtr);
+	}
+
+	public function set tileX(tileX:int):void {
+		_wrap_dtNavMeshCreateParams_tileX_set(swigCPtr, tileX);
+	}
+
+	public function get tileX():int {
+		return _wrap_dtNavMeshCreateParams_tileX_get(swigCPtr);
+	}
+
+	public function set tileY(tileY:int):void {
+		_wrap_dtNavMeshCreateParams_tileY_set(swigCPtr, tileY);
+	}
+
+	public function get tileY():int {
+		return _wrap_dtNavMeshCreateParams_tileY_get(swigCPtr);
+	}
+
+	public function set tileLayer(tileLayer:int):void {
+		_wrap_dtNavMeshCreateParams_tileLayer_set(swigCPtr, tileLayer);
+	}
+
+	public function get tileLayer():int {
+		return _wrap_dtNavMeshCreateParams_tileLayer_get(swigCPtr);
+	}
+
+	public function set bmin(bmin:int):void {
+		_wrap_dtNavMeshCreateParams_bmin_set(swigCPtr, bmin);
+	}
+
+	public function get bmin():int {
+		return _wrap_dtNavMeshCreateParams_bmin_get(swigCPtr);
+	}
+
+	public function set bmax(bmax:int):void {
+		_wrap_dtNavMeshCreateParams_bmax_set(swigCPtr, bmax);
+	}
+
+	public function get bmax():int {
+		return _wrap_dtNavMeshCreateParams_bmax_get(swigCPtr);
+	}
+
+	public function set walkableHeight(walkableHeight:Number):void {
+		_wrap_dtNavMeshCreateParams_walkableHeight_set(swigCPtr, walkableHeight);
+	}
+
+	public function get walkableHeight():Number {
+		return _wrap_dtNavMeshCreateParams_walkableHeight_get(swigCPtr);
+	}
+
+	public function set walkableRadius(walkableRadius:Number):void {
+		_wrap_dtNavMeshCreateParams_walkableRadius_set(swigCPtr, walkableRadius);
+	}
+
+	public function get walkableRadius():Number {
+		return _wrap_dtNavMeshCreateParams_walkableRadius_get(swigCPtr);
+	}
+
+	public function set walkableClimb(walkableClimb:Number):void {
+		_wrap_dtNavMeshCreateParams_walkableClimb_set(swigCPtr, walkableClimb);
+	}
+
+	public function get walkableClimb():Number {
+		return _wrap_dtNavMeshCreateParams_walkableClimb_get(swigCPtr);
+	}
+
+	public function set cs(cs:Number):void {
+		_wrap_dtNavMeshCreateParams_cs_set(swigCPtr, cs);
+	}
+
+	public function get cs():Number {
+		return _wrap_dtNavMeshCreateParams_cs_get(swigCPtr);
+	}
+
+	public function set ch(ch:Number):void {
+		_wrap_dtNavMeshCreateParams_ch_set(swigCPtr, ch);
+	}
+
+	public function get ch():Number {
+		return _wrap_dtNavMeshCreateParams_ch_get(swigCPtr);
+	}
+
+	public function set buildBvTree(buildBvTree:Boolean):void {
+		_wrap_dtNavMeshCreateParams_buildBvTree_set(swigCPtr, buildBvTree);
+	}
+
+	public function get buildBvTree():Boolean {
+		return _wrap_dtNavMeshCreateParams_buildBvTree_get(swigCPtr);
+	}
+
+	public static function create():dtNavMeshCreateParams {
+		var obj = new dtNavMeshCreateParams();
+		obj.swigCPtr = _wrap_new_dtNavMeshCreateParams();
+		return obj;
+	}
+
+	public function destroy():void {
+		_wrap_delete_dtNavMeshCreateParams(swigCPtr);
+	}
+
+}
+
+
+public class dtQueryFilter {
+	public var swigCPtr:int;
+	public static function create():dtQueryFilter {
+		var obj = new dtQueryFilter();
+		obj.swigCPtr = _wrap_new_dtQueryFilter();
+		return obj;
+	}
+
+	public function passFilter(ref:int, tile:int, poly:int):Boolean {
+		return _wrap_dtQueryFilter_passFilter(swigCPtr, ref, tile, poly);
+	}
+
+	public function getCost(pa:int, pb:int, prevRef:int, prevTile:int, prevPoly:int, curRef:int, curTile:int, curPoly:int, nextRef:int, nextTile:int, nextPoly:int):Number {
+		return _wrap_dtQueryFilter_getCost(swigCPtr, pa, pb, prevRef, prevTile, prevPoly, curRef, curTile, curPoly, nextRef, nextTile, nextPoly);
+	}
+
+	public function getAreaCost(i:int):Number {
+		return _wrap_dtQueryFilter_getAreaCost(swigCPtr, i);
+	}
+
+	public function setAreaCost(i:int, cost:Number):void {
+		_wrap_dtQueryFilter_setAreaCost(swigCPtr, i, cost);
+	}
+
+	public function getIncludeFlags():int {
+		return _wrap_dtQueryFilter_getIncludeFlags(swigCPtr);
+	}
+
+	public function setIncludeFlags(flags:int):void {
+		_wrap_dtQueryFilter_setIncludeFlags(swigCPtr, flags);
+	}
+
+	public function getExcludeFlags():int {
+		return _wrap_dtQueryFilter_getExcludeFlags(swigCPtr);
+	}
+
+	public function setExcludeFlags(flags:int):void {
+		_wrap_dtQueryFilter_setExcludeFlags(swigCPtr, flags);
+	}
+
+	public function destroy():void {
+		_wrap_delete_dtQueryFilter(swigCPtr);
+	}
+
+}
+
+
+public class dtNavMeshQuery {
+	public var swigCPtr:int;
+	public static function create():dtNavMeshQuery {
+		var obj = new dtNavMeshQuery();
+		obj.swigCPtr = _wrap_new_dtNavMeshQuery();
+		return obj;
+	}
+
+	public function destroy():void {
+		_wrap_delete_dtNavMeshQuery(swigCPtr);
+	}
+
+	public function init(nav:int, maxNodes:int):int {
+		return _wrap_dtNavMeshQuery_init(swigCPtr, nav, maxNodes);
+	}
+
+	public function findPath(startRef:int, endRef:int, startPos:int, endPos:int, filter:int, path:int, pathCount:int, maxPath:int):int {
+		return _wrap_dtNavMeshQuery_findPath(swigCPtr, startRef, endRef, startPos, endPos, filter, path, pathCount, maxPath);
+	}
+
+	public function findStraightPath(startPos:int, endPos:int, path:int, pathSize:int, straightPath:int, straightPathFlags:int, straightPathRefs:int, straightPathCount:int, maxStraightPath:int):int {
+		return _wrap_dtNavMeshQuery_findStraightPath(swigCPtr, startPos, endPos, path, pathSize, straightPath, straightPathFlags, straightPathRefs, straightPathCount, maxStraightPath);
+	}
+
+	public function initSlicedFindPath(startRef:int, endRef:int, startPos:int, endPos:int, filter:int):int {
+		return _wrap_dtNavMeshQuery_initSlicedFindPath(swigCPtr, startRef, endRef, startPos, endPos, filter);
+	}
+
+	public function updateSlicedFindPath(maxIter:int, doneIters:int):int {
+		return _wrap_dtNavMeshQuery_updateSlicedFindPath(swigCPtr, maxIter, doneIters);
+	}
+
+	public function finalizeSlicedFindPath(path:int, pathCount:int, maxPath:int):int {
+		return _wrap_dtNavMeshQuery_finalizeSlicedFindPath(swigCPtr, path, pathCount, maxPath);
+	}
+
+	public function finalizeSlicedFindPathPartial(existing:int, existingSize:int, path:int, pathCount:int, maxPath:int):int {
+		return _wrap_dtNavMeshQuery_finalizeSlicedFindPathPartial(swigCPtr, existing, existingSize, path, pathCount, maxPath);
+	}
+
+	public function findPolysAroundCircle(startRef:int, centerPos:int, radius:Number, filter:int, resultRef:int, resultParent:int, resultCost:int, resultCount:int, maxResult:int):int {
+		return _wrap_dtNavMeshQuery_findPolysAroundCircle(swigCPtr, startRef, centerPos, radius, filter, resultRef, resultParent, resultCost, resultCount, maxResult);
+	}
+
+	public function findPolysAroundShape(startRef:int, verts:int, nverts:int, filter:int, resultRef:int, resultParent:int, resultCost:int, resultCount:int, maxResult:int):int {
+		return _wrap_dtNavMeshQuery_findPolysAroundShape(swigCPtr, startRef, verts, nverts, filter, resultRef, resultParent, resultCost, resultCount, maxResult);
+	}
+
+	public function findNearestPoly(center:int, extents:int, filter:int, nearestRef:int, nearestPt:int):int {
+		return _wrap_dtNavMeshQuery_findNearestPoly(swigCPtr, center, extents, filter, nearestRef, nearestPt);
+	}
+
+	public function queryPolygons(center:int, extents:int, filter:int, polys:int, polyCount:int, maxPolys:int):int {
+		return _wrap_dtNavMeshQuery_queryPolygons(swigCPtr, center, extents, filter, polys, polyCount, maxPolys);
+	}
+
+	public function findLocalNeighbourhood(startRef:int, centerPos:int, radius:Number, filter:int, resultRef:int, resultParent:int, resultCount:int, maxResult:int):int {
+		return _wrap_dtNavMeshQuery_findLocalNeighbourhood(swigCPtr, startRef, centerPos, radius, filter, resultRef, resultParent, resultCount, maxResult);
+	}
+
+	public function moveAlongSurface(startRef:int, startPos:int, endPos:int, filter:int, resultPos:int, visited:int, visitedCount:int, maxVisitedSize:int):int {
+		return _wrap_dtNavMeshQuery_moveAlongSurface(swigCPtr, startRef, startPos, endPos, filter, resultPos, visited, visitedCount, maxVisitedSize);
+	}
+
+	public function raycast(startRef:int, startPos:int, endPos:int, filter:int, t:int, hitNormal:int, path:int, pathCount:int, maxPath:int):int {
+		return _wrap_dtNavMeshQuery_raycast(swigCPtr, startRef, startPos, endPos, filter, t, hitNormal, path, pathCount, maxPath);
+	}
+
+	public function findDistanceToWall(startRef:int, centerPos:int, maxRadius:Number, filter:int, hitDist:int, hitPos:int, hitNormal:int):int {
+		return _wrap_dtNavMeshQuery_findDistanceToWall(swigCPtr, startRef, centerPos, maxRadius, filter, hitDist, hitPos, hitNormal);
+	}
+
+	public function getPolyWallSegments(ref:int, filter:int, segmentVerts:int, segmentRefs:int, segmentCount:int, maxSegments:int):int {
+		return _wrap_dtNavMeshQuery_getPolyWallSegments(swigCPtr, ref, filter, segmentVerts, segmentRefs, segmentCount, maxSegments);
+	}
+
+	public function findRandomPoint(filter:int, frand:Function, randomRef:int, randomPt:int):int {
+		return _wrap_dtNavMeshQuery_findRandomPoint(swigCPtr, filter, frand, randomRef, randomPt);
+	}
+
+	public function findRandomPointAroundCircle(startRef:int, centerPos:int, maxRadius:Number, filter:int, frand:Function, randomRef:int, randomPt:int):int {
+		return _wrap_dtNavMeshQuery_findRandomPointAroundCircle(swigCPtr, startRef, centerPos, maxRadius, filter, frand, randomRef, randomPt);
+	}
+
+	public function closestPointOnPoly(ref:int, pos:int, closest:int):int {
+		return _wrap_dtNavMeshQuery_closestPointOnPoly(swigCPtr, ref, pos, closest);
+	}
+
+	public function closestPointOnPolyBoundary(ref:int, pos:int, closest:int):int {
+		return _wrap_dtNavMeshQuery_closestPointOnPolyBoundary(swigCPtr, ref, pos, closest);
+	}
+
+	public function getPolyHeight(ref:int, pos:int, height:int):int {
+		return _wrap_dtNavMeshQuery_getPolyHeight(swigCPtr, ref, pos, height);
+	}
+
+	public function isValidPolyRef(ref:int, filter:int):Boolean {
+		return _wrap_dtNavMeshQuery_isValidPolyRef(swigCPtr, ref, filter);
+	}
+
+	public function isInClosedList(ref:int):Boolean {
+		return _wrap_dtNavMeshQuery_isInClosedList(swigCPtr, ref);
+	}
+
+	public function getNodePool():int {
+		return _wrap_dtNavMeshQuery_getNodePool(swigCPtr);
+	}
+
+	public function getAttachedNavMesh():int {
+		return _wrap_dtNavMeshQuery_getAttachedNavMesh(swigCPtr);
+	}
+
+}
+
+
+public class dtNode {
+	public var swigCPtr:int;
+	public function set pos(pos:int):void {
+		_wrap_dtNode_pos_set(swigCPtr, pos);
+	}
+
+	public function get pos():int {
+		return _wrap_dtNode_pos_get(swigCPtr);
+	}
+
+	public function set cost(cost:Number):void {
+		_wrap_dtNode_cost_set(swigCPtr, cost);
+	}
+
+	public function get cost():Number {
+		return _wrap_dtNode_cost_get(swigCPtr);
+	}
+
+	public function set total(total:Number):void {
+		_wrap_dtNode_total_set(swigCPtr, total);
+	}
+
+	public function get total():Number {
+		return _wrap_dtNode_total_get(swigCPtr);
+	}
+
+	public function set pidx(pidx:int):void {
+		_wrap_dtNode_pidx_set(swigCPtr, pidx);
+	}
+
+	public function get pidx():int {
+		return _wrap_dtNode_pidx_get(swigCPtr);
+	}
+
+	public function set flags(flags:int):void {
+		_wrap_dtNode_flags_set(swigCPtr, flags);
+	}
+
+	public function get flags():int {
+		return _wrap_dtNode_flags_get(swigCPtr);
+	}
+
+	public function set id(id:int):void {
+		_wrap_dtNode_id_set(swigCPtr, id);
+	}
+
+	public function get id():int {
+		return _wrap_dtNode_id_get(swigCPtr);
+	}
+
+	public static function create():dtNode {
+		var obj = new dtNode();
+		obj.swigCPtr = _wrap_new_dtNode();
+		return obj;
+	}
+
+	public function destroy():void {
+		_wrap_delete_dtNode(swigCPtr);
+	}
+
+}
+
+
+public class dtNodePool {
+	public var swigCPtr:int;
+	public static function create(maxNodes:int, hashSize:int):dtNodePool {
+		var obj = new dtNodePool();
+		obj.swigCPtr = _wrap_new_dtNodePool(maxNodes, hashSize);
+		return obj;
+	}
+
+	public function destroy():void {
+		_wrap_delete_dtNodePool(swigCPtr);
+	}
+
+	public function equals(arg2:int):void {
+		_wrap_dtNodePool_equals(swigCPtr, arg2);
+	}
+
+	public function clear():void {
+		_wrap_dtNodePool_clear(swigCPtr);
+	}
+
+	public function getNode(id:int):int {
+		return _wrap_dtNodePool_getNode(swigCPtr, id);
+	}
+
+	public function findNode(id:int):int {
+		return _wrap_dtNodePool_findNode(swigCPtr, id);
+	}
+
+	public function getNodeIdx(node:int):int {
+		return _wrap_dtNodePool_getNodeIdx(swigCPtr, node);
+	}
+
+	public function getNodeAtIdx(idx:int):int {
+		return _wrap_dtNodePool_getNodeAtIdx(swigCPtr, idx);
+	}
+
+	public function getMemUsed():int {
+		return _wrap_dtNodePool_getMemUsed(swigCPtr);
+	}
+
+	public function getMaxNodes():int {
+		return _wrap_dtNodePool_getMaxNodes(swigCPtr);
+	}
+
+	public function getHashSize():int {
+		return _wrap_dtNodePool_getHashSize(swigCPtr);
+	}
+
+	public function getFirst(bucket:int):int {
+		return _wrap_dtNodePool_getFirst(swigCPtr, bucket);
+	}
+
+	public function getNext(i:int):int {
+		return _wrap_dtNodePool_getNext(swigCPtr, i);
+	}
+
+}
+
+
+public class dtNodeQueue {
+	public var swigCPtr:int;
+	public static function create(n:int):dtNodeQueue {
+		var obj = new dtNodeQueue();
+		obj.swigCPtr = _wrap_new_dtNodeQueue(n);
+		return obj;
+	}
+
+	public function destroy():void {
+		_wrap_delete_dtNodeQueue(swigCPtr);
+	}
+
+	public function equals(arg2:int):void {
+		_wrap_dtNodeQueue_equals(swigCPtr, arg2);
+	}
+
+	public function clear():void {
+		_wrap_dtNodeQueue_clear(swigCPtr);
+	}
+
+	public function top():int {
+		return _wrap_dtNodeQueue_top(swigCPtr);
+	}
+
+	public function pop():int {
+		return _wrap_dtNodeQueue_pop(swigCPtr);
+	}
+
+	public function push(node:int):void {
+		_wrap_dtNodeQueue_push(swigCPtr, node);
+	}
+
+	public function modify(node:int):void {
+		_wrap_dtNodeQueue_modify(swigCPtr, node);
+	}
+
+	public function empty():Boolean {
+		return _wrap_dtNodeQueue_empty(swigCPtr);
+	}
+
+	public function getMemUsed():int {
+		return _wrap_dtNodeQueue_getMemUsed(swigCPtr);
+	}
+
+	public function getCapacity():int {
+		return _wrap_dtNodeQueue_getCapacity(swigCPtr);
+	}
+
+}
+
+
+public class dtCrowdNeighbour {
+	public var swigCPtr:int;
+	public function set idx(idx:int):void {
+		_wrap_dtCrowdNeighbour_idx_set(swigCPtr, idx);
+	}
+
+	public function get idx():int {
+		return _wrap_dtCrowdNeighbour_idx_get(swigCPtr);
+	}
+
+	public function set dist(dist:Number):void {
+		_wrap_dtCrowdNeighbour_dist_set(swigCPtr, dist);
+	}
+
+	public function get dist():Number {
+		return _wrap_dtCrowdNeighbour_dist_get(swigCPtr);
+	}
+
+	public static function create():dtCrowdNeighbour {
+		var obj = new dtCrowdNeighbour();
+		obj.swigCPtr = _wrap_new_dtCrowdNeighbour();
+		return obj;
+	}
+
+	public function destroy():void {
+		_wrap_delete_dtCrowdNeighbour(swigCPtr);
+	}
+
+}
+
+
+public class dtCrowdAgentParams {
+	public var swigCPtr:int;
+	public function set radius(radius:Number):void {
+		_wrap_dtCrowdAgentParams_radius_set(swigCPtr, radius);
+	}
+
+	public function get radius():Number {
+		return _wrap_dtCrowdAgentParams_radius_get(swigCPtr);
+	}
+
+	public function set height(height:Number):void {
+		_wrap_dtCrowdAgentParams_height_set(swigCPtr, height);
+	}
+
+	public function get height():Number {
+		return _wrap_dtCrowdAgentParams_height_get(swigCPtr);
+	}
+
+	public function set maxAcceleration(maxAcceleration:Number):void {
+		_wrap_dtCrowdAgentParams_maxAcceleration_set(swigCPtr, maxAcceleration);
+	}
+
+	public function get maxAcceleration():Number {
+		return _wrap_dtCrowdAgentParams_maxAcceleration_get(swigCPtr);
+	}
+
+	public function set maxSpeed(maxSpeed:Number):void {
+		_wrap_dtCrowdAgentParams_maxSpeed_set(swigCPtr, maxSpeed);
+	}
+
+	public function get maxSpeed():Number {
+		return _wrap_dtCrowdAgentParams_maxSpeed_get(swigCPtr);
+	}
+
+	public function set collisionQueryRange(collisionQueryRange:Number):void {
+		_wrap_dtCrowdAgentParams_collisionQueryRange_set(swigCPtr, collisionQueryRange);
+	}
+
+	public function get collisionQueryRange():Number {
+		return _wrap_dtCrowdAgentParams_collisionQueryRange_get(swigCPtr);
+	}
+
+	public function set pathOptimizationRange(pathOptimizationRange:Number):void {
+		_wrap_dtCrowdAgentParams_pathOptimizationRange_set(swigCPtr, pathOptimizationRange);
+	}
+
+	public function get pathOptimizationRange():Number {
+		return _wrap_dtCrowdAgentParams_pathOptimizationRange_get(swigCPtr);
+	}
+
+	public function set separationWeight(separationWeight:Number):void {
+		_wrap_dtCrowdAgentParams_separationWeight_set(swigCPtr, separationWeight);
+	}
+
+	public function get separationWeight():Number {
+		return _wrap_dtCrowdAgentParams_separationWeight_get(swigCPtr);
+	}
+
+	public function set updateFlags(updateFlags:String):void {
+		_wrap_dtCrowdAgentParams_updateFlags_set(swigCPtr, updateFlags);
+	}
+
+	public function get updateFlags():String {
+		return _wrap_dtCrowdAgentParams_updateFlags_get(swigCPtr);
+	}
+
+	public function set obstacleAvoidanceType(obstacleAvoidanceType:String):void {
+		_wrap_dtCrowdAgentParams_obstacleAvoidanceType_set(swigCPtr, obstacleAvoidanceType);
+	}
+
+	public function get obstacleAvoidanceType():String {
+		return _wrap_dtCrowdAgentParams_obstacleAvoidanceType_get(swigCPtr);
+	}
+
+	public function set userData(userData:int):void {
+		_wrap_dtCrowdAgentParams_userData_set(swigCPtr, userData);
+	}
+
+	public function get userData():int {
+		return _wrap_dtCrowdAgentParams_userData_get(swigCPtr);
+	}
+
+	public static function create():dtCrowdAgentParams {
+		var obj = new dtCrowdAgentParams();
+		obj.swigCPtr = _wrap_new_dtCrowdAgentParams();
+		return obj;
+	}
+
+	public function destroy():void {
+		_wrap_delete_dtCrowdAgentParams(swigCPtr);
+	}
+
+}
+
+
+public class dtCrowdAgent {
+	public var swigCPtr:int;
+	public function set active(active:String):void {
+		_wrap_dtCrowdAgent_active_set(swigCPtr, active);
+	}
+
+	public function get active():String {
+		return _wrap_dtCrowdAgent_active_get(swigCPtr);
+	}
+
+	public function set state(state:String):void {
+		_wrap_dtCrowdAgent_state_set(swigCPtr, state);
+	}
+
+	public function get state():String {
+		return _wrap_dtCrowdAgent_state_get(swigCPtr);
+	}
+
+	public function set corridor(corridor:int):void {
+		_wrap_dtCrowdAgent_corridor_set(swigCPtr, corridor);
+	}
+
+	public function get corridor():int {
+		return _wrap_dtCrowdAgent_corridor_get(swigCPtr);
+	}
+
+	public function set boundary(boundary:int):void {
+		_wrap_dtCrowdAgent_boundary_set(swigCPtr, boundary);
+	}
+
+	public function get boundary():int {
+		return _wrap_dtCrowdAgent_boundary_get(swigCPtr);
+	}
+
+	public function set topologyOptTime(topologyOptTime:Number):void {
+		_wrap_dtCrowdAgent_topologyOptTime_set(swigCPtr, topologyOptTime);
+	}
+
+	public function get topologyOptTime():Number {
+		return _wrap_dtCrowdAgent_topologyOptTime_get(swigCPtr);
+	}
+
+	public function set neis(neis:int):void {
+		_wrap_dtCrowdAgent_neis_set(swigCPtr, neis);
+	}
+
+	public function get neis():int {
+		return _wrap_dtCrowdAgent_neis_get(swigCPtr);
+	}
+
+	public function set nneis(nneis:int):void {
+		_wrap_dtCrowdAgent_nneis_set(swigCPtr, nneis);
+	}
+
+	public function get nneis():int {
+		return _wrap_dtCrowdAgent_nneis_get(swigCPtr);
+	}
+
+	public function set desiredSpeed(desiredSpeed:Number):void {
+		_wrap_dtCrowdAgent_desiredSpeed_set(swigCPtr, desiredSpeed);
+	}
+
+	public function get desiredSpeed():Number {
+		return _wrap_dtCrowdAgent_desiredSpeed_get(swigCPtr);
+	}
+
+	public function set npos(npos:int):void {
+		_wrap_dtCrowdAgent_npos_set(swigCPtr, npos);
+	}
+
+	public function get npos():int {
+		return _wrap_dtCrowdAgent_npos_get(swigCPtr);
+	}
+
+	public function set disp(disp:int):void {
+		_wrap_dtCrowdAgent_disp_set(swigCPtr, disp);
+	}
+
+	public function get disp():int {
+		return _wrap_dtCrowdAgent_disp_get(swigCPtr);
+	}
+
+	public function set dvel(dvel:int):void {
+		_wrap_dtCrowdAgent_dvel_set(swigCPtr, dvel);
+	}
+
+	public function get dvel():int {
+		return _wrap_dtCrowdAgent_dvel_get(swigCPtr);
+	}
+
+	public function set nvel(nvel:int):void {
+		_wrap_dtCrowdAgent_nvel_set(swigCPtr, nvel);
+	}
+
+	public function get nvel():int {
+		return _wrap_dtCrowdAgent_nvel_get(swigCPtr);
+	}
+
+	public function set vel(vel:int):void {
+		_wrap_dtCrowdAgent_vel_set(swigCPtr, vel);
+	}
+
+	public function get vel():int {
+		return _wrap_dtCrowdAgent_vel_get(swigCPtr);
+	}
+
+	public function set params(params:int):void {
+		_wrap_dtCrowdAgent_params_set(swigCPtr, params);
+	}
+
+	public function get params():int {
+		return _wrap_dtCrowdAgent_params_get(swigCPtr);
+	}
+
+	public function set cornerVerts(cornerVerts:int):void {
+		_wrap_dtCrowdAgent_cornerVerts_set(swigCPtr, cornerVerts);
+	}
+
+	public function get cornerVerts():int {
+		return _wrap_dtCrowdAgent_cornerVerts_get(swigCPtr);
+	}
+
+	public function set cornerFlags(cornerFlags:int):void {
+		_wrap_dtCrowdAgent_cornerFlags_set(swigCPtr, cornerFlags);
+	}
+
+	public function get cornerFlags():int {
+		return _wrap_dtCrowdAgent_cornerFlags_get(swigCPtr);
+	}
+
+	public function set cornerPolys(cornerPolys:int):void {
+		_wrap_dtCrowdAgent_cornerPolys_set(swigCPtr, cornerPolys);
+	}
+
+	public function get cornerPolys():int {
+		return _wrap_dtCrowdAgent_cornerPolys_get(swigCPtr);
+	}
+
+	public function set ncorners(ncorners:int):void {
+		_wrap_dtCrowdAgent_ncorners_set(swigCPtr, ncorners);
+	}
+
+	public function get ncorners():int {
+		return _wrap_dtCrowdAgent_ncorners_get(swigCPtr);
+	}
+
+	public function set targetState(targetState:String):void {
+		_wrap_dtCrowdAgent_targetState_set(swigCPtr, targetState);
+	}
+
+	public function get targetState():String {
+		return _wrap_dtCrowdAgent_targetState_get(swigCPtr);
+	}
+
+	public function set targetRef(targetRef:int):void {
+		_wrap_dtCrowdAgent_targetRef_set(swigCPtr, targetRef);
+	}
+
+	public function get targetRef():int {
+		return _wrap_dtCrowdAgent_targetRef_get(swigCPtr);
+	}
+
+	public function set targetPos(targetPos:int):void {
+		_wrap_dtCrowdAgent_targetPos_set(swigCPtr, targetPos);
+	}
+
+	public function get targetPos():int {
+		return _wrap_dtCrowdAgent_targetPos_get(swigCPtr);
+	}
+
+	public function set targetPathqRef(targetPathqRef:int):void {
+		_wrap_dtCrowdAgent_targetPathqRef_set(swigCPtr, targetPathqRef);
+	}
+
+	public function get targetPathqRef():int {
+		return _wrap_dtCrowdAgent_targetPathqRef_get(swigCPtr);
+	}
+
+	public function set targetReplan(targetReplan:Boolean):void {
+		_wrap_dtCrowdAgent_targetReplan_set(swigCPtr, targetReplan);
+	}
+
+	public function get targetReplan():Boolean {
+		return _wrap_dtCrowdAgent_targetReplan_get(swigCPtr);
+	}
+
+	public function set targetReplanTime(targetReplanTime:Number):void {
+		_wrap_dtCrowdAgent_targetReplanTime_set(swigCPtr, targetReplanTime);
+	}
+
+	public function get targetReplanTime():Number {
+		return _wrap_dtCrowdAgent_targetReplanTime_get(swigCPtr);
+	}
+
+	public static function create():dtCrowdAgent {
+		var obj = new dtCrowdAgent();
+		obj.swigCPtr = _wrap_new_dtCrowdAgent();
+		return obj;
+	}
+
+	public function destroy():void {
+		_wrap_delete_dtCrowdAgent(swigCPtr);
+	}
+
+}
+
+
+public class dtCrowdAgentAnimation {
+	public var swigCPtr:int;
+	public function set active(active:String):void {
+		_wrap_dtCrowdAgentAnimation_active_set(swigCPtr, active);
+	}
+
+	public function get active():String {
+		return _wrap_dtCrowdAgentAnimation_active_get(swigCPtr);
+	}
+
+	public function set initPos(initPos:int):void {
+		_wrap_dtCrowdAgentAnimation_initPos_set(swigCPtr, initPos);
+	}
+
+	public function get initPos():int {
+		return _wrap_dtCrowdAgentAnimation_initPos_get(swigCPtr);
+	}
+
+	public function set startPos(startPos:int):void {
+		_wrap_dtCrowdAgentAnimation_startPos_set(swigCPtr, startPos);
+	}
+
+	public function get startPos():int {
+		return _wrap_dtCrowdAgentAnimation_startPos_get(swigCPtr);
+	}
+
+	public function set endPos(endPos:int):void {
+		_wrap_dtCrowdAgentAnimation_endPos_set(swigCPtr, endPos);
+	}
+
+	public function get endPos():int {
+		return _wrap_dtCrowdAgentAnimation_endPos_get(swigCPtr);
+	}
+
+	public function set polyRef(polyRef:int):void {
+		_wrap_dtCrowdAgentAnimation_polyRef_set(swigCPtr, polyRef);
+	}
+
+	public function get polyRef():int {
+		return _wrap_dtCrowdAgentAnimation_polyRef_get(swigCPtr);
+	}
+
+	public function set t(t:Number):void {
+		_wrap_dtCrowdAgentAnimation_t_set(swigCPtr, t);
+	}
+
+	public function get t():Number {
+		return _wrap_dtCrowdAgentAnimation_t_get(swigCPtr);
+	}
+
+	public function set tmax(tmax:Number):void {
+		_wrap_dtCrowdAgentAnimation_tmax_set(swigCPtr, tmax);
+	}
+
+	public function get tmax():Number {
+		return _wrap_dtCrowdAgentAnimation_tmax_get(swigCPtr);
+	}
+
+	public static function create():dtCrowdAgentAnimation {
+		var obj = new dtCrowdAgentAnimation();
+		obj.swigCPtr = _wrap_new_dtCrowdAgentAnimation();
+		return obj;
+	}
+
+	public function destroy():void {
+		_wrap_delete_dtCrowdAgentAnimation(swigCPtr);
+	}
+
+}
+
+
+public class dtCrowdAgentDebugInfo {
+	public var swigCPtr:int;
+	public function set idx(idx:int):void {
+		_wrap_dtCrowdAgentDebugInfo_idx_set(swigCPtr, idx);
+	}
+
+	public function get idx():int {
+		return _wrap_dtCrowdAgentDebugInfo_idx_get(swigCPtr);
+	}
+
+	public function set optStart(optStart:int):void {
+		_wrap_dtCrowdAgentDebugInfo_optStart_set(swigCPtr, optStart);
+	}
+
+	public function get optStart():int {
+		return _wrap_dtCrowdAgentDebugInfo_optStart_get(swigCPtr);
+	}
+
+	public function set optEnd(optEnd:int):void {
+		_wrap_dtCrowdAgentDebugInfo_optEnd_set(swigCPtr, optEnd);
+	}
+
+	public function get optEnd():int {
+		return _wrap_dtCrowdAgentDebugInfo_optEnd_get(swigCPtr);
+	}
+
+	public function set vod(vod:int):void {
+		_wrap_dtCrowdAgentDebugInfo_vod_set(swigCPtr, vod);
+	}
+
+	public function get vod():int {
+		return _wrap_dtCrowdAgentDebugInfo_vod_get(swigCPtr);
+	}
+
+	public static function create():dtCrowdAgentDebugInfo {
+		var obj = new dtCrowdAgentDebugInfo();
+		obj.swigCPtr = _wrap_new_dtCrowdAgentDebugInfo();
+		return obj;
+	}
+
+	public function destroy():void {
+		_wrap_delete_dtCrowdAgentDebugInfo(swigCPtr);
+	}
+
+}
+
+
+public class dtCrowd {
+	public var swigCPtr:int;
+	public static function create():dtCrowd {
+		var obj = new dtCrowd();
+		obj.swigCPtr = _wrap_new_dtCrowd();
+		return obj;
+	}
+
+	public function destroy():void {
+		_wrap_delete_dtCrowd(swigCPtr);
+	}
+
+	public function init(maxAgents:int, maxAgentRadius:Number, nav:int):Boolean {
+		return _wrap_dtCrowd_init(swigCPtr, maxAgents, maxAgentRadius, nav);
+	}
+
+	public function setObstacleAvoidanceParams(idx:int, params:int):void {
+		_wrap_dtCrowd_setObstacleAvoidanceParams(swigCPtr, idx, params);
+	}
+
+	public function getObstacleAvoidanceParams(idx:int):int {
+		return _wrap_dtCrowd_getObstacleAvoidanceParams(swigCPtr, idx);
+	}
+
+	public function getAgent(idx:int):int {
+		return _wrap_dtCrowd_getAgent(swigCPtr, idx);
+	}
+
+	public function getAgentCount():int {
+		return _wrap_dtCrowd_getAgentCount(swigCPtr);
+	}
+
+	public function addAgent(pos:int, params:int):int {
+		return _wrap_dtCrowd_addAgent(swigCPtr, pos, params);
+	}
+
+	public function updateAgentParameters(idx:int, params:int):void {
+		_wrap_dtCrowd_updateAgentParameters(swigCPtr, idx, params);
+	}
+
+	public function removeAgent(idx:int):void {
+		_wrap_dtCrowd_removeAgent(swigCPtr, idx);
+	}
+
+	public function requestMoveTarget(idx:int, ref:int, pos:int):Boolean {
+		return _wrap_dtCrowd_requestMoveTarget(swigCPtr, idx, ref, pos);
+	}
+
+	public function requestMoveVelocity(idx:int, vel:int):Boolean {
+		return _wrap_dtCrowd_requestMoveVelocity(swigCPtr, idx, vel);
+	}
+
+	public function resetMoveTarget(idx:int):Boolean {
+		return _wrap_dtCrowd_resetMoveTarget(swigCPtr, idx);
+	}
+
+	public function getActiveAgents(agents:int, maxAgents:int):int {
+		return _wrap_dtCrowd_getActiveAgents(swigCPtr, agents, maxAgents);
+	}
+
+	public function update(dt:Number, debug:int):void {
+		_wrap_dtCrowd_update(swigCPtr, dt, debug);
+	}
+
+	public function getFilter():int {
+		return _wrap_dtCrowd_getFilter(swigCPtr);
+	}
+
+	public function getEditableFilter():int {
+		return _wrap_dtCrowd_getEditableFilter(swigCPtr);
+	}
+
+	public function getQueryExtents():int {
+		return _wrap_dtCrowd_getQueryExtents(swigCPtr);
+	}
+
+	public function getVelocitySampleCount():int {
+		return _wrap_dtCrowd_getVelocitySampleCount(swigCPtr);
+	}
+
+	public function getGrid():int {
+		return _wrap_dtCrowd_getGrid(swigCPtr);
+	}
+
+	public function getPathQueue():int {
+		return _wrap_dtCrowd_getPathQueue(swigCPtr);
+	}
+
+	public function getNavMeshQuery():int {
+		return _wrap_dtCrowd_getNavMeshQuery(swigCPtr);
+	}
+
+}
+
+
+public class dtLocalBoundary {
+	public var swigCPtr:int;
+	public static function create():dtLocalBoundary {
+		var obj = new dtLocalBoundary();
+		obj.swigCPtr = _wrap_new_dtLocalBoundary();
+		return obj;
+	}
+
+	public function destroy():void {
+		_wrap_delete_dtLocalBoundary(swigCPtr);
+	}
+
+	public function reset():void {
+		_wrap_dtLocalBoundary_reset(swigCPtr);
+	}
+
+	public function update(ref:int, pos:int, collisionQueryRange:Number, navquery:int, filter:int):void {
+		_wrap_dtLocalBoundary_update(swigCPtr, ref, pos, collisionQueryRange, navquery, filter);
+	}
+
+	public function isValid(navquery:int, filter:int):Boolean {
+		return _wrap_dtLocalBoundary_isValid(swigCPtr, navquery, filter);
+	}
+
+	public function getCenter():int {
+		return _wrap_dtLocalBoundary_getCenter(swigCPtr);
+	}
+
+	public function getSegmentCount():int {
+		return _wrap_dtLocalBoundary_getSegmentCount(swigCPtr);
+	}
+
+	public function getSegment(i:int):int {
+		return _wrap_dtLocalBoundary_getSegment(swigCPtr, i);
+	}
+
+}
+
+
+public class dtObstacleCircle {
+	public var swigCPtr:int;
+	public function set p(p:int):void {
+		_wrap_dtObstacleCircle_p_set(swigCPtr, p);
+	}
+
+	public function get p():int {
+		return _wrap_dtObstacleCircle_p_get(swigCPtr);
+	}
+
+	public function set vel(vel:int):void {
+		_wrap_dtObstacleCircle_vel_set(swigCPtr, vel);
+	}
+
+	public function get vel():int {
+		return _wrap_dtObstacleCircle_vel_get(swigCPtr);
+	}
+
+	public function set dvel(dvel:int):void {
+		_wrap_dtObstacleCircle_dvel_set(swigCPtr, dvel);
+	}
+
+	public function get dvel():int {
+		return _wrap_dtObstacleCircle_dvel_get(swigCPtr);
+	}
+
+	public function set rad(rad:Number):void {
+		_wrap_dtObstacleCircle_rad_set(swigCPtr, rad);
+	}
+
+	public function get rad():Number {
+		return _wrap_dtObstacleCircle_rad_get(swigCPtr);
+	}
+
+	public function set dp(dp:int):void {
+		_wrap_dtObstacleCircle_dp_set(swigCPtr, dp);
+	}
+
+	public function get dp():int {
+		return _wrap_dtObstacleCircle_dp_get(swigCPtr);
+	}
+
+	public function set np(np:int):void {
+		_wrap_dtObstacleCircle_np_set(swigCPtr, np);
+	}
+
+	public function get np():int {
+		return _wrap_dtObstacleCircle_np_get(swigCPtr);
+	}
+
+	public static function create():dtObstacleCircle {
+		var obj = new dtObstacleCircle();
+		obj.swigCPtr = _wrap_new_dtObstacleCircle();
+		return obj;
+	}
+
+	public function destroy():void {
+		_wrap_delete_dtObstacleCircle(swigCPtr);
+	}
+
+}
+
+
+public class dtObstacleSegment {
+	public var swigCPtr:int;
+	public function set p(p:int):void {
+		_wrap_dtObstacleSegment_p_set(swigCPtr, p);
+	}
+
+	public function get p():int {
+		return _wrap_dtObstacleSegment_p_get(swigCPtr);
+	}
+
+	public function set q(q:int):void {
+		_wrap_dtObstacleSegment_q_set(swigCPtr, q);
+	}
+
+	public function get q():int {
+		return _wrap_dtObstacleSegment_q_get(swigCPtr);
+	}
+
+	public function set touch(touch:Boolean):void {
+		_wrap_dtObstacleSegment_touch_set(swigCPtr, touch);
+	}
+
+	public function get touch():Boolean {
+		return _wrap_dtObstacleSegment_touch_get(swigCPtr);
+	}
+
+	public static function create():dtObstacleSegment {
+		var obj = new dtObstacleSegment();
+		obj.swigCPtr = _wrap_new_dtObstacleSegment();
+		return obj;
+	}
+
+	public function destroy():void {
+		_wrap_delete_dtObstacleSegment(swigCPtr);
+	}
+
+}
+
+
+public class dtObstacleAvoidanceDebugData {
+	public var swigCPtr:int;
+	public static function create():dtObstacleAvoidanceDebugData {
+		var obj = new dtObstacleAvoidanceDebugData();
+		obj.swigCPtr = _wrap_new_dtObstacleAvoidanceDebugData();
+		return obj;
+	}
+
+	public function destroy():void {
+		_wrap_delete_dtObstacleAvoidanceDebugData(swigCPtr);
+	}
+
+	public function init(maxSamples:int):Boolean {
+		return _wrap_dtObstacleAvoidanceDebugData_init(swigCPtr, maxSamples);
+	}
+
+	public function reset():void {
+		_wrap_dtObstacleAvoidanceDebugData_reset(swigCPtr);
+	}
+
+	public function addSample(vel:int, ssize:Number, pen:Number, vpen:Number, vcpen:Number, spen:Number, tpen:Number):void {
+		_wrap_dtObstacleAvoidanceDebugData_addSample(swigCPtr, vel, ssize, pen, vpen, vcpen, spen, tpen);
+	}
+
+	public function normalizeSamples():void {
+		_wrap_dtObstacleAvoidanceDebugData_normalizeSamples(swigCPtr);
+	}
+
+	public function getSampleCount():int {
+		return _wrap_dtObstacleAvoidanceDebugData_getSampleCount(swigCPtr);
+	}
+
+	public function getSampleVelocity(i:int):int {
+		return _wrap_dtObstacleAvoidanceDebugData_getSampleVelocity(swigCPtr, i);
+	}
+
+	public function getSampleSize(i:int):Number {
+		return _wrap_dtObstacleAvoidanceDebugData_getSampleSize(swigCPtr, i);
+	}
+
+	public function getSamplePenalty(i:int):Number {
+		return _wrap_dtObstacleAvoidanceDebugData_getSamplePenalty(swigCPtr, i);
+	}
+
+	public function getSampleDesiredVelocityPenalty(i:int):Number {
+		return _wrap_dtObstacleAvoidanceDebugData_getSampleDesiredVelocityPenalty(swigCPtr, i);
+	}
+
+	public function getSampleCurrentVelocityPenalty(i:int):Number {
+		return _wrap_dtObstacleAvoidanceDebugData_getSampleCurrentVelocityPenalty(swigCPtr, i);
+	}
+
+	public function getSamplePreferredSidePenalty(i:int):Number {
+		return _wrap_dtObstacleAvoidanceDebugData_getSamplePreferredSidePenalty(swigCPtr, i);
+	}
+
+	public function getSampleCollisionTimePenalty(i:int):Number {
+		return _wrap_dtObstacleAvoidanceDebugData_getSampleCollisionTimePenalty(swigCPtr, i);
+	}
+
+}
+
+
+public class dtObstacleAvoidanceParams {
+	public var swigCPtr:int;
+	public function set velBias(velBias:Number):void {
+		_wrap_dtObstacleAvoidanceParams_velBias_set(swigCPtr, velBias);
+	}
+
+	public function get velBias():Number {
+		return _wrap_dtObstacleAvoidanceParams_velBias_get(swigCPtr);
+	}
+
+	public function set weightDesVel(weightDesVel:Number):void {
+		_wrap_dtObstacleAvoidanceParams_weightDesVel_set(swigCPtr, weightDesVel);
+	}
+
+	public function get weightDesVel():Number {
+		return _wrap_dtObstacleAvoidanceParams_weightDesVel_get(swigCPtr);
+	}
+
+	public function set weightCurVel(weightCurVel:Number):void {
+		_wrap_dtObstacleAvoidanceParams_weightCurVel_set(swigCPtr, weightCurVel);
+	}
+
+	public function get weightCurVel():Number {
+		return _wrap_dtObstacleAvoidanceParams_weightCurVel_get(swigCPtr);
+	}
+
+	public function set weightSide(weightSide:Number):void {
+		_wrap_dtObstacleAvoidanceParams_weightSide_set(swigCPtr, weightSide);
+	}
+
+	public function get weightSide():Number {
+		return _wrap_dtObstacleAvoidanceParams_weightSide_get(swigCPtr);
+	}
+
+	public function set weightToi(weightToi:Number):void {
+		_wrap_dtObstacleAvoidanceParams_weightToi_set(swigCPtr, weightToi);
+	}
+
+	public function get weightToi():Number {
+		return _wrap_dtObstacleAvoidanceParams_weightToi_get(swigCPtr);
+	}
+
+	public function set horizTime(horizTime:Number):void {
+		_wrap_dtObstacleAvoidanceParams_horizTime_set(swigCPtr, horizTime);
+	}
+
+	public function get horizTime():Number {
+		return _wrap_dtObstacleAvoidanceParams_horizTime_get(swigCPtr);
+	}
+
+	public function set gridSize(gridSize:String):void {
+		_wrap_dtObstacleAvoidanceParams_gridSize_set(swigCPtr, gridSize);
+	}
+
+	public function get gridSize():String {
+		return _wrap_dtObstacleAvoidanceParams_gridSize_get(swigCPtr);
+	}
+
+	public function set adaptiveDivs(adaptiveDivs:String):void {
+		_wrap_dtObstacleAvoidanceParams_adaptiveDivs_set(swigCPtr, adaptiveDivs);
+	}
+
+	public function get adaptiveDivs():String {
+		return _wrap_dtObstacleAvoidanceParams_adaptiveDivs_get(swigCPtr);
+	}
+
+	public function set adaptiveRings(adaptiveRings:String):void {
+		_wrap_dtObstacleAvoidanceParams_adaptiveRings_set(swigCPtr, adaptiveRings);
+	}
+
+	public function get adaptiveRings():String {
+		return _wrap_dtObstacleAvoidanceParams_adaptiveRings_get(swigCPtr);
+	}
+
+	public function set adaptiveDepth(adaptiveDepth:String):void {
+		_wrap_dtObstacleAvoidanceParams_adaptiveDepth_set(swigCPtr, adaptiveDepth);
+	}
+
+	public function get adaptiveDepth():String {
+		return _wrap_dtObstacleAvoidanceParams_adaptiveDepth_get(swigCPtr);
+	}
+
+	public static function create():dtObstacleAvoidanceParams {
+		var obj = new dtObstacleAvoidanceParams();
+		obj.swigCPtr = _wrap_new_dtObstacleAvoidanceParams();
+		return obj;
+	}
+
+	public function destroy():void {
+		_wrap_delete_dtObstacleAvoidanceParams(swigCPtr);
+	}
+
+}
+
+
+public class dtObstacleAvoidanceQuery {
+	public var swigCPtr:int;
+	public static function create():dtObstacleAvoidanceQuery {
+		var obj = new dtObstacleAvoidanceQuery();
+		obj.swigCPtr = _wrap_new_dtObstacleAvoidanceQuery();
+		return obj;
+	}
+
+	public function destroy():void {
+		_wrap_delete_dtObstacleAvoidanceQuery(swigCPtr);
+	}
+
+	public function init(maxCircles:int, maxSegments:int):Boolean {
+		return _wrap_dtObstacleAvoidanceQuery_init(swigCPtr, maxCircles, maxSegments);
+	}
+
+	public function reset():void {
+		_wrap_dtObstacleAvoidanceQuery_reset(swigCPtr);
+	}
+
+	public function addCircle(pos:int, rad:Number, vel:int, dvel:int):void {
+		_wrap_dtObstacleAvoidanceQuery_addCircle(swigCPtr, pos, rad, vel, dvel);
+	}
+
+	public function addSegment(p:int, q:int):void {
+		_wrap_dtObstacleAvoidanceQuery_addSegment(swigCPtr, p, q);
+	}
+
+	public function sampleVelocityGrid(pos:int, rad:Number, vmax:Number, vel:int, dvel:int, nvel:int, params:int, debug:int):int {
+		return _wrap_dtObstacleAvoidanceQuery_sampleVelocityGrid(swigCPtr, pos, rad, vmax, vel, dvel, nvel, params, debug);
+	}
+
+	public function sampleVelocityAdaptive(pos:int, rad:Number, vmax:Number, vel:int, dvel:int, nvel:int, params:int, debug:int):int {
+		return _wrap_dtObstacleAvoidanceQuery_sampleVelocityAdaptive(swigCPtr, pos, rad, vmax, vel, dvel, nvel, params, debug);
+	}
+
+	public function getObstacleCircleCount():int {
+		return _wrap_dtObstacleAvoidanceQuery_getObstacleCircleCount(swigCPtr);
+	}
+
+	public function getObstacleCircle(i:int):int {
+		return _wrap_dtObstacleAvoidanceQuery_getObstacleCircle(swigCPtr, i);
+	}
+
+	public function getObstacleSegmentCount():int {
+		return _wrap_dtObstacleAvoidanceQuery_getObstacleSegmentCount(swigCPtr);
+	}
+
+	public function getObstacleSegment(i:int):int {
+		return _wrap_dtObstacleAvoidanceQuery_getObstacleSegment(swigCPtr, i);
+	}
+
+}
+
+
+public class dtPathCorridor {
+	public var swigCPtr:int;
+	public static function create():dtPathCorridor {
+		var obj = new dtPathCorridor();
+		obj.swigCPtr = _wrap_new_dtPathCorridor();
+		return obj;
+	}
+
+	public function destroy():void {
+		_wrap_delete_dtPathCorridor(swigCPtr);
+	}
+
+	public function init(maxPath:int):Boolean {
+		return _wrap_dtPathCorridor_init(swigCPtr, maxPath);
+	}
+
+	public function reset(ref:int, pos:int):void {
+		_wrap_dtPathCorridor_reset(swigCPtr, ref, pos);
+	}
+
+	public function findCorners(cornerVerts:int, cornerFlags:int, cornerPolys:int, maxCorners:int, navquery:int, filter:int):int {
+		return _wrap_dtPathCorridor_findCorners(swigCPtr, cornerVerts, cornerFlags, cornerPolys, maxCorners, navquery, filter);
+	}
+
+	public function optimizePathVisibility(next:int, pathOptimizationRange:Number, navquery:int, filter:int):void {
+		_wrap_dtPathCorridor_optimizePathVisibility(swigCPtr, next, pathOptimizationRange, navquery, filter);
+	}
+
+	public function optimizePathTopology(navquery:int, filter:int):Boolean {
+		return _wrap_dtPathCorridor_optimizePathTopology(swigCPtr, navquery, filter);
+	}
+
+	public function moveOverOffmeshConnection(offMeshConRef:int, refs:int, startPos:int, endPos:int, navquery:int):Boolean {
+		return _wrap_dtPathCorridor_moveOverOffmeshConnection(swigCPtr, offMeshConRef, refs, startPos, endPos, navquery);
+	}
+
+	public function fixPathStart(safeRef:int, safePos:int):Boolean {
+		return _wrap_dtPathCorridor_fixPathStart(swigCPtr, safeRef, safePos);
+	}
+
+	public function trimInvalidPath(safeRef:int, safePos:int, navquery:int, filter:int):Boolean {
+		return _wrap_dtPathCorridor_trimInvalidPath(swigCPtr, safeRef, safePos, navquery, filter);
+	}
+
+	public function isValid(maxLookAhead:int, navquery:int, filter:int):Boolean {
+		return _wrap_dtPathCorridor_isValid(swigCPtr, maxLookAhead, navquery, filter);
+	}
+
+	public function movePosition(npos:int, navquery:int, filter:int):void {
+		_wrap_dtPathCorridor_movePosition(swigCPtr, npos, navquery, filter);
+	}
+
+	public function moveTargetPosition(npos:int, navquery:int, filter:int):void {
+		_wrap_dtPathCorridor_moveTargetPosition(swigCPtr, npos, navquery, filter);
+	}
+
+	public function setCorridor(target:int, polys:int, npath:int):void {
+		_wrap_dtPathCorridor_setCorridor(swigCPtr, target, polys, npath);
+	}
+
+	public function getPos():int {
+		return _wrap_dtPathCorridor_getPos(swigCPtr);
+	}
+
+	public function getTarget():int {
+		return _wrap_dtPathCorridor_getTarget(swigCPtr);
+	}
+
+	public function getFirstPoly():int {
+		return _wrap_dtPathCorridor_getFirstPoly(swigCPtr);
+	}
+
+	public function getLastPoly():int {
+		return _wrap_dtPathCorridor_getLastPoly(swigCPtr);
+	}
+
+	public function getPath():int {
+		return _wrap_dtPathCorridor_getPath(swigCPtr);
+	}
+
+	public function getPathCount():int {
+		return _wrap_dtPathCorridor_getPathCount(swigCPtr);
+	}
+
+}
+
+
+public class dtPathQueue {
+	public var swigCPtr:int;
+	public static function create():dtPathQueue {
+		var obj = new dtPathQueue();
+		obj.swigCPtr = _wrap_new_dtPathQueue();
+		return obj;
+	}
+
+	public function destroy():void {
+		_wrap_delete_dtPathQueue(swigCPtr);
+	}
+
+	public function init(maxPathSize:int, maxSearchNodeCount:int, nav:int):Boolean {
+		return _wrap_dtPathQueue_init(swigCPtr, maxPathSize, maxSearchNodeCount, nav);
+	}
+
+	public function update(maxIters:int):void {
+		_wrap_dtPathQueue_update(swigCPtr, maxIters);
+	}
+
+	public function request(startRef:int, endRef:int, startPos:int, endPos:int, filter:int):int {
+		return _wrap_dtPathQueue_request(swigCPtr, startRef, endRef, startPos, endPos, filter);
+	}
+
+	public function getRequestStatus(ref:int):int {
+		return _wrap_dtPathQueue_getRequestStatus(swigCPtr, ref);
+	}
+
+	public function getPathResult(ref:int, path:int, pathSize:int, maxPath:int):int {
+		return _wrap_dtPathQueue_getPathResult(swigCPtr, ref, path, pathSize, maxPath);
+	}
+
+	public function getNavQuery():int {
+		return _wrap_dtPathQueue_getNavQuery(swigCPtr);
+	}
+
+}
+
+
+public class dtProximityGrid {
+	public var swigCPtr:int;
+	public static function create():dtProximityGrid {
+		var obj = new dtProximityGrid();
+		obj.swigCPtr = _wrap_new_dtProximityGrid();
+		return obj;
+	}
+
+	public function destroy():void {
+		_wrap_delete_dtProximityGrid(swigCPtr);
+	}
+
+	public function init(maxItems:int, cellSize:Number):Boolean {
+		return _wrap_dtProximityGrid_init(swigCPtr, maxItems, cellSize);
+	}
+
+	public function clear():void {
+		_wrap_dtProximityGrid_clear(swigCPtr);
+	}
+
+	public function addItem(id:int, minx:Number, miny:Number, maxx:Number, maxy:Number):void {
+		_wrap_dtProximityGrid_addItem(swigCPtr, id, minx, miny, maxx, maxy);
+	}
+
+	public function queryItems(minx:Number, miny:Number, maxx:Number, maxy:Number, ids:int, maxIds:int):int {
+		return _wrap_dtProximityGrid_queryItems(swigCPtr, minx, miny, maxx, maxy, ids, maxIds);
+	}
+
+	public function getItemCountAt(x:int, y:int):int {
+		return _wrap_dtProximityGrid_getItemCountAt(swigCPtr, x, y);
+	}
+
+	public function getBounds():int {
+		return _wrap_dtProximityGrid_getBounds(swigCPtr);
+	}
+
+	public function getCellSize():Number {
+		return _wrap_dtProximityGrid_getCellSize(swigCPtr);
+	}
+
+}
+
+
+public class dtCompressedTile {
+	public var swigCPtr:int;
+	public function set salt(salt:int):void {
+		_wrap_dtCompressedTile_salt_set(swigCPtr, salt);
+	}
+
+	public function get salt():int {
+		return _wrap_dtCompressedTile_salt_get(swigCPtr);
+	}
+
+	public function set header(header:int):void {
+		_wrap_dtCompressedTile_header_set(swigCPtr, header);
+	}
+
+	public function get header():int {
+		return _wrap_dtCompressedTile_header_get(swigCPtr);
+	}
+
+	public function set compressed(compressed:int):void {
+		_wrap_dtCompressedTile_compressed_set(swigCPtr, compressed);
+	}
+
+	public function get compressed():int {
+		return _wrap_dtCompressedTile_compressed_get(swigCPtr);
+	}
+
+	public function set compressedSize(compressedSize:int):void {
+		_wrap_dtCompressedTile_compressedSize_set(swigCPtr, compressedSize);
+	}
+
+	public function get compressedSize():int {
+		return _wrap_dtCompressedTile_compressedSize_get(swigCPtr);
+	}
+
+	public function set data(data:int):void {
+		_wrap_dtCompressedTile_data_set(swigCPtr, data);
+	}
+
+	public function get data():int {
+		return _wrap_dtCompressedTile_data_get(swigCPtr);
+	}
+
+	public function set dataSize(dataSize:int):void {
+		_wrap_dtCompressedTile_dataSize_set(swigCPtr, dataSize);
+	}
+
+	public function get dataSize():int {
+		return _wrap_dtCompressedTile_dataSize_get(swigCPtr);
+	}
+
+	public function set flags(flags:int):void {
+		_wrap_dtCompressedTile_flags_set(swigCPtr, flags);
+	}
+
+	public function get flags():int {
+		return _wrap_dtCompressedTile_flags_get(swigCPtr);
+	}
+
+	public function set next(next:int):void {
+		_wrap_dtCompressedTile_next_set(swigCPtr, next);
+	}
+
+	public function get next():int {
+		return _wrap_dtCompressedTile_next_get(swigCPtr);
+	}
+
+	public static function create():dtCompressedTile {
+		var obj = new dtCompressedTile();
+		obj.swigCPtr = _wrap_new_dtCompressedTile();
+		return obj;
+	}
+
+	public function destroy():void {
+		_wrap_delete_dtCompressedTile(swigCPtr);
+	}
+
+}
+
+
+public class dtTileCacheObstacle {
+	public var swigCPtr:int;
+	public function set pos(pos:int):void {
+		_wrap_dtTileCacheObstacle_pos_set(swigCPtr, pos);
+	}
+
+	public function get pos():int {
+		return _wrap_dtTileCacheObstacle_pos_get(swigCPtr);
+	}
+
+	public function set radius(radius:Number):void {
+		_wrap_dtTileCacheObstacle_radius_set(swigCPtr, radius);
+	}
+
+	public function get radius():Number {
+		return _wrap_dtTileCacheObstacle_radius_get(swigCPtr);
+	}
+
+	public function set height(height:Number):void {
+		_wrap_dtTileCacheObstacle_height_set(swigCPtr, height);
+	}
+
+	public function get height():Number {
+		return _wrap_dtTileCacheObstacle_height_get(swigCPtr);
+	}
+
+	public function set touched(touched:int):void {
+		_wrap_dtTileCacheObstacle_touched_set(swigCPtr, touched);
+	}
+
+	public function get touched():int {
+		return _wrap_dtTileCacheObstacle_touched_get(swigCPtr);
+	}
+
+	public function set pending(pending:int):void {
+		_wrap_dtTileCacheObstacle_pending_set(swigCPtr, pending);
+	}
+
+	public function get pending():int {
+		return _wrap_dtTileCacheObstacle_pending_get(swigCPtr);
+	}
+
+	public function set salt(salt:int):void {
+		_wrap_dtTileCacheObstacle_salt_set(swigCPtr, salt);
+	}
+
+	public function get salt():int {
+		return _wrap_dtTileCacheObstacle_salt_get(swigCPtr);
+	}
+
+	public function set state(state:String):void {
+		_wrap_dtTileCacheObstacle_state_set(swigCPtr, state);
+	}
+
+	public function get state():String {
+		return _wrap_dtTileCacheObstacle_state_get(swigCPtr);
+	}
+
+	public function set ntouched(ntouched:String):void {
+		_wrap_dtTileCacheObstacle_ntouched_set(swigCPtr, ntouched);
+	}
+
+	public function get ntouched():String {
+		return _wrap_dtTileCacheObstacle_ntouched_get(swigCPtr);
+	}
+
+	public function set npending(npending:String):void {
+		_wrap_dtTileCacheObstacle_npending_set(swigCPtr, npending);
+	}
+
+	public function get npending():String {
+		return _wrap_dtTileCacheObstacle_npending_get(swigCPtr);
+	}
+
+	public function set next(next:int):void {
+		_wrap_dtTileCacheObstacle_next_set(swigCPtr, next);
+	}
+
+	public function get next():int {
+		return _wrap_dtTileCacheObstacle_next_get(swigCPtr);
+	}
+
+	public static function create():dtTileCacheObstacle {
+		var obj = new dtTileCacheObstacle();
+		obj.swigCPtr = _wrap_new_dtTileCacheObstacle();
+		return obj;
+	}
+
+	public function destroy():void {
+		_wrap_delete_dtTileCacheObstacle(swigCPtr);
+	}
+
+}
+
+
+public class dtTileCacheParams {
+	public var swigCPtr:int;
+	public function set orig(orig:int):void {
+		_wrap_dtTileCacheParams_orig_set(swigCPtr, orig);
+	}
+
+	public function get orig():int {
+		return _wrap_dtTileCacheParams_orig_get(swigCPtr);
+	}
+
+	public function set cs(cs:Number):void {
+		_wrap_dtTileCacheParams_cs_set(swigCPtr, cs);
+	}
+
+	public function get cs():Number {
+		return _wrap_dtTileCacheParams_cs_get(swigCPtr);
+	}
+
+	public function set ch(ch:Number):void {
+		_wrap_dtTileCacheParams_ch_set(swigCPtr, ch);
+	}
+
+	public function get ch():Number {
+		return _wrap_dtTileCacheParams_ch_get(swigCPtr);
+	}
+
+	public function set width(width:int):void {
+		_wrap_dtTileCacheParams_width_set(swigCPtr, width);
+	}
+
+	public function get width():int {
+		return _wrap_dtTileCacheParams_width_get(swigCPtr);
+	}
+
+	public function set height(height:int):void {
+		_wrap_dtTileCacheParams_height_set(swigCPtr, height);
+	}
+
+	public function get height():int {
+		return _wrap_dtTileCacheParams_height_get(swigCPtr);
+	}
+
+	public function set walkableHeight(walkableHeight:Number):void {
+		_wrap_dtTileCacheParams_walkableHeight_set(swigCPtr, walkableHeight);
+	}
+
+	public function get walkableHeight():Number {
+		return _wrap_dtTileCacheParams_walkableHeight_get(swigCPtr);
+	}
+
+	public function set walkableRadius(walkableRadius:Number):void {
+		_wrap_dtTileCacheParams_walkableRadius_set(swigCPtr, walkableRadius);
+	}
+
+	public function get walkableRadius():Number {
+		return _wrap_dtTileCacheParams_walkableRadius_get(swigCPtr);
+	}
+
+	public function set walkableClimb(walkableClimb:Number):void {
+		_wrap_dtTileCacheParams_walkableClimb_set(swigCPtr, walkableClimb);
+	}
+
+	public function get walkableClimb():Number {
+		return _wrap_dtTileCacheParams_walkableClimb_get(swigCPtr);
+	}
+
+	public function set maxSimplificationError(maxSimplificationError:Number):void {
+		_wrap_dtTileCacheParams_maxSimplificationError_set(swigCPtr, maxSimplificationError);
+	}
+
+	public function get maxSimplificationError():Number {
+		return _wrap_dtTileCacheParams_maxSimplificationError_get(swigCPtr);
+	}
+
+	public function set maxTiles(maxTiles:int):void {
+		_wrap_dtTileCacheParams_maxTiles_set(swigCPtr, maxTiles);
+	}
+
+	public function get maxTiles():int {
+		return _wrap_dtTileCacheParams_maxTiles_get(swigCPtr);
+	}
+
+	public function set maxObstacles(maxObstacles:int):void {
+		_wrap_dtTileCacheParams_maxObstacles_set(swigCPtr, maxObstacles);
+	}
+
+	public function get maxObstacles():int {
+		return _wrap_dtTileCacheParams_maxObstacles_get(swigCPtr);
+	}
+
+	public static function create():dtTileCacheParams {
+		var obj = new dtTileCacheParams();
+		obj.swigCPtr = _wrap_new_dtTileCacheParams();
+		return obj;
+	}
+
+	public function destroy():void {
+		_wrap_delete_dtTileCacheParams(swigCPtr);
+	}
+
+}
+
+
+public class dtTileCacheMeshProcess {
+	public var swigCPtr:int;
+	public function process(params:int, polyAreas:int, polyFlags:int):void {
+		_wrap_dtTileCacheMeshProcess_process(swigCPtr, params, polyAreas, polyFlags);
+	}
+
+	public function destroy():void {
+		_wrap_delete_dtTileCacheMeshProcess(swigCPtr);
+	}
+
+}
+
+
+public class dtTileCache {
+	public var swigCPtr:int;
+	public static function create():dtTileCache {
+		var obj = new dtTileCache();
+		obj.swigCPtr = _wrap_new_dtTileCache();
+		return obj;
+	}
+
+	public function destroy():void {
+		_wrap_delete_dtTileCache(swigCPtr);
+	}
+
+	public function getAlloc():int {
+		return _wrap_dtTileCache_getAlloc(swigCPtr);
+	}
+
+	public function getCompressor():int {
+		return _wrap_dtTileCache_getCompressor(swigCPtr);
+	}
+
+	public function getParams():int {
+		return _wrap_dtTileCache_getParams(swigCPtr);
+	}
+
+	public function getTileCount():int {
+		return _wrap_dtTileCache_getTileCount(swigCPtr);
+	}
+
+	public function getTile(i:int):int {
+		return _wrap_dtTileCache_getTile(swigCPtr, i);
+	}
+
+	public function getObstacleCount():int {
+		return _wrap_dtTileCache_getObstacleCount(swigCPtr);
+	}
+
+	public function getObstacle(i:int):int {
+		return _wrap_dtTileCache_getObstacle(swigCPtr, i);
+	}
+
+	public function getObstacleByRef(ref:int):int {
+		return _wrap_dtTileCache_getObstacleByRef(swigCPtr, ref);
+	}
+
+	public function getObstacleRef(obmin:int):int {
+		return _wrap_dtTileCache_getObstacleRef(swigCPtr, obmin);
+	}
+
+	public function init(params:int, talloc:int, tcomp:int, tmproc:int):int {
+		return _wrap_dtTileCache_init(swigCPtr, params, talloc, tcomp, tmproc);
+	}
+
+	public function getTilesAt(tx:int, ty:int, tiles:int, maxTiles:int):int {
+		return _wrap_dtTileCache_getTilesAt(swigCPtr, tx, ty, tiles, maxTiles);
+	}
+
+	public function getTileAt(tx:int, ty:int, tlayer:int):int {
+		return _wrap_dtTileCache_getTileAt(swigCPtr, tx, ty, tlayer);
+	}
+
+	public function getTileRef(tile:int):int {
+		return _wrap_dtTileCache_getTileRef(swigCPtr, tile);
+	}
+
+	public function getTileByRef(ref:int):int {
+		return _wrap_dtTileCache_getTileByRef(swigCPtr, ref);
+	}
+
+	public function addTile(data:int, dataSize:int, flags:String, result:int):int {
+		return _wrap_dtTileCache_addTile(swigCPtr, data, dataSize, flags, result);
+	}
+
+	public function removeTile(ref:int, data:int, dataSize:int):int {
+		return _wrap_dtTileCache_removeTile(swigCPtr, ref, data, dataSize);
+	}
+
+	public function addObstacle(pos:int, radius:Number, height:Number, result:int):int {
+		return _wrap_dtTileCache_addObstacle(swigCPtr, pos, radius, height, result);
+	}
+
+	public function removeObstacle(ref:int):int {
+		return _wrap_dtTileCache_removeObstacle(swigCPtr, ref);
+	}
+
+	public function queryTiles(bmin:int, bmax:int, results:int, resultCount:int, maxResults:int):int {
+		return _wrap_dtTileCache_queryTiles(swigCPtr, bmin, bmax, results, resultCount, maxResults);
+	}
+
+	public function update(arg2:Number, navmesh:int):int {
+		return _wrap_dtTileCache_update(swigCPtr, arg2, navmesh);
+	}
+
+	public function buildNavMeshTilesAt(tx:int, ty:int, navmesh:int):int {
+		return _wrap_dtTileCache_buildNavMeshTilesAt(swigCPtr, tx, ty, navmesh);
+	}
+
+	public function buildNavMeshTile(ref:int, navmesh:int):int {
+		return _wrap_dtTileCache_buildNavMeshTile(swigCPtr, ref, navmesh);
+	}
+
+	public function calcTightTileBounds(header:int, bmin:int, bmax:int):void {
+		_wrap_dtTileCache_calcTightTileBounds(swigCPtr, header, bmin, bmax);
+	}
+
+	public function getObstacleBounds(ob:int, bmin:int, bmax:int):void {
+		_wrap_dtTileCache_getObstacleBounds(swigCPtr, ob, bmin, bmax);
+	}
+
+	public function encodeTileId(salt:int, it:int):int {
+		return _wrap_dtTileCache_encodeTileId(swigCPtr, salt, it);
+	}
+
+	public function decodeTileIdSalt(ref:int):int {
+		return _wrap_dtTileCache_decodeTileIdSalt(swigCPtr, ref);
+	}
+
+	public function decodeTileIdTile(ref:int):int {
+		return _wrap_dtTileCache_decodeTileIdTile(swigCPtr, ref);
+	}
+
+	public function encodeObstacleId(salt:int, it:int):int {
+		return _wrap_dtTileCache_encodeObstacleId(swigCPtr, salt, it);
+	}
+
+	public function decodeObstacleIdSalt(ref:int):int {
+		return _wrap_dtTileCache_decodeObstacleIdSalt(swigCPtr, ref);
+	}
+
+	public function decodeObstacleIdObstacle(ref:int):int {
+		return _wrap_dtTileCache_decodeObstacleIdObstacle(swigCPtr, ref);
+	}
+
+}
+
+
+public class dtTileCacheLayerHeader {
+	public var swigCPtr:int;
+	public function set magic(magic:int):void {
+		_wrap_dtTileCacheLayerHeader_magic_set(swigCPtr, magic);
+	}
+
+	public function get magic():int {
+		return _wrap_dtTileCacheLayerHeader_magic_get(swigCPtr);
+	}
+
+	public function set version(version:int):void {
+		_wrap_dtTileCacheLayerHeader_version_set(swigCPtr, version);
+	}
+
+	public function get version():int {
+		return _wrap_dtTileCacheLayerHeader_version_get(swigCPtr);
+	}
+
+	public function set tx(tx:int):void {
+		_wrap_dtTileCacheLayerHeader_tx_set(swigCPtr, tx);
+	}
+
+	public function get tx():int {
+		return _wrap_dtTileCacheLayerHeader_tx_get(swigCPtr);
+	}
+
+	public function set ty(ty:int):void {
+		_wrap_dtTileCacheLayerHeader_ty_set(swigCPtr, ty);
+	}
+
+	public function get ty():int {
+		return _wrap_dtTileCacheLayerHeader_ty_get(swigCPtr);
+	}
+
+	public function set tlayer(tlayer:int):void {
+		_wrap_dtTileCacheLayerHeader_tlayer_set(swigCPtr, tlayer);
+	}
+
+	public function get tlayer():int {
+		return _wrap_dtTileCacheLayerHeader_tlayer_get(swigCPtr);
+	}
+
+	public function set bmin(bmin:int):void {
+		_wrap_dtTileCacheLayerHeader_bmin_set(swigCPtr, bmin);
+	}
+
+	public function get bmin():int {
+		return _wrap_dtTileCacheLayerHeader_bmin_get(swigCPtr);
+	}
+
+	public function set bmax(bmax:int):void {
+		_wrap_dtTileCacheLayerHeader_bmax_set(swigCPtr, bmax);
+	}
+
+	public function get bmax():int {
+		return _wrap_dtTileCacheLayerHeader_bmax_get(swigCPtr);
+	}
+
+	public function set hmin(hmin:int):void {
+		_wrap_dtTileCacheLayerHeader_hmin_set(swigCPtr, hmin);
+	}
+
+	public function get hmin():int {
+		return _wrap_dtTileCacheLayerHeader_hmin_get(swigCPtr);
+	}
+
+	public function set hmax(hmax:int):void {
+		_wrap_dtTileCacheLayerHeader_hmax_set(swigCPtr, hmax);
+	}
+
+	public function get hmax():int {
+		return _wrap_dtTileCacheLayerHeader_hmax_get(swigCPtr);
+	}
+
+	public function set width(width:String):void {
+		_wrap_dtTileCacheLayerHeader_width_set(swigCPtr, width);
+	}
+
+	public function get width():String {
+		return _wrap_dtTileCacheLayerHeader_width_get(swigCPtr);
+	}
+
+	public function set height(height:String):void {
+		_wrap_dtTileCacheLayerHeader_height_set(swigCPtr, height);
+	}
+
+	public function get height():String {
+		return _wrap_dtTileCacheLayerHeader_height_get(swigCPtr);
+	}
+
+	public function set minx(minx:String):void {
+		_wrap_dtTileCacheLayerHeader_minx_set(swigCPtr, minx);
+	}
+
+	public function get minx():String {
+		return _wrap_dtTileCacheLayerHeader_minx_get(swigCPtr);
+	}
+
+	public function set maxx(maxx:String):void {
+		_wrap_dtTileCacheLayerHeader_maxx_set(swigCPtr, maxx);
+	}
+
+	public function get maxx():String {
+		return _wrap_dtTileCacheLayerHeader_maxx_get(swigCPtr);
+	}
+
+	public function set miny(miny:String):void {
+		_wrap_dtTileCacheLayerHeader_miny_set(swigCPtr, miny);
+	}
+
+	public function get miny():String {
+		return _wrap_dtTileCacheLayerHeader_miny_get(swigCPtr);
+	}
+
+	public function set maxy(maxy:String):void {
+		_wrap_dtTileCacheLayerHeader_maxy_set(swigCPtr, maxy);
+	}
+
+	public function get maxy():String {
+		return _wrap_dtTileCacheLayerHeader_maxy_get(swigCPtr);
+	}
+
+	public static function create():dtTileCacheLayerHeader {
+		var obj = new dtTileCacheLayerHeader();
+		obj.swigCPtr = _wrap_new_dtTileCacheLayerHeader();
+		return obj;
+	}
+
+	public function destroy():void {
+		_wrap_delete_dtTileCacheLayerHeader(swigCPtr);
+	}
+
+}
+
+
+public class dtTileCacheLayer {
+	public var swigCPtr:int;
+	public function set header(header:int):void {
+		_wrap_dtTileCacheLayer_header_set(swigCPtr, header);
+	}
+
+	public function get header():int {
+		return _wrap_dtTileCacheLayer_header_get(swigCPtr);
+	}
+
+	public function set regCount(regCount:String):void {
+		_wrap_dtTileCacheLayer_regCount_set(swigCPtr, regCount);
+	}
+
+	public function get regCount():String {
+		return _wrap_dtTileCacheLayer_regCount_get(swigCPtr);
+	}
+
+	public function set heights(heights:int):void {
+		_wrap_dtTileCacheLayer_heights_set(swigCPtr, heights);
+	}
+
+	public function get heights():int {
+		return _wrap_dtTileCacheLayer_heights_get(swigCPtr);
+	}
+
+	public function set areas(areas:int):void {
+		_wrap_dtTileCacheLayer_areas_set(swigCPtr, areas);
+	}
+
+	public function get areas():int {
+		return _wrap_dtTileCacheLayer_areas_get(swigCPtr);
+	}
+
+	public function set cons(cons:int):void {
+		_wrap_dtTileCacheLayer_cons_set(swigCPtr, cons);
+	}
+
+	public function get cons():int {
+		return _wrap_dtTileCacheLayer_cons_get(swigCPtr);
+	}
+
+	public function set regs(regs:int):void {
+		_wrap_dtTileCacheLayer_regs_set(swigCPtr, regs);
+	}
+
+	public function get regs():int {
+		return _wrap_dtTileCacheLayer_regs_get(swigCPtr);
+	}
+
+	public static function create():dtTileCacheLayer {
+		var obj = new dtTileCacheLayer();
+		obj.swigCPtr = _wrap_new_dtTileCacheLayer();
+		return obj;
+	}
+
+	public function destroy():void {
+		_wrap_delete_dtTileCacheLayer(swigCPtr);
+	}
+
+}
+
+
+public class dtTileCacheContour {
+	public var swigCPtr:int;
+	public function set nverts(nverts:int):void {
+		_wrap_dtTileCacheContour_nverts_set(swigCPtr, nverts);
+	}
+
+	public function get nverts():int {
+		return _wrap_dtTileCacheContour_nverts_get(swigCPtr);
+	}
+
+	public function set verts(verts:int):void {
+		_wrap_dtTileCacheContour_verts_set(swigCPtr, verts);
+	}
+
+	public function get verts():int {
+		return _wrap_dtTileCacheContour_verts_get(swigCPtr);
+	}
+
+	public function set reg(reg:String):void {
+		_wrap_dtTileCacheContour_reg_set(swigCPtr, reg);
+	}
+
+	public function get reg():String {
+		return _wrap_dtTileCacheContour_reg_get(swigCPtr);
+	}
+
+	public function set area(area:String):void {
+		_wrap_dtTileCacheContour_area_set(swigCPtr, area);
+	}
+
+	public function get area():String {
+		return _wrap_dtTileCacheContour_area_get(swigCPtr);
+	}
+
+	public static function create():dtTileCacheContour {
+		var obj = new dtTileCacheContour();
+		obj.swigCPtr = _wrap_new_dtTileCacheContour();
+		return obj;
+	}
+
+	public function destroy():void {
+		_wrap_delete_dtTileCacheContour(swigCPtr);
+	}
+
+}
+
+
+public class dtTileCacheContourSet {
+	public var swigCPtr:int;
+	public function set nconts(nconts:int):void {
+		_wrap_dtTileCacheContourSet_nconts_set(swigCPtr, nconts);
+	}
+
+	public function get nconts():int {
+		return _wrap_dtTileCacheContourSet_nconts_get(swigCPtr);
+	}
+
+	public function set conts(conts:int):void {
+		_wrap_dtTileCacheContourSet_conts_set(swigCPtr, conts);
+	}
+
+	public function get conts():int {
+		return _wrap_dtTileCacheContourSet_conts_get(swigCPtr);
+	}
+
+	public static function create():dtTileCacheContourSet {
+		var obj = new dtTileCacheContourSet();
+		obj.swigCPtr = _wrap_new_dtTileCacheContourSet();
+		return obj;
+	}
+
+	public function destroy():void {
+		_wrap_delete_dtTileCacheContourSet(swigCPtr);
+	}
+
+}
+
+
+public class dtTileCachePolyMesh {
+	public var swigCPtr:int;
+	public function set nvp(nvp:int):void {
+		_wrap_dtTileCachePolyMesh_nvp_set(swigCPtr, nvp);
+	}
+
+	public function get nvp():int {
+		return _wrap_dtTileCachePolyMesh_nvp_get(swigCPtr);
+	}
+
+	public function set nverts(nverts:int):void {
+		_wrap_dtTileCachePolyMesh_nverts_set(swigCPtr, nverts);
+	}
+
+	public function get nverts():int {
+		return _wrap_dtTileCachePolyMesh_nverts_get(swigCPtr);
+	}
+
+	public function set npolys(npolys:int):void {
+		_wrap_dtTileCachePolyMesh_npolys_set(swigCPtr, npolys);
+	}
+
+	public function get npolys():int {
+		return _wrap_dtTileCachePolyMesh_npolys_get(swigCPtr);
+	}
+
+	public function set verts(verts:int):void {
+		_wrap_dtTileCachePolyMesh_verts_set(swigCPtr, verts);
+	}
+
+	public function get verts():int {
+		return _wrap_dtTileCachePolyMesh_verts_get(swigCPtr);
+	}
+
+	public function set polys(polys:int):void {
+		_wrap_dtTileCachePolyMesh_polys_set(swigCPtr, polys);
+	}
+
+	public function get polys():int {
+		return _wrap_dtTileCachePolyMesh_polys_get(swigCPtr);
+	}
+
+	public function set flags(flags:int):void {
+		_wrap_dtTileCachePolyMesh_flags_set(swigCPtr, flags);
+	}
+
+	public function get flags():int {
+		return _wrap_dtTileCachePolyMesh_flags_get(swigCPtr);
+	}
+
+	public function set areas(areas:int):void {
+		_wrap_dtTileCachePolyMesh_areas_set(swigCPtr, areas);
+	}
+
+	public function get areas():int {
+		return _wrap_dtTileCachePolyMesh_areas_get(swigCPtr);
+	}
+
+	public static function create():dtTileCachePolyMesh {
+		var obj = new dtTileCachePolyMesh();
+		obj.swigCPtr = _wrap_new_dtTileCachePolyMesh();
+		return obj;
+	}
+
+	public function destroy():void {
+		_wrap_delete_dtTileCachePolyMesh(swigCPtr);
+	}
+
+}
+
+
+public class dtTileCacheAlloc {
+	public var swigCPtr:int;
+	public function reset():void {
+		_wrap_dtTileCacheAlloc_reset(swigCPtr);
+	}
+
+	public function alloc(size:int):int {
+		return _wrap_dtTileCacheAlloc_alloc(swigCPtr, size);
+	}
+
+	public function free(ptr:int):void {
+		_wrap_dtTileCacheAlloc_free(swigCPtr, ptr);
+	}
+
+	public static function create():dtTileCacheAlloc {
+		var obj = new dtTileCacheAlloc();
+		obj.swigCPtr = _wrap_new_dtTileCacheAlloc();
+		return obj;
+	}
+
+	public function destroy():void {
+		_wrap_delete_dtTileCacheAlloc(swigCPtr);
+	}
+
+}
+
+
+public class dtTileCacheCompressor {
+	public var swigCPtr:int;
+	public function maxCompressedSize(bufferSize:int):int {
+		return _wrap_dtTileCacheCompressor_maxCompressedSize(swigCPtr, bufferSize);
+	}
+
+	public function compress(buffer:int, bufferSize:int, compressed:int, maxCompressedSize:int, compressedSize:int):int {
+		return _wrap_dtTileCacheCompressor_compress(swigCPtr, buffer, bufferSize, compressed, maxCompressedSize, compressedSize);
+	}
+
+	public function decompress(compressed:int, compressedSize:int, buffer:int, maxBufferSize:int, bufferSize:int):int {
+		return _wrap_dtTileCacheCompressor_decompress(swigCPtr, compressed, compressedSize, buffer, maxBufferSize, bufferSize);
+	}
+
+	public function destroy():void {
+		_wrap_delete_dtTileCacheCompressor(swigCPtr);
+	}
+
+}
+
 
 public class rcContext {
 	public var swigCPtr:int;
@@ -1670,6 +5857,41 @@ public class rcPolyMeshDetail {
 }
 
 
+public class rcIntArray {
+	public var swigCPtr:int;
+	public static function create():rcIntArray {
+		var obj = new rcIntArray();
+		obj.swigCPtr = _wrap_new_rcIntArray();
+		return obj;
+	}
+
+	public function destroy():void {
+		_wrap_delete_rcIntArray(swigCPtr);
+	}
+
+	public function resize(n:int):void {
+		_wrap_rcIntArray_resize(swigCPtr, n);
+	}
+
+	public function push(item:int):void {
+		_wrap_rcIntArray_push(swigCPtr, item);
+	}
+
+	public function pop():int {
+		return _wrap_rcIntArray_pop(swigCPtr);
+	}
+
+	public function valueAt(i:int):int {
+		return _wrap_rcIntArray_valueAt(swigCPtr, i);
+	}
+
+	public function size():int {
+		return _wrap_rcIntArray_size(swigCPtr);
+	}
+
+}
+
+
 public class AS3_rcContext extends rcContext {
 	public static function create():AS3_rcContext {
 		var obj = new AS3_rcContext();
@@ -1679,6 +5901,313 @@ public class AS3_rcContext extends rcContext {
 
 	override public function destroy():void {
 		_wrap_delete_AS3_rcContext(swigCPtr);
+	}
+
+}
+
+
+public class rcChunkyTriMeshNode {
+	public var swigCPtr:int;
+	public function set bmin(bmin:int):void {
+		_wrap_rcChunkyTriMeshNode_bmin_set(swigCPtr, bmin);
+	}
+
+	public function get bmin():int {
+		return _wrap_rcChunkyTriMeshNode_bmin_get(swigCPtr);
+	}
+
+	public function set bmax(bmax:int):void {
+		_wrap_rcChunkyTriMeshNode_bmax_set(swigCPtr, bmax);
+	}
+
+	public function get bmax():int {
+		return _wrap_rcChunkyTriMeshNode_bmax_get(swigCPtr);
+	}
+
+	public function set i(i:int):void {
+		_wrap_rcChunkyTriMeshNode_i_set(swigCPtr, i);
+	}
+
+	public function get i():int {
+		return _wrap_rcChunkyTriMeshNode_i_get(swigCPtr);
+	}
+
+	public function set n(n:int):void {
+		_wrap_rcChunkyTriMeshNode_n_set(swigCPtr, n);
+	}
+
+	public function get n():int {
+		return _wrap_rcChunkyTriMeshNode_n_get(swigCPtr);
+	}
+
+	public static function create():rcChunkyTriMeshNode {
+		var obj = new rcChunkyTriMeshNode();
+		obj.swigCPtr = _wrap_new_rcChunkyTriMeshNode();
+		return obj;
+	}
+
+	public function destroy():void {
+		_wrap_delete_rcChunkyTriMeshNode(swigCPtr);
+	}
+
+}
+
+
+public class rcChunkyTriMesh {
+	public var swigCPtr:int;
+	public static function create():rcChunkyTriMesh {
+		var obj = new rcChunkyTriMesh();
+		obj.swigCPtr = _wrap_new_rcChunkyTriMesh();
+		return obj;
+	}
+
+	public function destroy():void {
+		_wrap_delete_rcChunkyTriMesh(swigCPtr);
+	}
+
+	public function set nodes(nodes:int):void {
+		_wrap_rcChunkyTriMesh_nodes_set(swigCPtr, nodes);
+	}
+
+	public function get nodes():int {
+		return _wrap_rcChunkyTriMesh_nodes_get(swigCPtr);
+	}
+
+	public function set nnodes(nnodes:int):void {
+		_wrap_rcChunkyTriMesh_nnodes_set(swigCPtr, nnodes);
+	}
+
+	public function get nnodes():int {
+		return _wrap_rcChunkyTriMesh_nnodes_get(swigCPtr);
+	}
+
+	public function set tris(tris:int):void {
+		_wrap_rcChunkyTriMesh_tris_set(swigCPtr, tris);
+	}
+
+	public function get tris():int {
+		return _wrap_rcChunkyTriMesh_tris_get(swigCPtr);
+	}
+
+	public function set ntris(ntris:int):void {
+		_wrap_rcChunkyTriMesh_ntris_set(swigCPtr, ntris);
+	}
+
+	public function get ntris():int {
+		return _wrap_rcChunkyTriMesh_ntris_get(swigCPtr);
+	}
+
+	public function set maxTrisPerChunk(maxTrisPerChunk:int):void {
+		_wrap_rcChunkyTriMesh_maxTrisPerChunk_set(swigCPtr, maxTrisPerChunk);
+	}
+
+	public function get maxTrisPerChunk():int {
+		return _wrap_rcChunkyTriMesh_maxTrisPerChunk_get(swigCPtr);
+	}
+
+}
+
+
+public class rcMeshLoaderObj {
+	public var swigCPtr:int;
+	public static function create():rcMeshLoaderObj {
+		var obj = new rcMeshLoaderObj();
+		obj.swigCPtr = _wrap_new_rcMeshLoaderObj();
+		return obj;
+	}
+
+	public function destroy():void {
+		_wrap_delete_rcMeshLoaderObj(swigCPtr);
+	}
+
+	public function load(fileName:String):Boolean {
+		return _wrap_rcMeshLoaderObj_load(swigCPtr, fileName);
+	}
+
+	public function getVerts():int {
+		return _wrap_rcMeshLoaderObj_getVerts(swigCPtr);
+	}
+
+	public function getNormals():int {
+		return _wrap_rcMeshLoaderObj_getNormals(swigCPtr);
+	}
+
+	public function getTris():int {
+		return _wrap_rcMeshLoaderObj_getTris(swigCPtr);
+	}
+
+	public function getVertCount():int {
+		return _wrap_rcMeshLoaderObj_getVertCount(swigCPtr);
+	}
+
+	public function getTriCount():int {
+		return _wrap_rcMeshLoaderObj_getTriCount(swigCPtr);
+	}
+
+	public function getFileName():String {
+		return _wrap_rcMeshLoaderObj_getFileName(swigCPtr);
+	}
+
+}
+
+
+public class ConvexVolume {
+	public var swigCPtr:int;
+	public function set verts(verts:int):void {
+		_wrap_ConvexVolume_verts_set(swigCPtr, verts);
+	}
+
+	public function get verts():int {
+		return _wrap_ConvexVolume_verts_get(swigCPtr);
+	}
+
+	public function set hmin(hmin:Number):void {
+		_wrap_ConvexVolume_hmin_set(swigCPtr, hmin);
+	}
+
+	public function get hmin():Number {
+		return _wrap_ConvexVolume_hmin_get(swigCPtr);
+	}
+
+	public function set hmax(hmax:Number):void {
+		_wrap_ConvexVolume_hmax_set(swigCPtr, hmax);
+	}
+
+	public function get hmax():Number {
+		return _wrap_ConvexVolume_hmax_get(swigCPtr);
+	}
+
+	public function set nverts(nverts:int):void {
+		_wrap_ConvexVolume_nverts_set(swigCPtr, nverts);
+	}
+
+	public function get nverts():int {
+		return _wrap_ConvexVolume_nverts_get(swigCPtr);
+	}
+
+	public function set area(area:int):void {
+		_wrap_ConvexVolume_area_set(swigCPtr, area);
+	}
+
+	public function get area():int {
+		return _wrap_ConvexVolume_area_get(swigCPtr);
+	}
+
+	public static function create():ConvexVolume {
+		var obj = new ConvexVolume();
+		obj.swigCPtr = _wrap_new_ConvexVolume();
+		return obj;
+	}
+
+	public function destroy():void {
+		_wrap_delete_ConvexVolume(swigCPtr);
+	}
+
+}
+
+
+public class InputGeom {
+	public var swigCPtr:int;
+	public static function create():InputGeom {
+		var obj = new InputGeom();
+		obj.swigCPtr = _wrap_new_InputGeom();
+		return obj;
+	}
+
+	public function destroy():void {
+		_wrap_delete_InputGeom(swigCPtr);
+	}
+
+	public function loadMesh(ctx:int, filepath:String):Boolean {
+		return _wrap_InputGeom_loadMesh(swigCPtr, ctx, filepath);
+	}
+
+	public function load(ctx:int, filepath:String):Boolean {
+		return _wrap_InputGeom_load(swigCPtr, ctx, filepath);
+	}
+
+	public function save(filepath:String):Boolean {
+		return _wrap_InputGeom_save(swigCPtr, filepath);
+	}
+
+	public function getMesh():int {
+		return _wrap_InputGeom_getMesh(swigCPtr);
+	}
+
+	public function getMeshBoundsMin():int {
+		return _wrap_InputGeom_getMeshBoundsMin(swigCPtr);
+	}
+
+	public function getMeshBoundsMax():int {
+		return _wrap_InputGeom_getMeshBoundsMax(swigCPtr);
+	}
+
+	public function getChunkyMesh():int {
+		return _wrap_InputGeom_getChunkyMesh(swigCPtr);
+	}
+
+	public function raycastMesh(src:int, dst:int, tmin:int):Boolean {
+		return _wrap_InputGeom_raycastMesh(swigCPtr, src, dst, tmin);
+	}
+
+	public function getOffMeshConnectionCount():int {
+		return _wrap_InputGeom_getOffMeshConnectionCount(swigCPtr);
+	}
+
+	public function getOffMeshConnectionVerts():int {
+		return _wrap_InputGeom_getOffMeshConnectionVerts(swigCPtr);
+	}
+
+	public function getOffMeshConnectionRads():int {
+		return _wrap_InputGeom_getOffMeshConnectionRads(swigCPtr);
+	}
+
+	public function getOffMeshConnectionDirs():int {
+		return _wrap_InputGeom_getOffMeshConnectionDirs(swigCPtr);
+	}
+
+	public function getOffMeshConnectionAreas():int {
+		return _wrap_InputGeom_getOffMeshConnectionAreas(swigCPtr);
+	}
+
+	public function getOffMeshConnectionFlags():int {
+		return _wrap_InputGeom_getOffMeshConnectionFlags(swigCPtr);
+	}
+
+	public function getOffMeshConnectionId():int {
+		return _wrap_InputGeom_getOffMeshConnectionId(swigCPtr);
+	}
+
+	public function addOffMeshConnection(spos:int, epos:int, rad:Number, bidir:String, area:String, flags:int):void {
+		_wrap_InputGeom_addOffMeshConnection(swigCPtr, spos, epos, rad, bidir, area, flags);
+	}
+
+	public function deleteOffMeshConnection(i:int):void {
+		_wrap_InputGeom_deleteOffMeshConnection(swigCPtr, i);
+	}
+
+	public function drawOffMeshConnections(dd:int, hilight:Boolean):void {
+		_wrap_InputGeom_drawOffMeshConnections(swigCPtr, dd, hilight);
+	}
+
+	public function getConvexVolumeCount():int {
+		return _wrap_InputGeom_getConvexVolumeCount(swigCPtr);
+	}
+
+	public function getConvexVolumes():int {
+		return _wrap_InputGeom_getConvexVolumes(swigCPtr);
+	}
+
+	public function addConvexVolume(verts:int, nverts:int, minh:Number, maxh:Number, area:String):void {
+		_wrap_InputGeom_addConvexVolume(swigCPtr, verts, nverts, minh, maxh, area);
+	}
+
+	public function deleteConvexVolume(i:int):void {
+		_wrap_InputGeom_deleteConvexVolume(swigCPtr, i);
+	}
+
+	public function drawConvexVolumes(dd:int, hilight:Boolean):void {
+		_wrap_InputGeom_drawConvexVolumes(swigCPtr, dd, hilight);
 	}
 
 }
@@ -1798,6 +6327,12 @@ public class Sample {
 		return _wrap_Sample_m_detailSampleMaxError_get(swigCPtr);
 	}
 
+	public static function create():Sample {
+		var obj = new Sample();
+		obj.swigCPtr = _wrap_new_Sample();
+		return obj;
+	}
+
 	public function destroy():void {
 		_wrap_delete_Sample(swigCPtr);
 	}
@@ -1862,10 +6397,24 @@ public class Sample {
 		return _wrap_Sample_getBoundsMax(swigCPtr);
 	}
 
+	public function resetCommonSettings():void {
+		_wrap_Sample_resetCommonSettings(swigCPtr);
+	}
+
+	public function handleCommonSettings():void {
+		_wrap_Sample_handleCommonSettings(swigCPtr);
+	}
+
 }
 
 
 public class Sample_TempObstacles extends Sample {
+	public static function create():Sample_TempObstacles {
+		var obj = new Sample_TempObstacles();
+		obj.swigCPtr = _wrap_new_Sample_TempObstacles();
+		return obj;
+	}
+
 	override public function destroy():void {
 		_wrap_delete_Sample_TempObstacles(swigCPtr);
 	}
@@ -1886,6 +6435,26 @@ public class Sample_TempObstacles extends Sample {
 		_wrap_Sample_TempObstacles_handleUpdate(swigCPtr, dt);
 	}
 
+	public function getTilePos(pos:int, tx:int, ty:int):void {
+		_wrap_Sample_TempObstacles_getTilePos(swigCPtr, pos, tx, ty);
+	}
+
+	public function getObstacleCount():int {
+		return _wrap_Sample_TempObstacles_getObstacleCount(swigCPtr);
+	}
+
+	public function addTempObstacle(pos:int):int {
+		return _wrap_Sample_TempObstacles_addTempObstacle(swigCPtr, pos);
+	}
+
+	public function removeTempObstacle(id:int):void {
+		_wrap_Sample_TempObstacles_removeTempObstacle(swigCPtr, id);
+	}
+
+	public function clearAllTempObstacles():void {
+		_wrap_Sample_TempObstacles_clearAllTempObstacles(swigCPtr);
+	}
+
 	public function set m_tileSize(m_tileSize:Number):void {
 		_wrap_Sample_TempObstacles_m_tileSize_set(swigCPtr, m_tileSize);
 	}
@@ -1900,122 +6469,6 @@ public class Sample_TempObstacles extends Sample {
 
 	public function get m_maxObstacles():Number {
 		return _wrap_Sample_TempObstacles_m_maxObstacles_get(swigCPtr);
-	}
-
-}
-
-
-public class ConvexVolume {
-	public var swigCPtr:int;
-	public function set verts(verts:int):void {
-		_wrap_ConvexVolume_verts_set(swigCPtr, verts);
-	}
-
-	public function get verts():int {
-		return _wrap_ConvexVolume_verts_get(swigCPtr);
-	}
-
-	public function set hmin(hmin:Number):void {
-		_wrap_ConvexVolume_hmin_set(swigCPtr, hmin);
-	}
-
-	public function get hmin():Number {
-		return _wrap_ConvexVolume_hmin_get(swigCPtr);
-	}
-
-	public function set hmax(hmax:Number):void {
-		_wrap_ConvexVolume_hmax_set(swigCPtr, hmax);
-	}
-
-	public function get hmax():Number {
-		return _wrap_ConvexVolume_hmax_get(swigCPtr);
-	}
-
-	public function set nverts(nverts:int):void {
-		_wrap_ConvexVolume_nverts_set(swigCPtr, nverts);
-	}
-
-	public function get nverts():int {
-		return _wrap_ConvexVolume_nverts_get(swigCPtr);
-	}
-
-	public function set area(area:int):void {
-		_wrap_ConvexVolume_area_set(swigCPtr, area);
-	}
-
-	public function get area():int {
-		return _wrap_ConvexVolume_area_get(swigCPtr);
-	}
-
-	public static function create():ConvexVolume {
-		var obj = new ConvexVolume();
-		obj.swigCPtr = _wrap_new_ConvexVolume();
-		return obj;
-	}
-
-	public function destroy():void {
-		_wrap_delete_ConvexVolume(swigCPtr);
-	}
-
-}
-
-
-public class InputGeom {
-	public var swigCPtr:int;
-	public function loadMesh(ctx:int, filepath:String):Boolean {
-		return _wrap_InputGeom_loadMesh(swigCPtr, ctx, filepath);
-	}
-
-	public function getMesh():int {
-		return _wrap_InputGeom_getMesh(swigCPtr);
-	}
-
-	public function getMeshBoundsMin():int {
-		return _wrap_InputGeom_getMeshBoundsMin(swigCPtr);
-	}
-
-	public function getMeshBoundsMax():int {
-		return _wrap_InputGeom_getMeshBoundsMax(swigCPtr);
-	}
-
-	public function getChunkyMesh():int {
-		return _wrap_InputGeom_getChunkyMesh(swigCPtr);
-	}
-
-	public function getOffMeshConnectionCount():int {
-		return _wrap_InputGeom_getOffMeshConnectionCount(swigCPtr);
-	}
-
-	public function getOffMeshConnectionVerts():int {
-		return _wrap_InputGeom_getOffMeshConnectionVerts(swigCPtr);
-	}
-
-	public function getOffMeshConnectionRads():int {
-		return _wrap_InputGeom_getOffMeshConnectionRads(swigCPtr);
-	}
-
-	public function getOffMeshConnectionDirs():int {
-		return _wrap_InputGeom_getOffMeshConnectionDirs(swigCPtr);
-	}
-
-	public function getOffMeshConnectionAreas():int {
-		return _wrap_InputGeom_getOffMeshConnectionAreas(swigCPtr);
-	}
-
-	public function getOffMeshConnectionFlags():int {
-		return _wrap_InputGeom_getOffMeshConnectionFlags(swigCPtr);
-	}
-
-	public function getOffMeshConnectionId():int {
-		return _wrap_InputGeom_getOffMeshConnectionId(swigCPtr);
-	}
-
-	public function getConvexVolumeCount():int {
-		return _wrap_InputGeom_getConvexVolumeCount(swigCPtr);
-	}
-
-	public function getConvexVolumes():int {
-		return _wrap_InputGeom_getConvexVolumes(swigCPtr);
 	}
 
 }

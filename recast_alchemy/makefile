@@ -31,7 +31,16 @@ DETOUR_CROWD_SOURCE=../recastnavigation/DetourCrowd/Source
 DETOUR_TC_SOURCE=../recastnavigation/DetourTileCache/Source
 DEBUG_SOURCE=../recastnavigation/DebugUtils/Source
 
-all: Detour DetourCrowd DetourTileCache Recast RecastDemo debug swc
+
+all: recompile
+
+
+recompile: Detour DetourCrowd DetourTileCache Recast RecastDemo debug
+
+	#cd build && PATH="$(call unixpath,$(FLASCC)/usr/bin):$(PATH)" make -j8
+
+	make swig
+
 
 debug: DebugDraw 
 
@@ -111,18 +120,19 @@ swig:
 	java -jar $(call nativepath,$(FLASCC)/usr/lib/asc2.jar) -import $(call nativepath,$(FLASCC)/usr/lib/builtin.abc) -import $(call nativepath,$(FLASCC)/usr/lib/playerglobal.abc) build/Recast.as
 
 	# Compile the SWIG C++ wrappers
-	PATH="$(call unixpath,$(FLASCC)/usr/bin):$(PATH)" g++ $(BASE_CFLAGS) -DBT_USE_DOUBLE_PRECISION $(ALL_INCS) build/Recast_wrap.cxx -O4 -c
+	PATH="$(call unixpath,$(FLASCC)/usr/bin):$(PATH)" g++ $(BASE_CFLAGS) -DBT_USE_DOUBLE_PRECISION $(ALL_INCS) build/Recast_wrap.cxx -O4 -c &> build/swig_wrapper.log
 	mv Recast_wrap.o build
 
 	# protect the required symbols in the LTO exports file
-	cp -f exports.txt build/
-	chmod u+rw build/exports.txt
-	PATH="$(call unixpath,$(FLASCC)/usr/bin):$(PATH)" nm build/Recast_wrap.o | grep " T " | awk '{print $$3}' | sed 's/__/_/' >> build/exports.txt
+	#cp -f exports.txt build/
+	#chmod u+rw build/exports.txt
+	#PATH="$(call unixpath,$(FLASCC)/usr/bin):$(PATH)" nm build/Recast_wrap.o | grep " T " | awk '{print $$3}' | sed 's/__/_/' >> build/exports.txt
 
 	# Link the final library
-	PATH="$(call unixpath,$(FLASCC)/usr/bin):$(PATH)" g++ $(BASE_CFLAGS) -DBT_USE_DOUBLE_PRECISION $(ALL_INCS) main.cpp \
-	build/Recast_wrap.o build/Recast.abc \
+	PATH="$(call unixpath,$(FLASCC)/usr/bin):$(PATH)" g++ -jvmopt=-Xmx1G $(BASE_CFLAGS) -DBT_USE_DOUBLE_PRECISION $(ALL_INCS) main.cpp \
+	$(ALL_OBJS) ./build/Recast_wrap.o ./build/Recast.abc \
 	-Wl,--start-group \
 	-Wl,--end-group \
-	-emit-swc=org.recastnavigation -O4 -flto-api=exports.txt $(EXTRA_OPTS) -o build/Recast.swc
+	-emit-swc=org.recastnavigation -O4 $(EXTRA_OPTS) -o build/Recast.swc &> build/swc.log
+	#-emit-swc=org.recastnavigation -O4 -flto-api=build/exports.txt $(EXTRA_OPTS) -o build/Recast.swc &> build/swc.log
 

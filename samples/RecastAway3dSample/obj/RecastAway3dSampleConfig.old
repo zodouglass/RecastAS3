@@ -32,17 +32,18 @@
     </define>
     <verbose-stacktraces>true</verbose-stacktraces>
     <source-path append="true">
-      <path-element>F:\projects\_resources\RecastAS3\as3_demo_2d\src</path-element>
+      <path-element>F:\projects\_resources\RecastAS3\samples\RecastAway3dSample\src</path-element>
       <path-element>C:\Program Files (x86)\Adobe\Adobe Flash CS5.5\Common\Configuration\Component Source\ActionScript 3.0\User Interface</path-element>
       <path-element>C:\Program Files (x86)\Adobe\Adobe Flash CS5.5\Common\Configuration\ActionScript 3.0\projects\Flash\src</path-element>
       <path-element>C:\Program Files (x86)\FlashDevelop\Library\AS3\classes</path-element>
     </source-path>
     <library-path append="true">
+      <path-element>F:\projects\_resources\RecastAS3\samples\RecastAway3dSample\lib\away3d-core-fp11_4_1_4.swc</path-element>
       <path-element>F:\projects\_resources\RecastAS3\recast_alchemy\build\Recast.swc</path-element>
     </library-path>
   </compiler>
   <file-specs>
-    <path-element>F:\projects\_resources\RecastAS3\as3_demo_2d\src\MainCC.as</path-element>
+    <path-element>F:\projects\_resources\RecastAS3\samples\RecastAway3dSample\src\Main.as</path-element>
   </file-specs>
   <default-background-color>#FFFFFF</default-background-color>
   <default-frame-rate>30</default-frame-rate>

@@ -155,15 +155,21426 @@ template <typename T> T SwigValueInit() {
 
 #include "AS3/AS3.h"
 #include <stdlib.h>
-#include "Recast.h"
-#include "DetourCrowd.h"
-#include "InputGeom.h"
-#include "DetourCommon.h"
-#include "SoloMesh.h"
-#include "Sample_TempObstacles.h"
-#include "AS3/AS3.h"
 #include <stdio.h>
 #include <string.h>
+#include <math.h>
+
+//DebugUtils
+#include "DebugDraw.h"
+#include "DetourDebugDraw.h"
+#include "RecastDebugDraw.h"
+//#include "RecastDump.h"
+
+//Detour
+#include "DetourAlloc.h"
+#include "DetourAssert.h"
+#include "DetourCommon.h"
+#include "DetourNavMesh.h"
+#include "DetourNavMeshBuilder.h"
+#include "DetourNavMeshQuery.h"
+#include "DetourNode.h"
+#include "DetourStatus.h"
+//Detour Crowd
+#include "DetourCrowd.h"
+#include "DetourLocalBoundary.h"
+#include "DetourObstacleAvoidance.h"
+#include "DetourPathCorridor.h"
+#include "DetourPathQueue.h"
+#include "DetourProximityGrid.h"
+//DetourTileCache
+#include "DetourTileCache.h"
+#include "DetourTileCacheBuilder.h"
+//Recast
+#include "Recast.h"
+#include "RecastAlloc.h"
+#include "RecastAssert.h"
+
+	//demo
+	#include "AS3_rcContext.h"
+	#include "ChunkyTriMesh.h"
+	#include "MeshLoaderObj.h"
+	#include "InputGeom.h"
+	#include "Sample.h"
+	#include "Sample_TempObstacles.h"
+
+
+__attribute__((annotate("as3sig:public function _wrap_DU_PI_get():Number")))
+void _wrap_DU_PI_get() {
+  float result ;
+  
+  result = (float)(float)DU_PI;
+  {
+    AS3_DeclareVar(asresult, Number);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DU_DRAW_POINTS():int")))
+void _wrap_DU_DRAW_POINTS() {
+  int result ;
+  
+  result = DU_DRAW_POINTS;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DU_DRAW_LINES():int")))
+void _wrap_DU_DRAW_LINES() {
+  int result ;
+  
+  result = DU_DRAW_LINES;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DU_DRAW_TRIS():int")))
+void _wrap_DU_DRAW_TRIS() {
+  int result ;
+  
+  result = DU_DRAW_TRIS;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DU_DRAW_QUADS():int")))
+void _wrap_DU_DRAW_QUADS() {
+  int result ;
+  
+  result = DU_DRAW_QUADS;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_delete_duDebugDraw(self):void")))
+void _wrap_delete_duDebugDraw() {
+  duDebugDraw *arg1 = (duDebugDraw *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  delete arg1;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_duDebugDraw_depthMask(self, state:Boolean):void")))
+void _wrap_duDebugDraw_depthMask() {
+  duDebugDraw *arg1 = (duDebugDraw *) 0 ;
+  bool arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, state);
+  }
+  (arg1)->depthMask(arg2);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_duDebugDraw_texture(self, state:Boolean):void")))
+void _wrap_duDebugDraw_texture() {
+  duDebugDraw *arg1 = (duDebugDraw *) 0 ;
+  bool arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, state);
+  }
+  (arg1)->texture(arg2);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_duDebugDraw_begin(self, prim:int):void")))
+void _wrap_duDebugDraw_begin() {
+  duDebugDraw *arg1 = (duDebugDraw *) 0 ;
+  duDebugDrawPrimitives arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, prim);
+  }
+  (arg1)->begin(arg2);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_duDebugDraw_vertex(self, pos:int, color:int):void")))
+void _wrap_duDebugDraw_vertex() {
+  duDebugDraw *arg1 = (duDebugDraw *) 0 ;
+  float *arg2 = (float *) 0 ;
+  unsigned int arg3 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, pos);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, color);
+  }
+  (arg1)->vertex((float const *)arg2,arg3);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_duDebugDraw_vertexXYZ(self, x:Number, y:Number, z:Number, color:int):void")))
+void _wrap_duDebugDraw_vertexXYZ() {
+  duDebugDraw *arg1 = (duDebugDraw *) 0 ;
+  float arg2 ;
+  float arg3 ;
+  float arg4 ;
+  unsigned int arg5 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, x);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, y);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, z);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, color);
+  }
+  (arg1)->vertex(arg2,arg3,arg4,arg5);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_duDebugDraw_vertexUV(self, pos:int, color:int, uv:int):void")))
+void _wrap_duDebugDraw_vertexUV() {
+  duDebugDraw *arg1 = (duDebugDraw *) 0 ;
+  float *arg2 = (float *) 0 ;
+  unsigned int arg3 ;
+  float *arg4 = (float *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, pos);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, color);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, uv);
+  }
+  (arg1)->vertex((float const *)arg2,arg3,(float const *)arg4);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_duDebugDraw_vertexXYZUV(self, x:Number, y:Number, z:Number, color:int, u:Number, v:Number):void")))
+void _wrap_duDebugDraw_vertexXYZUV() {
+  duDebugDraw *arg1 = (duDebugDraw *) 0 ;
+  float arg2 ;
+  float arg3 ;
+  float arg4 ;
+  unsigned int arg5 ;
+  float arg6 ;
+  float arg7 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, x);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, y);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, z);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, color);
+  }
+  {
+    AS3_GetScalarFromVar(arg6, u);
+  }
+  {
+    AS3_GetScalarFromVar(arg7, v);
+  }
+  (arg1)->vertex(arg2,arg3,arg4,arg5,arg6,arg7);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_duDebugDraw_end(self):void")))
+void _wrap_duDebugDraw_end() {
+  duDebugDraw *arg1 = (duDebugDraw *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  (arg1)->end();
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_duRGBA(r:int, g:int, b:int, a:int):int")))
+void _wrap_duRGBA() {
+  int arg1 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  unsigned int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, r);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, g);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, b);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, a);
+  }
+  result = (unsigned int)duRGBA(arg1,arg2,arg3,arg4);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_duRGBAf(fr:Number, fg:Number, fb:Number, fa:Number):int")))
+void _wrap_duRGBAf() {
+  float arg1 ;
+  float arg2 ;
+  float arg3 ;
+  float arg4 ;
+  unsigned int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, fr);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, fg);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, fb);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, fa);
+  }
+  result = (unsigned int)duRGBAf(arg1,arg2,arg3,arg4);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_duIntToCol(i:int, a:int):int")))
+void _wrap_duIntToCol() {
+  int arg1 ;
+  int arg2 ;
+  unsigned int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, i);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, a);
+  }
+  result = (unsigned int)duIntToCol(arg1,arg2);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_duMultCol(col:int, d:int):int")))
+void _wrap_duMultCol() {
+  unsigned int arg1 ;
+  unsigned int arg2 ;
+  unsigned int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, col);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, d);
+  }
+  result = (unsigned int)duMultCol(arg1,arg2);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_duDarkenCol(col:int):int")))
+void _wrap_duDarkenCol() {
+  unsigned int arg1 ;
+  unsigned int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, col);
+  }
+  result = (unsigned int)duDarkenCol(arg1);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_duLerpCol(ca:int, cb:int, u:int):int")))
+void _wrap_duLerpCol() {
+  unsigned int arg1 ;
+  unsigned int arg2 ;
+  unsigned int arg3 ;
+  unsigned int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, ca);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, cb);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, u);
+  }
+  result = (unsigned int)duLerpCol(arg1,arg2,arg3);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_duTransCol(c:int, a:int):int")))
+void _wrap_duTransCol() {
+  unsigned int arg1 ;
+  unsigned int arg2 ;
+  unsigned int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, c);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, a);
+  }
+  result = (unsigned int)duTransCol(arg1,arg2);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_duCalcBoxColors(colors:int, colTop:int, colSide:int):void")))
+void _wrap_duCalcBoxColors() {
+  unsigned int *arg1 = (unsigned int *) 0 ;
+  unsigned int arg2 ;
+  unsigned int arg3 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, colors);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, colTop);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, colSide);
+  }
+  duCalcBoxColors(arg1,arg2,arg3);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_duDebugDrawCylinderWire(dd:int, minx:Number, miny:Number, minz:Number, maxx:Number, maxy:Number, maxz:Number, col:int, lineWidth:Number):void")))
+void _wrap_duDebugDrawCylinderWire() {
+  duDebugDraw *arg1 = (duDebugDraw *) 0 ;
+  float arg2 ;
+  float arg3 ;
+  float arg4 ;
+  float arg5 ;
+  float arg6 ;
+  float arg7 ;
+  unsigned int arg8 ;
+  float arg9 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, dd);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, minx);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, miny);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, minz);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, maxx);
+  }
+  {
+    AS3_GetScalarFromVar(arg6, maxy);
+  }
+  {
+    AS3_GetScalarFromVar(arg7, maxz);
+  }
+  {
+    AS3_GetScalarFromVar(arg8, col);
+  }
+  {
+    AS3_GetScalarFromVar(arg9, lineWidth);
+  }
+  duDebugDrawCylinderWire(arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8,arg9);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_duDebugDrawBoxWire(dd:int, minx:Number, miny:Number, minz:Number, maxx:Number, maxy:Number, maxz:Number, col:int, lineWidth:Number):void")))
+void _wrap_duDebugDrawBoxWire() {
+  duDebugDraw *arg1 = (duDebugDraw *) 0 ;
+  float arg2 ;
+  float arg3 ;
+  float arg4 ;
+  float arg5 ;
+  float arg6 ;
+  float arg7 ;
+  unsigned int arg8 ;
+  float arg9 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, dd);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, minx);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, miny);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, minz);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, maxx);
+  }
+  {
+    AS3_GetScalarFromVar(arg6, maxy);
+  }
+  {
+    AS3_GetScalarFromVar(arg7, maxz);
+  }
+  {
+    AS3_GetScalarFromVar(arg8, col);
+  }
+  {
+    AS3_GetScalarFromVar(arg9, lineWidth);
+  }
+  duDebugDrawBoxWire(arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8,arg9);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_duDebugDrawArc(dd:int, x0:Number, y0:Number, z0:Number, x1:Number, y1:Number, z1:Number, h:Number, as0:Number, as1:Number, col:int, lineWidth:Number):void")))
+void _wrap_duDebugDrawArc() {
+  duDebugDraw *arg1 = (duDebugDraw *) 0 ;
+  float arg2 ;
+  float arg3 ;
+  float arg4 ;
+  float arg5 ;
+  float arg6 ;
+  float arg7 ;
+  float arg8 ;
+  float arg9 ;
+  float arg10 ;
+  unsigned int arg11 ;
+  float arg12 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, dd);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, x0);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, y0);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, z0);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, x1);
+  }
+  {
+    AS3_GetScalarFromVar(arg6, y1);
+  }
+  {
+    AS3_GetScalarFromVar(arg7, z1);
+  }
+  {
+    AS3_GetScalarFromVar(arg8, h);
+  }
+  {
+    AS3_GetScalarFromVar(arg9, as0);
+  }
+  {
+    AS3_GetScalarFromVar(arg10, as1);
+  }
+  {
+    AS3_GetScalarFromVar(arg11, col);
+  }
+  {
+    AS3_GetScalarFromVar(arg12, lineWidth);
+  }
+  duDebugDrawArc(arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8,arg9,arg10,arg11,arg12);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_duDebugDrawArrow(dd:int, x0:Number, y0:Number, z0:Number, x1:Number, y1:Number, z1:Number, as0:Number, as1:Number, col:int, lineWidth:Number):void")))
+void _wrap_duDebugDrawArrow() {
+  duDebugDraw *arg1 = (duDebugDraw *) 0 ;
+  float arg2 ;
+  float arg3 ;
+  float arg4 ;
+  float arg5 ;
+  float arg6 ;
+  float arg7 ;
+  float arg8 ;
+  float arg9 ;
+  unsigned int arg10 ;
+  float arg11 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, dd);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, x0);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, y0);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, z0);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, x1);
+  }
+  {
+    AS3_GetScalarFromVar(arg6, y1);
+  }
+  {
+    AS3_GetScalarFromVar(arg7, z1);
+  }
+  {
+    AS3_GetScalarFromVar(arg8, as0);
+  }
+  {
+    AS3_GetScalarFromVar(arg9, as1);
+  }
+  {
+    AS3_GetScalarFromVar(arg10, col);
+  }
+  {
+    AS3_GetScalarFromVar(arg11, lineWidth);
+  }
+  duDebugDrawArrow(arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8,arg9,arg10,arg11);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_duDebugDrawCircle(dd:int, x:Number, y:Number, z:Number, r:Number, col:int, lineWidth:Number):void")))
+void _wrap_duDebugDrawCircle() {
+  duDebugDraw *arg1 = (duDebugDraw *) 0 ;
+  float arg2 ;
+  float arg3 ;
+  float arg4 ;
+  float arg5 ;
+  unsigned int arg6 ;
+  float arg7 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, dd);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, x);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, y);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, z);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, r);
+  }
+  {
+    AS3_GetScalarFromVar(arg6, col);
+  }
+  {
+    AS3_GetScalarFromVar(arg7, lineWidth);
+  }
+  duDebugDrawCircle(arg1,arg2,arg3,arg4,arg5,arg6,arg7);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_duDebugDrawCross(dd:int, x:Number, y:Number, z:Number, size:Number, col:int, lineWidth:Number):void")))
+void _wrap_duDebugDrawCross() {
+  duDebugDraw *arg1 = (duDebugDraw *) 0 ;
+  float arg2 ;
+  float arg3 ;
+  float arg4 ;
+  float arg5 ;
+  unsigned int arg6 ;
+  float arg7 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, dd);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, x);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, y);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, z);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, size);
+  }
+  {
+    AS3_GetScalarFromVar(arg6, col);
+  }
+  {
+    AS3_GetScalarFromVar(arg7, lineWidth);
+  }
+  duDebugDrawCross(arg1,arg2,arg3,arg4,arg5,arg6,arg7);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_duDebugDrawBox(dd:int, minx:Number, miny:Number, minz:Number, maxx:Number, maxy:Number, maxz:Number, fcol:int):void")))
+void _wrap_duDebugDrawBox() {
+  duDebugDraw *arg1 = (duDebugDraw *) 0 ;
+  float arg2 ;
+  float arg3 ;
+  float arg4 ;
+  float arg5 ;
+  float arg6 ;
+  float arg7 ;
+  unsigned int *arg8 = (unsigned int *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, dd);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, minx);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, miny);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, minz);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, maxx);
+  }
+  {
+    AS3_GetScalarFromVar(arg6, maxy);
+  }
+  {
+    AS3_GetScalarFromVar(arg7, maxz);
+  }
+  {
+    AS3_GetScalarFromVar(arg8, fcol);
+  }
+  duDebugDrawBox(arg1,arg2,arg3,arg4,arg5,arg6,arg7,(unsigned int const *)arg8);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_duDebugDrawCylinder(dd:int, minx:Number, miny:Number, minz:Number, maxx:Number, maxy:Number, maxz:Number, col:int):void")))
+void _wrap_duDebugDrawCylinder() {
+  duDebugDraw *arg1 = (duDebugDraw *) 0 ;
+  float arg2 ;
+  float arg3 ;
+  float arg4 ;
+  float arg5 ;
+  float arg6 ;
+  float arg7 ;
+  unsigned int arg8 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, dd);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, minx);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, miny);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, minz);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, maxx);
+  }
+  {
+    AS3_GetScalarFromVar(arg6, maxy);
+  }
+  {
+    AS3_GetScalarFromVar(arg7, maxz);
+  }
+  {
+    AS3_GetScalarFromVar(arg8, col);
+  }
+  duDebugDrawCylinder(arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_duDebugDrawGridXZ(dd:int, ox:Number, oy:Number, oz:Number, w:int, h:int, size:Number, col:int, lineWidth:Number):void")))
+void _wrap_duDebugDrawGridXZ() {
+  duDebugDraw *arg1 = (duDebugDraw *) 0 ;
+  float arg2 ;
+  float arg3 ;
+  float arg4 ;
+  int arg5 ;
+  int arg6 ;
+  float arg7 ;
+  unsigned int arg8 ;
+  float arg9 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, dd);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, ox);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, oy);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, oz);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, w);
+  }
+  {
+    AS3_GetScalarFromVar(arg6, h);
+  }
+  {
+    AS3_GetScalarFromVar(arg7, size);
+  }
+  {
+    AS3_GetScalarFromVar(arg8, col);
+  }
+  {
+    AS3_GetScalarFromVar(arg9, lineWidth);
+  }
+  duDebugDrawGridXZ(arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8,arg9);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_duAppendCylinderWire(dd:int, minx:Number, miny:Number, minz:Number, maxx:Number, maxy:Number, maxz:Number, col:int):void")))
+void _wrap_duAppendCylinderWire() {
+  duDebugDraw *arg1 = (duDebugDraw *) 0 ;
+  float arg2 ;
+  float arg3 ;
+  float arg4 ;
+  float arg5 ;
+  float arg6 ;
+  float arg7 ;
+  unsigned int arg8 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, dd);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, minx);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, miny);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, minz);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, maxx);
+  }
+  {
+    AS3_GetScalarFromVar(arg6, maxy);
+  }
+  {
+    AS3_GetScalarFromVar(arg7, maxz);
+  }
+  {
+    AS3_GetScalarFromVar(arg8, col);
+  }
+  duAppendCylinderWire(arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_duAppendBoxWire(dd:int, minx:Number, miny:Number, minz:Number, maxx:Number, maxy:Number, maxz:Number, col:int):void")))
+void _wrap_duAppendBoxWire() {
+  duDebugDraw *arg1 = (duDebugDraw *) 0 ;
+  float arg2 ;
+  float arg3 ;
+  float arg4 ;
+  float arg5 ;
+  float arg6 ;
+  float arg7 ;
+  unsigned int arg8 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, dd);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, minx);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, miny);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, minz);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, maxx);
+  }
+  {
+    AS3_GetScalarFromVar(arg6, maxy);
+  }
+  {
+    AS3_GetScalarFromVar(arg7, maxz);
+  }
+  {
+    AS3_GetScalarFromVar(arg8, col);
+  }
+  duAppendBoxWire(arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_duAppendBoxPoints(dd:int, minx:Number, miny:Number, minz:Number, maxx:Number, maxy:Number, maxz:Number, col:int):void")))
+void _wrap_duAppendBoxPoints() {
+  duDebugDraw *arg1 = (duDebugDraw *) 0 ;
+  float arg2 ;
+  float arg3 ;
+  float arg4 ;
+  float arg5 ;
+  float arg6 ;
+  float arg7 ;
+  unsigned int arg8 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, dd);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, minx);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, miny);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, minz);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, maxx);
+  }
+  {
+    AS3_GetScalarFromVar(arg6, maxy);
+  }
+  {
+    AS3_GetScalarFromVar(arg7, maxz);
+  }
+  {
+    AS3_GetScalarFromVar(arg8, col);
+  }
+  duAppendBoxPoints(arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_duAppendArc(dd:int, x0:Number, y0:Number, z0:Number, x1:Number, y1:Number, z1:Number, h:Number, as0:Number, as1:Number, col:int):void")))
+void _wrap_duAppendArc() {
+  duDebugDraw *arg1 = (duDebugDraw *) 0 ;
+  float arg2 ;
+  float arg3 ;
+  float arg4 ;
+  float arg5 ;
+  float arg6 ;
+  float arg7 ;
+  float arg8 ;
+  float arg9 ;
+  float arg10 ;
+  unsigned int arg11 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, dd);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, x0);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, y0);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, z0);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, x1);
+  }
+  {
+    AS3_GetScalarFromVar(arg6, y1);
+  }
+  {
+    AS3_GetScalarFromVar(arg7, z1);
+  }
+  {
+    AS3_GetScalarFromVar(arg8, h);
+  }
+  {
+    AS3_GetScalarFromVar(arg9, as0);
+  }
+  {
+    AS3_GetScalarFromVar(arg10, as1);
+  }
+  {
+    AS3_GetScalarFromVar(arg11, col);
+  }
+  duAppendArc(arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8,arg9,arg10,arg11);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_duAppendArrow(dd:int, x0:Number, y0:Number, z0:Number, x1:Number, y1:Number, z1:Number, as0:Number, as1:Number, col:int):void")))
+void _wrap_duAppendArrow() {
+  duDebugDraw *arg1 = (duDebugDraw *) 0 ;
+  float arg2 ;
+  float arg3 ;
+  float arg4 ;
+  float arg5 ;
+  float arg6 ;
+  float arg7 ;
+  float arg8 ;
+  float arg9 ;
+  unsigned int arg10 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, dd);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, x0);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, y0);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, z0);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, x1);
+  }
+  {
+    AS3_GetScalarFromVar(arg6, y1);
+  }
+  {
+    AS3_GetScalarFromVar(arg7, z1);
+  }
+  {
+    AS3_GetScalarFromVar(arg8, as0);
+  }
+  {
+    AS3_GetScalarFromVar(arg9, as1);
+  }
+  {
+    AS3_GetScalarFromVar(arg10, col);
+  }
+  duAppendArrow(arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8,arg9,arg10);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_duAppendCircle(dd:int, x:Number, y:Number, z:Number, r:Number, col:int):void")))
+void _wrap_duAppendCircle() {
+  duDebugDraw *arg1 = (duDebugDraw *) 0 ;
+  float arg2 ;
+  float arg3 ;
+  float arg4 ;
+  float arg5 ;
+  unsigned int arg6 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, dd);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, x);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, y);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, z);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, r);
+  }
+  {
+    AS3_GetScalarFromVar(arg6, col);
+  }
+  duAppendCircle(arg1,arg2,arg3,arg4,arg5,arg6);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_duAppendCross(dd:int, x:Number, y:Number, z:Number, size:Number, col:int):void")))
+void _wrap_duAppendCross() {
+  duDebugDraw *arg1 = (duDebugDraw *) 0 ;
+  float arg2 ;
+  float arg3 ;
+  float arg4 ;
+  float arg5 ;
+  unsigned int arg6 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, dd);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, x);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, y);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, z);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, size);
+  }
+  {
+    AS3_GetScalarFromVar(arg6, col);
+  }
+  duAppendCross(arg1,arg2,arg3,arg4,arg5,arg6);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_duAppendBox(dd:int, minx:Number, miny:Number, minz:Number, maxx:Number, maxy:Number, maxz:Number, fcol:int):void")))
+void _wrap_duAppendBox() {
+  duDebugDraw *arg1 = (duDebugDraw *) 0 ;
+  float arg2 ;
+  float arg3 ;
+  float arg4 ;
+  float arg5 ;
+  float arg6 ;
+  float arg7 ;
+  unsigned int *arg8 = (unsigned int *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, dd);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, minx);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, miny);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, minz);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, maxx);
+  }
+  {
+    AS3_GetScalarFromVar(arg6, maxy);
+  }
+  {
+    AS3_GetScalarFromVar(arg7, maxz);
+  }
+  {
+    AS3_GetScalarFromVar(arg8, fcol);
+  }
+  duAppendBox(arg1,arg2,arg3,arg4,arg5,arg6,arg7,(unsigned int const *)arg8);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_duAppendCylinder(dd:int, minx:Number, miny:Number, minz:Number, maxx:Number, maxy:Number, maxz:Number, col:int):void")))
+void _wrap_duAppendCylinder() {
+  duDebugDraw *arg1 = (duDebugDraw *) 0 ;
+  float arg2 ;
+  float arg3 ;
+  float arg4 ;
+  float arg5 ;
+  float arg6 ;
+  float arg7 ;
+  unsigned int arg8 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, dd);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, minx);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, miny);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, minz);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, maxx);
+  }
+  {
+    AS3_GetScalarFromVar(arg6, maxy);
+  }
+  {
+    AS3_GetScalarFromVar(arg7, maxz);
+  }
+  {
+    AS3_GetScalarFromVar(arg8, col);
+  }
+  duAppendCylinder(arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_delete_duDisplayList(self):void")))
+void _wrap_delete_duDisplayList() {
+  duDisplayList *arg1 = (duDisplayList *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  delete arg1;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_duDisplayList_depthMask(self, state:Boolean):void")))
+void _wrap_duDisplayList_depthMask() {
+  duDisplayList *arg1 = (duDisplayList *) 0 ;
+  bool arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, state);
+  }
+  (arg1)->depthMask(arg2);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_duDisplayList_begin(self, prim:int):void")))
+void _wrap_duDisplayList_begin() {
+  duDisplayList *arg1 = (duDisplayList *) 0 ;
+  duDebugDrawPrimitives arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, prim);
+  }
+  (arg1)->begin(arg2);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_duDisplayList_vertexXYZ(self, x:Number, y:Number, z:Number, color:int):void")))
+void _wrap_duDisplayList_vertexXYZ() {
+  duDisplayList *arg1 = (duDisplayList *) 0 ;
+  float arg2 ;
+  float arg3 ;
+  float arg4 ;
+  unsigned int arg5 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, x);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, y);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, z);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, color);
+  }
+  (arg1)->vertex(arg2,arg3,arg4,arg5);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_duDisplayList_vertex(self, pos:int, color:int):void")))
+void _wrap_duDisplayList_vertex() {
+  duDisplayList *arg1 = (duDisplayList *) 0 ;
+  float *arg2 = (float *) 0 ;
+  unsigned int arg3 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, pos);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, color);
+  }
+  (arg1)->vertex((float const *)arg2,arg3);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_duDisplayList_end(self):void")))
+void _wrap_duDisplayList_end() {
+  duDisplayList *arg1 = (duDisplayList *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  (arg1)->end();
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_duDisplayList_clear(self):void")))
+void _wrap_duDisplayList_clear() {
+  duDisplayList *arg1 = (duDisplayList *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  (arg1)->clear();
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_duDisplayList_draw(self, dd:int):void")))
+void _wrap_duDisplayList_draw() {
+  duDisplayList *arg1 = (duDisplayList *) 0 ;
+  duDebugDraw *arg2 = (duDebugDraw *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, dd);
+  }
+  (arg1)->draw(arg2);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DU_DRAWNAVMESH_OFFMESHCONS():int")))
+void _wrap_DU_DRAWNAVMESH_OFFMESHCONS() {
+  int result ;
+  
+  result = DU_DRAWNAVMESH_OFFMESHCONS;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DU_DRAWNAVMESH_CLOSEDLIST():int")))
+void _wrap_DU_DRAWNAVMESH_CLOSEDLIST() {
+  int result ;
+  
+  result = DU_DRAWNAVMESH_CLOSEDLIST;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DU_DRAWNAVMESH_COLOR_TILES():int")))
+void _wrap_DU_DRAWNAVMESH_COLOR_TILES() {
+  int result ;
+  
+  result = DU_DRAWNAVMESH_COLOR_TILES;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_duDebugDrawNavMesh(dd:int, mesh:int, flags:String):void")))
+void _wrap_duDebugDrawNavMesh() {
+  duDebugDraw *arg1 = (duDebugDraw *) 0 ;
+  dtNavMesh *arg2 = 0 ;
+  unsigned char arg3 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, dd);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, mesh);
+  }
+  {
+    inline_nonreentrant_as3(
+      "%0 = flags.charCodeAt(0)" : "=r"(arg3)
+      );
+  }
+  duDebugDrawNavMesh(arg1,(dtNavMesh const &)*arg2,arg3);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_duDebugDrawNavMeshWithClosedList(dd:int, mesh:int, query:int, flags:String):void")))
+void _wrap_duDebugDrawNavMeshWithClosedList() {
+  duDebugDraw *arg1 = (duDebugDraw *) 0 ;
+  dtNavMesh *arg2 = 0 ;
+  dtNavMeshQuery *arg3 = 0 ;
+  unsigned char arg4 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, dd);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, mesh);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, query);
+  }
+  {
+    inline_nonreentrant_as3(
+      "%0 = flags.charCodeAt(0)" : "=r"(arg4)
+      );
+  }
+  duDebugDrawNavMeshWithClosedList(arg1,(dtNavMesh const &)*arg2,(dtNavMeshQuery const &)*arg3,arg4);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_duDebugDrawNavMeshNodes(dd:int, query:int):void")))
+void _wrap_duDebugDrawNavMeshNodes() {
+  duDebugDraw *arg1 = (duDebugDraw *) 0 ;
+  dtNavMeshQuery *arg2 = 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, dd);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, query);
+  }
+  duDebugDrawNavMeshNodes(arg1,(dtNavMeshQuery const &)*arg2);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_duDebugDrawNavMeshBVTree(dd:int, mesh:int):void")))
+void _wrap_duDebugDrawNavMeshBVTree() {
+  duDebugDraw *arg1 = (duDebugDraw *) 0 ;
+  dtNavMesh *arg2 = 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, dd);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, mesh);
+  }
+  duDebugDrawNavMeshBVTree(arg1,(dtNavMesh const &)*arg2);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_duDebugDrawNavMeshPortals(dd:int, mesh:int):void")))
+void _wrap_duDebugDrawNavMeshPortals() {
+  duDebugDraw *arg1 = (duDebugDraw *) 0 ;
+  dtNavMesh *arg2 = 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, dd);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, mesh);
+  }
+  duDebugDrawNavMeshPortals(arg1,(dtNavMesh const &)*arg2);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_duDebugDrawNavMeshPolysWithFlags(dd:int, mesh:int, polyFlags:int, col:int):void")))
+void _wrap_duDebugDrawNavMeshPolysWithFlags() {
+  duDebugDraw *arg1 = (duDebugDraw *) 0 ;
+  dtNavMesh *arg2 = 0 ;
+  unsigned short arg3 ;
+  unsigned int arg4 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, dd);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, mesh);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, polyFlags);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, col);
+  }
+  duDebugDrawNavMeshPolysWithFlags(arg1,(dtNavMesh const &)*arg2,arg3,arg4);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_duDebugDrawNavMeshPoly(dd:int, mesh:int, ref:int, col:int):void")))
+void _wrap_duDebugDrawNavMeshPoly() {
+  duDebugDraw *arg1 = (duDebugDraw *) 0 ;
+  dtNavMesh *arg2 = 0 ;
+  dtPolyRef arg3 ;
+  unsigned int arg4 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, dd);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, mesh);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, ref);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, col);
+  }
+  duDebugDrawNavMeshPoly(arg1,(dtNavMesh const &)*arg2,arg3,arg4);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_duDebugDrawTileCacheLayerAreas(dd:int, layer:int, cs:Number, ch:Number):void")))
+void _wrap_duDebugDrawTileCacheLayerAreas() {
+  duDebugDraw *arg1 = (duDebugDraw *) 0 ;
+  dtTileCacheLayer *arg2 = 0 ;
+  float arg3 ;
+  float arg4 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, dd);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, layer);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, cs);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, ch);
+  }
+  duDebugDrawTileCacheLayerAreas(arg1,(dtTileCacheLayer const &)*arg2,arg3,arg4);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_duDebugDrawTileCacheLayerRegions(dd:int, layer:int, cs:Number, ch:Number):void")))
+void _wrap_duDebugDrawTileCacheLayerRegions() {
+  duDebugDraw *arg1 = (duDebugDraw *) 0 ;
+  dtTileCacheLayer *arg2 = 0 ;
+  float arg3 ;
+  float arg4 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, dd);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, layer);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, cs);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, ch);
+  }
+  duDebugDrawTileCacheLayerRegions(arg1,(dtTileCacheLayer const &)*arg2,arg3,arg4);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_duDebugDrawTileCacheContours(dd:int, lcset:int, orig:int, cs:Number, ch:Number):void")))
+void _wrap_duDebugDrawTileCacheContours() {
+  duDebugDraw *arg1 = (duDebugDraw *) 0 ;
+  dtTileCacheContourSet *arg2 = 0 ;
+  float *arg3 = (float *) 0 ;
+  float arg4 ;
+  float arg5 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, dd);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, lcset);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, orig);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, cs);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, ch);
+  }
+  duDebugDrawTileCacheContours(arg1,(dtTileCacheContourSet const &)*arg2,(float const *)arg3,arg4,arg5);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_duDebugDrawTileCachePolyMesh(dd:int, lmesh:int, orig:int, cs:Number, ch:Number):void")))
+void _wrap_duDebugDrawTileCachePolyMesh() {
+  duDebugDraw *arg1 = (duDebugDraw *) 0 ;
+  dtTileCachePolyMesh *arg2 = 0 ;
+  float *arg3 = (float *) 0 ;
+  float arg4 ;
+  float arg5 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, dd);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, lmesh);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, orig);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, cs);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, ch);
+  }
+  duDebugDrawTileCachePolyMesh(arg1,(dtTileCachePolyMesh const &)*arg2,(float const *)arg3,arg4,arg5);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_duDebugDrawTriMesh(dd:int, verts:int, nverts:int, tris:int, normals:int, ntris:int, flags:int, texScale:Number):void")))
+void _wrap_duDebugDrawTriMesh() {
+  duDebugDraw *arg1 = (duDebugDraw *) 0 ;
+  float *arg2 = (float *) 0 ;
+  int arg3 ;
+  int *arg4 = (int *) 0 ;
+  float *arg5 = (float *) 0 ;
+  int arg6 ;
+  unsigned char *arg7 = (unsigned char *) 0 ;
+  float arg8 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, dd);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, verts);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, nverts);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, tris);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, normals);
+  }
+  {
+    AS3_GetScalarFromVar(arg6, ntris);
+  }
+  {
+    AS3_GetScalarFromVar(arg7, flags);
+  }
+  {
+    AS3_GetScalarFromVar(arg8, texScale);
+  }
+  duDebugDrawTriMesh(arg1,(float const *)arg2,arg3,(int const *)arg4,(float const *)arg5,arg6,(unsigned char const *)arg7,arg8);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_duDebugDrawTriMeshSlope(dd:int, verts:int, nverts:int, tris:int, normals:int, ntris:int, walkableSlopeAngle:Number, texScale:Number):void")))
+void _wrap_duDebugDrawTriMeshSlope() {
+  duDebugDraw *arg1 = (duDebugDraw *) 0 ;
+  float *arg2 = (float *) 0 ;
+  int arg3 ;
+  int *arg4 = (int *) 0 ;
+  float *arg5 = (float *) 0 ;
+  int arg6 ;
+  float arg7 ;
+  float arg8 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, dd);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, verts);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, nverts);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, tris);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, normals);
+  }
+  {
+    AS3_GetScalarFromVar(arg6, ntris);
+  }
+  {
+    AS3_GetScalarFromVar(arg7, walkableSlopeAngle);
+  }
+  {
+    AS3_GetScalarFromVar(arg8, texScale);
+  }
+  duDebugDrawTriMeshSlope(arg1,(float const *)arg2,arg3,(int const *)arg4,(float const *)arg5,arg6,arg7,arg8);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_duDebugDrawHeightfieldSolid(dd:int, hf:int):void")))
+void _wrap_duDebugDrawHeightfieldSolid() {
+  duDebugDraw *arg1 = (duDebugDraw *) 0 ;
+  rcHeightfield *arg2 = 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, dd);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, hf);
+  }
+  duDebugDrawHeightfieldSolid(arg1,(rcHeightfield const &)*arg2);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_duDebugDrawHeightfieldWalkable(dd:int, hf:int):void")))
+void _wrap_duDebugDrawHeightfieldWalkable() {
+  duDebugDraw *arg1 = (duDebugDraw *) 0 ;
+  rcHeightfield *arg2 = 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, dd);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, hf);
+  }
+  duDebugDrawHeightfieldWalkable(arg1,(rcHeightfield const &)*arg2);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_duDebugDrawCompactHeightfieldSolid(dd:int, chf:int):void")))
+void _wrap_duDebugDrawCompactHeightfieldSolid() {
+  duDebugDraw *arg1 = (duDebugDraw *) 0 ;
+  rcCompactHeightfield *arg2 = 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, dd);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, chf);
+  }
+  duDebugDrawCompactHeightfieldSolid(arg1,(rcCompactHeightfield const &)*arg2);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_duDebugDrawCompactHeightfieldRegions(dd:int, chf:int):void")))
+void _wrap_duDebugDrawCompactHeightfieldRegions() {
+  duDebugDraw *arg1 = (duDebugDraw *) 0 ;
+  rcCompactHeightfield *arg2 = 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, dd);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, chf);
+  }
+  duDebugDrawCompactHeightfieldRegions(arg1,(rcCompactHeightfield const &)*arg2);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_duDebugDrawCompactHeightfieldDistance(dd:int, chf:int):void")))
+void _wrap_duDebugDrawCompactHeightfieldDistance() {
+  duDebugDraw *arg1 = (duDebugDraw *) 0 ;
+  rcCompactHeightfield *arg2 = 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, dd);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, chf);
+  }
+  duDebugDrawCompactHeightfieldDistance(arg1,(rcCompactHeightfield const &)*arg2);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_duDebugDrawHeightfieldLayer(dd:int, layer:int, idx:int):void")))
+void _wrap_duDebugDrawHeightfieldLayer() {
+  duDebugDraw *arg1 = (duDebugDraw *) 0 ;
+  rcHeightfieldLayer *arg2 = 0 ;
+  int arg3 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, dd);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, layer);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, idx);
+  }
+  duDebugDrawHeightfieldLayer(arg1,(rcHeightfieldLayer const &)*arg2,arg3);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_duDebugDrawHeightfieldLayers(dd:int, lset:int):void")))
+void _wrap_duDebugDrawHeightfieldLayers() {
+  duDebugDraw *arg1 = (duDebugDraw *) 0 ;
+  rcHeightfieldLayerSet *arg2 = 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, dd);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, lset);
+  }
+  duDebugDrawHeightfieldLayers(arg1,(rcHeightfieldLayerSet const &)*arg2);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_duDebugDrawRegionConnections(dd:int, cset:int, alpha:Number):void")))
+void _wrap_duDebugDrawRegionConnections() {
+  duDebugDraw *arg1 = (duDebugDraw *) 0 ;
+  rcContourSet *arg2 = 0 ;
+  float arg3 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, dd);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, cset);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, alpha);
+  }
+  duDebugDrawRegionConnections(arg1,(rcContourSet const &)*arg2,arg3);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_duDebugDrawRawContours(dd:int, cset:int, alpha:Number):void")))
+void _wrap_duDebugDrawRawContours() {
+  duDebugDraw *arg1 = (duDebugDraw *) 0 ;
+  rcContourSet *arg2 = 0 ;
+  float arg3 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, dd);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, cset);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, alpha);
+  }
+  duDebugDrawRawContours(arg1,(rcContourSet const &)*arg2,arg3);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_duDebugDrawContours(dd:int, cset:int, alpha:Number):void")))
+void _wrap_duDebugDrawContours() {
+  duDebugDraw *arg1 = (duDebugDraw *) 0 ;
+  rcContourSet *arg2 = 0 ;
+  float arg3 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, dd);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, cset);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, alpha);
+  }
+  duDebugDrawContours(arg1,(rcContourSet const &)*arg2,arg3);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_duDebugDrawPolyMesh(dd:int, mesh:int):void")))
+void _wrap_duDebugDrawPolyMesh() {
+  duDebugDraw *arg1 = (duDebugDraw *) 0 ;
+  rcPolyMesh *arg2 = 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, dd);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, mesh);
+  }
+  duDebugDrawPolyMesh(arg1,(rcPolyMesh const &)*arg2);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_duDebugDrawPolyMeshDetail(dd:int, dmesh:int):void")))
+void _wrap_duDebugDrawPolyMeshDetail() {
+  duDebugDraw *arg1 = (duDebugDraw *) 0 ;
+  rcPolyMeshDetail *arg2 = 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, dd);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, dmesh);
+  }
+  duDebugDrawPolyMeshDetail(arg1,(rcPolyMeshDetail const &)*arg2);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DT_ALLOC_PERM():int")))
+void _wrap_DT_ALLOC_PERM() {
+  int result ;
+  
+  result = DT_ALLOC_PERM;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DT_ALLOC_TEMP():int")))
+void _wrap_DT_ALLOC_TEMP() {
+  int result ;
+  
+  result = DT_ALLOC_TEMP;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtSqrt(x:Number):Number")))
+void _wrap_dtSqrt() {
+  float arg1 ;
+  float result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, x);
+  }
+  result = (float)dtSqrt(arg1);
+  {
+    AS3_DeclareVar(asresult, Number);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtVcross(dest:int, v1:int, v2:int):void")))
+void _wrap_dtVcross() {
+  float *arg1 = (float *) 0 ;
+  float *arg2 = (float *) 0 ;
+  float *arg3 = (float *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, dest);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, v1);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, v2);
+  }
+  dtVcross(arg1,(float const *)arg2,(float const *)arg3);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtVdot(v1:int, v2:int):Number")))
+void _wrap_dtVdot() {
+  float *arg1 = (float *) 0 ;
+  float *arg2 = (float *) 0 ;
+  float result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, v1);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, v2);
+  }
+  result = (float)dtVdot((float const *)arg1,(float const *)arg2);
+  {
+    AS3_DeclareVar(asresult, Number);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtVmad(dest:int, v1:int, v2:int, s:Number):void")))
+void _wrap_dtVmad() {
+  float *arg1 = (float *) 0 ;
+  float *arg2 = (float *) 0 ;
+  float *arg3 = (float *) 0 ;
+  float arg4 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, dest);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, v1);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, v2);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, s);
+  }
+  dtVmad(arg1,(float const *)arg2,(float const *)arg3,arg4);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtVlerp(dest:int, v1:int, v2:int, t:Number):void")))
+void _wrap_dtVlerp() {
+  float *arg1 = (float *) 0 ;
+  float *arg2 = (float *) 0 ;
+  float *arg3 = (float *) 0 ;
+  float arg4 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, dest);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, v1);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, v2);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, t);
+  }
+  dtVlerp(arg1,(float const *)arg2,(float const *)arg3,arg4);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtVadd(dest:int, v1:int, v2:int):void")))
+void _wrap_dtVadd() {
+  float *arg1 = (float *) 0 ;
+  float *arg2 = (float *) 0 ;
+  float *arg3 = (float *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, dest);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, v1);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, v2);
+  }
+  dtVadd(arg1,(float const *)arg2,(float const *)arg3);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtVsub(dest:int, v1:int, v2:int):void")))
+void _wrap_dtVsub() {
+  float *arg1 = (float *) 0 ;
+  float *arg2 = (float *) 0 ;
+  float *arg3 = (float *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, dest);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, v1);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, v2);
+  }
+  dtVsub(arg1,(float const *)arg2,(float const *)arg3);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtVscale(dest:int, v:int, t:Number):void")))
+void _wrap_dtVscale() {
+  float *arg1 = (float *) 0 ;
+  float *arg2 = (float *) 0 ;
+  float arg3 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, dest);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, v);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, t);
+  }
+  dtVscale(arg1,(float const *)arg2,arg3);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtVmin(mn:int, v:int):void")))
+void _wrap_dtVmin() {
+  float *arg1 = (float *) 0 ;
+  float *arg2 = (float *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, mn);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, v);
+  }
+  dtVmin(arg1,(float const *)arg2);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtVmax(mx:int, v:int):void")))
+void _wrap_dtVmax() {
+  float *arg1 = (float *) 0 ;
+  float *arg2 = (float *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, mx);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, v);
+  }
+  dtVmax(arg1,(float const *)arg2);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtVset(dest:int, x:Number, y:Number, z:Number):void")))
+void _wrap_dtVset() {
+  float *arg1 = (float *) 0 ;
+  float arg2 ;
+  float arg3 ;
+  float arg4 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, dest);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, x);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, y);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, z);
+  }
+  dtVset(arg1,arg2,arg3,arg4);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtVcopy(dest:int, a:int):void")))
+void _wrap_dtVcopy() {
+  float *arg1 = (float *) 0 ;
+  float *arg2 = (float *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, dest);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, a);
+  }
+  dtVcopy(arg1,(float const *)arg2);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtVlen(v:int):Number")))
+void _wrap_dtVlen() {
+  float *arg1 = (float *) 0 ;
+  float result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, v);
+  }
+  result = (float)dtVlen((float const *)arg1);
+  {
+    AS3_DeclareVar(asresult, Number);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtVlenSqr(v:int):Number")))
+void _wrap_dtVlenSqr() {
+  float *arg1 = (float *) 0 ;
+  float result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, v);
+  }
+  result = (float)dtVlenSqr((float const *)arg1);
+  {
+    AS3_DeclareVar(asresult, Number);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtVdist(v1:int, v2:int):Number")))
+void _wrap_dtVdist() {
+  float *arg1 = (float *) 0 ;
+  float *arg2 = (float *) 0 ;
+  float result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, v1);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, v2);
+  }
+  result = (float)dtVdist((float const *)arg1,(float const *)arg2);
+  {
+    AS3_DeclareVar(asresult, Number);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtVdistSqr(v1:int, v2:int):Number")))
+void _wrap_dtVdistSqr() {
+  float *arg1 = (float *) 0 ;
+  float *arg2 = (float *) 0 ;
+  float result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, v1);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, v2);
+  }
+  result = (float)dtVdistSqr((float const *)arg1,(float const *)arg2);
+  {
+    AS3_DeclareVar(asresult, Number);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtVdist2D(v1:int, v2:int):Number")))
+void _wrap_dtVdist2D() {
+  float *arg1 = (float *) 0 ;
+  float *arg2 = (float *) 0 ;
+  float result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, v1);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, v2);
+  }
+  result = (float)dtVdist2D((float const *)arg1,(float const *)arg2);
+  {
+    AS3_DeclareVar(asresult, Number);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtVdist2DSqr(v1:int, v2:int):Number")))
+void _wrap_dtVdist2DSqr() {
+  float *arg1 = (float *) 0 ;
+  float *arg2 = (float *) 0 ;
+  float result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, v1);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, v2);
+  }
+  result = (float)dtVdist2DSqr((float const *)arg1,(float const *)arg2);
+  {
+    AS3_DeclareVar(asresult, Number);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtVnormalize(v:int):void")))
+void _wrap_dtVnormalize() {
+  float *arg1 = (float *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, v);
+  }
+  dtVnormalize(arg1);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtVequal(p0:int, p1:int):Boolean")))
+void _wrap_dtVequal() {
+  float *arg1 = (float *) 0 ;
+  float *arg2 = (float *) 0 ;
+  bool result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, p0);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, p1);
+  }
+  result = (bool)dtVequal((float const *)arg1,(float const *)arg2);
+  {
+    AS3_DeclareVar(asresult, Boolean);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtVdot2D(u:int, v:int):Number")))
+void _wrap_dtVdot2D() {
+  float *arg1 = (float *) 0 ;
+  float *arg2 = (float *) 0 ;
+  float result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, u);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, v);
+  }
+  result = (float)dtVdot2D((float const *)arg1,(float const *)arg2);
+  {
+    AS3_DeclareVar(asresult, Number);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtVperp2D(u:int, v:int):Number")))
+void _wrap_dtVperp2D() {
+  float *arg1 = (float *) 0 ;
+  float *arg2 = (float *) 0 ;
+  float result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, u);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, v);
+  }
+  result = (float)dtVperp2D((float const *)arg1,(float const *)arg2);
+  {
+    AS3_DeclareVar(asresult, Number);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTriArea2D(a:int, b:int, c:int):Number")))
+void _wrap_dtTriArea2D() {
+  float *arg1 = (float *) 0 ;
+  float *arg2 = (float *) 0 ;
+  float *arg3 = (float *) 0 ;
+  float result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, a);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, b);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, c);
+  }
+  result = (float)dtTriArea2D((float const *)arg1,(float const *)arg2,(float const *)arg3);
+  {
+    AS3_DeclareVar(asresult, Number);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtOverlapQuantBounds(amin:int, amax:int, bmin:int, bmax:int):Boolean")))
+void _wrap_dtOverlapQuantBounds() {
+  unsigned short *arg1 ;
+  unsigned short *arg2 ;
+  unsigned short *arg3 ;
+  unsigned short *arg4 ;
+  bool result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, amin);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, amax);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, bmin);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, bmax);
+  }
+  result = (bool)dtOverlapQuantBounds((unsigned short const (*))arg1,(unsigned short const (*))arg2,(unsigned short const (*))arg3,(unsigned short const (*))arg4);
+  {
+    AS3_DeclareVar(asresult, Boolean);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtOverlapBounds(amin:int, amax:int, bmin:int, bmax:int):Boolean")))
+void _wrap_dtOverlapBounds() {
+  float *arg1 = (float *) 0 ;
+  float *arg2 = (float *) 0 ;
+  float *arg3 = (float *) 0 ;
+  float *arg4 = (float *) 0 ;
+  bool result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, amin);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, amax);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, bmin);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, bmax);
+  }
+  result = (bool)dtOverlapBounds((float const *)arg1,(float const *)arg2,(float const *)arg3,(float const *)arg4);
+  {
+    AS3_DeclareVar(asresult, Boolean);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtClosestPtPointTriangle(closest:int, p:int, a:int, b:int, c:int):void")))
+void _wrap_dtClosestPtPointTriangle() {
+  float *arg1 = (float *) 0 ;
+  float *arg2 = (float *) 0 ;
+  float *arg3 = (float *) 0 ;
+  float *arg4 = (float *) 0 ;
+  float *arg5 = (float *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, closest);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, p);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, a);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, b);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, c);
+  }
+  dtClosestPtPointTriangle(arg1,(float const *)arg2,(float const *)arg3,(float const *)arg4,(float const *)arg5);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtClosestHeightPointTriangle(p:int, a:int, b:int, c:int, h:int):Boolean")))
+void _wrap_dtClosestHeightPointTriangle() {
+  float *arg1 = (float *) 0 ;
+  float *arg2 = (float *) 0 ;
+  float *arg3 = (float *) 0 ;
+  float *arg4 = (float *) 0 ;
+  float *arg5 = 0 ;
+  bool result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, p);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, a);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, b);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, c);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, h);
+  }
+  result = (bool)dtClosestHeightPointTriangle((float const *)arg1,(float const *)arg2,(float const *)arg3,(float const *)arg4,*arg5);
+  {
+    AS3_DeclareVar(asresult, Boolean);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtIntersectSegmentPoly2D(p0:int, p1:int, verts:int, nverts:int, tmin:int, tmax:int, segMin:int, segMax:int):Boolean")))
+void _wrap_dtIntersectSegmentPoly2D() {
+  float *arg1 = (float *) 0 ;
+  float *arg2 = (float *) 0 ;
+  float *arg3 = (float *) 0 ;
+  int arg4 ;
+  float *arg5 = 0 ;
+  float *arg6 = 0 ;
+  int *arg7 = 0 ;
+  int *arg8 = 0 ;
+  bool result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, p0);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, p1);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, verts);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, nverts);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, tmin);
+  }
+  {
+    AS3_GetScalarFromVar(arg6, tmax);
+  }
+  {
+    AS3_GetScalarFromVar(arg7, segMin);
+  }
+  {
+    AS3_GetScalarFromVar(arg8, segMax);
+  }
+  result = (bool)dtIntersectSegmentPoly2D((float const *)arg1,(float const *)arg2,(float const *)arg3,arg4,*arg5,*arg6,*arg7,*arg8);
+  {
+    AS3_DeclareVar(asresult, Boolean);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtPointInPolygon(pt:int, verts:int, nverts:int):Boolean")))
+void _wrap_dtPointInPolygon() {
+  float *arg1 = (float *) 0 ;
+  float *arg2 = (float *) 0 ;
+  int arg3 ;
+  bool result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, pt);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, verts);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, nverts);
+  }
+  result = (bool)dtPointInPolygon((float const *)arg1,(float const *)arg2,arg3);
+  {
+    AS3_DeclareVar(asresult, Boolean);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtDistancePtPolyEdgesSqr(pt:int, verts:int, nverts:int, ed:int, et:int):Boolean")))
+void _wrap_dtDistancePtPolyEdgesSqr() {
+  float *arg1 = (float *) 0 ;
+  float *arg2 = (float *) 0 ;
+  int arg3 ;
+  float *arg4 = (float *) 0 ;
+  float *arg5 = (float *) 0 ;
+  bool result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, pt);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, verts);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, nverts);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, ed);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, et);
+  }
+  result = (bool)dtDistancePtPolyEdgesSqr((float const *)arg1,(float const *)arg2,arg3,arg4,arg5);
+  {
+    AS3_DeclareVar(asresult, Boolean);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtDistancePtSegSqr2D(pt:int, p:int, q:int, t:int):Number")))
+void _wrap_dtDistancePtSegSqr2D() {
+  float *arg1 = (float *) 0 ;
+  float *arg2 = (float *) 0 ;
+  float *arg3 = (float *) 0 ;
+  float *arg4 = 0 ;
+  float result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, pt);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, p);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, q);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, t);
+  }
+  result = (float)dtDistancePtSegSqr2D((float const *)arg1,(float const *)arg2,(float const *)arg3,*arg4);
+  {
+    AS3_DeclareVar(asresult, Number);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCalcPolyCenter(tc:int, idx:int, nidx:int, verts:int):void")))
+void _wrap_dtCalcPolyCenter() {
+  float *arg1 = (float *) 0 ;
+  unsigned short *arg2 = (unsigned short *) 0 ;
+  int arg3 ;
+  float *arg4 = (float *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, tc);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, idx);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, nidx);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, verts);
+  }
+  dtCalcPolyCenter(arg1,(unsigned short const *)arg2,arg3,(float const *)arg4);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtOverlapPolyPoly2D(polya:int, npolya:int, polyb:int, npolyb:int):Boolean")))
+void _wrap_dtOverlapPolyPoly2D() {
+  float *arg1 = (float *) 0 ;
+  int arg2 ;
+  float *arg3 = (float *) 0 ;
+  int arg4 ;
+  bool result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, polya);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, npolya);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, polyb);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, npolyb);
+  }
+  result = (bool)dtOverlapPolyPoly2D((float const *)arg1,arg2,(float const *)arg3,arg4);
+  {
+    AS3_DeclareVar(asresult, Boolean);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNextPow2(v:int):int")))
+void _wrap_dtNextPow2() {
+  unsigned int arg1 ;
+  unsigned int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, v);
+  }
+  result = (unsigned int)dtNextPow2(arg1);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtIlog2(v:int):int")))
+void _wrap_dtIlog2() {
+  unsigned int arg1 ;
+  unsigned int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, v);
+  }
+  result = (unsigned int)dtIlog2(arg1);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtAlign4(x:int):int")))
+void _wrap_dtAlign4() {
+  int arg1 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, x);
+  }
+  result = (int)dtAlign4(arg1);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtOppositeTile(side:int):int")))
+void _wrap_dtOppositeTile() {
+  int arg1 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, side);
+  }
+  result = (int)dtOppositeTile(arg1);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtSwapByte(a:int, b:int):void")))
+void _wrap_dtSwapByte() {
+  unsigned char *arg1 = (unsigned char *) 0 ;
+  unsigned char *arg2 = (unsigned char *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, a);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, b);
+  }
+  dtSwapByte(arg1,arg2);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtSwapEndian(v:int):void")))
+void _wrap_dtSwapEndian() {
+  short *arg1 = (short *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, v);
+  }
+  dtSwapEndian(arg1);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtRandomPointInConvexPoly(pts:int, npts:int, areas:int, s:Number, t:Number, out:int):void")))
+void _wrap_dtRandomPointInConvexPoly() {
+  float *arg1 = (float *) 0 ;
+  int arg2 ;
+  float *arg3 = (float *) 0 ;
+  float arg4 ;
+  float arg5 ;
+  float *arg6 = (float *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, pts);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, npts);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, areas);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, s);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, t);
+  }
+  {
+    AS3_GetScalarFromVar(arg6, out);
+  }
+  dtRandomPointInConvexPoly((float const *)arg1,arg2,arg3,arg4,arg5,arg6);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DT_VERTS_PER_POLYGON_get():int")))
+void _wrap_DT_VERTS_PER_POLYGON_get() {
+  int result ;
+  
+  result = (int)(int)DT_VERTS_PER_POLYGON;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DT_NAVMESH_MAGIC_get():int")))
+void _wrap_DT_NAVMESH_MAGIC_get() {
+  int result ;
+  
+  result = (int)(int)DT_NAVMESH_MAGIC;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DT_NAVMESH_VERSION_get():int")))
+void _wrap_DT_NAVMESH_VERSION_get() {
+  int result ;
+  
+  result = (int)(int)DT_NAVMESH_VERSION;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DT_NAVMESH_STATE_MAGIC_get():int")))
+void _wrap_DT_NAVMESH_STATE_MAGIC_get() {
+  int result ;
+  
+  result = (int)(int)DT_NAVMESH_STATE_MAGIC;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DT_NAVMESH_STATE_VERSION_get():int")))
+void _wrap_DT_NAVMESH_STATE_VERSION_get() {
+  int result ;
+  
+  result = (int)(int)DT_NAVMESH_STATE_VERSION;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DT_EXT_LINK_get():int")))
+void _wrap_DT_EXT_LINK_get() {
+  unsigned short result ;
+  
+  result = (unsigned short)(unsigned short)DT_EXT_LINK;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DT_NULL_LINK_get():int")))
+void _wrap_DT_NULL_LINK_get() {
+  unsigned int result ;
+  
+  result = (unsigned int)(unsigned int)DT_NULL_LINK;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DT_OFFMESH_CON_BIDIR_get():int")))
+void _wrap_DT_OFFMESH_CON_BIDIR_get() {
+  unsigned int result ;
+  
+  result = (unsigned int)(unsigned int)DT_OFFMESH_CON_BIDIR;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DT_MAX_AREAS_get():int")))
+void _wrap_DT_MAX_AREAS_get() {
+  int result ;
+  
+  result = (int)(int)DT_MAX_AREAS;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DT_TILE_FREE_DATA():int")))
+void _wrap_DT_TILE_FREE_DATA() {
+  int result ;
+  
+  result = DT_TILE_FREE_DATA;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DT_STRAIGHTPATH_START():int")))
+void _wrap_DT_STRAIGHTPATH_START() {
+  int result ;
+  
+  result = DT_STRAIGHTPATH_START;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DT_STRAIGHTPATH_END():int")))
+void _wrap_DT_STRAIGHTPATH_END() {
+  int result ;
+  
+  result = DT_STRAIGHTPATH_END;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DT_STRAIGHTPATH_OFFMESH_CONNECTION():int")))
+void _wrap_DT_STRAIGHTPATH_OFFMESH_CONNECTION() {
+  int result ;
+  
+  result = DT_STRAIGHTPATH_OFFMESH_CONNECTION;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DT_POLYTYPE_GROUND():int")))
+void _wrap_DT_POLYTYPE_GROUND() {
+  int result ;
+  
+  result = DT_POLYTYPE_GROUND;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DT_POLYTYPE_OFFMESH_CONNECTION():int")))
+void _wrap_DT_POLYTYPE_OFFMESH_CONNECTION() {
+  int result ;
+  
+  result = DT_POLYTYPE_OFFMESH_CONNECTION;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtPoly_firstLink_set(self, firstLink:int):void")))
+void _wrap_dtPoly_firstLink_set() {
+  dtPoly *arg1 = (dtPoly *) 0 ;
+  unsigned int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, firstLink);
+  }
+  if (arg1) (arg1)->firstLink = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtPoly_firstLink_get(self):int")))
+void _wrap_dtPoly_firstLink_get() {
+  dtPoly *arg1 = (dtPoly *) 0 ;
+  unsigned int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned int) ((arg1)->firstLink);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtPoly_verts_set(self, verts:int):void")))
+void _wrap_dtPoly_verts_set() {
+  dtPoly *arg1 = (dtPoly *) 0 ;
+  unsigned short *arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, verts);
+  }
+  {
+    size_t ii;
+    unsigned short *b = (unsigned short *) arg1->verts;
+    for (ii = 0; ii < (size_t)DT_VERTS_PER_POLYGON; ii++) b[ii] = *((unsigned short *) arg2 + ii);
+  }
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtPoly_verts_get(self):int")))
+void _wrap_dtPoly_verts_get() {
+  dtPoly *arg1 = (dtPoly *) 0 ;
+  unsigned short *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned short *)(unsigned short *) ((arg1)->verts);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtPoly_neis_set(self, neis:int):void")))
+void _wrap_dtPoly_neis_set() {
+  dtPoly *arg1 = (dtPoly *) 0 ;
+  unsigned short *arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, neis);
+  }
+  {
+    size_t ii;
+    unsigned short *b = (unsigned short *) arg1->neis;
+    for (ii = 0; ii < (size_t)DT_VERTS_PER_POLYGON; ii++) b[ii] = *((unsigned short *) arg2 + ii);
+  }
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtPoly_neis_get(self):int")))
+void _wrap_dtPoly_neis_get() {
+  dtPoly *arg1 = (dtPoly *) 0 ;
+  unsigned short *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned short *)(unsigned short *) ((arg1)->neis);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtPoly_flags_set(self, flags:int):void")))
+void _wrap_dtPoly_flags_set() {
+  dtPoly *arg1 = (dtPoly *) 0 ;
+  unsigned short arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, flags);
+  }
+  if (arg1) (arg1)->flags = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtPoly_flags_get(self):int")))
+void _wrap_dtPoly_flags_get() {
+  dtPoly *arg1 = (dtPoly *) 0 ;
+  unsigned short result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned short) ((arg1)->flags);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtPoly_vertCount_set(self, vertCount:String):void")))
+void _wrap_dtPoly_vertCount_set() {
+  dtPoly *arg1 = (dtPoly *) 0 ;
+  unsigned char arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    inline_nonreentrant_as3(
+      "%0 = vertCount.charCodeAt(0)" : "=r"(arg2)
+      );
+  }
+  if (arg1) (arg1)->vertCount = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtPoly_vertCount_get(self):String")))
+void _wrap_dtPoly_vertCount_get() {
+  dtPoly *arg1 = (dtPoly *) 0 ;
+  unsigned char result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned char) ((arg1)->vertCount);
+  {
+    AS3_DeclareVar(asresult, String);
+    AS3_CopyCStringToVar(asresult, &result, 1);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtPoly_areaAndtype_set(self, areaAndtype:String):void")))
+void _wrap_dtPoly_areaAndtype_set() {
+  dtPoly *arg1 = (dtPoly *) 0 ;
+  unsigned char arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    inline_nonreentrant_as3(
+      "%0 = areaAndtype.charCodeAt(0)" : "=r"(arg2)
+      );
+  }
+  if (arg1) (arg1)->areaAndtype = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtPoly_areaAndtype_get(self):String")))
+void _wrap_dtPoly_areaAndtype_get() {
+  dtPoly *arg1 = (dtPoly *) 0 ;
+  unsigned char result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned char) ((arg1)->areaAndtype);
+  {
+    AS3_DeclareVar(asresult, String);
+    AS3_CopyCStringToVar(asresult, &result, 1);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtPoly_setArea(self, a:String):void")))
+void _wrap_dtPoly_setArea() {
+  dtPoly *arg1 = (dtPoly *) 0 ;
+  unsigned char arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    inline_nonreentrant_as3(
+      "%0 = a.charCodeAt(0)" : "=r"(arg2)
+      );
+  }
+  (arg1)->setArea(arg2);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtPoly_setType(self, t:String):void")))
+void _wrap_dtPoly_setType() {
+  dtPoly *arg1 = (dtPoly *) 0 ;
+  unsigned char arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    inline_nonreentrant_as3(
+      "%0 = t.charCodeAt(0)" : "=r"(arg2)
+      );
+  }
+  (arg1)->setType(arg2);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtPoly_getArea(self):String")))
+void _wrap_dtPoly_getArea() {
+  dtPoly *arg1 = (dtPoly *) 0 ;
+  unsigned char result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned char)((dtPoly const *)arg1)->getArea();
+  {
+    AS3_DeclareVar(asresult, String);
+    AS3_CopyCStringToVar(asresult, &result, 1);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtPoly_getType(self):String")))
+void _wrap_dtPoly_getType() {
+  dtPoly *arg1 = (dtPoly *) 0 ;
+  unsigned char result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned char)((dtPoly const *)arg1)->getType();
+  {
+    AS3_DeclareVar(asresult, String);
+    AS3_CopyCStringToVar(asresult, &result, 1);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_new_dtPoly():int")))
+void _wrap_new_dtPoly() {
+  dtPoly *result ;
+  
+  result = (dtPoly *)new dtPoly();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_delete_dtPoly(self):void")))
+void _wrap_delete_dtPoly() {
+  dtPoly *arg1 = (dtPoly *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  delete arg1;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtPolyDetail_vertBase_set(self, vertBase:int):void")))
+void _wrap_dtPolyDetail_vertBase_set() {
+  dtPolyDetail *arg1 = (dtPolyDetail *) 0 ;
+  unsigned int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, vertBase);
+  }
+  if (arg1) (arg1)->vertBase = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtPolyDetail_vertBase_get(self):int")))
+void _wrap_dtPolyDetail_vertBase_get() {
+  dtPolyDetail *arg1 = (dtPolyDetail *) 0 ;
+  unsigned int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned int) ((arg1)->vertBase);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtPolyDetail_triBase_set(self, triBase:int):void")))
+void _wrap_dtPolyDetail_triBase_set() {
+  dtPolyDetail *arg1 = (dtPolyDetail *) 0 ;
+  unsigned int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, triBase);
+  }
+  if (arg1) (arg1)->triBase = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtPolyDetail_triBase_get(self):int")))
+void _wrap_dtPolyDetail_triBase_get() {
+  dtPolyDetail *arg1 = (dtPolyDetail *) 0 ;
+  unsigned int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned int) ((arg1)->triBase);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtPolyDetail_vertCount_set(self, vertCount:String):void")))
+void _wrap_dtPolyDetail_vertCount_set() {
+  dtPolyDetail *arg1 = (dtPolyDetail *) 0 ;
+  unsigned char arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    inline_nonreentrant_as3(
+      "%0 = vertCount.charCodeAt(0)" : "=r"(arg2)
+      );
+  }
+  if (arg1) (arg1)->vertCount = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtPolyDetail_vertCount_get(self):String")))
+void _wrap_dtPolyDetail_vertCount_get() {
+  dtPolyDetail *arg1 = (dtPolyDetail *) 0 ;
+  unsigned char result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned char) ((arg1)->vertCount);
+  {
+    AS3_DeclareVar(asresult, String);
+    AS3_CopyCStringToVar(asresult, &result, 1);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtPolyDetail_triCount_set(self, triCount:String):void")))
+void _wrap_dtPolyDetail_triCount_set() {
+  dtPolyDetail *arg1 = (dtPolyDetail *) 0 ;
+  unsigned char arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    inline_nonreentrant_as3(
+      "%0 = triCount.charCodeAt(0)" : "=r"(arg2)
+      );
+  }
+  if (arg1) (arg1)->triCount = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtPolyDetail_triCount_get(self):String")))
+void _wrap_dtPolyDetail_triCount_get() {
+  dtPolyDetail *arg1 = (dtPolyDetail *) 0 ;
+  unsigned char result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned char) ((arg1)->triCount);
+  {
+    AS3_DeclareVar(asresult, String);
+    AS3_CopyCStringToVar(asresult, &result, 1);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_new_dtPolyDetail():int")))
+void _wrap_new_dtPolyDetail() {
+  dtPolyDetail *result ;
+  
+  result = (dtPolyDetail *)new dtPolyDetail();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_delete_dtPolyDetail(self):void")))
+void _wrap_delete_dtPolyDetail() {
+  dtPolyDetail *arg1 = (dtPolyDetail *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  delete arg1;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtLink_ref_set(self, ref:int):void")))
+void _wrap_dtLink_ref_set() {
+  dtLink *arg1 = (dtLink *) 0 ;
+  dtPolyRef arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, ref);
+  }
+  if (arg1) (arg1)->ref = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtLink_ref_get(self):int")))
+void _wrap_dtLink_ref_get() {
+  dtLink *arg1 = (dtLink *) 0 ;
+  dtPolyRef result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (dtPolyRef) ((arg1)->ref);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtLink_next_set(self, next:int):void")))
+void _wrap_dtLink_next_set() {
+  dtLink *arg1 = (dtLink *) 0 ;
+  unsigned int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, next);
+  }
+  if (arg1) (arg1)->next = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtLink_next_get(self):int")))
+void _wrap_dtLink_next_get() {
+  dtLink *arg1 = (dtLink *) 0 ;
+  unsigned int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned int) ((arg1)->next);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtLink_edge_set(self, edge:String):void")))
+void _wrap_dtLink_edge_set() {
+  dtLink *arg1 = (dtLink *) 0 ;
+  unsigned char arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    inline_nonreentrant_as3(
+      "%0 = edge.charCodeAt(0)" : "=r"(arg2)
+      );
+  }
+  if (arg1) (arg1)->edge = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtLink_edge_get(self):String")))
+void _wrap_dtLink_edge_get() {
+  dtLink *arg1 = (dtLink *) 0 ;
+  unsigned char result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned char) ((arg1)->edge);
+  {
+    AS3_DeclareVar(asresult, String);
+    AS3_CopyCStringToVar(asresult, &result, 1);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtLink_side_set(self, side:String):void")))
+void _wrap_dtLink_side_set() {
+  dtLink *arg1 = (dtLink *) 0 ;
+  unsigned char arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    inline_nonreentrant_as3(
+      "%0 = side.charCodeAt(0)" : "=r"(arg2)
+      );
+  }
+  if (arg1) (arg1)->side = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtLink_side_get(self):String")))
+void _wrap_dtLink_side_get() {
+  dtLink *arg1 = (dtLink *) 0 ;
+  unsigned char result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned char) ((arg1)->side);
+  {
+    AS3_DeclareVar(asresult, String);
+    AS3_CopyCStringToVar(asresult, &result, 1);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtLink_bmin_set(self, bmin:String):void")))
+void _wrap_dtLink_bmin_set() {
+  dtLink *arg1 = (dtLink *) 0 ;
+  unsigned char arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    inline_nonreentrant_as3(
+      "%0 = bmin.charCodeAt(0)" : "=r"(arg2)
+      );
+  }
+  if (arg1) (arg1)->bmin = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtLink_bmin_get(self):String")))
+void _wrap_dtLink_bmin_get() {
+  dtLink *arg1 = (dtLink *) 0 ;
+  unsigned char result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned char) ((arg1)->bmin);
+  {
+    AS3_DeclareVar(asresult, String);
+    AS3_CopyCStringToVar(asresult, &result, 1);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtLink_bmax_set(self, bmax:String):void")))
+void _wrap_dtLink_bmax_set() {
+  dtLink *arg1 = (dtLink *) 0 ;
+  unsigned char arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    inline_nonreentrant_as3(
+      "%0 = bmax.charCodeAt(0)" : "=r"(arg2)
+      );
+  }
+  if (arg1) (arg1)->bmax = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtLink_bmax_get(self):String")))
+void _wrap_dtLink_bmax_get() {
+  dtLink *arg1 = (dtLink *) 0 ;
+  unsigned char result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned char) ((arg1)->bmax);
+  {
+    AS3_DeclareVar(asresult, String);
+    AS3_CopyCStringToVar(asresult, &result, 1);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_new_dtLink():int")))
+void _wrap_new_dtLink() {
+  dtLink *result ;
+  
+  result = (dtLink *)new dtLink();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_delete_dtLink(self):void")))
+void _wrap_delete_dtLink() {
+  dtLink *arg1 = (dtLink *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  delete arg1;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtBVNode_bmin_set(self, bmin:int):void")))
+void _wrap_dtBVNode_bmin_set() {
+  dtBVNode *arg1 = (dtBVNode *) 0 ;
+  unsigned short *arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, bmin);
+  }
+  {
+    size_t ii;
+    unsigned short *b = (unsigned short *) arg1->bmin;
+    for (ii = 0; ii < (size_t)3; ii++) b[ii] = *((unsigned short *) arg2 + ii);
+  }
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtBVNode_bmin_get(self):int")))
+void _wrap_dtBVNode_bmin_get() {
+  dtBVNode *arg1 = (dtBVNode *) 0 ;
+  unsigned short *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned short *)(unsigned short *) ((arg1)->bmin);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtBVNode_bmax_set(self, bmax:int):void")))
+void _wrap_dtBVNode_bmax_set() {
+  dtBVNode *arg1 = (dtBVNode *) 0 ;
+  unsigned short *arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, bmax);
+  }
+  {
+    size_t ii;
+    unsigned short *b = (unsigned short *) arg1->bmax;
+    for (ii = 0; ii < (size_t)3; ii++) b[ii] = *((unsigned short *) arg2 + ii);
+  }
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtBVNode_bmax_get(self):int")))
+void _wrap_dtBVNode_bmax_get() {
+  dtBVNode *arg1 = (dtBVNode *) 0 ;
+  unsigned short *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned short *)(unsigned short *) ((arg1)->bmax);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtBVNode_i_set(self, i:int):void")))
+void _wrap_dtBVNode_i_set() {
+  dtBVNode *arg1 = (dtBVNode *) 0 ;
+  int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, i);
+  }
+  if (arg1) (arg1)->i = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtBVNode_i_get(self):int")))
+void _wrap_dtBVNode_i_get() {
+  dtBVNode *arg1 = (dtBVNode *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int) ((arg1)->i);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_new_dtBVNode():int")))
+void _wrap_new_dtBVNode() {
+  dtBVNode *result ;
+  
+  result = (dtBVNode *)new dtBVNode();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_delete_dtBVNode(self):void")))
+void _wrap_delete_dtBVNode() {
+  dtBVNode *arg1 = (dtBVNode *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  delete arg1;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtOffMeshConnection_pos_set(self, pos:int):void")))
+void _wrap_dtOffMeshConnection_pos_set() {
+  dtOffMeshConnection *arg1 = (dtOffMeshConnection *) 0 ;
+  float *arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, pos);
+  }
+  {
+    size_t ii;
+    float *b = (float *) arg1->pos;
+    for (ii = 0; ii < (size_t)6; ii++) b[ii] = *((float *) arg2 + ii);
+  }
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtOffMeshConnection_pos_get(self):int")))
+void _wrap_dtOffMeshConnection_pos_get() {
+  dtOffMeshConnection *arg1 = (dtOffMeshConnection *) 0 ;
+  float *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float *)(float *) ((arg1)->pos);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtOffMeshConnection_rad_set(self, rad:Number):void")))
+void _wrap_dtOffMeshConnection_rad_set() {
+  dtOffMeshConnection *arg1 = (dtOffMeshConnection *) 0 ;
+  float arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, rad);
+  }
+  if (arg1) (arg1)->rad = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtOffMeshConnection_rad_get(self):Number")))
+void _wrap_dtOffMeshConnection_rad_get() {
+  dtOffMeshConnection *arg1 = (dtOffMeshConnection *) 0 ;
+  float result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float) ((arg1)->rad);
+  {
+    AS3_DeclareVar(asresult, Number);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtOffMeshConnection_poly_set(self, poly:int):void")))
+void _wrap_dtOffMeshConnection_poly_set() {
+  dtOffMeshConnection *arg1 = (dtOffMeshConnection *) 0 ;
+  unsigned short arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, poly);
+  }
+  if (arg1) (arg1)->poly = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtOffMeshConnection_poly_get(self):int")))
+void _wrap_dtOffMeshConnection_poly_get() {
+  dtOffMeshConnection *arg1 = (dtOffMeshConnection *) 0 ;
+  unsigned short result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned short) ((arg1)->poly);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtOffMeshConnection_flags_set(self, flags:String):void")))
+void _wrap_dtOffMeshConnection_flags_set() {
+  dtOffMeshConnection *arg1 = (dtOffMeshConnection *) 0 ;
+  unsigned char arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    inline_nonreentrant_as3(
+      "%0 = flags.charCodeAt(0)" : "=r"(arg2)
+      );
+  }
+  if (arg1) (arg1)->flags = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtOffMeshConnection_flags_get(self):String")))
+void _wrap_dtOffMeshConnection_flags_get() {
+  dtOffMeshConnection *arg1 = (dtOffMeshConnection *) 0 ;
+  unsigned char result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned char) ((arg1)->flags);
+  {
+    AS3_DeclareVar(asresult, String);
+    AS3_CopyCStringToVar(asresult, &result, 1);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtOffMeshConnection_side_set(self, side:String):void")))
+void _wrap_dtOffMeshConnection_side_set() {
+  dtOffMeshConnection *arg1 = (dtOffMeshConnection *) 0 ;
+  unsigned char arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    inline_nonreentrant_as3(
+      "%0 = side.charCodeAt(0)" : "=r"(arg2)
+      );
+  }
+  if (arg1) (arg1)->side = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtOffMeshConnection_side_get(self):String")))
+void _wrap_dtOffMeshConnection_side_get() {
+  dtOffMeshConnection *arg1 = (dtOffMeshConnection *) 0 ;
+  unsigned char result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned char) ((arg1)->side);
+  {
+    AS3_DeclareVar(asresult, String);
+    AS3_CopyCStringToVar(asresult, &result, 1);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtOffMeshConnection_userId_set(self, userId:int):void")))
+void _wrap_dtOffMeshConnection_userId_set() {
+  dtOffMeshConnection *arg1 = (dtOffMeshConnection *) 0 ;
+  unsigned int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, userId);
+  }
+  if (arg1) (arg1)->userId = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtOffMeshConnection_userId_get(self):int")))
+void _wrap_dtOffMeshConnection_userId_get() {
+  dtOffMeshConnection *arg1 = (dtOffMeshConnection *) 0 ;
+  unsigned int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned int) ((arg1)->userId);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_new_dtOffMeshConnection():int")))
+void _wrap_new_dtOffMeshConnection() {
+  dtOffMeshConnection *result ;
+  
+  result = (dtOffMeshConnection *)new dtOffMeshConnection();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_delete_dtOffMeshConnection(self):void")))
+void _wrap_delete_dtOffMeshConnection() {
+  dtOffMeshConnection *arg1 = (dtOffMeshConnection *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  delete arg1;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshHeader_magic_set(self, magic:int):void")))
+void _wrap_dtMeshHeader_magic_set() {
+  dtMeshHeader *arg1 = (dtMeshHeader *) 0 ;
+  int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, magic);
+  }
+  if (arg1) (arg1)->magic = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshHeader_magic_get(self):int")))
+void _wrap_dtMeshHeader_magic_get() {
+  dtMeshHeader *arg1 = (dtMeshHeader *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int) ((arg1)->magic);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshHeader_version_set(self, version:int):void")))
+void _wrap_dtMeshHeader_version_set() {
+  dtMeshHeader *arg1 = (dtMeshHeader *) 0 ;
+  int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, version);
+  }
+  if (arg1) (arg1)->version = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshHeader_version_get(self):int")))
+void _wrap_dtMeshHeader_version_get() {
+  dtMeshHeader *arg1 = (dtMeshHeader *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int) ((arg1)->version);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshHeader_x_set(self, x:int):void")))
+void _wrap_dtMeshHeader_x_set() {
+  dtMeshHeader *arg1 = (dtMeshHeader *) 0 ;
+  int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, x);
+  }
+  if (arg1) (arg1)->x = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshHeader_x_get(self):int")))
+void _wrap_dtMeshHeader_x_get() {
+  dtMeshHeader *arg1 = (dtMeshHeader *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int) ((arg1)->x);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshHeader_y_set(self, y:int):void")))
+void _wrap_dtMeshHeader_y_set() {
+  dtMeshHeader *arg1 = (dtMeshHeader *) 0 ;
+  int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, y);
+  }
+  if (arg1) (arg1)->y = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshHeader_y_get(self):int")))
+void _wrap_dtMeshHeader_y_get() {
+  dtMeshHeader *arg1 = (dtMeshHeader *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int) ((arg1)->y);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshHeader_layer_set(self, layer:int):void")))
+void _wrap_dtMeshHeader_layer_set() {
+  dtMeshHeader *arg1 = (dtMeshHeader *) 0 ;
+  int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, layer);
+  }
+  if (arg1) (arg1)->layer = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshHeader_layer_get(self):int")))
+void _wrap_dtMeshHeader_layer_get() {
+  dtMeshHeader *arg1 = (dtMeshHeader *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int) ((arg1)->layer);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshHeader_userId_set(self, userId:int):void")))
+void _wrap_dtMeshHeader_userId_set() {
+  dtMeshHeader *arg1 = (dtMeshHeader *) 0 ;
+  unsigned int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, userId);
+  }
+  if (arg1) (arg1)->userId = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshHeader_userId_get(self):int")))
+void _wrap_dtMeshHeader_userId_get() {
+  dtMeshHeader *arg1 = (dtMeshHeader *) 0 ;
+  unsigned int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned int) ((arg1)->userId);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshHeader_polyCount_set(self, polyCount:int):void")))
+void _wrap_dtMeshHeader_polyCount_set() {
+  dtMeshHeader *arg1 = (dtMeshHeader *) 0 ;
+  int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, polyCount);
+  }
+  if (arg1) (arg1)->polyCount = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshHeader_polyCount_get(self):int")))
+void _wrap_dtMeshHeader_polyCount_get() {
+  dtMeshHeader *arg1 = (dtMeshHeader *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int) ((arg1)->polyCount);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshHeader_vertCount_set(self, vertCount:int):void")))
+void _wrap_dtMeshHeader_vertCount_set() {
+  dtMeshHeader *arg1 = (dtMeshHeader *) 0 ;
+  int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, vertCount);
+  }
+  if (arg1) (arg1)->vertCount = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshHeader_vertCount_get(self):int")))
+void _wrap_dtMeshHeader_vertCount_get() {
+  dtMeshHeader *arg1 = (dtMeshHeader *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int) ((arg1)->vertCount);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshHeader_maxLinkCount_set(self, maxLinkCount:int):void")))
+void _wrap_dtMeshHeader_maxLinkCount_set() {
+  dtMeshHeader *arg1 = (dtMeshHeader *) 0 ;
+  int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, maxLinkCount);
+  }
+  if (arg1) (arg1)->maxLinkCount = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshHeader_maxLinkCount_get(self):int")))
+void _wrap_dtMeshHeader_maxLinkCount_get() {
+  dtMeshHeader *arg1 = (dtMeshHeader *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int) ((arg1)->maxLinkCount);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshHeader_detailMeshCount_set(self, detailMeshCount:int):void")))
+void _wrap_dtMeshHeader_detailMeshCount_set() {
+  dtMeshHeader *arg1 = (dtMeshHeader *) 0 ;
+  int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, detailMeshCount);
+  }
+  if (arg1) (arg1)->detailMeshCount = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshHeader_detailMeshCount_get(self):int")))
+void _wrap_dtMeshHeader_detailMeshCount_get() {
+  dtMeshHeader *arg1 = (dtMeshHeader *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int) ((arg1)->detailMeshCount);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshHeader_detailVertCount_set(self, detailVertCount:int):void")))
+void _wrap_dtMeshHeader_detailVertCount_set() {
+  dtMeshHeader *arg1 = (dtMeshHeader *) 0 ;
+  int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, detailVertCount);
+  }
+  if (arg1) (arg1)->detailVertCount = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshHeader_detailVertCount_get(self):int")))
+void _wrap_dtMeshHeader_detailVertCount_get() {
+  dtMeshHeader *arg1 = (dtMeshHeader *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int) ((arg1)->detailVertCount);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshHeader_detailTriCount_set(self, detailTriCount:int):void")))
+void _wrap_dtMeshHeader_detailTriCount_set() {
+  dtMeshHeader *arg1 = (dtMeshHeader *) 0 ;
+  int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, detailTriCount);
+  }
+  if (arg1) (arg1)->detailTriCount = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshHeader_detailTriCount_get(self):int")))
+void _wrap_dtMeshHeader_detailTriCount_get() {
+  dtMeshHeader *arg1 = (dtMeshHeader *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int) ((arg1)->detailTriCount);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshHeader_bvNodeCount_set(self, bvNodeCount:int):void")))
+void _wrap_dtMeshHeader_bvNodeCount_set() {
+  dtMeshHeader *arg1 = (dtMeshHeader *) 0 ;
+  int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, bvNodeCount);
+  }
+  if (arg1) (arg1)->bvNodeCount = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshHeader_bvNodeCount_get(self):int")))
+void _wrap_dtMeshHeader_bvNodeCount_get() {
+  dtMeshHeader *arg1 = (dtMeshHeader *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int) ((arg1)->bvNodeCount);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshHeader_offMeshConCount_set(self, offMeshConCount:int):void")))
+void _wrap_dtMeshHeader_offMeshConCount_set() {
+  dtMeshHeader *arg1 = (dtMeshHeader *) 0 ;
+  int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, offMeshConCount);
+  }
+  if (arg1) (arg1)->offMeshConCount = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshHeader_offMeshConCount_get(self):int")))
+void _wrap_dtMeshHeader_offMeshConCount_get() {
+  dtMeshHeader *arg1 = (dtMeshHeader *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int) ((arg1)->offMeshConCount);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshHeader_offMeshBase_set(self, offMeshBase:int):void")))
+void _wrap_dtMeshHeader_offMeshBase_set() {
+  dtMeshHeader *arg1 = (dtMeshHeader *) 0 ;
+  int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, offMeshBase);
+  }
+  if (arg1) (arg1)->offMeshBase = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshHeader_offMeshBase_get(self):int")))
+void _wrap_dtMeshHeader_offMeshBase_get() {
+  dtMeshHeader *arg1 = (dtMeshHeader *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int) ((arg1)->offMeshBase);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshHeader_walkableHeight_set(self, walkableHeight:Number):void")))
+void _wrap_dtMeshHeader_walkableHeight_set() {
+  dtMeshHeader *arg1 = (dtMeshHeader *) 0 ;
+  float arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, walkableHeight);
+  }
+  if (arg1) (arg1)->walkableHeight = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshHeader_walkableHeight_get(self):Number")))
+void _wrap_dtMeshHeader_walkableHeight_get() {
+  dtMeshHeader *arg1 = (dtMeshHeader *) 0 ;
+  float result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float) ((arg1)->walkableHeight);
+  {
+    AS3_DeclareVar(asresult, Number);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshHeader_walkableRadius_set(self, walkableRadius:Number):void")))
+void _wrap_dtMeshHeader_walkableRadius_set() {
+  dtMeshHeader *arg1 = (dtMeshHeader *) 0 ;
+  float arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, walkableRadius);
+  }
+  if (arg1) (arg1)->walkableRadius = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshHeader_walkableRadius_get(self):Number")))
+void _wrap_dtMeshHeader_walkableRadius_get() {
+  dtMeshHeader *arg1 = (dtMeshHeader *) 0 ;
+  float result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float) ((arg1)->walkableRadius);
+  {
+    AS3_DeclareVar(asresult, Number);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshHeader_walkableClimb_set(self, walkableClimb:Number):void")))
+void _wrap_dtMeshHeader_walkableClimb_set() {
+  dtMeshHeader *arg1 = (dtMeshHeader *) 0 ;
+  float arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, walkableClimb);
+  }
+  if (arg1) (arg1)->walkableClimb = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshHeader_walkableClimb_get(self):Number")))
+void _wrap_dtMeshHeader_walkableClimb_get() {
+  dtMeshHeader *arg1 = (dtMeshHeader *) 0 ;
+  float result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float) ((arg1)->walkableClimb);
+  {
+    AS3_DeclareVar(asresult, Number);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshHeader_bmin_set(self, bmin:int):void")))
+void _wrap_dtMeshHeader_bmin_set() {
+  dtMeshHeader *arg1 = (dtMeshHeader *) 0 ;
+  float *arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, bmin);
+  }
+  {
+    size_t ii;
+    float *b = (float *) arg1->bmin;
+    for (ii = 0; ii < (size_t)3; ii++) b[ii] = *((float *) arg2 + ii);
+  }
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshHeader_bmin_get(self):int")))
+void _wrap_dtMeshHeader_bmin_get() {
+  dtMeshHeader *arg1 = (dtMeshHeader *) 0 ;
+  float *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float *)(float *) ((arg1)->bmin);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshHeader_bmax_set(self, bmax:int):void")))
+void _wrap_dtMeshHeader_bmax_set() {
+  dtMeshHeader *arg1 = (dtMeshHeader *) 0 ;
+  float *arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, bmax);
+  }
+  {
+    size_t ii;
+    float *b = (float *) arg1->bmax;
+    for (ii = 0; ii < (size_t)3; ii++) b[ii] = *((float *) arg2 + ii);
+  }
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshHeader_bmax_get(self):int")))
+void _wrap_dtMeshHeader_bmax_get() {
+  dtMeshHeader *arg1 = (dtMeshHeader *) 0 ;
+  float *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float *)(float *) ((arg1)->bmax);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshHeader_bvQuantFactor_set(self, bvQuantFactor:Number):void")))
+void _wrap_dtMeshHeader_bvQuantFactor_set() {
+  dtMeshHeader *arg1 = (dtMeshHeader *) 0 ;
+  float arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, bvQuantFactor);
+  }
+  if (arg1) (arg1)->bvQuantFactor = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshHeader_bvQuantFactor_get(self):Number")))
+void _wrap_dtMeshHeader_bvQuantFactor_get() {
+  dtMeshHeader *arg1 = (dtMeshHeader *) 0 ;
+  float result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float) ((arg1)->bvQuantFactor);
+  {
+    AS3_DeclareVar(asresult, Number);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_new_dtMeshHeader():int")))
+void _wrap_new_dtMeshHeader() {
+  dtMeshHeader *result ;
+  
+  result = (dtMeshHeader *)new dtMeshHeader();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_delete_dtMeshHeader(self):void")))
+void _wrap_delete_dtMeshHeader() {
+  dtMeshHeader *arg1 = (dtMeshHeader *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  delete arg1;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshTile_salt_set(self, salt:int):void")))
+void _wrap_dtMeshTile_salt_set() {
+  dtMeshTile *arg1 = (dtMeshTile *) 0 ;
+  unsigned int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, salt);
+  }
+  if (arg1) (arg1)->salt = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshTile_salt_get(self):int")))
+void _wrap_dtMeshTile_salt_get() {
+  dtMeshTile *arg1 = (dtMeshTile *) 0 ;
+  unsigned int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned int) ((arg1)->salt);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshTile_linksFreeList_set(self, linksFreeList:int):void")))
+void _wrap_dtMeshTile_linksFreeList_set() {
+  dtMeshTile *arg1 = (dtMeshTile *) 0 ;
+  unsigned int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, linksFreeList);
+  }
+  if (arg1) (arg1)->linksFreeList = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshTile_linksFreeList_get(self):int")))
+void _wrap_dtMeshTile_linksFreeList_get() {
+  dtMeshTile *arg1 = (dtMeshTile *) 0 ;
+  unsigned int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned int) ((arg1)->linksFreeList);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshTile_header_set(self, header:int):void")))
+void _wrap_dtMeshTile_header_set() {
+  dtMeshTile *arg1 = (dtMeshTile *) 0 ;
+  dtMeshHeader *arg2 = (dtMeshHeader *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, header);
+  }
+  if (arg1) (arg1)->header = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshTile_header_get(self):int")))
+void _wrap_dtMeshTile_header_get() {
+  dtMeshTile *arg1 = (dtMeshTile *) 0 ;
+  dtMeshHeader *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (dtMeshHeader *) ((arg1)->header);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshTile_polys_set(self, polys:int):void")))
+void _wrap_dtMeshTile_polys_set() {
+  dtMeshTile *arg1 = (dtMeshTile *) 0 ;
+  dtPoly *arg2 = (dtPoly *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, polys);
+  }
+  if (arg1) (arg1)->polys = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshTile_polys_get(self):int")))
+void _wrap_dtMeshTile_polys_get() {
+  dtMeshTile *arg1 = (dtMeshTile *) 0 ;
+  dtPoly *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (dtPoly *) ((arg1)->polys);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshTile_verts_set(self, verts:int):void")))
+void _wrap_dtMeshTile_verts_set() {
+  dtMeshTile *arg1 = (dtMeshTile *) 0 ;
+  float *arg2 = (float *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, verts);
+  }
+  if (arg1) (arg1)->verts = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshTile_verts_get(self):int")))
+void _wrap_dtMeshTile_verts_get() {
+  dtMeshTile *arg1 = (dtMeshTile *) 0 ;
+  float *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float *) ((arg1)->verts);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshTile_links_set(self, links:int):void")))
+void _wrap_dtMeshTile_links_set() {
+  dtMeshTile *arg1 = (dtMeshTile *) 0 ;
+  dtLink *arg2 = (dtLink *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, links);
+  }
+  if (arg1) (arg1)->links = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshTile_links_get(self):int")))
+void _wrap_dtMeshTile_links_get() {
+  dtMeshTile *arg1 = (dtMeshTile *) 0 ;
+  dtLink *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (dtLink *) ((arg1)->links);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshTile_detailMeshes_set(self, detailMeshes:int):void")))
+void _wrap_dtMeshTile_detailMeshes_set() {
+  dtMeshTile *arg1 = (dtMeshTile *) 0 ;
+  dtPolyDetail *arg2 = (dtPolyDetail *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, detailMeshes);
+  }
+  if (arg1) (arg1)->detailMeshes = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshTile_detailMeshes_get(self):int")))
+void _wrap_dtMeshTile_detailMeshes_get() {
+  dtMeshTile *arg1 = (dtMeshTile *) 0 ;
+  dtPolyDetail *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (dtPolyDetail *) ((arg1)->detailMeshes);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshTile_detailVerts_set(self, detailVerts:int):void")))
+void _wrap_dtMeshTile_detailVerts_set() {
+  dtMeshTile *arg1 = (dtMeshTile *) 0 ;
+  float *arg2 = (float *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, detailVerts);
+  }
+  if (arg1) (arg1)->detailVerts = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshTile_detailVerts_get(self):int")))
+void _wrap_dtMeshTile_detailVerts_get() {
+  dtMeshTile *arg1 = (dtMeshTile *) 0 ;
+  float *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float *) ((arg1)->detailVerts);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshTile_detailTris_set(self, detailTris:int):void")))
+void _wrap_dtMeshTile_detailTris_set() {
+  dtMeshTile *arg1 = (dtMeshTile *) 0 ;
+  unsigned char *arg2 = (unsigned char *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, detailTris);
+  }
+  if (arg1) (arg1)->detailTris = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshTile_detailTris_get(self):int")))
+void _wrap_dtMeshTile_detailTris_get() {
+  dtMeshTile *arg1 = (dtMeshTile *) 0 ;
+  unsigned char *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned char *) ((arg1)->detailTris);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshTile_bvTree_set(self, bvTree:int):void")))
+void _wrap_dtMeshTile_bvTree_set() {
+  dtMeshTile *arg1 = (dtMeshTile *) 0 ;
+  dtBVNode *arg2 = (dtBVNode *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, bvTree);
+  }
+  if (arg1) (arg1)->bvTree = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshTile_bvTree_get(self):int")))
+void _wrap_dtMeshTile_bvTree_get() {
+  dtMeshTile *arg1 = (dtMeshTile *) 0 ;
+  dtBVNode *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (dtBVNode *) ((arg1)->bvTree);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshTile_offMeshCons_set(self, offMeshCons:int):void")))
+void _wrap_dtMeshTile_offMeshCons_set() {
+  dtMeshTile *arg1 = (dtMeshTile *) 0 ;
+  dtOffMeshConnection *arg2 = (dtOffMeshConnection *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, offMeshCons);
+  }
+  if (arg1) (arg1)->offMeshCons = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshTile_offMeshCons_get(self):int")))
+void _wrap_dtMeshTile_offMeshCons_get() {
+  dtMeshTile *arg1 = (dtMeshTile *) 0 ;
+  dtOffMeshConnection *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (dtOffMeshConnection *) ((arg1)->offMeshCons);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshTile_data_set(self, data:int):void")))
+void _wrap_dtMeshTile_data_set() {
+  dtMeshTile *arg1 = (dtMeshTile *) 0 ;
+  unsigned char *arg2 = (unsigned char *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, data);
+  }
+  if (arg1) (arg1)->data = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshTile_data_get(self):int")))
+void _wrap_dtMeshTile_data_get() {
+  dtMeshTile *arg1 = (dtMeshTile *) 0 ;
+  unsigned char *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned char *) ((arg1)->data);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshTile_dataSize_set(self, dataSize:int):void")))
+void _wrap_dtMeshTile_dataSize_set() {
+  dtMeshTile *arg1 = (dtMeshTile *) 0 ;
+  int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, dataSize);
+  }
+  if (arg1) (arg1)->dataSize = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshTile_dataSize_get(self):int")))
+void _wrap_dtMeshTile_dataSize_get() {
+  dtMeshTile *arg1 = (dtMeshTile *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int) ((arg1)->dataSize);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshTile_flags_set(self, flags:int):void")))
+void _wrap_dtMeshTile_flags_set() {
+  dtMeshTile *arg1 = (dtMeshTile *) 0 ;
+  int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, flags);
+  }
+  if (arg1) (arg1)->flags = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshTile_flags_get(self):int")))
+void _wrap_dtMeshTile_flags_get() {
+  dtMeshTile *arg1 = (dtMeshTile *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int) ((arg1)->flags);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshTile_next_set(self, next:int):void")))
+void _wrap_dtMeshTile_next_set() {
+  dtMeshTile *arg1 = (dtMeshTile *) 0 ;
+  dtMeshTile *arg2 = (dtMeshTile *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, next);
+  }
+  if (arg1) (arg1)->next = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMeshTile_next_get(self):int")))
+void _wrap_dtMeshTile_next_get() {
+  dtMeshTile *arg1 = (dtMeshTile *) 0 ;
+  dtMeshTile *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (dtMeshTile *) ((arg1)->next);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_new_dtMeshTile():int")))
+void _wrap_new_dtMeshTile() {
+  dtMeshTile *result ;
+  
+  result = (dtMeshTile *)new dtMeshTile();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_delete_dtMeshTile(self):void")))
+void _wrap_delete_dtMeshTile() {
+  dtMeshTile *arg1 = (dtMeshTile *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  delete arg1;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshParams_orig_set(self, orig:int):void")))
+void _wrap_dtNavMeshParams_orig_set() {
+  dtNavMeshParams *arg1 = (dtNavMeshParams *) 0 ;
+  float *arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, orig);
+  }
+  {
+    size_t ii;
+    float *b = (float *) arg1->orig;
+    for (ii = 0; ii < (size_t)3; ii++) b[ii] = *((float *) arg2 + ii);
+  }
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshParams_orig_get(self):int")))
+void _wrap_dtNavMeshParams_orig_get() {
+  dtNavMeshParams *arg1 = (dtNavMeshParams *) 0 ;
+  float *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float *)(float *) ((arg1)->orig);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshParams_tileWidth_set(self, tileWidth:Number):void")))
+void _wrap_dtNavMeshParams_tileWidth_set() {
+  dtNavMeshParams *arg1 = (dtNavMeshParams *) 0 ;
+  float arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, tileWidth);
+  }
+  if (arg1) (arg1)->tileWidth = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshParams_tileWidth_get(self):Number")))
+void _wrap_dtNavMeshParams_tileWidth_get() {
+  dtNavMeshParams *arg1 = (dtNavMeshParams *) 0 ;
+  float result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float) ((arg1)->tileWidth);
+  {
+    AS3_DeclareVar(asresult, Number);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshParams_tileHeight_set(self, tileHeight:Number):void")))
+void _wrap_dtNavMeshParams_tileHeight_set() {
+  dtNavMeshParams *arg1 = (dtNavMeshParams *) 0 ;
+  float arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, tileHeight);
+  }
+  if (arg1) (arg1)->tileHeight = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshParams_tileHeight_get(self):Number")))
+void _wrap_dtNavMeshParams_tileHeight_get() {
+  dtNavMeshParams *arg1 = (dtNavMeshParams *) 0 ;
+  float result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float) ((arg1)->tileHeight);
+  {
+    AS3_DeclareVar(asresult, Number);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshParams_maxTiles_set(self, maxTiles:int):void")))
+void _wrap_dtNavMeshParams_maxTiles_set() {
+  dtNavMeshParams *arg1 = (dtNavMeshParams *) 0 ;
+  int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, maxTiles);
+  }
+  if (arg1) (arg1)->maxTiles = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshParams_maxTiles_get(self):int")))
+void _wrap_dtNavMeshParams_maxTiles_get() {
+  dtNavMeshParams *arg1 = (dtNavMeshParams *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int) ((arg1)->maxTiles);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshParams_maxPolys_set(self, maxPolys:int):void")))
+void _wrap_dtNavMeshParams_maxPolys_set() {
+  dtNavMeshParams *arg1 = (dtNavMeshParams *) 0 ;
+  int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, maxPolys);
+  }
+  if (arg1) (arg1)->maxPolys = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshParams_maxPolys_get(self):int")))
+void _wrap_dtNavMeshParams_maxPolys_get() {
+  dtNavMeshParams *arg1 = (dtNavMeshParams *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int) ((arg1)->maxPolys);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_new_dtNavMeshParams():int")))
+void _wrap_new_dtNavMeshParams() {
+  dtNavMeshParams *result ;
+  
+  result = (dtNavMeshParams *)new dtNavMeshParams();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_delete_dtNavMeshParams(self):void")))
+void _wrap_delete_dtNavMeshParams() {
+  dtNavMeshParams *arg1 = (dtNavMeshParams *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  delete arg1;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_new_dtNavMesh():int")))
+void _wrap_new_dtNavMesh() {
+  dtNavMesh *result ;
+  
+  result = (dtNavMesh *)new dtNavMesh();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_delete_dtNavMesh(self):void")))
+void _wrap_delete_dtNavMesh() {
+  dtNavMesh *arg1 = (dtNavMesh *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  delete arg1;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMesh_init(self, params:int):int")))
+void _wrap_dtNavMesh_init() {
+  dtNavMesh *arg1 = (dtNavMesh *) 0 ;
+  dtNavMeshParams *arg2 = (dtNavMeshParams *) 0 ;
+  dtStatus result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, params);
+  }
+  result = (dtStatus)(arg1)->init((dtNavMeshParams const *)arg2);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMesh_getParams(self):int")))
+void _wrap_dtNavMesh_getParams() {
+  dtNavMesh *arg1 = (dtNavMesh *) 0 ;
+  dtNavMeshParams *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (dtNavMeshParams *)((dtNavMesh const *)arg1)->getParams();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMesh_addTile(self, data:int, dataSize:int, flags:int, lastRef:int, result:int):int")))
+void _wrap_dtNavMesh_addTile() {
+  dtNavMesh *arg1 = (dtNavMesh *) 0 ;
+  unsigned char *arg2 = (unsigned char *) 0 ;
+  int arg3 ;
+  int arg4 ;
+  dtTileRef arg5 ;
+  dtTileRef *arg6 = (dtTileRef *) 0 ;
+  dtStatus result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, data);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, dataSize);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, flags);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, lastRef);
+  }
+  {
+    AS3_GetScalarFromVar(arg6, result);
+  }
+  result = (dtStatus)(arg1)->addTile(arg2,arg3,arg4,arg5,arg6);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMesh_removeTile(self, ref:int, data:int, dataSize:int):int")))
+void _wrap_dtNavMesh_removeTile() {
+  dtNavMesh *arg1 = (dtNavMesh *) 0 ;
+  dtTileRef arg2 ;
+  unsigned char **arg3 = (unsigned char **) 0 ;
+  int *arg4 = (int *) 0 ;
+  dtStatus result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, ref);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, data);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, dataSize);
+  }
+  result = (dtStatus)(arg1)->removeTile(arg2,arg3,arg4);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMesh_calcTileLoc(self, pos:int, tx:int, ty:int):void")))
+void _wrap_dtNavMesh_calcTileLoc() {
+  dtNavMesh *arg1 = (dtNavMesh *) 0 ;
+  float *arg2 = (float *) 0 ;
+  int *arg3 = (int *) 0 ;
+  int *arg4 = (int *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, pos);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, tx);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, ty);
+  }
+  ((dtNavMesh const *)arg1)->calcTileLoc((float const *)arg2,arg3,arg4);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMesh_getTileAt(self, x:int, y:int, layer:int):int")))
+void _wrap_dtNavMesh_getTileAt() {
+  dtNavMesh *arg1 = (dtNavMesh *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  dtMeshTile *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, x);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, y);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, layer);
+  }
+  result = (dtMeshTile *)((dtNavMesh const *)arg1)->getTileAt(arg2,arg3,arg4);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMesh_getTilesAt(self, x:int, y:int, tiles:int, maxTiles:int):int")))
+void _wrap_dtNavMesh_getTilesAt() {
+  dtNavMesh *arg1 = (dtNavMesh *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  dtMeshTile **arg4 = (dtMeshTile **) 0 ;
+  int arg5 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, x);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, y);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, tiles);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, maxTiles);
+  }
+  result = (int)((dtNavMesh const *)arg1)->getTilesAt(arg2,arg3,(dtMeshTile const **)arg4,arg5);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMesh_getTileRefAt(self, x:int, y:int, layer:int):int")))
+void _wrap_dtNavMesh_getTileRefAt() {
+  dtNavMesh *arg1 = (dtNavMesh *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  dtTileRef result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, x);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, y);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, layer);
+  }
+  result = (dtTileRef)((dtNavMesh const *)arg1)->getTileRefAt(arg2,arg3,arg4);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMesh_getTileRef(self, tile:int):int")))
+void _wrap_dtNavMesh_getTileRef() {
+  dtNavMesh *arg1 = (dtNavMesh *) 0 ;
+  dtMeshTile *arg2 = (dtMeshTile *) 0 ;
+  dtTileRef result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, tile);
+  }
+  result = (dtTileRef)((dtNavMesh const *)arg1)->getTileRef((dtMeshTile const *)arg2);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMesh_getTileByRef(self, ref:int):int")))
+void _wrap_dtNavMesh_getTileByRef() {
+  dtNavMesh *arg1 = (dtNavMesh *) 0 ;
+  dtTileRef arg2 ;
+  dtMeshTile *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, ref);
+  }
+  result = (dtMeshTile *)((dtNavMesh const *)arg1)->getTileByRef(arg2);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMesh_getMaxTiles(self):int")))
+void _wrap_dtNavMesh_getMaxTiles() {
+  dtNavMesh *arg1 = (dtNavMesh *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int)((dtNavMesh const *)arg1)->getMaxTiles();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMesh_getTile(self, i:int):int")))
+void _wrap_dtNavMesh_getTile() {
+  dtNavMesh *arg1 = (dtNavMesh *) 0 ;
+  int arg2 ;
+  dtMeshTile *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, i);
+  }
+  result = (dtMeshTile *)((dtNavMesh const *)arg1)->getTile(arg2);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMesh_getTileAndPolyByRef(self, ref:int, tile:int, poly:int):int")))
+void _wrap_dtNavMesh_getTileAndPolyByRef() {
+  dtNavMesh *arg1 = (dtNavMesh *) 0 ;
+  dtPolyRef arg2 ;
+  dtMeshTile **arg3 = (dtMeshTile **) 0 ;
+  dtPoly **arg4 = (dtPoly **) 0 ;
+  dtStatus result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, ref);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, tile);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, poly);
+  }
+  result = (dtStatus)((dtNavMesh const *)arg1)->getTileAndPolyByRef(arg2,(dtMeshTile const **)arg3,(dtPoly const **)arg4);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMesh_getTileAndPolyByRefUnsafe(self, ref:int, tile:int, poly:int):void")))
+void _wrap_dtNavMesh_getTileAndPolyByRefUnsafe() {
+  dtNavMesh *arg1 = (dtNavMesh *) 0 ;
+  dtPolyRef arg2 ;
+  dtMeshTile **arg3 = (dtMeshTile **) 0 ;
+  dtPoly **arg4 = (dtPoly **) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, ref);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, tile);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, poly);
+  }
+  ((dtNavMesh const *)arg1)->getTileAndPolyByRefUnsafe(arg2,(dtMeshTile const **)arg3,(dtPoly const **)arg4);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMesh_isValidPolyRef(self, ref:int):Boolean")))
+void _wrap_dtNavMesh_isValidPolyRef() {
+  dtNavMesh *arg1 = (dtNavMesh *) 0 ;
+  dtPolyRef arg2 ;
+  bool result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, ref);
+  }
+  result = (bool)((dtNavMesh const *)arg1)->isValidPolyRef(arg2);
+  {
+    AS3_DeclareVar(asresult, Boolean);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMesh_getPolyRefBase(self, tile:int):int")))
+void _wrap_dtNavMesh_getPolyRefBase() {
+  dtNavMesh *arg1 = (dtNavMesh *) 0 ;
+  dtMeshTile *arg2 = (dtMeshTile *) 0 ;
+  dtPolyRef result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, tile);
+  }
+  result = (dtPolyRef)((dtNavMesh const *)arg1)->getPolyRefBase((dtMeshTile const *)arg2);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMesh_getOffMeshConnectionPolyEndPoints(self, prevRef:int, polyRef:int, startPos:int, endPos:int):int")))
+void _wrap_dtNavMesh_getOffMeshConnectionPolyEndPoints() {
+  dtNavMesh *arg1 = (dtNavMesh *) 0 ;
+  dtPolyRef arg2 ;
+  dtPolyRef arg3 ;
+  float *arg4 = (float *) 0 ;
+  float *arg5 = (float *) 0 ;
+  dtStatus result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, prevRef);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, polyRef);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, startPos);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, endPos);
+  }
+  result = (dtStatus)((dtNavMesh const *)arg1)->getOffMeshConnectionPolyEndPoints(arg2,arg3,arg4,arg5);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMesh_getOffMeshConnectionByRef(self, ref:int):int")))
+void _wrap_dtNavMesh_getOffMeshConnectionByRef() {
+  dtNavMesh *arg1 = (dtNavMesh *) 0 ;
+  dtPolyRef arg2 ;
+  dtOffMeshConnection *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, ref);
+  }
+  result = (dtOffMeshConnection *)((dtNavMesh const *)arg1)->getOffMeshConnectionByRef(arg2);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMesh_setPolyFlags(self, ref:int, flags:int):int")))
+void _wrap_dtNavMesh_setPolyFlags() {
+  dtNavMesh *arg1 = (dtNavMesh *) 0 ;
+  dtPolyRef arg2 ;
+  unsigned short arg3 ;
+  dtStatus result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, ref);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, flags);
+  }
+  result = (dtStatus)(arg1)->setPolyFlags(arg2,arg3);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMesh_getPolyFlags(self, ref:int, resultFlags:int):int")))
+void _wrap_dtNavMesh_getPolyFlags() {
+  dtNavMesh *arg1 = (dtNavMesh *) 0 ;
+  dtPolyRef arg2 ;
+  unsigned short *arg3 = (unsigned short *) 0 ;
+  dtStatus result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, ref);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, resultFlags);
+  }
+  result = (dtStatus)((dtNavMesh const *)arg1)->getPolyFlags(arg2,arg3);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMesh_setPolyArea(self, ref:int, area:String):int")))
+void _wrap_dtNavMesh_setPolyArea() {
+  dtNavMesh *arg1 = (dtNavMesh *) 0 ;
+  dtPolyRef arg2 ;
+  unsigned char arg3 ;
+  dtStatus result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, ref);
+  }
+  {
+    inline_nonreentrant_as3(
+      "%0 = area.charCodeAt(0)" : "=r"(arg3)
+      );
+  }
+  result = (dtStatus)(arg1)->setPolyArea(arg2,arg3);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMesh_getPolyArea(self, ref:int, resultArea:int):int")))
+void _wrap_dtNavMesh_getPolyArea() {
+  dtNavMesh *arg1 = (dtNavMesh *) 0 ;
+  dtPolyRef arg2 ;
+  unsigned char *arg3 = (unsigned char *) 0 ;
+  dtStatus result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, ref);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, resultArea);
+  }
+  result = (dtStatus)((dtNavMesh const *)arg1)->getPolyArea(arg2,arg3);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMesh_getTileStateSize(self, tile:int):int")))
+void _wrap_dtNavMesh_getTileStateSize() {
+  dtNavMesh *arg1 = (dtNavMesh *) 0 ;
+  dtMeshTile *arg2 = (dtMeshTile *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, tile);
+  }
+  result = (int)((dtNavMesh const *)arg1)->getTileStateSize((dtMeshTile const *)arg2);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMesh_storeTileState(self, tile:int, data:int, maxDataSize:int):int")))
+void _wrap_dtNavMesh_storeTileState() {
+  dtNavMesh *arg1 = (dtNavMesh *) 0 ;
+  dtMeshTile *arg2 = (dtMeshTile *) 0 ;
+  unsigned char *arg3 = (unsigned char *) 0 ;
+  int arg4 ;
+  dtStatus result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, tile);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, data);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, maxDataSize);
+  }
+  result = (dtStatus)((dtNavMesh const *)arg1)->storeTileState((dtMeshTile const *)arg2,arg3,arg4);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMesh_restoreTileState(self, tile:int, data:int, maxDataSize:int):int")))
+void _wrap_dtNavMesh_restoreTileState() {
+  dtNavMesh *arg1 = (dtNavMesh *) 0 ;
+  dtMeshTile *arg2 = (dtMeshTile *) 0 ;
+  unsigned char *arg3 = (unsigned char *) 0 ;
+  int arg4 ;
+  dtStatus result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, tile);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, data);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, maxDataSize);
+  }
+  result = (dtStatus)(arg1)->restoreTileState(arg2,(unsigned char const *)arg3,arg4);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMesh_encodePolyId(self, salt:int, it:int, ip:int):int")))
+void _wrap_dtNavMesh_encodePolyId() {
+  dtNavMesh *arg1 = (dtNavMesh *) 0 ;
+  unsigned int arg2 ;
+  unsigned int arg3 ;
+  unsigned int arg4 ;
+  dtPolyRef result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, salt);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, it);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, ip);
+  }
+  result = (dtPolyRef)((dtNavMesh const *)arg1)->encodePolyId(arg2,arg3,arg4);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMesh_decodePolyId(self, ref:int, salt:int, it:int, ip:int):void")))
+void _wrap_dtNavMesh_decodePolyId() {
+  dtNavMesh *arg1 = (dtNavMesh *) 0 ;
+  dtPolyRef arg2 ;
+  unsigned int *arg3 = 0 ;
+  unsigned int *arg4 = 0 ;
+  unsigned int *arg5 = 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, ref);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, salt);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, it);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, ip);
+  }
+  ((dtNavMesh const *)arg1)->decodePolyId(arg2,*arg3,*arg4,*arg5);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMesh_decodePolyIdSalt(self, ref:int):int")))
+void _wrap_dtNavMesh_decodePolyIdSalt() {
+  dtNavMesh *arg1 = (dtNavMesh *) 0 ;
+  dtPolyRef arg2 ;
+  unsigned int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, ref);
+  }
+  result = (unsigned int)((dtNavMesh const *)arg1)->decodePolyIdSalt(arg2);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMesh_decodePolyIdTile(self, ref:int):int")))
+void _wrap_dtNavMesh_decodePolyIdTile() {
+  dtNavMesh *arg1 = (dtNavMesh *) 0 ;
+  dtPolyRef arg2 ;
+  unsigned int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, ref);
+  }
+  result = (unsigned int)((dtNavMesh const *)arg1)->decodePolyIdTile(arg2);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMesh_decodePolyIdPoly(self, ref:int):int")))
+void _wrap_dtNavMesh_decodePolyIdPoly() {
+  dtNavMesh *arg1 = (dtNavMesh *) 0 ;
+  dtPolyRef arg2 ;
+  unsigned int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, ref);
+  }
+  result = (unsigned int)((dtNavMesh const *)arg1)->decodePolyIdPoly(arg2);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtAllocNavMesh():int")))
+void _wrap_dtAllocNavMesh() {
+  dtNavMesh *result ;
+  
+  result = (dtNavMesh *)dtAllocNavMesh();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtFreeNavMesh(navmesh:int):void")))
+void _wrap_dtFreeNavMesh() {
+  dtNavMesh *arg1 = (dtNavMesh *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, navmesh);
+  }
+  dtFreeNavMesh(arg1);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshCreateParams_verts_set(self, verts:int):void")))
+void _wrap_dtNavMeshCreateParams_verts_set() {
+  dtNavMeshCreateParams *arg1 = (dtNavMeshCreateParams *) 0 ;
+  unsigned short *arg2 = (unsigned short *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, verts);
+  }
+  if (arg1) (arg1)->verts = (unsigned short const *)arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshCreateParams_verts_get(self):int")))
+void _wrap_dtNavMeshCreateParams_verts_get() {
+  dtNavMeshCreateParams *arg1 = (dtNavMeshCreateParams *) 0 ;
+  unsigned short *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned short *) ((arg1)->verts);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshCreateParams_vertCount_set(self, vertCount:int):void")))
+void _wrap_dtNavMeshCreateParams_vertCount_set() {
+  dtNavMeshCreateParams *arg1 = (dtNavMeshCreateParams *) 0 ;
+  int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, vertCount);
+  }
+  if (arg1) (arg1)->vertCount = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshCreateParams_vertCount_get(self):int")))
+void _wrap_dtNavMeshCreateParams_vertCount_get() {
+  dtNavMeshCreateParams *arg1 = (dtNavMeshCreateParams *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int) ((arg1)->vertCount);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshCreateParams_polys_set(self, polys:int):void")))
+void _wrap_dtNavMeshCreateParams_polys_set() {
+  dtNavMeshCreateParams *arg1 = (dtNavMeshCreateParams *) 0 ;
+  unsigned short *arg2 = (unsigned short *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, polys);
+  }
+  if (arg1) (arg1)->polys = (unsigned short const *)arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshCreateParams_polys_get(self):int")))
+void _wrap_dtNavMeshCreateParams_polys_get() {
+  dtNavMeshCreateParams *arg1 = (dtNavMeshCreateParams *) 0 ;
+  unsigned short *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned short *) ((arg1)->polys);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshCreateParams_polyFlags_set(self, polyFlags:int):void")))
+void _wrap_dtNavMeshCreateParams_polyFlags_set() {
+  dtNavMeshCreateParams *arg1 = (dtNavMeshCreateParams *) 0 ;
+  unsigned short *arg2 = (unsigned short *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, polyFlags);
+  }
+  if (arg1) (arg1)->polyFlags = (unsigned short const *)arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshCreateParams_polyFlags_get(self):int")))
+void _wrap_dtNavMeshCreateParams_polyFlags_get() {
+  dtNavMeshCreateParams *arg1 = (dtNavMeshCreateParams *) 0 ;
+  unsigned short *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned short *) ((arg1)->polyFlags);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshCreateParams_polyAreas_set(self, polyAreas:int):void")))
+void _wrap_dtNavMeshCreateParams_polyAreas_set() {
+  dtNavMeshCreateParams *arg1 = (dtNavMeshCreateParams *) 0 ;
+  unsigned char *arg2 = (unsigned char *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, polyAreas);
+  }
+  if (arg1) (arg1)->polyAreas = (unsigned char const *)arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshCreateParams_polyAreas_get(self):int")))
+void _wrap_dtNavMeshCreateParams_polyAreas_get() {
+  dtNavMeshCreateParams *arg1 = (dtNavMeshCreateParams *) 0 ;
+  unsigned char *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned char *) ((arg1)->polyAreas);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshCreateParams_polyCount_set(self, polyCount:int):void")))
+void _wrap_dtNavMeshCreateParams_polyCount_set() {
+  dtNavMeshCreateParams *arg1 = (dtNavMeshCreateParams *) 0 ;
+  int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, polyCount);
+  }
+  if (arg1) (arg1)->polyCount = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshCreateParams_polyCount_get(self):int")))
+void _wrap_dtNavMeshCreateParams_polyCount_get() {
+  dtNavMeshCreateParams *arg1 = (dtNavMeshCreateParams *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int) ((arg1)->polyCount);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshCreateParams_nvp_set(self, nvp:int):void")))
+void _wrap_dtNavMeshCreateParams_nvp_set() {
+  dtNavMeshCreateParams *arg1 = (dtNavMeshCreateParams *) 0 ;
+  int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, nvp);
+  }
+  if (arg1) (arg1)->nvp = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshCreateParams_nvp_get(self):int")))
+void _wrap_dtNavMeshCreateParams_nvp_get() {
+  dtNavMeshCreateParams *arg1 = (dtNavMeshCreateParams *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int) ((arg1)->nvp);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshCreateParams_detailMeshes_set(self, detailMeshes:int):void")))
+void _wrap_dtNavMeshCreateParams_detailMeshes_set() {
+  dtNavMeshCreateParams *arg1 = (dtNavMeshCreateParams *) 0 ;
+  unsigned int *arg2 = (unsigned int *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, detailMeshes);
+  }
+  if (arg1) (arg1)->detailMeshes = (unsigned int const *)arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshCreateParams_detailMeshes_get(self):int")))
+void _wrap_dtNavMeshCreateParams_detailMeshes_get() {
+  dtNavMeshCreateParams *arg1 = (dtNavMeshCreateParams *) 0 ;
+  unsigned int *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned int *) ((arg1)->detailMeshes);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshCreateParams_detailVerts_set(self, detailVerts:int):void")))
+void _wrap_dtNavMeshCreateParams_detailVerts_set() {
+  dtNavMeshCreateParams *arg1 = (dtNavMeshCreateParams *) 0 ;
+  float *arg2 = (float *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, detailVerts);
+  }
+  if (arg1) (arg1)->detailVerts = (float const *)arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshCreateParams_detailVerts_get(self):int")))
+void _wrap_dtNavMeshCreateParams_detailVerts_get() {
+  dtNavMeshCreateParams *arg1 = (dtNavMeshCreateParams *) 0 ;
+  float *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float *) ((arg1)->detailVerts);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshCreateParams_detailVertsCount_set(self, detailVertsCount:int):void")))
+void _wrap_dtNavMeshCreateParams_detailVertsCount_set() {
+  dtNavMeshCreateParams *arg1 = (dtNavMeshCreateParams *) 0 ;
+  int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, detailVertsCount);
+  }
+  if (arg1) (arg1)->detailVertsCount = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshCreateParams_detailVertsCount_get(self):int")))
+void _wrap_dtNavMeshCreateParams_detailVertsCount_get() {
+  dtNavMeshCreateParams *arg1 = (dtNavMeshCreateParams *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int) ((arg1)->detailVertsCount);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshCreateParams_detailTris_set(self, detailTris:int):void")))
+void _wrap_dtNavMeshCreateParams_detailTris_set() {
+  dtNavMeshCreateParams *arg1 = (dtNavMeshCreateParams *) 0 ;
+  unsigned char *arg2 = (unsigned char *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, detailTris);
+  }
+  if (arg1) (arg1)->detailTris = (unsigned char const *)arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshCreateParams_detailTris_get(self):int")))
+void _wrap_dtNavMeshCreateParams_detailTris_get() {
+  dtNavMeshCreateParams *arg1 = (dtNavMeshCreateParams *) 0 ;
+  unsigned char *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned char *) ((arg1)->detailTris);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshCreateParams_detailTriCount_set(self, detailTriCount:int):void")))
+void _wrap_dtNavMeshCreateParams_detailTriCount_set() {
+  dtNavMeshCreateParams *arg1 = (dtNavMeshCreateParams *) 0 ;
+  int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, detailTriCount);
+  }
+  if (arg1) (arg1)->detailTriCount = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshCreateParams_detailTriCount_get(self):int")))
+void _wrap_dtNavMeshCreateParams_detailTriCount_get() {
+  dtNavMeshCreateParams *arg1 = (dtNavMeshCreateParams *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int) ((arg1)->detailTriCount);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshCreateParams_offMeshConVerts_set(self, offMeshConVerts:int):void")))
+void _wrap_dtNavMeshCreateParams_offMeshConVerts_set() {
+  dtNavMeshCreateParams *arg1 = (dtNavMeshCreateParams *) 0 ;
+  float *arg2 = (float *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, offMeshConVerts);
+  }
+  if (arg1) (arg1)->offMeshConVerts = (float const *)arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshCreateParams_offMeshConVerts_get(self):int")))
+void _wrap_dtNavMeshCreateParams_offMeshConVerts_get() {
+  dtNavMeshCreateParams *arg1 = (dtNavMeshCreateParams *) 0 ;
+  float *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float *) ((arg1)->offMeshConVerts);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshCreateParams_offMeshConRad_set(self, offMeshConRad:int):void")))
+void _wrap_dtNavMeshCreateParams_offMeshConRad_set() {
+  dtNavMeshCreateParams *arg1 = (dtNavMeshCreateParams *) 0 ;
+  float *arg2 = (float *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, offMeshConRad);
+  }
+  if (arg1) (arg1)->offMeshConRad = (float const *)arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshCreateParams_offMeshConRad_get(self):int")))
+void _wrap_dtNavMeshCreateParams_offMeshConRad_get() {
+  dtNavMeshCreateParams *arg1 = (dtNavMeshCreateParams *) 0 ;
+  float *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float *) ((arg1)->offMeshConRad);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshCreateParams_offMeshConFlags_set(self, offMeshConFlags:int):void")))
+void _wrap_dtNavMeshCreateParams_offMeshConFlags_set() {
+  dtNavMeshCreateParams *arg1 = (dtNavMeshCreateParams *) 0 ;
+  unsigned short *arg2 = (unsigned short *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, offMeshConFlags);
+  }
+  if (arg1) (arg1)->offMeshConFlags = (unsigned short const *)arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshCreateParams_offMeshConFlags_get(self):int")))
+void _wrap_dtNavMeshCreateParams_offMeshConFlags_get() {
+  dtNavMeshCreateParams *arg1 = (dtNavMeshCreateParams *) 0 ;
+  unsigned short *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned short *) ((arg1)->offMeshConFlags);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshCreateParams_offMeshConAreas_set(self, offMeshConAreas:int):void")))
+void _wrap_dtNavMeshCreateParams_offMeshConAreas_set() {
+  dtNavMeshCreateParams *arg1 = (dtNavMeshCreateParams *) 0 ;
+  unsigned char *arg2 = (unsigned char *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, offMeshConAreas);
+  }
+  if (arg1) (arg1)->offMeshConAreas = (unsigned char const *)arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshCreateParams_offMeshConAreas_get(self):int")))
+void _wrap_dtNavMeshCreateParams_offMeshConAreas_get() {
+  dtNavMeshCreateParams *arg1 = (dtNavMeshCreateParams *) 0 ;
+  unsigned char *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned char *) ((arg1)->offMeshConAreas);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshCreateParams_offMeshConDir_set(self, offMeshConDir:int):void")))
+void _wrap_dtNavMeshCreateParams_offMeshConDir_set() {
+  dtNavMeshCreateParams *arg1 = (dtNavMeshCreateParams *) 0 ;
+  unsigned char *arg2 = (unsigned char *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, offMeshConDir);
+  }
+  if (arg1) (arg1)->offMeshConDir = (unsigned char const *)arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshCreateParams_offMeshConDir_get(self):int")))
+void _wrap_dtNavMeshCreateParams_offMeshConDir_get() {
+  dtNavMeshCreateParams *arg1 = (dtNavMeshCreateParams *) 0 ;
+  unsigned char *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned char *) ((arg1)->offMeshConDir);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshCreateParams_offMeshConUserID_set(self, offMeshConUserID:int):void")))
+void _wrap_dtNavMeshCreateParams_offMeshConUserID_set() {
+  dtNavMeshCreateParams *arg1 = (dtNavMeshCreateParams *) 0 ;
+  unsigned int *arg2 = (unsigned int *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, offMeshConUserID);
+  }
+  if (arg1) (arg1)->offMeshConUserID = (unsigned int const *)arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshCreateParams_offMeshConUserID_get(self):int")))
+void _wrap_dtNavMeshCreateParams_offMeshConUserID_get() {
+  dtNavMeshCreateParams *arg1 = (dtNavMeshCreateParams *) 0 ;
+  unsigned int *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned int *) ((arg1)->offMeshConUserID);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshCreateParams_offMeshConCount_set(self, offMeshConCount:int):void")))
+void _wrap_dtNavMeshCreateParams_offMeshConCount_set() {
+  dtNavMeshCreateParams *arg1 = (dtNavMeshCreateParams *) 0 ;
+  int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, offMeshConCount);
+  }
+  if (arg1) (arg1)->offMeshConCount = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshCreateParams_offMeshConCount_get(self):int")))
+void _wrap_dtNavMeshCreateParams_offMeshConCount_get() {
+  dtNavMeshCreateParams *arg1 = (dtNavMeshCreateParams *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int) ((arg1)->offMeshConCount);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshCreateParams_userId_set(self, userId:int):void")))
+void _wrap_dtNavMeshCreateParams_userId_set() {
+  dtNavMeshCreateParams *arg1 = (dtNavMeshCreateParams *) 0 ;
+  unsigned int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, userId);
+  }
+  if (arg1) (arg1)->userId = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshCreateParams_userId_get(self):int")))
+void _wrap_dtNavMeshCreateParams_userId_get() {
+  dtNavMeshCreateParams *arg1 = (dtNavMeshCreateParams *) 0 ;
+  unsigned int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned int) ((arg1)->userId);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshCreateParams_tileX_set(self, tileX:int):void")))
+void _wrap_dtNavMeshCreateParams_tileX_set() {
+  dtNavMeshCreateParams *arg1 = (dtNavMeshCreateParams *) 0 ;
+  int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, tileX);
+  }
+  if (arg1) (arg1)->tileX = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshCreateParams_tileX_get(self):int")))
+void _wrap_dtNavMeshCreateParams_tileX_get() {
+  dtNavMeshCreateParams *arg1 = (dtNavMeshCreateParams *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int) ((arg1)->tileX);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshCreateParams_tileY_set(self, tileY:int):void")))
+void _wrap_dtNavMeshCreateParams_tileY_set() {
+  dtNavMeshCreateParams *arg1 = (dtNavMeshCreateParams *) 0 ;
+  int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, tileY);
+  }
+  if (arg1) (arg1)->tileY = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshCreateParams_tileY_get(self):int")))
+void _wrap_dtNavMeshCreateParams_tileY_get() {
+  dtNavMeshCreateParams *arg1 = (dtNavMeshCreateParams *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int) ((arg1)->tileY);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshCreateParams_tileLayer_set(self, tileLayer:int):void")))
+void _wrap_dtNavMeshCreateParams_tileLayer_set() {
+  dtNavMeshCreateParams *arg1 = (dtNavMeshCreateParams *) 0 ;
+  int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, tileLayer);
+  }
+  if (arg1) (arg1)->tileLayer = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshCreateParams_tileLayer_get(self):int")))
+void _wrap_dtNavMeshCreateParams_tileLayer_get() {
+  dtNavMeshCreateParams *arg1 = (dtNavMeshCreateParams *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int) ((arg1)->tileLayer);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshCreateParams_bmin_set(self, bmin:int):void")))
+void _wrap_dtNavMeshCreateParams_bmin_set() {
+  dtNavMeshCreateParams *arg1 = (dtNavMeshCreateParams *) 0 ;
+  float *arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, bmin);
+  }
+  {
+    size_t ii;
+    float *b = (float *) arg1->bmin;
+    for (ii = 0; ii < (size_t)3; ii++) b[ii] = *((float *) arg2 + ii);
+  }
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshCreateParams_bmin_get(self):int")))
+void _wrap_dtNavMeshCreateParams_bmin_get() {
+  dtNavMeshCreateParams *arg1 = (dtNavMeshCreateParams *) 0 ;
+  float *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float *)(float *) ((arg1)->bmin);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshCreateParams_bmax_set(self, bmax:int):void")))
+void _wrap_dtNavMeshCreateParams_bmax_set() {
+  dtNavMeshCreateParams *arg1 = (dtNavMeshCreateParams *) 0 ;
+  float *arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, bmax);
+  }
+  {
+    size_t ii;
+    float *b = (float *) arg1->bmax;
+    for (ii = 0; ii < (size_t)3; ii++) b[ii] = *((float *) arg2 + ii);
+  }
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshCreateParams_bmax_get(self):int")))
+void _wrap_dtNavMeshCreateParams_bmax_get() {
+  dtNavMeshCreateParams *arg1 = (dtNavMeshCreateParams *) 0 ;
+  float *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float *)(float *) ((arg1)->bmax);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshCreateParams_walkableHeight_set(self, walkableHeight:Number):void")))
+void _wrap_dtNavMeshCreateParams_walkableHeight_set() {
+  dtNavMeshCreateParams *arg1 = (dtNavMeshCreateParams *) 0 ;
+  float arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, walkableHeight);
+  }
+  if (arg1) (arg1)->walkableHeight = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshCreateParams_walkableHeight_get(self):Number")))
+void _wrap_dtNavMeshCreateParams_walkableHeight_get() {
+  dtNavMeshCreateParams *arg1 = (dtNavMeshCreateParams *) 0 ;
+  float result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float) ((arg1)->walkableHeight);
+  {
+    AS3_DeclareVar(asresult, Number);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshCreateParams_walkableRadius_set(self, walkableRadius:Number):void")))
+void _wrap_dtNavMeshCreateParams_walkableRadius_set() {
+  dtNavMeshCreateParams *arg1 = (dtNavMeshCreateParams *) 0 ;
+  float arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, walkableRadius);
+  }
+  if (arg1) (arg1)->walkableRadius = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshCreateParams_walkableRadius_get(self):Number")))
+void _wrap_dtNavMeshCreateParams_walkableRadius_get() {
+  dtNavMeshCreateParams *arg1 = (dtNavMeshCreateParams *) 0 ;
+  float result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float) ((arg1)->walkableRadius);
+  {
+    AS3_DeclareVar(asresult, Number);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshCreateParams_walkableClimb_set(self, walkableClimb:Number):void")))
+void _wrap_dtNavMeshCreateParams_walkableClimb_set() {
+  dtNavMeshCreateParams *arg1 = (dtNavMeshCreateParams *) 0 ;
+  float arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, walkableClimb);
+  }
+  if (arg1) (arg1)->walkableClimb = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshCreateParams_walkableClimb_get(self):Number")))
+void _wrap_dtNavMeshCreateParams_walkableClimb_get() {
+  dtNavMeshCreateParams *arg1 = (dtNavMeshCreateParams *) 0 ;
+  float result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float) ((arg1)->walkableClimb);
+  {
+    AS3_DeclareVar(asresult, Number);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshCreateParams_cs_set(self, cs:Number):void")))
+void _wrap_dtNavMeshCreateParams_cs_set() {
+  dtNavMeshCreateParams *arg1 = (dtNavMeshCreateParams *) 0 ;
+  float arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, cs);
+  }
+  if (arg1) (arg1)->cs = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshCreateParams_cs_get(self):Number")))
+void _wrap_dtNavMeshCreateParams_cs_get() {
+  dtNavMeshCreateParams *arg1 = (dtNavMeshCreateParams *) 0 ;
+  float result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float) ((arg1)->cs);
+  {
+    AS3_DeclareVar(asresult, Number);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshCreateParams_ch_set(self, ch:Number):void")))
+void _wrap_dtNavMeshCreateParams_ch_set() {
+  dtNavMeshCreateParams *arg1 = (dtNavMeshCreateParams *) 0 ;
+  float arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, ch);
+  }
+  if (arg1) (arg1)->ch = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshCreateParams_ch_get(self):Number")))
+void _wrap_dtNavMeshCreateParams_ch_get() {
+  dtNavMeshCreateParams *arg1 = (dtNavMeshCreateParams *) 0 ;
+  float result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float) ((arg1)->ch);
+  {
+    AS3_DeclareVar(asresult, Number);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshCreateParams_buildBvTree_set(self, buildBvTree:Boolean):void")))
+void _wrap_dtNavMeshCreateParams_buildBvTree_set() {
+  dtNavMeshCreateParams *arg1 = (dtNavMeshCreateParams *) 0 ;
+  bool arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, buildBvTree);
+  }
+  if (arg1) (arg1)->buildBvTree = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshCreateParams_buildBvTree_get(self):Boolean")))
+void _wrap_dtNavMeshCreateParams_buildBvTree_get() {
+  dtNavMeshCreateParams *arg1 = (dtNavMeshCreateParams *) 0 ;
+  bool result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (bool) ((arg1)->buildBvTree);
+  {
+    AS3_DeclareVar(asresult, Boolean);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_new_dtNavMeshCreateParams():int")))
+void _wrap_new_dtNavMeshCreateParams() {
+  dtNavMeshCreateParams *result ;
+  
+  result = (dtNavMeshCreateParams *)new dtNavMeshCreateParams();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_delete_dtNavMeshCreateParams(self):void")))
+void _wrap_delete_dtNavMeshCreateParams() {
+  dtNavMeshCreateParams *arg1 = (dtNavMeshCreateParams *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  delete arg1;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCreateNavMeshData(params:int, outData:int, outDataSize:int):Boolean")))
+void _wrap_dtCreateNavMeshData() {
+  dtNavMeshCreateParams *arg1 = (dtNavMeshCreateParams *) 0 ;
+  unsigned char **arg2 = (unsigned char **) 0 ;
+  int *arg3 = (int *) 0 ;
+  bool result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, params);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, outData);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, outDataSize);
+  }
+  result = (bool)dtCreateNavMeshData(arg1,arg2,arg3);
+  {
+    AS3_DeclareVar(asresult, Boolean);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshHeaderSwapEndian(data:int, dataSize:int):Boolean")))
+void _wrap_dtNavMeshHeaderSwapEndian() {
+  unsigned char *arg1 = (unsigned char *) 0 ;
+  int arg2 ;
+  bool result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, data);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, dataSize);
+  }
+  result = (bool)dtNavMeshHeaderSwapEndian(arg1,arg2);
+  {
+    AS3_DeclareVar(asresult, Boolean);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshDataSwapEndian(data:int, dataSize:int):Boolean")))
+void _wrap_dtNavMeshDataSwapEndian() {
+  unsigned char *arg1 = (unsigned char *) 0 ;
+  int arg2 ;
+  bool result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, data);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, dataSize);
+  }
+  result = (bool)dtNavMeshDataSwapEndian(arg1,arg2);
+  {
+    AS3_DeclareVar(asresult, Boolean);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_new_dtQueryFilter():int")))
+void _wrap_new_dtQueryFilter() {
+  dtQueryFilter *result ;
+  
+  result = (dtQueryFilter *)new dtQueryFilter();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtQueryFilter_passFilter(self, ref:int, tile:int, poly:int):Boolean")))
+void _wrap_dtQueryFilter_passFilter() {
+  dtQueryFilter *arg1 = (dtQueryFilter *) 0 ;
+  dtPolyRef arg2 ;
+  dtMeshTile *arg3 = (dtMeshTile *) 0 ;
+  dtPoly *arg4 = (dtPoly *) 0 ;
+  bool result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, ref);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, tile);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, poly);
+  }
+  result = (bool)((dtQueryFilter const *)arg1)->passFilter(arg2,(dtMeshTile const *)arg3,(dtPoly const *)arg4);
+  {
+    AS3_DeclareVar(asresult, Boolean);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtQueryFilter_getCost(self, pa:int, pb:int, prevRef:int, prevTile:int, prevPoly:int, curRef:int, curTile:int, curPoly:int, nextRef:int, nextTile:int, nextPoly:int):Number")))
+void _wrap_dtQueryFilter_getCost() {
+  dtQueryFilter *arg1 = (dtQueryFilter *) 0 ;
+  float *arg2 = (float *) 0 ;
+  float *arg3 = (float *) 0 ;
+  dtPolyRef arg4 ;
+  dtMeshTile *arg5 = (dtMeshTile *) 0 ;
+  dtPoly *arg6 = (dtPoly *) 0 ;
+  dtPolyRef arg7 ;
+  dtMeshTile *arg8 = (dtMeshTile *) 0 ;
+  dtPoly *arg9 = (dtPoly *) 0 ;
+  dtPolyRef arg10 ;
+  dtMeshTile *arg11 = (dtMeshTile *) 0 ;
+  dtPoly *arg12 = (dtPoly *) 0 ;
+  float result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, pa);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, pb);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, prevRef);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, prevTile);
+  }
+  {
+    AS3_GetScalarFromVar(arg6, prevPoly);
+  }
+  {
+    AS3_GetScalarFromVar(arg7, curRef);
+  }
+  {
+    AS3_GetScalarFromVar(arg8, curTile);
+  }
+  {
+    AS3_GetScalarFromVar(arg9, curPoly);
+  }
+  {
+    AS3_GetScalarFromVar(arg10, nextRef);
+  }
+  {
+    AS3_GetScalarFromVar(arg11, nextTile);
+  }
+  {
+    AS3_GetScalarFromVar(arg12, nextPoly);
+  }
+  result = (float)((dtQueryFilter const *)arg1)->getCost((float const *)arg2,(float const *)arg3,arg4,(dtMeshTile const *)arg5,(dtPoly const *)arg6,arg7,(dtMeshTile const *)arg8,(dtPoly const *)arg9,arg10,(dtMeshTile const *)arg11,(dtPoly const *)arg12);
+  {
+    AS3_DeclareVar(asresult, Number);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtQueryFilter_getAreaCost(self, i:int):Number")))
+void _wrap_dtQueryFilter_getAreaCost() {
+  dtQueryFilter *arg1 = (dtQueryFilter *) 0 ;
+  int arg2 ;
+  float result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, i);
+  }
+  result = (float)((dtQueryFilter const *)arg1)->getAreaCost(arg2);
+  {
+    AS3_DeclareVar(asresult, Number);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtQueryFilter_setAreaCost(self, i:int, cost:Number):void")))
+void _wrap_dtQueryFilter_setAreaCost() {
+  dtQueryFilter *arg1 = (dtQueryFilter *) 0 ;
+  int arg2 ;
+  float arg3 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, i);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, cost);
+  }
+  (arg1)->setAreaCost(arg2,arg3);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtQueryFilter_getIncludeFlags(self):int")))
+void _wrap_dtQueryFilter_getIncludeFlags() {
+  dtQueryFilter *arg1 = (dtQueryFilter *) 0 ;
+  unsigned short result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned short)((dtQueryFilter const *)arg1)->getIncludeFlags();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtQueryFilter_setIncludeFlags(self, flags:int):void")))
+void _wrap_dtQueryFilter_setIncludeFlags() {
+  dtQueryFilter *arg1 = (dtQueryFilter *) 0 ;
+  unsigned short arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, flags);
+  }
+  (arg1)->setIncludeFlags(arg2);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtQueryFilter_getExcludeFlags(self):int")))
+void _wrap_dtQueryFilter_getExcludeFlags() {
+  dtQueryFilter *arg1 = (dtQueryFilter *) 0 ;
+  unsigned short result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned short)((dtQueryFilter const *)arg1)->getExcludeFlags();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtQueryFilter_setExcludeFlags(self, flags:int):void")))
+void _wrap_dtQueryFilter_setExcludeFlags() {
+  dtQueryFilter *arg1 = (dtQueryFilter *) 0 ;
+  unsigned short arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, flags);
+  }
+  (arg1)->setExcludeFlags(arg2);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_delete_dtQueryFilter(self):void")))
+void _wrap_delete_dtQueryFilter() {
+  dtQueryFilter *arg1 = (dtQueryFilter *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  delete arg1;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_new_dtNavMeshQuery():int")))
+void _wrap_new_dtNavMeshQuery() {
+  dtNavMeshQuery *result ;
+  
+  result = (dtNavMeshQuery *)new dtNavMeshQuery();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_delete_dtNavMeshQuery(self):void")))
+void _wrap_delete_dtNavMeshQuery() {
+  dtNavMeshQuery *arg1 = (dtNavMeshQuery *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  delete arg1;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshQuery_init(self, nav:int, maxNodes:int):int")))
+void _wrap_dtNavMeshQuery_init() {
+  dtNavMeshQuery *arg1 = (dtNavMeshQuery *) 0 ;
+  dtNavMesh *arg2 = (dtNavMesh *) 0 ;
+  int arg3 ;
+  dtStatus result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, nav);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, maxNodes);
+  }
+  result = (dtStatus)(arg1)->init((dtNavMesh const *)arg2,arg3);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshQuery_findPath(self, startRef:int, endRef:int, startPos:int, endPos:int, filter:int, path:int, pathCount:int, maxPath:int):int")))
+void _wrap_dtNavMeshQuery_findPath() {
+  dtNavMeshQuery *arg1 = (dtNavMeshQuery *) 0 ;
+  dtPolyRef arg2 ;
+  dtPolyRef arg3 ;
+  float *arg4 = (float *) 0 ;
+  float *arg5 = (float *) 0 ;
+  dtQueryFilter *arg6 = (dtQueryFilter *) 0 ;
+  dtPolyRef *arg7 = (dtPolyRef *) 0 ;
+  int *arg8 = (int *) 0 ;
+  int arg9 ;
+  dtStatus result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, startRef);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, endRef);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, startPos);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, endPos);
+  }
+  {
+    AS3_GetScalarFromVar(arg6, filter);
+  }
+  {
+    AS3_GetScalarFromVar(arg7, path);
+  }
+  {
+    AS3_GetScalarFromVar(arg8, pathCount);
+  }
+  {
+    AS3_GetScalarFromVar(arg9, maxPath);
+  }
+  result = (dtStatus)((dtNavMeshQuery const *)arg1)->findPath(arg2,arg3,(float const *)arg4,(float const *)arg5,(dtQueryFilter const *)arg6,arg7,arg8,arg9);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshQuery_findStraightPath(self, startPos:int, endPos:int, path:int, pathSize:int, straightPath:int, straightPathFlags:int, straightPathRefs:int, straightPathCount:int, maxStraightPath:int):int")))
+void _wrap_dtNavMeshQuery_findStraightPath() {
+  dtNavMeshQuery *arg1 = (dtNavMeshQuery *) 0 ;
+  float *arg2 = (float *) 0 ;
+  float *arg3 = (float *) 0 ;
+  dtPolyRef *arg4 = (dtPolyRef *) 0 ;
+  int arg5 ;
+  float *arg6 = (float *) 0 ;
+  unsigned char *arg7 = (unsigned char *) 0 ;
+  dtPolyRef *arg8 = (dtPolyRef *) 0 ;
+  int *arg9 = (int *) 0 ;
+  int arg10 ;
+  dtStatus result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, startPos);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, endPos);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, path);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, pathSize);
+  }
+  {
+    AS3_GetScalarFromVar(arg6, straightPath);
+  }
+  {
+    AS3_GetScalarFromVar(arg7, straightPathFlags);
+  }
+  {
+    AS3_GetScalarFromVar(arg8, straightPathRefs);
+  }
+  {
+    AS3_GetScalarFromVar(arg9, straightPathCount);
+  }
+  {
+    AS3_GetScalarFromVar(arg10, maxStraightPath);
+  }
+  result = (dtStatus)((dtNavMeshQuery const *)arg1)->findStraightPath((float const *)arg2,(float const *)arg3,(dtPolyRef const *)arg4,arg5,arg6,arg7,arg8,arg9,arg10);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshQuery_initSlicedFindPath(self, startRef:int, endRef:int, startPos:int, endPos:int, filter:int):int")))
+void _wrap_dtNavMeshQuery_initSlicedFindPath() {
+  dtNavMeshQuery *arg1 = (dtNavMeshQuery *) 0 ;
+  dtPolyRef arg2 ;
+  dtPolyRef arg3 ;
+  float *arg4 = (float *) 0 ;
+  float *arg5 = (float *) 0 ;
+  dtQueryFilter *arg6 = (dtQueryFilter *) 0 ;
+  dtStatus result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, startRef);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, endRef);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, startPos);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, endPos);
+  }
+  {
+    AS3_GetScalarFromVar(arg6, filter);
+  }
+  result = (dtStatus)(arg1)->initSlicedFindPath(arg2,arg3,(float const *)arg4,(float const *)arg5,(dtQueryFilter const *)arg6);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshQuery_updateSlicedFindPath(self, maxIter:int, doneIters:int):int")))
+void _wrap_dtNavMeshQuery_updateSlicedFindPath() {
+  dtNavMeshQuery *arg1 = (dtNavMeshQuery *) 0 ;
+  int arg2 ;
+  int *arg3 = (int *) 0 ;
+  dtStatus result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, maxIter);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, doneIters);
+  }
+  result = (dtStatus)(arg1)->updateSlicedFindPath(arg2,arg3);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshQuery_finalizeSlicedFindPath(self, path:int, pathCount:int, maxPath:int):int")))
+void _wrap_dtNavMeshQuery_finalizeSlicedFindPath() {
+  dtNavMeshQuery *arg1 = (dtNavMeshQuery *) 0 ;
+  dtPolyRef *arg2 = (dtPolyRef *) 0 ;
+  int *arg3 = (int *) 0 ;
+  int arg4 ;
+  dtStatus result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, path);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, pathCount);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, maxPath);
+  }
+  result = (dtStatus)(arg1)->finalizeSlicedFindPath(arg2,arg3,arg4);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshQuery_finalizeSlicedFindPathPartial(self, existing:int, existingSize:int, path:int, pathCount:int, maxPath:int):int")))
+void _wrap_dtNavMeshQuery_finalizeSlicedFindPathPartial() {
+  dtNavMeshQuery *arg1 = (dtNavMeshQuery *) 0 ;
+  dtPolyRef *arg2 = (dtPolyRef *) 0 ;
+  int arg3 ;
+  dtPolyRef *arg4 = (dtPolyRef *) 0 ;
+  int *arg5 = (int *) 0 ;
+  int arg6 ;
+  dtStatus result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, existing);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, existingSize);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, path);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, pathCount);
+  }
+  {
+    AS3_GetScalarFromVar(arg6, maxPath);
+  }
+  result = (dtStatus)(arg1)->finalizeSlicedFindPathPartial((dtPolyRef const *)arg2,arg3,arg4,arg5,arg6);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshQuery_findPolysAroundCircle(self, startRef:int, centerPos:int, radius:Number, filter:int, resultRef:int, resultParent:int, resultCost:int, resultCount:int, maxResult:int):int")))
+void _wrap_dtNavMeshQuery_findPolysAroundCircle() {
+  dtNavMeshQuery *arg1 = (dtNavMeshQuery *) 0 ;
+  dtPolyRef arg2 ;
+  float *arg3 = (float *) 0 ;
+  float arg4 ;
+  dtQueryFilter *arg5 = (dtQueryFilter *) 0 ;
+  dtPolyRef *arg6 = (dtPolyRef *) 0 ;
+  dtPolyRef *arg7 = (dtPolyRef *) 0 ;
+  float *arg8 = (float *) 0 ;
+  int *arg9 = (int *) 0 ;
+  int arg10 ;
+  dtStatus result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, startRef);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, centerPos);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, radius);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, filter);
+  }
+  {
+    AS3_GetScalarFromVar(arg6, resultRef);
+  }
+  {
+    AS3_GetScalarFromVar(arg7, resultParent);
+  }
+  {
+    AS3_GetScalarFromVar(arg8, resultCost);
+  }
+  {
+    AS3_GetScalarFromVar(arg9, resultCount);
+  }
+  {
+    AS3_GetScalarFromVar(arg10, maxResult);
+  }
+  result = (dtStatus)((dtNavMeshQuery const *)arg1)->findPolysAroundCircle(arg2,(float const *)arg3,arg4,(dtQueryFilter const *)arg5,arg6,arg7,arg8,arg9,arg10);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshQuery_findPolysAroundShape(self, startRef:int, verts:int, nverts:int, filter:int, resultRef:int, resultParent:int, resultCost:int, resultCount:int, maxResult:int):int")))
+void _wrap_dtNavMeshQuery_findPolysAroundShape() {
+  dtNavMeshQuery *arg1 = (dtNavMeshQuery *) 0 ;
+  dtPolyRef arg2 ;
+  float *arg3 = (float *) 0 ;
+  int arg4 ;
+  dtQueryFilter *arg5 = (dtQueryFilter *) 0 ;
+  dtPolyRef *arg6 = (dtPolyRef *) 0 ;
+  dtPolyRef *arg7 = (dtPolyRef *) 0 ;
+  float *arg8 = (float *) 0 ;
+  int *arg9 = (int *) 0 ;
+  int arg10 ;
+  dtStatus result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, startRef);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, verts);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, nverts);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, filter);
+  }
+  {
+    AS3_GetScalarFromVar(arg6, resultRef);
+  }
+  {
+    AS3_GetScalarFromVar(arg7, resultParent);
+  }
+  {
+    AS3_GetScalarFromVar(arg8, resultCost);
+  }
+  {
+    AS3_GetScalarFromVar(arg9, resultCount);
+  }
+  {
+    AS3_GetScalarFromVar(arg10, maxResult);
+  }
+  result = (dtStatus)((dtNavMeshQuery const *)arg1)->findPolysAroundShape(arg2,(float const *)arg3,arg4,(dtQueryFilter const *)arg5,arg6,arg7,arg8,arg9,arg10);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshQuery_findNearestPoly(self, center:int, extents:int, filter:int, nearestRef:int, nearestPt:int):int")))
+void _wrap_dtNavMeshQuery_findNearestPoly() {
+  dtNavMeshQuery *arg1 = (dtNavMeshQuery *) 0 ;
+  float *arg2 = (float *) 0 ;
+  float *arg3 = (float *) 0 ;
+  dtQueryFilter *arg4 = (dtQueryFilter *) 0 ;
+  dtPolyRef *arg5 = (dtPolyRef *) 0 ;
+  float *arg6 = (float *) 0 ;
+  dtStatus result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, center);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, extents);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, filter);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, nearestRef);
+  }
+  {
+    AS3_GetScalarFromVar(arg6, nearestPt);
+  }
+  result = (dtStatus)((dtNavMeshQuery const *)arg1)->findNearestPoly((float const *)arg2,(float const *)arg3,(dtQueryFilter const *)arg4,arg5,arg6);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshQuery_queryPolygons(self, center:int, extents:int, filter:int, polys:int, polyCount:int, maxPolys:int):int")))
+void _wrap_dtNavMeshQuery_queryPolygons() {
+  dtNavMeshQuery *arg1 = (dtNavMeshQuery *) 0 ;
+  float *arg2 = (float *) 0 ;
+  float *arg3 = (float *) 0 ;
+  dtQueryFilter *arg4 = (dtQueryFilter *) 0 ;
+  dtPolyRef *arg5 = (dtPolyRef *) 0 ;
+  int *arg6 = (int *) 0 ;
+  int arg7 ;
+  dtStatus result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, center);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, extents);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, filter);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, polys);
+  }
+  {
+    AS3_GetScalarFromVar(arg6, polyCount);
+  }
+  {
+    AS3_GetScalarFromVar(arg7, maxPolys);
+  }
+  result = (dtStatus)((dtNavMeshQuery const *)arg1)->queryPolygons((float const *)arg2,(float const *)arg3,(dtQueryFilter const *)arg4,arg5,arg6,arg7);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshQuery_findLocalNeighbourhood(self, startRef:int, centerPos:int, radius:Number, filter:int, resultRef:int, resultParent:int, resultCount:int, maxResult:int):int")))
+void _wrap_dtNavMeshQuery_findLocalNeighbourhood() {
+  dtNavMeshQuery *arg1 = (dtNavMeshQuery *) 0 ;
+  dtPolyRef arg2 ;
+  float *arg3 = (float *) 0 ;
+  float arg4 ;
+  dtQueryFilter *arg5 = (dtQueryFilter *) 0 ;
+  dtPolyRef *arg6 = (dtPolyRef *) 0 ;
+  dtPolyRef *arg7 = (dtPolyRef *) 0 ;
+  int *arg8 = (int *) 0 ;
+  int arg9 ;
+  dtStatus result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, startRef);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, centerPos);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, radius);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, filter);
+  }
+  {
+    AS3_GetScalarFromVar(arg6, resultRef);
+  }
+  {
+    AS3_GetScalarFromVar(arg7, resultParent);
+  }
+  {
+    AS3_GetScalarFromVar(arg8, resultCount);
+  }
+  {
+    AS3_GetScalarFromVar(arg9, maxResult);
+  }
+  result = (dtStatus)((dtNavMeshQuery const *)arg1)->findLocalNeighbourhood(arg2,(float const *)arg3,arg4,(dtQueryFilter const *)arg5,arg6,arg7,arg8,arg9);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshQuery_moveAlongSurface(self, startRef:int, startPos:int, endPos:int, filter:int, resultPos:int, visited:int, visitedCount:int, maxVisitedSize:int):int")))
+void _wrap_dtNavMeshQuery_moveAlongSurface() {
+  dtNavMeshQuery *arg1 = (dtNavMeshQuery *) 0 ;
+  dtPolyRef arg2 ;
+  float *arg3 = (float *) 0 ;
+  float *arg4 = (float *) 0 ;
+  dtQueryFilter *arg5 = (dtQueryFilter *) 0 ;
+  float *arg6 = (float *) 0 ;
+  dtPolyRef *arg7 = (dtPolyRef *) 0 ;
+  int *arg8 = (int *) 0 ;
+  int arg9 ;
+  dtStatus result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, startRef);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, startPos);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, endPos);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, filter);
+  }
+  {
+    AS3_GetScalarFromVar(arg6, resultPos);
+  }
+  {
+    AS3_GetScalarFromVar(arg7, visited);
+  }
+  {
+    AS3_GetScalarFromVar(arg8, visitedCount);
+  }
+  {
+    AS3_GetScalarFromVar(arg9, maxVisitedSize);
+  }
+  result = (dtStatus)((dtNavMeshQuery const *)arg1)->moveAlongSurface(arg2,(float const *)arg3,(float const *)arg4,(dtQueryFilter const *)arg5,arg6,arg7,arg8,arg9);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshQuery_raycast(self, startRef:int, startPos:int, endPos:int, filter:int, t:int, hitNormal:int, path:int, pathCount:int, maxPath:int):int")))
+void _wrap_dtNavMeshQuery_raycast() {
+  dtNavMeshQuery *arg1 = (dtNavMeshQuery *) 0 ;
+  dtPolyRef arg2 ;
+  float *arg3 = (float *) 0 ;
+  float *arg4 = (float *) 0 ;
+  dtQueryFilter *arg5 = (dtQueryFilter *) 0 ;
+  float *arg6 = (float *) 0 ;
+  float *arg7 = (float *) 0 ;
+  dtPolyRef *arg8 = (dtPolyRef *) 0 ;
+  int *arg9 = (int *) 0 ;
+  int arg10 ;
+  dtStatus result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, startRef);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, startPos);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, endPos);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, filter);
+  }
+  {
+    AS3_GetScalarFromVar(arg6, t);
+  }
+  {
+    AS3_GetScalarFromVar(arg7, hitNormal);
+  }
+  {
+    AS3_GetScalarFromVar(arg8, path);
+  }
+  {
+    AS3_GetScalarFromVar(arg9, pathCount);
+  }
+  {
+    AS3_GetScalarFromVar(arg10, maxPath);
+  }
+  result = (dtStatus)((dtNavMeshQuery const *)arg1)->raycast(arg2,(float const *)arg3,(float const *)arg4,(dtQueryFilter const *)arg5,arg6,arg7,arg8,arg9,arg10);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshQuery_findDistanceToWall(self, startRef:int, centerPos:int, maxRadius:Number, filter:int, hitDist:int, hitPos:int, hitNormal:int):int")))
+void _wrap_dtNavMeshQuery_findDistanceToWall() {
+  dtNavMeshQuery *arg1 = (dtNavMeshQuery *) 0 ;
+  dtPolyRef arg2 ;
+  float *arg3 = (float *) 0 ;
+  float arg4 ;
+  dtQueryFilter *arg5 = (dtQueryFilter *) 0 ;
+  float *arg6 = (float *) 0 ;
+  float *arg7 = (float *) 0 ;
+  float *arg8 = (float *) 0 ;
+  dtStatus result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, startRef);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, centerPos);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, maxRadius);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, filter);
+  }
+  {
+    AS3_GetScalarFromVar(arg6, hitDist);
+  }
+  {
+    AS3_GetScalarFromVar(arg7, hitPos);
+  }
+  {
+    AS3_GetScalarFromVar(arg8, hitNormal);
+  }
+  result = (dtStatus)((dtNavMeshQuery const *)arg1)->findDistanceToWall(arg2,(float const *)arg3,arg4,(dtQueryFilter const *)arg5,arg6,arg7,arg8);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshQuery_getPolyWallSegments(self, ref:int, filter:int, segmentVerts:int, segmentRefs:int, segmentCount:int, maxSegments:int):int")))
+void _wrap_dtNavMeshQuery_getPolyWallSegments() {
+  dtNavMeshQuery *arg1 = (dtNavMeshQuery *) 0 ;
+  dtPolyRef arg2 ;
+  dtQueryFilter *arg3 = (dtQueryFilter *) 0 ;
+  float *arg4 = (float *) 0 ;
+  dtPolyRef *arg5 = (dtPolyRef *) 0 ;
+  int *arg6 = (int *) 0 ;
+  int arg7 ;
+  dtStatus result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, ref);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, filter);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, segmentVerts);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, segmentRefs);
+  }
+  {
+    AS3_GetScalarFromVar(arg6, segmentCount);
+  }
+  {
+    AS3_GetScalarFromVar(arg7, maxSegments);
+  }
+  result = (dtStatus)((dtNavMeshQuery const *)arg1)->getPolyWallSegments(arg2,(dtQueryFilter const *)arg3,arg4,arg5,arg6,arg7);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_findRandomPoint_frand_func_ptr(f:Function):void")))
+float _wrap_findRandomPoint_frand_func_ptr () {
+  float result ;
+  
+  inline_as3(
+    "var asresult = f();"
+    );
+  {
+    AS3_GetScalarFromVar(result, asresult);
+  }
+  return result;
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshQuery_findRandomPoint(self, filter:int, frand:Function, randomRef:int, randomPt:int):int")))
+void _wrap_dtNavMeshQuery_findRandomPoint() {
+  dtNavMeshQuery *arg1 = (dtNavMeshQuery *) 0 ;
+  dtQueryFilter *arg2 = (dtQueryFilter *) 0 ;
+  float (*arg3)() = (float (*)()) 0 ;
+  dtPolyRef *arg4 = (dtPolyRef *) 0 ;
+  float *arg5 = (float *) 0 ;
+  dtStatus result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, filter);
+  }
+  {
+    swig_as3(
+      "var f:Function = frand;"
+      "var ptr:int = SWIG_AS3GetCCallPtr(f);"
+      "if (!ptr) {"
+      "  var wrap = function() { _wrap_findRandomPoint_frand_func_ptr(frand);};"
+      "  SWIG_AS3RegCCallWrapper(f, wrap);"
+      "  ptr = SWIG_AS3GetCCallPtr(f);"
+      "}"
+      "%0 = ptr;"
+      :"=r"(arg3)
+      );
+  }
+  {
+    AS3_GetScalarFromVar(arg4, randomRef);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, randomPt);
+  }
+  result = (dtStatus)((dtNavMeshQuery const *)arg1)->findRandomPoint((dtQueryFilter const *)arg2,arg3,arg4,arg5);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_findRandomPointAroundCircle_frand_func_ptr(f:Function):void")))
+float _wrap_findRandomPointAroundCircle_frand_func_ptr () {
+  float result ;
+  
+  inline_as3(
+    "var asresult = f();"
+    );
+  {
+    AS3_GetScalarFromVar(result, asresult);
+  }
+  return result;
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshQuery_findRandomPointAroundCircle(self, startRef:int, centerPos:int, maxRadius:Number, filter:int, frand:Function, randomRef:int, randomPt:int):int")))
+void _wrap_dtNavMeshQuery_findRandomPointAroundCircle() {
+  dtNavMeshQuery *arg1 = (dtNavMeshQuery *) 0 ;
+  dtPolyRef arg2 ;
+  float *arg3 = (float *) 0 ;
+  float arg4 ;
+  dtQueryFilter *arg5 = (dtQueryFilter *) 0 ;
+  float (*arg6)() = (float (*)()) 0 ;
+  dtPolyRef *arg7 = (dtPolyRef *) 0 ;
+  float *arg8 = (float *) 0 ;
+  dtStatus result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, startRef);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, centerPos);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, maxRadius);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, filter);
+  }
+  {
+    swig_as3(
+      "var f:Function = frand;"
+      "var ptr:int = SWIG_AS3GetCCallPtr(f);"
+      "if (!ptr) {"
+      "  var wrap = function() { _wrap_findRandomPointAroundCircle_frand_func_ptr(frand);};"
+      "  SWIG_AS3RegCCallWrapper(f, wrap);"
+      "  ptr = SWIG_AS3GetCCallPtr(f);"
+      "}"
+      "%0 = ptr;"
+      :"=r"(arg6)
+      );
+  }
+  {
+    AS3_GetScalarFromVar(arg7, randomRef);
+  }
+  {
+    AS3_GetScalarFromVar(arg8, randomPt);
+  }
+  result = (dtStatus)((dtNavMeshQuery const *)arg1)->findRandomPointAroundCircle(arg2,(float const *)arg3,arg4,(dtQueryFilter const *)arg5,arg6,arg7,arg8);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshQuery_closestPointOnPoly(self, ref:int, pos:int, closest:int):int")))
+void _wrap_dtNavMeshQuery_closestPointOnPoly() {
+  dtNavMeshQuery *arg1 = (dtNavMeshQuery *) 0 ;
+  dtPolyRef arg2 ;
+  float *arg3 = (float *) 0 ;
+  float *arg4 = (float *) 0 ;
+  dtStatus result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, ref);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, pos);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, closest);
+  }
+  result = (dtStatus)((dtNavMeshQuery const *)arg1)->closestPointOnPoly(arg2,(float const *)arg3,arg4);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshQuery_closestPointOnPolyBoundary(self, ref:int, pos:int, closest:int):int")))
+void _wrap_dtNavMeshQuery_closestPointOnPolyBoundary() {
+  dtNavMeshQuery *arg1 = (dtNavMeshQuery *) 0 ;
+  dtPolyRef arg2 ;
+  float *arg3 = (float *) 0 ;
+  float *arg4 = (float *) 0 ;
+  dtStatus result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, ref);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, pos);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, closest);
+  }
+  result = (dtStatus)((dtNavMeshQuery const *)arg1)->closestPointOnPolyBoundary(arg2,(float const *)arg3,arg4);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshQuery_getPolyHeight(self, ref:int, pos:int, height:int):int")))
+void _wrap_dtNavMeshQuery_getPolyHeight() {
+  dtNavMeshQuery *arg1 = (dtNavMeshQuery *) 0 ;
+  dtPolyRef arg2 ;
+  float *arg3 = (float *) 0 ;
+  float *arg4 = (float *) 0 ;
+  dtStatus result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, ref);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, pos);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, height);
+  }
+  result = (dtStatus)((dtNavMeshQuery const *)arg1)->getPolyHeight(arg2,(float const *)arg3,arg4);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshQuery_isValidPolyRef(self, ref:int, filter:int):Boolean")))
+void _wrap_dtNavMeshQuery_isValidPolyRef() {
+  dtNavMeshQuery *arg1 = (dtNavMeshQuery *) 0 ;
+  dtPolyRef arg2 ;
+  dtQueryFilter *arg3 = (dtQueryFilter *) 0 ;
+  bool result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, ref);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, filter);
+  }
+  result = (bool)((dtNavMeshQuery const *)arg1)->isValidPolyRef(arg2,(dtQueryFilter const *)arg3);
+  {
+    AS3_DeclareVar(asresult, Boolean);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshQuery_isInClosedList(self, ref:int):Boolean")))
+void _wrap_dtNavMeshQuery_isInClosedList() {
+  dtNavMeshQuery *arg1 = (dtNavMeshQuery *) 0 ;
+  dtPolyRef arg2 ;
+  bool result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, ref);
+  }
+  result = (bool)((dtNavMeshQuery const *)arg1)->isInClosedList(arg2);
+  {
+    AS3_DeclareVar(asresult, Boolean);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshQuery_getNodePool(self):int")))
+void _wrap_dtNavMeshQuery_getNodePool() {
+  dtNavMeshQuery *arg1 = (dtNavMeshQuery *) 0 ;
+  dtNodePool *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (dtNodePool *)((dtNavMeshQuery const *)arg1)->getNodePool();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshQuery_getAttachedNavMesh(self):int")))
+void _wrap_dtNavMeshQuery_getAttachedNavMesh() {
+  dtNavMeshQuery *arg1 = (dtNavMeshQuery *) 0 ;
+  dtNavMesh *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (dtNavMesh *)((dtNavMeshQuery const *)arg1)->getAttachedNavMesh();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtAllocNavMeshQuery():int")))
+void _wrap_dtAllocNavMeshQuery() {
+  dtNavMeshQuery *result ;
+  
+  result = (dtNavMeshQuery *)dtAllocNavMeshQuery();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtFreeNavMeshQuery(query:int):void")))
+void _wrap_dtFreeNavMeshQuery() {
+  dtNavMeshQuery *arg1 = (dtNavMeshQuery *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, query);
+  }
+  dtFreeNavMeshQuery(arg1);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DT_NODE_OPEN():int")))
+void _wrap_DT_NODE_OPEN() {
+  int result ;
+  
+  result = DT_NODE_OPEN;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DT_NODE_CLOSED():int")))
+void _wrap_DT_NODE_CLOSED() {
+  int result ;
+  
+  result = DT_NODE_CLOSED;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DT_NULL_IDX_get():int")))
+void _wrap_DT_NULL_IDX_get() {
+  dtNodeIndex result ;
+  
+  result = (dtNodeIndex)(dtNodeIndex)DT_NULL_IDX;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNode_pos_set(self, pos:int):void")))
+void _wrap_dtNode_pos_set() {
+  dtNode *arg1 = (dtNode *) 0 ;
+  float *arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, pos);
+  }
+  {
+    size_t ii;
+    float *b = (float *) arg1->pos;
+    for (ii = 0; ii < (size_t)3; ii++) b[ii] = *((float *) arg2 + ii);
+  }
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNode_pos_get(self):int")))
+void _wrap_dtNode_pos_get() {
+  dtNode *arg1 = (dtNode *) 0 ;
+  float *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float *)(float *) ((arg1)->pos);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNode_cost_set(self, cost:Number):void")))
+void _wrap_dtNode_cost_set() {
+  dtNode *arg1 = (dtNode *) 0 ;
+  float arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, cost);
+  }
+  if (arg1) (arg1)->cost = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNode_cost_get(self):Number")))
+void _wrap_dtNode_cost_get() {
+  dtNode *arg1 = (dtNode *) 0 ;
+  float result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float) ((arg1)->cost);
+  {
+    AS3_DeclareVar(asresult, Number);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNode_total_set(self, total:Number):void")))
+void _wrap_dtNode_total_set() {
+  dtNode *arg1 = (dtNode *) 0 ;
+  float arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, total);
+  }
+  if (arg1) (arg1)->total = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNode_total_get(self):Number")))
+void _wrap_dtNode_total_get() {
+  dtNode *arg1 = (dtNode *) 0 ;
+  float result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float) ((arg1)->total);
+  {
+    AS3_DeclareVar(asresult, Number);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNode_pidx_set(self, pidx:int):void")))
+void _wrap_dtNode_pidx_set() {
+  dtNode *arg1 = (dtNode *) 0 ;
+  unsigned int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, pidx);
+  }
+  if (arg1) (arg1)->pidx = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNode_pidx_get(self):int")))
+void _wrap_dtNode_pidx_get() {
+  dtNode *arg1 = (dtNode *) 0 ;
+  unsigned int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned int) ((arg1)->pidx);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNode_flags_set(self, flags:int):void")))
+void _wrap_dtNode_flags_set() {
+  dtNode *arg1 = (dtNode *) 0 ;
+  unsigned int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, flags);
+  }
+  if (arg1) (arg1)->flags = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNode_flags_get(self):int")))
+void _wrap_dtNode_flags_get() {
+  dtNode *arg1 = (dtNode *) 0 ;
+  unsigned int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned int) ((arg1)->flags);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNode_id_set(self, id:int):void")))
+void _wrap_dtNode_id_set() {
+  dtNode *arg1 = (dtNode *) 0 ;
+  dtPolyRef arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, id);
+  }
+  if (arg1) (arg1)->id = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNode_id_get(self):int")))
+void _wrap_dtNode_id_get() {
+  dtNode *arg1 = (dtNode *) 0 ;
+  dtPolyRef result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (dtPolyRef) ((arg1)->id);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_new_dtNode():int")))
+void _wrap_new_dtNode() {
+  dtNode *result ;
+  
+  result = (dtNode *)new dtNode();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_delete_dtNode(self):void")))
+void _wrap_delete_dtNode() {
+  dtNode *arg1 = (dtNode *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  delete arg1;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_new_dtNodePool(maxNodes:int, hashSize:int):int")))
+void _wrap_new_dtNodePool() {
+  int arg1 ;
+  int arg2 ;
+  dtNodePool *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, maxNodes);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, hashSize);
+  }
+  result = (dtNodePool *)new dtNodePool(arg1,arg2);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_delete_dtNodePool(self):void")))
+void _wrap_delete_dtNodePool() {
+  dtNodePool *arg1 = (dtNodePool *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  delete arg1;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNodePool_equals(self, arg2:int):void")))
+void _wrap_dtNodePool_equals() {
+  dtNodePool *arg1 = (dtNodePool *) 0 ;
+  dtNodePool *arg2 = 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, arg2);
+  }
+  (arg1)->operator =((dtNodePool const &)*arg2);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNodePool_clear(self):void")))
+void _wrap_dtNodePool_clear() {
+  dtNodePool *arg1 = (dtNodePool *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  (arg1)->clear();
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNodePool_getNode(self, id:int):int")))
+void _wrap_dtNodePool_getNode() {
+  dtNodePool *arg1 = (dtNodePool *) 0 ;
+  dtPolyRef arg2 ;
+  dtNode *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, id);
+  }
+  result = (dtNode *)(arg1)->getNode(arg2);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNodePool_findNode(self, id:int):int")))
+void _wrap_dtNodePool_findNode() {
+  dtNodePool *arg1 = (dtNodePool *) 0 ;
+  dtPolyRef arg2 ;
+  dtNode *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, id);
+  }
+  result = (dtNode *)(arg1)->findNode(arg2);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNodePool_getNodeIdx(self, node:int):int")))
+void _wrap_dtNodePool_getNodeIdx() {
+  dtNodePool *arg1 = (dtNodePool *) 0 ;
+  dtNode *arg2 = (dtNode *) 0 ;
+  unsigned int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, node);
+  }
+  result = (unsigned int)((dtNodePool const *)arg1)->getNodeIdx((dtNode const *)arg2);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNodePool_getNodeAtIdx(self, idx:int):int")))
+void _wrap_dtNodePool_getNodeAtIdx() {
+  dtNodePool *arg1 = (dtNodePool *) 0 ;
+  unsigned int arg2 ;
+  dtNode *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, idx);
+  }
+  result = (dtNode *)(arg1)->getNodeAtIdx(arg2);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNodePool_getMemUsed(self):int")))
+void _wrap_dtNodePool_getMemUsed() {
+  dtNodePool *arg1 = (dtNodePool *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int)((dtNodePool const *)arg1)->getMemUsed();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNodePool_getMaxNodes(self):int")))
+void _wrap_dtNodePool_getMaxNodes() {
+  dtNodePool *arg1 = (dtNodePool *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int)((dtNodePool const *)arg1)->getMaxNodes();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNodePool_getHashSize(self):int")))
+void _wrap_dtNodePool_getHashSize() {
+  dtNodePool *arg1 = (dtNodePool *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int)((dtNodePool const *)arg1)->getHashSize();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNodePool_getFirst(self, bucket:int):int")))
+void _wrap_dtNodePool_getFirst() {
+  dtNodePool *arg1 = (dtNodePool *) 0 ;
+  int arg2 ;
+  dtNodeIndex result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, bucket);
+  }
+  result = (dtNodeIndex)((dtNodePool const *)arg1)->getFirst(arg2);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNodePool_getNext(self, i:int):int")))
+void _wrap_dtNodePool_getNext() {
+  dtNodePool *arg1 = (dtNodePool *) 0 ;
+  int arg2 ;
+  dtNodeIndex result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, i);
+  }
+  result = (dtNodeIndex)((dtNodePool const *)arg1)->getNext(arg2);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_new_dtNodeQueue(n:int):int")))
+void _wrap_new_dtNodeQueue() {
+  int arg1 ;
+  dtNodeQueue *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, n);
+  }
+  result = (dtNodeQueue *)new dtNodeQueue(arg1);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_delete_dtNodeQueue(self):void")))
+void _wrap_delete_dtNodeQueue() {
+  dtNodeQueue *arg1 = (dtNodeQueue *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  delete arg1;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNodeQueue_equals(self, arg2:int):void")))
+void _wrap_dtNodeQueue_equals() {
+  dtNodeQueue *arg1 = (dtNodeQueue *) 0 ;
+  dtNodeQueue *arg2 = 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, arg2);
+  }
+  (arg1)->operator =(*arg2);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNodeQueue_clear(self):void")))
+void _wrap_dtNodeQueue_clear() {
+  dtNodeQueue *arg1 = (dtNodeQueue *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  (arg1)->clear();
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNodeQueue_top(self):int")))
+void _wrap_dtNodeQueue_top() {
+  dtNodeQueue *arg1 = (dtNodeQueue *) 0 ;
+  dtNode *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (dtNode *)(arg1)->top();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNodeQueue_pop(self):int")))
+void _wrap_dtNodeQueue_pop() {
+  dtNodeQueue *arg1 = (dtNodeQueue *) 0 ;
+  dtNode *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (dtNode *)(arg1)->pop();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNodeQueue_push(self, node:int):void")))
+void _wrap_dtNodeQueue_push() {
+  dtNodeQueue *arg1 = (dtNodeQueue *) 0 ;
+  dtNode *arg2 = (dtNode *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, node);
+  }
+  (arg1)->push(arg2);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNodeQueue_modify(self, node:int):void")))
+void _wrap_dtNodeQueue_modify() {
+  dtNodeQueue *arg1 = (dtNodeQueue *) 0 ;
+  dtNode *arg2 = (dtNode *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, node);
+  }
+  (arg1)->modify(arg2);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNodeQueue_empty(self):Boolean")))
+void _wrap_dtNodeQueue_empty() {
+  dtNodeQueue *arg1 = (dtNodeQueue *) 0 ;
+  bool result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (bool)((dtNodeQueue const *)arg1)->empty();
+  {
+    AS3_DeclareVar(asresult, Boolean);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNodeQueue_getMemUsed(self):int")))
+void _wrap_dtNodeQueue_getMemUsed() {
+  dtNodeQueue *arg1 = (dtNodeQueue *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int)((dtNodeQueue const *)arg1)->getMemUsed();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtNodeQueue_getCapacity(self):int")))
+void _wrap_dtNodeQueue_getCapacity() {
+  dtNodeQueue *arg1 = (dtNodeQueue *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int)((dtNodeQueue const *)arg1)->getCapacity();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DT_FAILURE_get():int")))
+void _wrap_DT_FAILURE_get() {
+  unsigned int result ;
+  
+  result = (unsigned int)(unsigned int)DT_FAILURE;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DT_SUCCESS_get():int")))
+void _wrap_DT_SUCCESS_get() {
+  unsigned int result ;
+  
+  result = (unsigned int)(unsigned int)DT_SUCCESS;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DT_IN_PROGRESS_get():int")))
+void _wrap_DT_IN_PROGRESS_get() {
+  unsigned int result ;
+  
+  result = (unsigned int)(unsigned int)DT_IN_PROGRESS;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DT_STATUS_DETAIL_MASK_get():int")))
+void _wrap_DT_STATUS_DETAIL_MASK_get() {
+  unsigned int result ;
+  
+  result = (unsigned int)(unsigned int)DT_STATUS_DETAIL_MASK;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DT_WRONG_MAGIC_get():int")))
+void _wrap_DT_WRONG_MAGIC_get() {
+  unsigned int result ;
+  
+  result = (unsigned int)(unsigned int)DT_WRONG_MAGIC;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DT_WRONG_VERSION_get():int")))
+void _wrap_DT_WRONG_VERSION_get() {
+  unsigned int result ;
+  
+  result = (unsigned int)(unsigned int)DT_WRONG_VERSION;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DT_OUT_OF_MEMORY_get():int")))
+void _wrap_DT_OUT_OF_MEMORY_get() {
+  unsigned int result ;
+  
+  result = (unsigned int)(unsigned int)DT_OUT_OF_MEMORY;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DT_INVALID_PARAM_get():int")))
+void _wrap_DT_INVALID_PARAM_get() {
+  unsigned int result ;
+  
+  result = (unsigned int)(unsigned int)DT_INVALID_PARAM;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DT_BUFFER_TOO_SMALL_get():int")))
+void _wrap_DT_BUFFER_TOO_SMALL_get() {
+  unsigned int result ;
+  
+  result = (unsigned int)(unsigned int)DT_BUFFER_TOO_SMALL;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DT_OUT_OF_NODES_get():int")))
+void _wrap_DT_OUT_OF_NODES_get() {
+  unsigned int result ;
+  
+  result = (unsigned int)(unsigned int)DT_OUT_OF_NODES;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DT_PARTIAL_RESULT_get():int")))
+void _wrap_DT_PARTIAL_RESULT_get() {
+  unsigned int result ;
+  
+  result = (unsigned int)(unsigned int)DT_PARTIAL_RESULT;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtStatusSucceed(status:int):Boolean")))
+void _wrap_dtStatusSucceed() {
+  dtStatus arg1 ;
+  bool result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, status);
+  }
+  result = (bool)dtStatusSucceed(arg1);
+  {
+    AS3_DeclareVar(asresult, Boolean);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtStatusFailed(status:int):Boolean")))
+void _wrap_dtStatusFailed() {
+  dtStatus arg1 ;
+  bool result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, status);
+  }
+  result = (bool)dtStatusFailed(arg1);
+  {
+    AS3_DeclareVar(asresult, Boolean);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtStatusInProgress(status:int):Boolean")))
+void _wrap_dtStatusInProgress() {
+  dtStatus arg1 ;
+  bool result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, status);
+  }
+  result = (bool)dtStatusInProgress(arg1);
+  {
+    AS3_DeclareVar(asresult, Boolean);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtStatusDetail(status:int, detail:int):Boolean")))
+void _wrap_dtStatusDetail() {
+  dtStatus arg1 ;
+  unsigned int arg2 ;
+  bool result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, status);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, detail);
+  }
+  result = (bool)dtStatusDetail(arg1,arg2);
+  {
+    AS3_DeclareVar(asresult, Boolean);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DT_CROWDAGENT_MAX_NEIGHBOURS_get():int")))
+void _wrap_DT_CROWDAGENT_MAX_NEIGHBOURS_get() {
+  int result ;
+  
+  result = (int)(int)DT_CROWDAGENT_MAX_NEIGHBOURS;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DT_CROWDAGENT_MAX_CORNERS_get():int")))
+void _wrap_DT_CROWDAGENT_MAX_CORNERS_get() {
+  int result ;
+  
+  result = (int)(int)DT_CROWDAGENT_MAX_CORNERS;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DT_CROWD_MAX_OBSTAVOIDANCE_PARAMS_get():int")))
+void _wrap_DT_CROWD_MAX_OBSTAVOIDANCE_PARAMS_get() {
+  int result ;
+  
+  result = (int)(int)DT_CROWD_MAX_OBSTAVOIDANCE_PARAMS;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdNeighbour_idx_set(self, idx:int):void")))
+void _wrap_dtCrowdNeighbour_idx_set() {
+  dtCrowdNeighbour *arg1 = (dtCrowdNeighbour *) 0 ;
+  int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, idx);
+  }
+  if (arg1) (arg1)->idx = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdNeighbour_idx_get(self):int")))
+void _wrap_dtCrowdNeighbour_idx_get() {
+  dtCrowdNeighbour *arg1 = (dtCrowdNeighbour *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int) ((arg1)->idx);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdNeighbour_dist_set(self, dist:Number):void")))
+void _wrap_dtCrowdNeighbour_dist_set() {
+  dtCrowdNeighbour *arg1 = (dtCrowdNeighbour *) 0 ;
+  float arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, dist);
+  }
+  if (arg1) (arg1)->dist = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdNeighbour_dist_get(self):Number")))
+void _wrap_dtCrowdNeighbour_dist_get() {
+  dtCrowdNeighbour *arg1 = (dtCrowdNeighbour *) 0 ;
+  float result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float) ((arg1)->dist);
+  {
+    AS3_DeclareVar(asresult, Number);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_new_dtCrowdNeighbour():int")))
+void _wrap_new_dtCrowdNeighbour() {
+  dtCrowdNeighbour *result ;
+  
+  result = (dtCrowdNeighbour *)new dtCrowdNeighbour();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_delete_dtCrowdNeighbour(self):void")))
+void _wrap_delete_dtCrowdNeighbour() {
+  dtCrowdNeighbour *arg1 = (dtCrowdNeighbour *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  delete arg1;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DT_CROWDAGENT_STATE_INVALID():int")))
+void _wrap_DT_CROWDAGENT_STATE_INVALID() {
+  int result ;
+  
+  result = DT_CROWDAGENT_STATE_INVALID;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DT_CROWDAGENT_STATE_WALKING():int")))
+void _wrap_DT_CROWDAGENT_STATE_WALKING() {
+  int result ;
+  
+  result = DT_CROWDAGENT_STATE_WALKING;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DT_CROWDAGENT_STATE_OFFMESH():int")))
+void _wrap_DT_CROWDAGENT_STATE_OFFMESH() {
+  int result ;
+  
+  result = DT_CROWDAGENT_STATE_OFFMESH;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgentParams_radius_set(self, radius:Number):void")))
+void _wrap_dtCrowdAgentParams_radius_set() {
+  dtCrowdAgentParams *arg1 = (dtCrowdAgentParams *) 0 ;
+  float arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, radius);
+  }
+  if (arg1) (arg1)->radius = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgentParams_radius_get(self):Number")))
+void _wrap_dtCrowdAgentParams_radius_get() {
+  dtCrowdAgentParams *arg1 = (dtCrowdAgentParams *) 0 ;
+  float result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float) ((arg1)->radius);
+  {
+    AS3_DeclareVar(asresult, Number);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgentParams_height_set(self, height:Number):void")))
+void _wrap_dtCrowdAgentParams_height_set() {
+  dtCrowdAgentParams *arg1 = (dtCrowdAgentParams *) 0 ;
+  float arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, height);
+  }
+  if (arg1) (arg1)->height = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgentParams_height_get(self):Number")))
+void _wrap_dtCrowdAgentParams_height_get() {
+  dtCrowdAgentParams *arg1 = (dtCrowdAgentParams *) 0 ;
+  float result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float) ((arg1)->height);
+  {
+    AS3_DeclareVar(asresult, Number);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgentParams_maxAcceleration_set(self, maxAcceleration:Number):void")))
+void _wrap_dtCrowdAgentParams_maxAcceleration_set() {
+  dtCrowdAgentParams *arg1 = (dtCrowdAgentParams *) 0 ;
+  float arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, maxAcceleration);
+  }
+  if (arg1) (arg1)->maxAcceleration = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgentParams_maxAcceleration_get(self):Number")))
+void _wrap_dtCrowdAgentParams_maxAcceleration_get() {
+  dtCrowdAgentParams *arg1 = (dtCrowdAgentParams *) 0 ;
+  float result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float) ((arg1)->maxAcceleration);
+  {
+    AS3_DeclareVar(asresult, Number);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgentParams_maxSpeed_set(self, maxSpeed:Number):void")))
+void _wrap_dtCrowdAgentParams_maxSpeed_set() {
+  dtCrowdAgentParams *arg1 = (dtCrowdAgentParams *) 0 ;
+  float arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, maxSpeed);
+  }
+  if (arg1) (arg1)->maxSpeed = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgentParams_maxSpeed_get(self):Number")))
+void _wrap_dtCrowdAgentParams_maxSpeed_get() {
+  dtCrowdAgentParams *arg1 = (dtCrowdAgentParams *) 0 ;
+  float result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float) ((arg1)->maxSpeed);
+  {
+    AS3_DeclareVar(asresult, Number);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgentParams_collisionQueryRange_set(self, collisionQueryRange:Number):void")))
+void _wrap_dtCrowdAgentParams_collisionQueryRange_set() {
+  dtCrowdAgentParams *arg1 = (dtCrowdAgentParams *) 0 ;
+  float arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, collisionQueryRange);
+  }
+  if (arg1) (arg1)->collisionQueryRange = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgentParams_collisionQueryRange_get(self):Number")))
+void _wrap_dtCrowdAgentParams_collisionQueryRange_get() {
+  dtCrowdAgentParams *arg1 = (dtCrowdAgentParams *) 0 ;
+  float result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float) ((arg1)->collisionQueryRange);
+  {
+    AS3_DeclareVar(asresult, Number);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgentParams_pathOptimizationRange_set(self, pathOptimizationRange:Number):void")))
+void _wrap_dtCrowdAgentParams_pathOptimizationRange_set() {
+  dtCrowdAgentParams *arg1 = (dtCrowdAgentParams *) 0 ;
+  float arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, pathOptimizationRange);
+  }
+  if (arg1) (arg1)->pathOptimizationRange = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgentParams_pathOptimizationRange_get(self):Number")))
+void _wrap_dtCrowdAgentParams_pathOptimizationRange_get() {
+  dtCrowdAgentParams *arg1 = (dtCrowdAgentParams *) 0 ;
+  float result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float) ((arg1)->pathOptimizationRange);
+  {
+    AS3_DeclareVar(asresult, Number);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgentParams_separationWeight_set(self, separationWeight:Number):void")))
+void _wrap_dtCrowdAgentParams_separationWeight_set() {
+  dtCrowdAgentParams *arg1 = (dtCrowdAgentParams *) 0 ;
+  float arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, separationWeight);
+  }
+  if (arg1) (arg1)->separationWeight = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgentParams_separationWeight_get(self):Number")))
+void _wrap_dtCrowdAgentParams_separationWeight_get() {
+  dtCrowdAgentParams *arg1 = (dtCrowdAgentParams *) 0 ;
+  float result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float) ((arg1)->separationWeight);
+  {
+    AS3_DeclareVar(asresult, Number);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgentParams_updateFlags_set(self, updateFlags:String):void")))
+void _wrap_dtCrowdAgentParams_updateFlags_set() {
+  dtCrowdAgentParams *arg1 = (dtCrowdAgentParams *) 0 ;
+  unsigned char arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    inline_nonreentrant_as3(
+      "%0 = updateFlags.charCodeAt(0)" : "=r"(arg2)
+      );
+  }
+  if (arg1) (arg1)->updateFlags = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgentParams_updateFlags_get(self):String")))
+void _wrap_dtCrowdAgentParams_updateFlags_get() {
+  dtCrowdAgentParams *arg1 = (dtCrowdAgentParams *) 0 ;
+  unsigned char result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned char) ((arg1)->updateFlags);
+  {
+    AS3_DeclareVar(asresult, String);
+    AS3_CopyCStringToVar(asresult, &result, 1);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgentParams_obstacleAvoidanceType_set(self, obstacleAvoidanceType:String):void")))
+void _wrap_dtCrowdAgentParams_obstacleAvoidanceType_set() {
+  dtCrowdAgentParams *arg1 = (dtCrowdAgentParams *) 0 ;
+  unsigned char arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    inline_nonreentrant_as3(
+      "%0 = obstacleAvoidanceType.charCodeAt(0)" : "=r"(arg2)
+      );
+  }
+  if (arg1) (arg1)->obstacleAvoidanceType = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgentParams_obstacleAvoidanceType_get(self):String")))
+void _wrap_dtCrowdAgentParams_obstacleAvoidanceType_get() {
+  dtCrowdAgentParams *arg1 = (dtCrowdAgentParams *) 0 ;
+  unsigned char result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned char) ((arg1)->obstacleAvoidanceType);
+  {
+    AS3_DeclareVar(asresult, String);
+    AS3_CopyCStringToVar(asresult, &result, 1);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgentParams_userData_set(self, userData:int):void")))
+void _wrap_dtCrowdAgentParams_userData_set() {
+  dtCrowdAgentParams *arg1 = (dtCrowdAgentParams *) 0 ;
+  void *arg2 = (void *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, userData);
+  }
+  if (arg1) (arg1)->userData = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgentParams_userData_get(self):int")))
+void _wrap_dtCrowdAgentParams_userData_get() {
+  dtCrowdAgentParams *arg1 = (dtCrowdAgentParams *) 0 ;
+  void *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (void *) ((arg1)->userData);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_new_dtCrowdAgentParams():int")))
+void _wrap_new_dtCrowdAgentParams() {
+  dtCrowdAgentParams *result ;
+  
+  result = (dtCrowdAgentParams *)new dtCrowdAgentParams();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_delete_dtCrowdAgentParams(self):void")))
+void _wrap_delete_dtCrowdAgentParams() {
+  dtCrowdAgentParams *arg1 = (dtCrowdAgentParams *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  delete arg1;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DT_CROWDAGENT_TARGET_NONE():int")))
+void _wrap_DT_CROWDAGENT_TARGET_NONE() {
+  int result ;
+  
+  result = DT_CROWDAGENT_TARGET_NONE;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DT_CROWDAGENT_TARGET_FAILED():int")))
+void _wrap_DT_CROWDAGENT_TARGET_FAILED() {
+  int result ;
+  
+  result = DT_CROWDAGENT_TARGET_FAILED;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DT_CROWDAGENT_TARGET_VALID():int")))
+void _wrap_DT_CROWDAGENT_TARGET_VALID() {
+  int result ;
+  
+  result = DT_CROWDAGENT_TARGET_VALID;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DT_CROWDAGENT_TARGET_REQUESTING():int")))
+void _wrap_DT_CROWDAGENT_TARGET_REQUESTING() {
+  int result ;
+  
+  result = DT_CROWDAGENT_TARGET_REQUESTING;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DT_CROWDAGENT_TARGET_WAITING_FOR_QUEUE():int")))
+void _wrap_DT_CROWDAGENT_TARGET_WAITING_FOR_QUEUE() {
+  int result ;
+  
+  result = DT_CROWDAGENT_TARGET_WAITING_FOR_QUEUE;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DT_CROWDAGENT_TARGET_WAITING_FOR_PATH():int")))
+void _wrap_DT_CROWDAGENT_TARGET_WAITING_FOR_PATH() {
+  int result ;
+  
+  result = DT_CROWDAGENT_TARGET_WAITING_FOR_PATH;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DT_CROWDAGENT_TARGET_VELOCITY():int")))
+void _wrap_DT_CROWDAGENT_TARGET_VELOCITY() {
+  int result ;
+  
+  result = DT_CROWDAGENT_TARGET_VELOCITY;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgent_active_set(self, active:String):void")))
+void _wrap_dtCrowdAgent_active_set() {
+  dtCrowdAgent *arg1 = (dtCrowdAgent *) 0 ;
+  unsigned char arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    inline_nonreentrant_as3(
+      "%0 = active.charCodeAt(0)" : "=r"(arg2)
+      );
+  }
+  if (arg1) (arg1)->active = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgent_active_get(self):String")))
+void _wrap_dtCrowdAgent_active_get() {
+  dtCrowdAgent *arg1 = (dtCrowdAgent *) 0 ;
+  unsigned char result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned char) ((arg1)->active);
+  {
+    AS3_DeclareVar(asresult, String);
+    AS3_CopyCStringToVar(asresult, &result, 1);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgent_state_set(self, state:String):void")))
+void _wrap_dtCrowdAgent_state_set() {
+  dtCrowdAgent *arg1 = (dtCrowdAgent *) 0 ;
+  unsigned char arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    inline_nonreentrant_as3(
+      "%0 = state.charCodeAt(0)" : "=r"(arg2)
+      );
+  }
+  if (arg1) (arg1)->state = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgent_state_get(self):String")))
+void _wrap_dtCrowdAgent_state_get() {
+  dtCrowdAgent *arg1 = (dtCrowdAgent *) 0 ;
+  unsigned char result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned char) ((arg1)->state);
+  {
+    AS3_DeclareVar(asresult, String);
+    AS3_CopyCStringToVar(asresult, &result, 1);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgent_corridor_set(self, corridor:int):void")))
+void _wrap_dtCrowdAgent_corridor_set() {
+  dtCrowdAgent *arg1 = (dtCrowdAgent *) 0 ;
+  dtPathCorridor *arg2 = (dtPathCorridor *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, corridor);
+  }
+  if (arg1) (arg1)->corridor = *arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgent_corridor_get(self):int")))
+void _wrap_dtCrowdAgent_corridor_get() {
+  dtCrowdAgent *arg1 = (dtCrowdAgent *) 0 ;
+  dtPathCorridor *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (dtPathCorridor *)& ((arg1)->corridor);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgent_boundary_set(self, boundary:int):void")))
+void _wrap_dtCrowdAgent_boundary_set() {
+  dtCrowdAgent *arg1 = (dtCrowdAgent *) 0 ;
+  dtLocalBoundary *arg2 = (dtLocalBoundary *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, boundary);
+  }
+  if (arg1) (arg1)->boundary = *arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgent_boundary_get(self):int")))
+void _wrap_dtCrowdAgent_boundary_get() {
+  dtCrowdAgent *arg1 = (dtCrowdAgent *) 0 ;
+  dtLocalBoundary *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (dtLocalBoundary *)& ((arg1)->boundary);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgent_topologyOptTime_set(self, topologyOptTime:Number):void")))
+void _wrap_dtCrowdAgent_topologyOptTime_set() {
+  dtCrowdAgent *arg1 = (dtCrowdAgent *) 0 ;
+  float arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, topologyOptTime);
+  }
+  if (arg1) (arg1)->topologyOptTime = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgent_topologyOptTime_get(self):Number")))
+void _wrap_dtCrowdAgent_topologyOptTime_get() {
+  dtCrowdAgent *arg1 = (dtCrowdAgent *) 0 ;
+  float result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float) ((arg1)->topologyOptTime);
+  {
+    AS3_DeclareVar(asresult, Number);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgent_neis_set(self, neis:int):void")))
+void _wrap_dtCrowdAgent_neis_set() {
+  dtCrowdAgent *arg1 = (dtCrowdAgent *) 0 ;
+  dtCrowdNeighbour *arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, neis);
+  }
+  {
+    size_t ii;
+    dtCrowdNeighbour *b = (dtCrowdNeighbour *) arg1->neis;
+    for (ii = 0; ii < (size_t)DT_CROWDAGENT_MAX_NEIGHBOURS; ii++) b[ii] = *((dtCrowdNeighbour *) arg2 + ii);
+  }
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgent_neis_get(self):int")))
+void _wrap_dtCrowdAgent_neis_get() {
+  dtCrowdAgent *arg1 = (dtCrowdAgent *) 0 ;
+  dtCrowdNeighbour *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (dtCrowdNeighbour *)(dtCrowdNeighbour *) ((arg1)->neis);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgent_nneis_set(self, nneis:int):void")))
+void _wrap_dtCrowdAgent_nneis_set() {
+  dtCrowdAgent *arg1 = (dtCrowdAgent *) 0 ;
+  int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, nneis);
+  }
+  if (arg1) (arg1)->nneis = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgent_nneis_get(self):int")))
+void _wrap_dtCrowdAgent_nneis_get() {
+  dtCrowdAgent *arg1 = (dtCrowdAgent *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int) ((arg1)->nneis);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgent_desiredSpeed_set(self, desiredSpeed:Number):void")))
+void _wrap_dtCrowdAgent_desiredSpeed_set() {
+  dtCrowdAgent *arg1 = (dtCrowdAgent *) 0 ;
+  float arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, desiredSpeed);
+  }
+  if (arg1) (arg1)->desiredSpeed = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgent_desiredSpeed_get(self):Number")))
+void _wrap_dtCrowdAgent_desiredSpeed_get() {
+  dtCrowdAgent *arg1 = (dtCrowdAgent *) 0 ;
+  float result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float) ((arg1)->desiredSpeed);
+  {
+    AS3_DeclareVar(asresult, Number);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgent_npos_set(self, npos:int):void")))
+void _wrap_dtCrowdAgent_npos_set() {
+  dtCrowdAgent *arg1 = (dtCrowdAgent *) 0 ;
+  float *arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, npos);
+  }
+  {
+    size_t ii;
+    float *b = (float *) arg1->npos;
+    for (ii = 0; ii < (size_t)3; ii++) b[ii] = *((float *) arg2 + ii);
+  }
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgent_npos_get(self):int")))
+void _wrap_dtCrowdAgent_npos_get() {
+  dtCrowdAgent *arg1 = (dtCrowdAgent *) 0 ;
+  float *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float *)(float *) ((arg1)->npos);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgent_disp_set(self, disp:int):void")))
+void _wrap_dtCrowdAgent_disp_set() {
+  dtCrowdAgent *arg1 = (dtCrowdAgent *) 0 ;
+  float *arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, disp);
+  }
+  {
+    size_t ii;
+    float *b = (float *) arg1->disp;
+    for (ii = 0; ii < (size_t)3; ii++) b[ii] = *((float *) arg2 + ii);
+  }
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgent_disp_get(self):int")))
+void _wrap_dtCrowdAgent_disp_get() {
+  dtCrowdAgent *arg1 = (dtCrowdAgent *) 0 ;
+  float *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float *)(float *) ((arg1)->disp);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgent_dvel_set(self, dvel:int):void")))
+void _wrap_dtCrowdAgent_dvel_set() {
+  dtCrowdAgent *arg1 = (dtCrowdAgent *) 0 ;
+  float *arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, dvel);
+  }
+  {
+    size_t ii;
+    float *b = (float *) arg1->dvel;
+    for (ii = 0; ii < (size_t)3; ii++) b[ii] = *((float *) arg2 + ii);
+  }
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgent_dvel_get(self):int")))
+void _wrap_dtCrowdAgent_dvel_get() {
+  dtCrowdAgent *arg1 = (dtCrowdAgent *) 0 ;
+  float *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float *)(float *) ((arg1)->dvel);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgent_nvel_set(self, nvel:int):void")))
+void _wrap_dtCrowdAgent_nvel_set() {
+  dtCrowdAgent *arg1 = (dtCrowdAgent *) 0 ;
+  float *arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, nvel);
+  }
+  {
+    size_t ii;
+    float *b = (float *) arg1->nvel;
+    for (ii = 0; ii < (size_t)3; ii++) b[ii] = *((float *) arg2 + ii);
+  }
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgent_nvel_get(self):int")))
+void _wrap_dtCrowdAgent_nvel_get() {
+  dtCrowdAgent *arg1 = (dtCrowdAgent *) 0 ;
+  float *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float *)(float *) ((arg1)->nvel);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgent_vel_set(self, vel:int):void")))
+void _wrap_dtCrowdAgent_vel_set() {
+  dtCrowdAgent *arg1 = (dtCrowdAgent *) 0 ;
+  float *arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, vel);
+  }
+  {
+    size_t ii;
+    float *b = (float *) arg1->vel;
+    for (ii = 0; ii < (size_t)3; ii++) b[ii] = *((float *) arg2 + ii);
+  }
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgent_vel_get(self):int")))
+void _wrap_dtCrowdAgent_vel_get() {
+  dtCrowdAgent *arg1 = (dtCrowdAgent *) 0 ;
+  float *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float *)(float *) ((arg1)->vel);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgent_params_set(self, params:int):void")))
+void _wrap_dtCrowdAgent_params_set() {
+  dtCrowdAgent *arg1 = (dtCrowdAgent *) 0 ;
+  dtCrowdAgentParams *arg2 = (dtCrowdAgentParams *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, params);
+  }
+  if (arg1) (arg1)->params = *arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgent_params_get(self):int")))
+void _wrap_dtCrowdAgent_params_get() {
+  dtCrowdAgent *arg1 = (dtCrowdAgent *) 0 ;
+  dtCrowdAgentParams *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (dtCrowdAgentParams *)& ((arg1)->params);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgent_cornerVerts_set(self, cornerVerts:int):void")))
+void _wrap_dtCrowdAgent_cornerVerts_set() {
+  dtCrowdAgent *arg1 = (dtCrowdAgent *) 0 ;
+  float *arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, cornerVerts);
+  }
+  {
+    size_t ii;
+    float *b = (float *) arg1->cornerVerts;
+    for (ii = 0; ii < (size_t)DT_CROWDAGENT_MAX_CORNERS*3; ii++) b[ii] = *((float *) arg2 + ii);
+  }
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgent_cornerVerts_get(self):int")))
+void _wrap_dtCrowdAgent_cornerVerts_get() {
+  dtCrowdAgent *arg1 = (dtCrowdAgent *) 0 ;
+  float *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float *)(float *) ((arg1)->cornerVerts);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgent_cornerFlags_set(self, cornerFlags:int):void")))
+void _wrap_dtCrowdAgent_cornerFlags_set() {
+  dtCrowdAgent *arg1 = (dtCrowdAgent *) 0 ;
+  unsigned char *arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, cornerFlags);
+  }
+  {
+    size_t ii;
+    unsigned char *b = (unsigned char *) arg1->cornerFlags;
+    for (ii = 0; ii < (size_t)DT_CROWDAGENT_MAX_CORNERS; ii++) b[ii] = *((unsigned char *) arg2 + ii);
+  }
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgent_cornerFlags_get(self):int")))
+void _wrap_dtCrowdAgent_cornerFlags_get() {
+  dtCrowdAgent *arg1 = (dtCrowdAgent *) 0 ;
+  unsigned char *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned char *)(unsigned char *) ((arg1)->cornerFlags);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgent_cornerPolys_set(self, cornerPolys:int):void")))
+void _wrap_dtCrowdAgent_cornerPolys_set() {
+  dtCrowdAgent *arg1 = (dtCrowdAgent *) 0 ;
+  dtPolyRef *arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, cornerPolys);
+  }
+  {
+    size_t ii;
+    dtPolyRef *b = (dtPolyRef *) arg1->cornerPolys;
+    for (ii = 0; ii < (size_t)DT_CROWDAGENT_MAX_CORNERS; ii++) b[ii] = *((dtPolyRef *) arg2 + ii);
+  }
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgent_cornerPolys_get(self):int")))
+void _wrap_dtCrowdAgent_cornerPolys_get() {
+  dtCrowdAgent *arg1 = (dtCrowdAgent *) 0 ;
+  dtPolyRef *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (dtPolyRef *)(dtPolyRef *) ((arg1)->cornerPolys);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgent_ncorners_set(self, ncorners:int):void")))
+void _wrap_dtCrowdAgent_ncorners_set() {
+  dtCrowdAgent *arg1 = (dtCrowdAgent *) 0 ;
+  int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, ncorners);
+  }
+  if (arg1) (arg1)->ncorners = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgent_ncorners_get(self):int")))
+void _wrap_dtCrowdAgent_ncorners_get() {
+  dtCrowdAgent *arg1 = (dtCrowdAgent *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int) ((arg1)->ncorners);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgent_targetState_set(self, targetState:String):void")))
+void _wrap_dtCrowdAgent_targetState_set() {
+  dtCrowdAgent *arg1 = (dtCrowdAgent *) 0 ;
+  unsigned char arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    inline_nonreentrant_as3(
+      "%0 = targetState.charCodeAt(0)" : "=r"(arg2)
+      );
+  }
+  if (arg1) (arg1)->targetState = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgent_targetState_get(self):String")))
+void _wrap_dtCrowdAgent_targetState_get() {
+  dtCrowdAgent *arg1 = (dtCrowdAgent *) 0 ;
+  unsigned char result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned char) ((arg1)->targetState);
+  {
+    AS3_DeclareVar(asresult, String);
+    AS3_CopyCStringToVar(asresult, &result, 1);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgent_targetRef_set(self, targetRef:int):void")))
+void _wrap_dtCrowdAgent_targetRef_set() {
+  dtCrowdAgent *arg1 = (dtCrowdAgent *) 0 ;
+  dtPolyRef arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, targetRef);
+  }
+  if (arg1) (arg1)->targetRef = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgent_targetRef_get(self):int")))
+void _wrap_dtCrowdAgent_targetRef_get() {
+  dtCrowdAgent *arg1 = (dtCrowdAgent *) 0 ;
+  dtPolyRef result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (dtPolyRef) ((arg1)->targetRef);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgent_targetPos_set(self, targetPos:int):void")))
+void _wrap_dtCrowdAgent_targetPos_set() {
+  dtCrowdAgent *arg1 = (dtCrowdAgent *) 0 ;
+  float *arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, targetPos);
+  }
+  {
+    size_t ii;
+    float *b = (float *) arg1->targetPos;
+    for (ii = 0; ii < (size_t)3; ii++) b[ii] = *((float *) arg2 + ii);
+  }
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgent_targetPos_get(self):int")))
+void _wrap_dtCrowdAgent_targetPos_get() {
+  dtCrowdAgent *arg1 = (dtCrowdAgent *) 0 ;
+  float *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float *)(float *) ((arg1)->targetPos);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgent_targetPathqRef_set(self, targetPathqRef:int):void")))
+void _wrap_dtCrowdAgent_targetPathqRef_set() {
+  dtCrowdAgent *arg1 = (dtCrowdAgent *) 0 ;
+  dtPathQueueRef arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, targetPathqRef);
+  }
+  if (arg1) (arg1)->targetPathqRef = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgent_targetPathqRef_get(self):int")))
+void _wrap_dtCrowdAgent_targetPathqRef_get() {
+  dtCrowdAgent *arg1 = (dtCrowdAgent *) 0 ;
+  dtPathQueueRef result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (dtPathQueueRef) ((arg1)->targetPathqRef);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgent_targetReplan_set(self, targetReplan:Boolean):void")))
+void _wrap_dtCrowdAgent_targetReplan_set() {
+  dtCrowdAgent *arg1 = (dtCrowdAgent *) 0 ;
+  bool arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, targetReplan);
+  }
+  if (arg1) (arg1)->targetReplan = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgent_targetReplan_get(self):Boolean")))
+void _wrap_dtCrowdAgent_targetReplan_get() {
+  dtCrowdAgent *arg1 = (dtCrowdAgent *) 0 ;
+  bool result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (bool) ((arg1)->targetReplan);
+  {
+    AS3_DeclareVar(asresult, Boolean);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgent_targetReplanTime_set(self, targetReplanTime:Number):void")))
+void _wrap_dtCrowdAgent_targetReplanTime_set() {
+  dtCrowdAgent *arg1 = (dtCrowdAgent *) 0 ;
+  float arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, targetReplanTime);
+  }
+  if (arg1) (arg1)->targetReplanTime = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgent_targetReplanTime_get(self):Number")))
+void _wrap_dtCrowdAgent_targetReplanTime_get() {
+  dtCrowdAgent *arg1 = (dtCrowdAgent *) 0 ;
+  float result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float) ((arg1)->targetReplanTime);
+  {
+    AS3_DeclareVar(asresult, Number);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_new_dtCrowdAgent():int")))
+void _wrap_new_dtCrowdAgent() {
+  dtCrowdAgent *result ;
+  
+  result = (dtCrowdAgent *)new dtCrowdAgent();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_delete_dtCrowdAgent(self):void")))
+void _wrap_delete_dtCrowdAgent() {
+  dtCrowdAgent *arg1 = (dtCrowdAgent *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  delete arg1;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgentAnimation_active_set(self, active:String):void")))
+void _wrap_dtCrowdAgentAnimation_active_set() {
+  dtCrowdAgentAnimation *arg1 = (dtCrowdAgentAnimation *) 0 ;
+  unsigned char arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    inline_nonreentrant_as3(
+      "%0 = active.charCodeAt(0)" : "=r"(arg2)
+      );
+  }
+  if (arg1) (arg1)->active = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgentAnimation_active_get(self):String")))
+void _wrap_dtCrowdAgentAnimation_active_get() {
+  dtCrowdAgentAnimation *arg1 = (dtCrowdAgentAnimation *) 0 ;
+  unsigned char result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned char) ((arg1)->active);
+  {
+    AS3_DeclareVar(asresult, String);
+    AS3_CopyCStringToVar(asresult, &result, 1);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgentAnimation_initPos_set(self, initPos:int):void")))
+void _wrap_dtCrowdAgentAnimation_initPos_set() {
+  dtCrowdAgentAnimation *arg1 = (dtCrowdAgentAnimation *) 0 ;
+  float *arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, initPos);
+  }
+  {
+    size_t ii;
+    float *b = (float *) arg1->initPos;
+    for (ii = 0; ii < (size_t)3; ii++) b[ii] = *((float *) arg2 + ii);
+  }
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgentAnimation_initPos_get(self):int")))
+void _wrap_dtCrowdAgentAnimation_initPos_get() {
+  dtCrowdAgentAnimation *arg1 = (dtCrowdAgentAnimation *) 0 ;
+  float *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float *)(float *) ((arg1)->initPos);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgentAnimation_startPos_set(self, startPos:int):void")))
+void _wrap_dtCrowdAgentAnimation_startPos_set() {
+  dtCrowdAgentAnimation *arg1 = (dtCrowdAgentAnimation *) 0 ;
+  float *arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, startPos);
+  }
+  {
+    size_t ii;
+    float *b = (float *) arg1->startPos;
+    for (ii = 0; ii < (size_t)3; ii++) b[ii] = *((float *) arg2 + ii);
+  }
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgentAnimation_startPos_get(self):int")))
+void _wrap_dtCrowdAgentAnimation_startPos_get() {
+  dtCrowdAgentAnimation *arg1 = (dtCrowdAgentAnimation *) 0 ;
+  float *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float *)(float *) ((arg1)->startPos);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgentAnimation_endPos_set(self, endPos:int):void")))
+void _wrap_dtCrowdAgentAnimation_endPos_set() {
+  dtCrowdAgentAnimation *arg1 = (dtCrowdAgentAnimation *) 0 ;
+  float *arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, endPos);
+  }
+  {
+    size_t ii;
+    float *b = (float *) arg1->endPos;
+    for (ii = 0; ii < (size_t)3; ii++) b[ii] = *((float *) arg2 + ii);
+  }
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgentAnimation_endPos_get(self):int")))
+void _wrap_dtCrowdAgentAnimation_endPos_get() {
+  dtCrowdAgentAnimation *arg1 = (dtCrowdAgentAnimation *) 0 ;
+  float *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float *)(float *) ((arg1)->endPos);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgentAnimation_polyRef_set(self, polyRef:int):void")))
+void _wrap_dtCrowdAgentAnimation_polyRef_set() {
+  dtCrowdAgentAnimation *arg1 = (dtCrowdAgentAnimation *) 0 ;
+  dtPolyRef arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, polyRef);
+  }
+  if (arg1) (arg1)->polyRef = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgentAnimation_polyRef_get(self):int")))
+void _wrap_dtCrowdAgentAnimation_polyRef_get() {
+  dtCrowdAgentAnimation *arg1 = (dtCrowdAgentAnimation *) 0 ;
+  dtPolyRef result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (dtPolyRef) ((arg1)->polyRef);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgentAnimation_t_set(self, t:Number):void")))
+void _wrap_dtCrowdAgentAnimation_t_set() {
+  dtCrowdAgentAnimation *arg1 = (dtCrowdAgentAnimation *) 0 ;
+  float arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, t);
+  }
+  if (arg1) (arg1)->t = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgentAnimation_t_get(self):Number")))
+void _wrap_dtCrowdAgentAnimation_t_get() {
+  dtCrowdAgentAnimation *arg1 = (dtCrowdAgentAnimation *) 0 ;
+  float result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float) ((arg1)->t);
+  {
+    AS3_DeclareVar(asresult, Number);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgentAnimation_tmax_set(self, tmax:Number):void")))
+void _wrap_dtCrowdAgentAnimation_tmax_set() {
+  dtCrowdAgentAnimation *arg1 = (dtCrowdAgentAnimation *) 0 ;
+  float arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, tmax);
+  }
+  if (arg1) (arg1)->tmax = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgentAnimation_tmax_get(self):Number")))
+void _wrap_dtCrowdAgentAnimation_tmax_get() {
+  dtCrowdAgentAnimation *arg1 = (dtCrowdAgentAnimation *) 0 ;
+  float result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float) ((arg1)->tmax);
+  {
+    AS3_DeclareVar(asresult, Number);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_new_dtCrowdAgentAnimation():int")))
+void _wrap_new_dtCrowdAgentAnimation() {
+  dtCrowdAgentAnimation *result ;
+  
+  result = (dtCrowdAgentAnimation *)new dtCrowdAgentAnimation();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_delete_dtCrowdAgentAnimation(self):void")))
+void _wrap_delete_dtCrowdAgentAnimation() {
+  dtCrowdAgentAnimation *arg1 = (dtCrowdAgentAnimation *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  delete arg1;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DT_CROWD_ANTICIPATE_TURNS():int")))
+void _wrap_DT_CROWD_ANTICIPATE_TURNS() {
+  int result ;
+  
+  result = DT_CROWD_ANTICIPATE_TURNS;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DT_CROWD_OBSTACLE_AVOIDANCE():int")))
+void _wrap_DT_CROWD_OBSTACLE_AVOIDANCE() {
+  int result ;
+  
+  result = DT_CROWD_OBSTACLE_AVOIDANCE;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DT_CROWD_SEPARATION():int")))
+void _wrap_DT_CROWD_SEPARATION() {
+  int result ;
+  
+  result = DT_CROWD_SEPARATION;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DT_CROWD_OPTIMIZE_VIS():int")))
+void _wrap_DT_CROWD_OPTIMIZE_VIS() {
+  int result ;
+  
+  result = DT_CROWD_OPTIMIZE_VIS;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DT_CROWD_OPTIMIZE_TOPO():int")))
+void _wrap_DT_CROWD_OPTIMIZE_TOPO() {
+  int result ;
+  
+  result = DT_CROWD_OPTIMIZE_TOPO;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgentDebugInfo_idx_set(self, idx:int):void")))
+void _wrap_dtCrowdAgentDebugInfo_idx_set() {
+  dtCrowdAgentDebugInfo *arg1 = (dtCrowdAgentDebugInfo *) 0 ;
+  int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, idx);
+  }
+  if (arg1) (arg1)->idx = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgentDebugInfo_idx_get(self):int")))
+void _wrap_dtCrowdAgentDebugInfo_idx_get() {
+  dtCrowdAgentDebugInfo *arg1 = (dtCrowdAgentDebugInfo *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int) ((arg1)->idx);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgentDebugInfo_optStart_set(self, optStart:int):void")))
+void _wrap_dtCrowdAgentDebugInfo_optStart_set() {
+  dtCrowdAgentDebugInfo *arg1 = (dtCrowdAgentDebugInfo *) 0 ;
+  float *arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, optStart);
+  }
+  {
+    size_t ii;
+    float *b = (float *) arg1->optStart;
+    for (ii = 0; ii < (size_t)3; ii++) b[ii] = *((float *) arg2 + ii);
+  }
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgentDebugInfo_optStart_get(self):int")))
+void _wrap_dtCrowdAgentDebugInfo_optStart_get() {
+  dtCrowdAgentDebugInfo *arg1 = (dtCrowdAgentDebugInfo *) 0 ;
+  float *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float *)(float *) ((arg1)->optStart);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgentDebugInfo_optEnd_set(self, optEnd:int):void")))
+void _wrap_dtCrowdAgentDebugInfo_optEnd_set() {
+  dtCrowdAgentDebugInfo *arg1 = (dtCrowdAgentDebugInfo *) 0 ;
+  float *arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, optEnd);
+  }
+  {
+    size_t ii;
+    float *b = (float *) arg1->optEnd;
+    for (ii = 0; ii < (size_t)3; ii++) b[ii] = *((float *) arg2 + ii);
+  }
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgentDebugInfo_optEnd_get(self):int")))
+void _wrap_dtCrowdAgentDebugInfo_optEnd_get() {
+  dtCrowdAgentDebugInfo *arg1 = (dtCrowdAgentDebugInfo *) 0 ;
+  float *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float *)(float *) ((arg1)->optEnd);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgentDebugInfo_vod_set(self, vod:int):void")))
+void _wrap_dtCrowdAgentDebugInfo_vod_set() {
+  dtCrowdAgentDebugInfo *arg1 = (dtCrowdAgentDebugInfo *) 0 ;
+  dtObstacleAvoidanceDebugData *arg2 = (dtObstacleAvoidanceDebugData *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, vod);
+  }
+  if (arg1) (arg1)->vod = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowdAgentDebugInfo_vod_get(self):int")))
+void _wrap_dtCrowdAgentDebugInfo_vod_get() {
+  dtCrowdAgentDebugInfo *arg1 = (dtCrowdAgentDebugInfo *) 0 ;
+  dtObstacleAvoidanceDebugData *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (dtObstacleAvoidanceDebugData *) ((arg1)->vod);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_new_dtCrowdAgentDebugInfo():int")))
+void _wrap_new_dtCrowdAgentDebugInfo() {
+  dtCrowdAgentDebugInfo *result ;
+  
+  result = (dtCrowdAgentDebugInfo *)new dtCrowdAgentDebugInfo();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_delete_dtCrowdAgentDebugInfo(self):void")))
+void _wrap_delete_dtCrowdAgentDebugInfo() {
+  dtCrowdAgentDebugInfo *arg1 = (dtCrowdAgentDebugInfo *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  delete arg1;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_new_dtCrowd():int")))
+void _wrap_new_dtCrowd() {
+  dtCrowd *result ;
+  
+  result = (dtCrowd *)new dtCrowd();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_delete_dtCrowd(self):void")))
+void _wrap_delete_dtCrowd() {
+  dtCrowd *arg1 = (dtCrowd *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  delete arg1;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowd_init(self, maxAgents:int, maxAgentRadius:Number, nav:int):Boolean")))
+void _wrap_dtCrowd_init() {
+  dtCrowd *arg1 = (dtCrowd *) 0 ;
+  int arg2 ;
+  float arg3 ;
+  dtNavMesh *arg4 = (dtNavMesh *) 0 ;
+  bool result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, maxAgents);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, maxAgentRadius);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, nav);
+  }
+  result = (bool)(arg1)->init(arg2,arg3,arg4);
+  {
+    AS3_DeclareVar(asresult, Boolean);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowd_setObstacleAvoidanceParams(self, idx:int, params:int):void")))
+void _wrap_dtCrowd_setObstacleAvoidanceParams() {
+  dtCrowd *arg1 = (dtCrowd *) 0 ;
+  int arg2 ;
+  dtObstacleAvoidanceParams *arg3 = (dtObstacleAvoidanceParams *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, idx);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, params);
+  }
+  (arg1)->setObstacleAvoidanceParams(arg2,(dtObstacleAvoidanceParams const *)arg3);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowd_getObstacleAvoidanceParams(self, idx:int):int")))
+void _wrap_dtCrowd_getObstacleAvoidanceParams() {
+  dtCrowd *arg1 = (dtCrowd *) 0 ;
+  int arg2 ;
+  dtObstacleAvoidanceParams *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, idx);
+  }
+  result = (dtObstacleAvoidanceParams *)((dtCrowd const *)arg1)->getObstacleAvoidanceParams(arg2);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowd_getAgent(self, idx:int):int")))
+void _wrap_dtCrowd_getAgent() {
+  dtCrowd *arg1 = (dtCrowd *) 0 ;
+  int arg2 ;
+  dtCrowdAgent *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, idx);
+  }
+  result = (dtCrowdAgent *)(arg1)->getAgent(arg2);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowd_getAgentCount(self):int")))
+void _wrap_dtCrowd_getAgentCount() {
+  dtCrowd *arg1 = (dtCrowd *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int)((dtCrowd const *)arg1)->getAgentCount();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowd_addAgent(self, pos:int, params:int):int")))
+void _wrap_dtCrowd_addAgent() {
+  dtCrowd *arg1 = (dtCrowd *) 0 ;
+  float *arg2 = (float *) 0 ;
+  dtCrowdAgentParams *arg3 = (dtCrowdAgentParams *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, pos);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, params);
+  }
+  result = (int)(arg1)->addAgent((float const *)arg2,(dtCrowdAgentParams const *)arg3);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowd_updateAgentParameters(self, idx:int, params:int):void")))
+void _wrap_dtCrowd_updateAgentParameters() {
+  dtCrowd *arg1 = (dtCrowd *) 0 ;
+  int arg2 ;
+  dtCrowdAgentParams *arg3 = (dtCrowdAgentParams *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, idx);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, params);
+  }
+  (arg1)->updateAgentParameters(arg2,(dtCrowdAgentParams const *)arg3);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowd_removeAgent(self, idx:int):void")))
+void _wrap_dtCrowd_removeAgent() {
+  dtCrowd *arg1 = (dtCrowd *) 0 ;
+  int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, idx);
+  }
+  (arg1)->removeAgent(arg2);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowd_requestMoveTarget(self, idx:int, ref:int, pos:int):Boolean")))
+void _wrap_dtCrowd_requestMoveTarget() {
+  dtCrowd *arg1 = (dtCrowd *) 0 ;
+  int arg2 ;
+  dtPolyRef arg3 ;
+  float *arg4 = (float *) 0 ;
+  bool result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, idx);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, ref);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, pos);
+  }
+  result = (bool)(arg1)->requestMoveTarget(arg2,arg3,(float const *)arg4);
+  {
+    AS3_DeclareVar(asresult, Boolean);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowd_requestMoveVelocity(self, idx:int, vel:int):Boolean")))
+void _wrap_dtCrowd_requestMoveVelocity() {
+  dtCrowd *arg1 = (dtCrowd *) 0 ;
+  int arg2 ;
+  float *arg3 = (float *) 0 ;
+  bool result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, idx);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, vel);
+  }
+  result = (bool)(arg1)->requestMoveVelocity(arg2,(float const *)arg3);
+  {
+    AS3_DeclareVar(asresult, Boolean);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowd_resetMoveTarget(self, idx:int):Boolean")))
+void _wrap_dtCrowd_resetMoveTarget() {
+  dtCrowd *arg1 = (dtCrowd *) 0 ;
+  int arg2 ;
+  bool result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, idx);
+  }
+  result = (bool)(arg1)->resetMoveTarget(arg2);
+  {
+    AS3_DeclareVar(asresult, Boolean);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowd_getActiveAgents(self, agents:int, maxAgents:int):int")))
+void _wrap_dtCrowd_getActiveAgents() {
+  dtCrowd *arg1 = (dtCrowd *) 0 ;
+  dtCrowdAgent **arg2 = (dtCrowdAgent **) 0 ;
+  int arg3 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, agents);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, maxAgents);
+  }
+  result = (int)(arg1)->getActiveAgents(arg2,arg3);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowd_update(self, dt:Number, debug:int):void")))
+void _wrap_dtCrowd_update() {
+  dtCrowd *arg1 = (dtCrowd *) 0 ;
+  float arg2 ;
+  dtCrowdAgentDebugInfo *arg3 = (dtCrowdAgentDebugInfo *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, dt);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, debug);
+  }
+  (arg1)->update(arg2,arg3);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowd_getFilter(self):int")))
+void _wrap_dtCrowd_getFilter() {
+  dtCrowd *arg1 = (dtCrowd *) 0 ;
+  dtQueryFilter *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (dtQueryFilter *)((dtCrowd const *)arg1)->getFilter();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowd_getEditableFilter(self):int")))
+void _wrap_dtCrowd_getEditableFilter() {
+  dtCrowd *arg1 = (dtCrowd *) 0 ;
+  dtQueryFilter *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (dtQueryFilter *)(arg1)->getEditableFilter();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowd_getQueryExtents(self):int")))
+void _wrap_dtCrowd_getQueryExtents() {
+  dtCrowd *arg1 = (dtCrowd *) 0 ;
+  float *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float *)((dtCrowd const *)arg1)->getQueryExtents();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowd_getVelocitySampleCount(self):int")))
+void _wrap_dtCrowd_getVelocitySampleCount() {
+  dtCrowd *arg1 = (dtCrowd *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int)((dtCrowd const *)arg1)->getVelocitySampleCount();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowd_getGrid(self):int")))
+void _wrap_dtCrowd_getGrid() {
+  dtCrowd *arg1 = (dtCrowd *) 0 ;
+  dtProximityGrid *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (dtProximityGrid *)((dtCrowd const *)arg1)->getGrid();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowd_getPathQueue(self):int")))
+void _wrap_dtCrowd_getPathQueue() {
+  dtCrowd *arg1 = (dtCrowd *) 0 ;
+  dtPathQueue *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (dtPathQueue *)((dtCrowd const *)arg1)->getPathQueue();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCrowd_getNavMeshQuery(self):int")))
+void _wrap_dtCrowd_getNavMeshQuery() {
+  dtCrowd *arg1 = (dtCrowd *) 0 ;
+  dtNavMeshQuery *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (dtNavMeshQuery *)((dtCrowd const *)arg1)->getNavMeshQuery();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtAllocCrowd():int")))
+void _wrap_dtAllocCrowd() {
+  dtCrowd *result ;
+  
+  result = (dtCrowd *)dtAllocCrowd();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtFreeCrowd(ptr:int):void")))
+void _wrap_dtFreeCrowd() {
+  dtCrowd *arg1 = (dtCrowd *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, ptr);
+  }
+  dtFreeCrowd(arg1);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_new_dtLocalBoundary():int")))
+void _wrap_new_dtLocalBoundary() {
+  dtLocalBoundary *result ;
+  
+  result = (dtLocalBoundary *)new dtLocalBoundary();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_delete_dtLocalBoundary(self):void")))
+void _wrap_delete_dtLocalBoundary() {
+  dtLocalBoundary *arg1 = (dtLocalBoundary *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  delete arg1;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtLocalBoundary_reset(self):void")))
+void _wrap_dtLocalBoundary_reset() {
+  dtLocalBoundary *arg1 = (dtLocalBoundary *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  (arg1)->reset();
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtLocalBoundary_update(self, ref:int, pos:int, collisionQueryRange:Number, navquery:int, filter:int):void")))
+void _wrap_dtLocalBoundary_update() {
+  dtLocalBoundary *arg1 = (dtLocalBoundary *) 0 ;
+  dtPolyRef arg2 ;
+  float *arg3 = (float *) 0 ;
+  float arg4 ;
+  dtNavMeshQuery *arg5 = (dtNavMeshQuery *) 0 ;
+  dtQueryFilter *arg6 = (dtQueryFilter *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, ref);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, pos);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, collisionQueryRange);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, navquery);
+  }
+  {
+    AS3_GetScalarFromVar(arg6, filter);
+  }
+  (arg1)->update(arg2,(float const *)arg3,arg4,arg5,(dtQueryFilter const *)arg6);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtLocalBoundary_isValid(self, navquery:int, filter:int):Boolean")))
+void _wrap_dtLocalBoundary_isValid() {
+  dtLocalBoundary *arg1 = (dtLocalBoundary *) 0 ;
+  dtNavMeshQuery *arg2 = (dtNavMeshQuery *) 0 ;
+  dtQueryFilter *arg3 = (dtQueryFilter *) 0 ;
+  bool result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, navquery);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, filter);
+  }
+  result = (bool)(arg1)->isValid(arg2,(dtQueryFilter const *)arg3);
+  {
+    AS3_DeclareVar(asresult, Boolean);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtLocalBoundary_getCenter(self):int")))
+void _wrap_dtLocalBoundary_getCenter() {
+  dtLocalBoundary *arg1 = (dtLocalBoundary *) 0 ;
+  float *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float *)((dtLocalBoundary const *)arg1)->getCenter();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtLocalBoundary_getSegmentCount(self):int")))
+void _wrap_dtLocalBoundary_getSegmentCount() {
+  dtLocalBoundary *arg1 = (dtLocalBoundary *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int)((dtLocalBoundary const *)arg1)->getSegmentCount();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtLocalBoundary_getSegment(self, i:int):int")))
+void _wrap_dtLocalBoundary_getSegment() {
+  dtLocalBoundary *arg1 = (dtLocalBoundary *) 0 ;
+  int arg2 ;
+  float *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, i);
+  }
+  result = (float *)((dtLocalBoundary const *)arg1)->getSegment(arg2);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtObstacleCircle_p_set(self, p:int):void")))
+void _wrap_dtObstacleCircle_p_set() {
+  dtObstacleCircle *arg1 = (dtObstacleCircle *) 0 ;
+  float *arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, p);
+  }
+  {
+    size_t ii;
+    float *b = (float *) arg1->p;
+    for (ii = 0; ii < (size_t)3; ii++) b[ii] = *((float *) arg2 + ii);
+  }
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtObstacleCircle_p_get(self):int")))
+void _wrap_dtObstacleCircle_p_get() {
+  dtObstacleCircle *arg1 = (dtObstacleCircle *) 0 ;
+  float *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float *)(float *) ((arg1)->p);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtObstacleCircle_vel_set(self, vel:int):void")))
+void _wrap_dtObstacleCircle_vel_set() {
+  dtObstacleCircle *arg1 = (dtObstacleCircle *) 0 ;
+  float *arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, vel);
+  }
+  {
+    size_t ii;
+    float *b = (float *) arg1->vel;
+    for (ii = 0; ii < (size_t)3; ii++) b[ii] = *((float *) arg2 + ii);
+  }
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtObstacleCircle_vel_get(self):int")))
+void _wrap_dtObstacleCircle_vel_get() {
+  dtObstacleCircle *arg1 = (dtObstacleCircle *) 0 ;
+  float *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float *)(float *) ((arg1)->vel);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtObstacleCircle_dvel_set(self, dvel:int):void")))
+void _wrap_dtObstacleCircle_dvel_set() {
+  dtObstacleCircle *arg1 = (dtObstacleCircle *) 0 ;
+  float *arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, dvel);
+  }
+  {
+    size_t ii;
+    float *b = (float *) arg1->dvel;
+    for (ii = 0; ii < (size_t)3; ii++) b[ii] = *((float *) arg2 + ii);
+  }
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtObstacleCircle_dvel_get(self):int")))
+void _wrap_dtObstacleCircle_dvel_get() {
+  dtObstacleCircle *arg1 = (dtObstacleCircle *) 0 ;
+  float *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float *)(float *) ((arg1)->dvel);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtObstacleCircle_rad_set(self, rad:Number):void")))
+void _wrap_dtObstacleCircle_rad_set() {
+  dtObstacleCircle *arg1 = (dtObstacleCircle *) 0 ;
+  float arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, rad);
+  }
+  if (arg1) (arg1)->rad = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtObstacleCircle_rad_get(self):Number")))
+void _wrap_dtObstacleCircle_rad_get() {
+  dtObstacleCircle *arg1 = (dtObstacleCircle *) 0 ;
+  float result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float) ((arg1)->rad);
+  {
+    AS3_DeclareVar(asresult, Number);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtObstacleCircle_dp_set(self, dp:int):void")))
+void _wrap_dtObstacleCircle_dp_set() {
+  dtObstacleCircle *arg1 = (dtObstacleCircle *) 0 ;
+  float *arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, dp);
+  }
+  {
+    size_t ii;
+    float *b = (float *) arg1->dp;
+    for (ii = 0; ii < (size_t)3; ii++) b[ii] = *((float *) arg2 + ii);
+  }
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtObstacleCircle_dp_get(self):int")))
+void _wrap_dtObstacleCircle_dp_get() {
+  dtObstacleCircle *arg1 = (dtObstacleCircle *) 0 ;
+  float *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float *)(float *) ((arg1)->dp);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtObstacleCircle_np_set(self, np:int):void")))
+void _wrap_dtObstacleCircle_np_set() {
+  dtObstacleCircle *arg1 = (dtObstacleCircle *) 0 ;
+  float *arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, np);
+  }
+  {
+    size_t ii;
+    float *b = (float *) arg1->np;
+    for (ii = 0; ii < (size_t)3; ii++) b[ii] = *((float *) arg2 + ii);
+  }
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtObstacleCircle_np_get(self):int")))
+void _wrap_dtObstacleCircle_np_get() {
+  dtObstacleCircle *arg1 = (dtObstacleCircle *) 0 ;
+  float *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float *)(float *) ((arg1)->np);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_new_dtObstacleCircle():int")))
+void _wrap_new_dtObstacleCircle() {
+  dtObstacleCircle *result ;
+  
+  result = (dtObstacleCircle *)new dtObstacleCircle();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_delete_dtObstacleCircle(self):void")))
+void _wrap_delete_dtObstacleCircle() {
+  dtObstacleCircle *arg1 = (dtObstacleCircle *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  delete arg1;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtObstacleSegment_p_set(self, p:int):void")))
+void _wrap_dtObstacleSegment_p_set() {
+  dtObstacleSegment *arg1 = (dtObstacleSegment *) 0 ;
+  float *arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, p);
+  }
+  {
+    size_t ii;
+    float *b = (float *) arg1->p;
+    for (ii = 0; ii < (size_t)3; ii++) b[ii] = *((float *) arg2 + ii);
+  }
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtObstacleSegment_p_get(self):int")))
+void _wrap_dtObstacleSegment_p_get() {
+  dtObstacleSegment *arg1 = (dtObstacleSegment *) 0 ;
+  float *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float *)(float *) ((arg1)->p);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtObstacleSegment_q_set(self, q:int):void")))
+void _wrap_dtObstacleSegment_q_set() {
+  dtObstacleSegment *arg1 = (dtObstacleSegment *) 0 ;
+  float *arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, q);
+  }
+  {
+    size_t ii;
+    float *b = (float *) arg1->q;
+    for (ii = 0; ii < (size_t)3; ii++) b[ii] = *((float *) arg2 + ii);
+  }
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtObstacleSegment_q_get(self):int")))
+void _wrap_dtObstacleSegment_q_get() {
+  dtObstacleSegment *arg1 = (dtObstacleSegment *) 0 ;
+  float *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float *)(float *) ((arg1)->q);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtObstacleSegment_touch_set(self, touch:Boolean):void")))
+void _wrap_dtObstacleSegment_touch_set() {
+  dtObstacleSegment *arg1 = (dtObstacleSegment *) 0 ;
+  bool arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, touch);
+  }
+  if (arg1) (arg1)->touch = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtObstacleSegment_touch_get(self):Boolean")))
+void _wrap_dtObstacleSegment_touch_get() {
+  dtObstacleSegment *arg1 = (dtObstacleSegment *) 0 ;
+  bool result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (bool) ((arg1)->touch);
+  {
+    AS3_DeclareVar(asresult, Boolean);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_new_dtObstacleSegment():int")))
+void _wrap_new_dtObstacleSegment() {
+  dtObstacleSegment *result ;
+  
+  result = (dtObstacleSegment *)new dtObstacleSegment();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_delete_dtObstacleSegment(self):void")))
+void _wrap_delete_dtObstacleSegment() {
+  dtObstacleSegment *arg1 = (dtObstacleSegment *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  delete arg1;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_new_dtObstacleAvoidanceDebugData():int")))
+void _wrap_new_dtObstacleAvoidanceDebugData() {
+  dtObstacleAvoidanceDebugData *result ;
+  
+  result = (dtObstacleAvoidanceDebugData *)new dtObstacleAvoidanceDebugData();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_delete_dtObstacleAvoidanceDebugData(self):void")))
+void _wrap_delete_dtObstacleAvoidanceDebugData() {
+  dtObstacleAvoidanceDebugData *arg1 = (dtObstacleAvoidanceDebugData *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  delete arg1;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtObstacleAvoidanceDebugData_init(self, maxSamples:int):Boolean")))
+void _wrap_dtObstacleAvoidanceDebugData_init() {
+  dtObstacleAvoidanceDebugData *arg1 = (dtObstacleAvoidanceDebugData *) 0 ;
+  int arg2 ;
+  bool result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, maxSamples);
+  }
+  result = (bool)(arg1)->init(arg2);
+  {
+    AS3_DeclareVar(asresult, Boolean);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtObstacleAvoidanceDebugData_reset(self):void")))
+void _wrap_dtObstacleAvoidanceDebugData_reset() {
+  dtObstacleAvoidanceDebugData *arg1 = (dtObstacleAvoidanceDebugData *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  (arg1)->reset();
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtObstacleAvoidanceDebugData_addSample(self, vel:int, ssize:Number, pen:Number, vpen:Number, vcpen:Number, spen:Number, tpen:Number):void")))
+void _wrap_dtObstacleAvoidanceDebugData_addSample() {
+  dtObstacleAvoidanceDebugData *arg1 = (dtObstacleAvoidanceDebugData *) 0 ;
+  float *arg2 = (float *) 0 ;
+  float arg3 ;
+  float arg4 ;
+  float arg5 ;
+  float arg6 ;
+  float arg7 ;
+  float arg8 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, vel);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, ssize);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, pen);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, vpen);
+  }
+  {
+    AS3_GetScalarFromVar(arg6, vcpen);
+  }
+  {
+    AS3_GetScalarFromVar(arg7, spen);
+  }
+  {
+    AS3_GetScalarFromVar(arg8, tpen);
+  }
+  (arg1)->addSample((float const *)arg2,arg3,arg4,arg5,arg6,arg7,arg8);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtObstacleAvoidanceDebugData_normalizeSamples(self):void")))
+void _wrap_dtObstacleAvoidanceDebugData_normalizeSamples() {
+  dtObstacleAvoidanceDebugData *arg1 = (dtObstacleAvoidanceDebugData *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  (arg1)->normalizeSamples();
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtObstacleAvoidanceDebugData_getSampleCount(self):int")))
+void _wrap_dtObstacleAvoidanceDebugData_getSampleCount() {
+  dtObstacleAvoidanceDebugData *arg1 = (dtObstacleAvoidanceDebugData *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int)((dtObstacleAvoidanceDebugData const *)arg1)->getSampleCount();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtObstacleAvoidanceDebugData_getSampleVelocity(self, i:int):int")))
+void _wrap_dtObstacleAvoidanceDebugData_getSampleVelocity() {
+  dtObstacleAvoidanceDebugData *arg1 = (dtObstacleAvoidanceDebugData *) 0 ;
+  int arg2 ;
+  float *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, i);
+  }
+  result = (float *)((dtObstacleAvoidanceDebugData const *)arg1)->getSampleVelocity(arg2);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtObstacleAvoidanceDebugData_getSampleSize(self, i:int):Number")))
+void _wrap_dtObstacleAvoidanceDebugData_getSampleSize() {
+  dtObstacleAvoidanceDebugData *arg1 = (dtObstacleAvoidanceDebugData *) 0 ;
+  int arg2 ;
+  float result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, i);
+  }
+  result = (float)((dtObstacleAvoidanceDebugData const *)arg1)->getSampleSize(arg2);
+  {
+    AS3_DeclareVar(asresult, Number);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtObstacleAvoidanceDebugData_getSamplePenalty(self, i:int):Number")))
+void _wrap_dtObstacleAvoidanceDebugData_getSamplePenalty() {
+  dtObstacleAvoidanceDebugData *arg1 = (dtObstacleAvoidanceDebugData *) 0 ;
+  int arg2 ;
+  float result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, i);
+  }
+  result = (float)((dtObstacleAvoidanceDebugData const *)arg1)->getSamplePenalty(arg2);
+  {
+    AS3_DeclareVar(asresult, Number);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtObstacleAvoidanceDebugData_getSampleDesiredVelocityPenalty(self, i:int):Number")))
+void _wrap_dtObstacleAvoidanceDebugData_getSampleDesiredVelocityPenalty() {
+  dtObstacleAvoidanceDebugData *arg1 = (dtObstacleAvoidanceDebugData *) 0 ;
+  int arg2 ;
+  float result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, i);
+  }
+  result = (float)((dtObstacleAvoidanceDebugData const *)arg1)->getSampleDesiredVelocityPenalty(arg2);
+  {
+    AS3_DeclareVar(asresult, Number);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtObstacleAvoidanceDebugData_getSampleCurrentVelocityPenalty(self, i:int):Number")))
+void _wrap_dtObstacleAvoidanceDebugData_getSampleCurrentVelocityPenalty() {
+  dtObstacleAvoidanceDebugData *arg1 = (dtObstacleAvoidanceDebugData *) 0 ;
+  int arg2 ;
+  float result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, i);
+  }
+  result = (float)((dtObstacleAvoidanceDebugData const *)arg1)->getSampleCurrentVelocityPenalty(arg2);
+  {
+    AS3_DeclareVar(asresult, Number);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtObstacleAvoidanceDebugData_getSamplePreferredSidePenalty(self, i:int):Number")))
+void _wrap_dtObstacleAvoidanceDebugData_getSamplePreferredSidePenalty() {
+  dtObstacleAvoidanceDebugData *arg1 = (dtObstacleAvoidanceDebugData *) 0 ;
+  int arg2 ;
+  float result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, i);
+  }
+  result = (float)((dtObstacleAvoidanceDebugData const *)arg1)->getSamplePreferredSidePenalty(arg2);
+  {
+    AS3_DeclareVar(asresult, Number);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtObstacleAvoidanceDebugData_getSampleCollisionTimePenalty(self, i:int):Number")))
+void _wrap_dtObstacleAvoidanceDebugData_getSampleCollisionTimePenalty() {
+  dtObstacleAvoidanceDebugData *arg1 = (dtObstacleAvoidanceDebugData *) 0 ;
+  int arg2 ;
+  float result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, i);
+  }
+  result = (float)((dtObstacleAvoidanceDebugData const *)arg1)->getSampleCollisionTimePenalty(arg2);
+  {
+    AS3_DeclareVar(asresult, Number);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtAllocObstacleAvoidanceDebugData():int")))
+void _wrap_dtAllocObstacleAvoidanceDebugData() {
+  dtObstacleAvoidanceDebugData *result ;
+  
+  result = (dtObstacleAvoidanceDebugData *)dtAllocObstacleAvoidanceDebugData();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtFreeObstacleAvoidanceDebugData(ptr:int):void")))
+void _wrap_dtFreeObstacleAvoidanceDebugData() {
+  dtObstacleAvoidanceDebugData *arg1 = (dtObstacleAvoidanceDebugData *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, ptr);
+  }
+  dtFreeObstacleAvoidanceDebugData(arg1);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DT_MAX_PATTERN_DIVS_get():int")))
+void _wrap_DT_MAX_PATTERN_DIVS_get() {
+  int result ;
+  
+  result = (int)(int)DT_MAX_PATTERN_DIVS;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DT_MAX_PATTERN_RINGS_get():int")))
+void _wrap_DT_MAX_PATTERN_RINGS_get() {
+  int result ;
+  
+  result = (int)(int)DT_MAX_PATTERN_RINGS;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtObstacleAvoidanceParams_velBias_set(self, velBias:Number):void")))
+void _wrap_dtObstacleAvoidanceParams_velBias_set() {
+  dtObstacleAvoidanceParams *arg1 = (dtObstacleAvoidanceParams *) 0 ;
+  float arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, velBias);
+  }
+  if (arg1) (arg1)->velBias = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtObstacleAvoidanceParams_velBias_get(self):Number")))
+void _wrap_dtObstacleAvoidanceParams_velBias_get() {
+  dtObstacleAvoidanceParams *arg1 = (dtObstacleAvoidanceParams *) 0 ;
+  float result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float) ((arg1)->velBias);
+  {
+    AS3_DeclareVar(asresult, Number);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtObstacleAvoidanceParams_weightDesVel_set(self, weightDesVel:Number):void")))
+void _wrap_dtObstacleAvoidanceParams_weightDesVel_set() {
+  dtObstacleAvoidanceParams *arg1 = (dtObstacleAvoidanceParams *) 0 ;
+  float arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, weightDesVel);
+  }
+  if (arg1) (arg1)->weightDesVel = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtObstacleAvoidanceParams_weightDesVel_get(self):Number")))
+void _wrap_dtObstacleAvoidanceParams_weightDesVel_get() {
+  dtObstacleAvoidanceParams *arg1 = (dtObstacleAvoidanceParams *) 0 ;
+  float result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float) ((arg1)->weightDesVel);
+  {
+    AS3_DeclareVar(asresult, Number);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtObstacleAvoidanceParams_weightCurVel_set(self, weightCurVel:Number):void")))
+void _wrap_dtObstacleAvoidanceParams_weightCurVel_set() {
+  dtObstacleAvoidanceParams *arg1 = (dtObstacleAvoidanceParams *) 0 ;
+  float arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, weightCurVel);
+  }
+  if (arg1) (arg1)->weightCurVel = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtObstacleAvoidanceParams_weightCurVel_get(self):Number")))
+void _wrap_dtObstacleAvoidanceParams_weightCurVel_get() {
+  dtObstacleAvoidanceParams *arg1 = (dtObstacleAvoidanceParams *) 0 ;
+  float result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float) ((arg1)->weightCurVel);
+  {
+    AS3_DeclareVar(asresult, Number);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtObstacleAvoidanceParams_weightSide_set(self, weightSide:Number):void")))
+void _wrap_dtObstacleAvoidanceParams_weightSide_set() {
+  dtObstacleAvoidanceParams *arg1 = (dtObstacleAvoidanceParams *) 0 ;
+  float arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, weightSide);
+  }
+  if (arg1) (arg1)->weightSide = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtObstacleAvoidanceParams_weightSide_get(self):Number")))
+void _wrap_dtObstacleAvoidanceParams_weightSide_get() {
+  dtObstacleAvoidanceParams *arg1 = (dtObstacleAvoidanceParams *) 0 ;
+  float result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float) ((arg1)->weightSide);
+  {
+    AS3_DeclareVar(asresult, Number);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtObstacleAvoidanceParams_weightToi_set(self, weightToi:Number):void")))
+void _wrap_dtObstacleAvoidanceParams_weightToi_set() {
+  dtObstacleAvoidanceParams *arg1 = (dtObstacleAvoidanceParams *) 0 ;
+  float arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, weightToi);
+  }
+  if (arg1) (arg1)->weightToi = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtObstacleAvoidanceParams_weightToi_get(self):Number")))
+void _wrap_dtObstacleAvoidanceParams_weightToi_get() {
+  dtObstacleAvoidanceParams *arg1 = (dtObstacleAvoidanceParams *) 0 ;
+  float result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float) ((arg1)->weightToi);
+  {
+    AS3_DeclareVar(asresult, Number);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtObstacleAvoidanceParams_horizTime_set(self, horizTime:Number):void")))
+void _wrap_dtObstacleAvoidanceParams_horizTime_set() {
+  dtObstacleAvoidanceParams *arg1 = (dtObstacleAvoidanceParams *) 0 ;
+  float arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, horizTime);
+  }
+  if (arg1) (arg1)->horizTime = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtObstacleAvoidanceParams_horizTime_get(self):Number")))
+void _wrap_dtObstacleAvoidanceParams_horizTime_get() {
+  dtObstacleAvoidanceParams *arg1 = (dtObstacleAvoidanceParams *) 0 ;
+  float result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float) ((arg1)->horizTime);
+  {
+    AS3_DeclareVar(asresult, Number);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtObstacleAvoidanceParams_gridSize_set(self, gridSize:String):void")))
+void _wrap_dtObstacleAvoidanceParams_gridSize_set() {
+  dtObstacleAvoidanceParams *arg1 = (dtObstacleAvoidanceParams *) 0 ;
+  unsigned char arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    inline_nonreentrant_as3(
+      "%0 = gridSize.charCodeAt(0)" : "=r"(arg2)
+      );
+  }
+  if (arg1) (arg1)->gridSize = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtObstacleAvoidanceParams_gridSize_get(self):String")))
+void _wrap_dtObstacleAvoidanceParams_gridSize_get() {
+  dtObstacleAvoidanceParams *arg1 = (dtObstacleAvoidanceParams *) 0 ;
+  unsigned char result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned char) ((arg1)->gridSize);
+  {
+    AS3_DeclareVar(asresult, String);
+    AS3_CopyCStringToVar(asresult, &result, 1);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtObstacleAvoidanceParams_adaptiveDivs_set(self, adaptiveDivs:String):void")))
+void _wrap_dtObstacleAvoidanceParams_adaptiveDivs_set() {
+  dtObstacleAvoidanceParams *arg1 = (dtObstacleAvoidanceParams *) 0 ;
+  unsigned char arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    inline_nonreentrant_as3(
+      "%0 = adaptiveDivs.charCodeAt(0)" : "=r"(arg2)
+      );
+  }
+  if (arg1) (arg1)->adaptiveDivs = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtObstacleAvoidanceParams_adaptiveDivs_get(self):String")))
+void _wrap_dtObstacleAvoidanceParams_adaptiveDivs_get() {
+  dtObstacleAvoidanceParams *arg1 = (dtObstacleAvoidanceParams *) 0 ;
+  unsigned char result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned char) ((arg1)->adaptiveDivs);
+  {
+    AS3_DeclareVar(asresult, String);
+    AS3_CopyCStringToVar(asresult, &result, 1);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtObstacleAvoidanceParams_adaptiveRings_set(self, adaptiveRings:String):void")))
+void _wrap_dtObstacleAvoidanceParams_adaptiveRings_set() {
+  dtObstacleAvoidanceParams *arg1 = (dtObstacleAvoidanceParams *) 0 ;
+  unsigned char arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    inline_nonreentrant_as3(
+      "%0 = adaptiveRings.charCodeAt(0)" : "=r"(arg2)
+      );
+  }
+  if (arg1) (arg1)->adaptiveRings = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtObstacleAvoidanceParams_adaptiveRings_get(self):String")))
+void _wrap_dtObstacleAvoidanceParams_adaptiveRings_get() {
+  dtObstacleAvoidanceParams *arg1 = (dtObstacleAvoidanceParams *) 0 ;
+  unsigned char result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned char) ((arg1)->adaptiveRings);
+  {
+    AS3_DeclareVar(asresult, String);
+    AS3_CopyCStringToVar(asresult, &result, 1);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtObstacleAvoidanceParams_adaptiveDepth_set(self, adaptiveDepth:String):void")))
+void _wrap_dtObstacleAvoidanceParams_adaptiveDepth_set() {
+  dtObstacleAvoidanceParams *arg1 = (dtObstacleAvoidanceParams *) 0 ;
+  unsigned char arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    inline_nonreentrant_as3(
+      "%0 = adaptiveDepth.charCodeAt(0)" : "=r"(arg2)
+      );
+  }
+  if (arg1) (arg1)->adaptiveDepth = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtObstacleAvoidanceParams_adaptiveDepth_get(self):String")))
+void _wrap_dtObstacleAvoidanceParams_adaptiveDepth_get() {
+  dtObstacleAvoidanceParams *arg1 = (dtObstacleAvoidanceParams *) 0 ;
+  unsigned char result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned char) ((arg1)->adaptiveDepth);
+  {
+    AS3_DeclareVar(asresult, String);
+    AS3_CopyCStringToVar(asresult, &result, 1);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_new_dtObstacleAvoidanceParams():int")))
+void _wrap_new_dtObstacleAvoidanceParams() {
+  dtObstacleAvoidanceParams *result ;
+  
+  result = (dtObstacleAvoidanceParams *)new dtObstacleAvoidanceParams();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_delete_dtObstacleAvoidanceParams(self):void")))
+void _wrap_delete_dtObstacleAvoidanceParams() {
+  dtObstacleAvoidanceParams *arg1 = (dtObstacleAvoidanceParams *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  delete arg1;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_new_dtObstacleAvoidanceQuery():int")))
+void _wrap_new_dtObstacleAvoidanceQuery() {
+  dtObstacleAvoidanceQuery *result ;
+  
+  result = (dtObstacleAvoidanceQuery *)new dtObstacleAvoidanceQuery();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_delete_dtObstacleAvoidanceQuery(self):void")))
+void _wrap_delete_dtObstacleAvoidanceQuery() {
+  dtObstacleAvoidanceQuery *arg1 = (dtObstacleAvoidanceQuery *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  delete arg1;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtObstacleAvoidanceQuery_init(self, maxCircles:int, maxSegments:int):Boolean")))
+void _wrap_dtObstacleAvoidanceQuery_init() {
+  dtObstacleAvoidanceQuery *arg1 = (dtObstacleAvoidanceQuery *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  bool result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, maxCircles);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, maxSegments);
+  }
+  result = (bool)(arg1)->init(arg2,arg3);
+  {
+    AS3_DeclareVar(asresult, Boolean);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtObstacleAvoidanceQuery_reset(self):void")))
+void _wrap_dtObstacleAvoidanceQuery_reset() {
+  dtObstacleAvoidanceQuery *arg1 = (dtObstacleAvoidanceQuery *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  (arg1)->reset();
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtObstacleAvoidanceQuery_addCircle(self, pos:int, rad:Number, vel:int, dvel:int):void")))
+void _wrap_dtObstacleAvoidanceQuery_addCircle() {
+  dtObstacleAvoidanceQuery *arg1 = (dtObstacleAvoidanceQuery *) 0 ;
+  float *arg2 = (float *) 0 ;
+  float arg3 ;
+  float *arg4 = (float *) 0 ;
+  float *arg5 = (float *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, pos);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, rad);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, vel);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, dvel);
+  }
+  (arg1)->addCircle((float const *)arg2,arg3,(float const *)arg4,(float const *)arg5);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtObstacleAvoidanceQuery_addSegment(self, p:int, q:int):void")))
+void _wrap_dtObstacleAvoidanceQuery_addSegment() {
+  dtObstacleAvoidanceQuery *arg1 = (dtObstacleAvoidanceQuery *) 0 ;
+  float *arg2 = (float *) 0 ;
+  float *arg3 = (float *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, p);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, q);
+  }
+  (arg1)->addSegment((float const *)arg2,(float const *)arg3);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtObstacleAvoidanceQuery_sampleVelocityGrid(self, pos:int, rad:Number, vmax:Number, vel:int, dvel:int, nvel:int, params:int, debug:int):int")))
+void _wrap_dtObstacleAvoidanceQuery_sampleVelocityGrid() {
+  dtObstacleAvoidanceQuery *arg1 = (dtObstacleAvoidanceQuery *) 0 ;
+  float *arg2 = (float *) 0 ;
+  float arg3 ;
+  float arg4 ;
+  float *arg5 = (float *) 0 ;
+  float *arg6 = (float *) 0 ;
+  float *arg7 = (float *) 0 ;
+  dtObstacleAvoidanceParams *arg8 = (dtObstacleAvoidanceParams *) 0 ;
+  dtObstacleAvoidanceDebugData *arg9 = (dtObstacleAvoidanceDebugData *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, pos);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, rad);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, vmax);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, vel);
+  }
+  {
+    AS3_GetScalarFromVar(arg6, dvel);
+  }
+  {
+    AS3_GetScalarFromVar(arg7, nvel);
+  }
+  {
+    AS3_GetScalarFromVar(arg8, params);
+  }
+  {
+    AS3_GetScalarFromVar(arg9, debug);
+  }
+  result = (int)(arg1)->sampleVelocityGrid((float const *)arg2,arg3,arg4,(float const *)arg5,(float const *)arg6,arg7,(dtObstacleAvoidanceParams const *)arg8,arg9);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtObstacleAvoidanceQuery_sampleVelocityAdaptive(self, pos:int, rad:Number, vmax:Number, vel:int, dvel:int, nvel:int, params:int, debug:int):int")))
+void _wrap_dtObstacleAvoidanceQuery_sampleVelocityAdaptive() {
+  dtObstacleAvoidanceQuery *arg1 = (dtObstacleAvoidanceQuery *) 0 ;
+  float *arg2 = (float *) 0 ;
+  float arg3 ;
+  float arg4 ;
+  float *arg5 = (float *) 0 ;
+  float *arg6 = (float *) 0 ;
+  float *arg7 = (float *) 0 ;
+  dtObstacleAvoidanceParams *arg8 = (dtObstacleAvoidanceParams *) 0 ;
+  dtObstacleAvoidanceDebugData *arg9 = (dtObstacleAvoidanceDebugData *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, pos);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, rad);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, vmax);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, vel);
+  }
+  {
+    AS3_GetScalarFromVar(arg6, dvel);
+  }
+  {
+    AS3_GetScalarFromVar(arg7, nvel);
+  }
+  {
+    AS3_GetScalarFromVar(arg8, params);
+  }
+  {
+    AS3_GetScalarFromVar(arg9, debug);
+  }
+  result = (int)(arg1)->sampleVelocityAdaptive((float const *)arg2,arg3,arg4,(float const *)arg5,(float const *)arg6,arg7,(dtObstacleAvoidanceParams const *)arg8,arg9);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtObstacleAvoidanceQuery_getObstacleCircleCount(self):int")))
+void _wrap_dtObstacleAvoidanceQuery_getObstacleCircleCount() {
+  dtObstacleAvoidanceQuery *arg1 = (dtObstacleAvoidanceQuery *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int)((dtObstacleAvoidanceQuery const *)arg1)->getObstacleCircleCount();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtObstacleAvoidanceQuery_getObstacleCircle(self, i:int):int")))
+void _wrap_dtObstacleAvoidanceQuery_getObstacleCircle() {
+  dtObstacleAvoidanceQuery *arg1 = (dtObstacleAvoidanceQuery *) 0 ;
+  int arg2 ;
+  dtObstacleCircle *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, i);
+  }
+  result = (dtObstacleCircle *)(arg1)->getObstacleCircle(arg2);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtObstacleAvoidanceQuery_getObstacleSegmentCount(self):int")))
+void _wrap_dtObstacleAvoidanceQuery_getObstacleSegmentCount() {
+  dtObstacleAvoidanceQuery *arg1 = (dtObstacleAvoidanceQuery *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int)((dtObstacleAvoidanceQuery const *)arg1)->getObstacleSegmentCount();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtObstacleAvoidanceQuery_getObstacleSegment(self, i:int):int")))
+void _wrap_dtObstacleAvoidanceQuery_getObstacleSegment() {
+  dtObstacleAvoidanceQuery *arg1 = (dtObstacleAvoidanceQuery *) 0 ;
+  int arg2 ;
+  dtObstacleSegment *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, i);
+  }
+  result = (dtObstacleSegment *)(arg1)->getObstacleSegment(arg2);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtAllocObstacleAvoidanceQuery():int")))
+void _wrap_dtAllocObstacleAvoidanceQuery() {
+  dtObstacleAvoidanceQuery *result ;
+  
+  result = (dtObstacleAvoidanceQuery *)dtAllocObstacleAvoidanceQuery();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtFreeObstacleAvoidanceQuery(ptr:int):void")))
+void _wrap_dtFreeObstacleAvoidanceQuery() {
+  dtObstacleAvoidanceQuery *arg1 = (dtObstacleAvoidanceQuery *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, ptr);
+  }
+  dtFreeObstacleAvoidanceQuery(arg1);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_new_dtPathCorridor():int")))
+void _wrap_new_dtPathCorridor() {
+  dtPathCorridor *result ;
+  
+  result = (dtPathCorridor *)new dtPathCorridor();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_delete_dtPathCorridor(self):void")))
+void _wrap_delete_dtPathCorridor() {
+  dtPathCorridor *arg1 = (dtPathCorridor *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  delete arg1;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtPathCorridor_init(self, maxPath:int):Boolean")))
+void _wrap_dtPathCorridor_init() {
+  dtPathCorridor *arg1 = (dtPathCorridor *) 0 ;
+  int arg2 ;
+  bool result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, maxPath);
+  }
+  result = (bool)(arg1)->init(arg2);
+  {
+    AS3_DeclareVar(asresult, Boolean);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtPathCorridor_reset(self, ref:int, pos:int):void")))
+void _wrap_dtPathCorridor_reset() {
+  dtPathCorridor *arg1 = (dtPathCorridor *) 0 ;
+  dtPolyRef arg2 ;
+  float *arg3 = (float *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, ref);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, pos);
+  }
+  (arg1)->reset(arg2,(float const *)arg3);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtPathCorridor_findCorners(self, cornerVerts:int, cornerFlags:int, cornerPolys:int, maxCorners:int, navquery:int, filter:int):int")))
+void _wrap_dtPathCorridor_findCorners() {
+  dtPathCorridor *arg1 = (dtPathCorridor *) 0 ;
+  float *arg2 = (float *) 0 ;
+  unsigned char *arg3 = (unsigned char *) 0 ;
+  dtPolyRef *arg4 = (dtPolyRef *) 0 ;
+  int arg5 ;
+  dtNavMeshQuery *arg6 = (dtNavMeshQuery *) 0 ;
+  dtQueryFilter *arg7 = (dtQueryFilter *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, cornerVerts);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, cornerFlags);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, cornerPolys);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, maxCorners);
+  }
+  {
+    AS3_GetScalarFromVar(arg6, navquery);
+  }
+  {
+    AS3_GetScalarFromVar(arg7, filter);
+  }
+  result = (int)(arg1)->findCorners(arg2,arg3,arg4,arg5,arg6,(dtQueryFilter const *)arg7);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtPathCorridor_optimizePathVisibility(self, next:int, pathOptimizationRange:Number, navquery:int, filter:int):void")))
+void _wrap_dtPathCorridor_optimizePathVisibility() {
+  dtPathCorridor *arg1 = (dtPathCorridor *) 0 ;
+  float *arg2 = (float *) 0 ;
+  float arg3 ;
+  dtNavMeshQuery *arg4 = (dtNavMeshQuery *) 0 ;
+  dtQueryFilter *arg5 = (dtQueryFilter *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, next);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, pathOptimizationRange);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, navquery);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, filter);
+  }
+  (arg1)->optimizePathVisibility((float const *)arg2,arg3,arg4,(dtQueryFilter const *)arg5);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtPathCorridor_optimizePathTopology(self, navquery:int, filter:int):Boolean")))
+void _wrap_dtPathCorridor_optimizePathTopology() {
+  dtPathCorridor *arg1 = (dtPathCorridor *) 0 ;
+  dtNavMeshQuery *arg2 = (dtNavMeshQuery *) 0 ;
+  dtQueryFilter *arg3 = (dtQueryFilter *) 0 ;
+  bool result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, navquery);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, filter);
+  }
+  result = (bool)(arg1)->optimizePathTopology(arg2,(dtQueryFilter const *)arg3);
+  {
+    AS3_DeclareVar(asresult, Boolean);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtPathCorridor_moveOverOffmeshConnection(self, offMeshConRef:int, refs:int, startPos:int, endPos:int, navquery:int):Boolean")))
+void _wrap_dtPathCorridor_moveOverOffmeshConnection() {
+  dtPathCorridor *arg1 = (dtPathCorridor *) 0 ;
+  dtPolyRef arg2 ;
+  dtPolyRef *arg3 = (dtPolyRef *) 0 ;
+  float *arg4 = (float *) 0 ;
+  float *arg5 = (float *) 0 ;
+  dtNavMeshQuery *arg6 = (dtNavMeshQuery *) 0 ;
+  bool result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, offMeshConRef);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, refs);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, startPos);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, endPos);
+  }
+  {
+    AS3_GetScalarFromVar(arg6, navquery);
+  }
+  result = (bool)(arg1)->moveOverOffmeshConnection(arg2,arg3,arg4,arg5,arg6);
+  {
+    AS3_DeclareVar(asresult, Boolean);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtPathCorridor_fixPathStart(self, safeRef:int, safePos:int):Boolean")))
+void _wrap_dtPathCorridor_fixPathStart() {
+  dtPathCorridor *arg1 = (dtPathCorridor *) 0 ;
+  dtPolyRef arg2 ;
+  float *arg3 = (float *) 0 ;
+  bool result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, safeRef);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, safePos);
+  }
+  result = (bool)(arg1)->fixPathStart(arg2,(float const *)arg3);
+  {
+    AS3_DeclareVar(asresult, Boolean);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtPathCorridor_trimInvalidPath(self, safeRef:int, safePos:int, navquery:int, filter:int):Boolean")))
+void _wrap_dtPathCorridor_trimInvalidPath() {
+  dtPathCorridor *arg1 = (dtPathCorridor *) 0 ;
+  dtPolyRef arg2 ;
+  float *arg3 = (float *) 0 ;
+  dtNavMeshQuery *arg4 = (dtNavMeshQuery *) 0 ;
+  dtQueryFilter *arg5 = (dtQueryFilter *) 0 ;
+  bool result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, safeRef);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, safePos);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, navquery);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, filter);
+  }
+  result = (bool)(arg1)->trimInvalidPath(arg2,(float const *)arg3,arg4,(dtQueryFilter const *)arg5);
+  {
+    AS3_DeclareVar(asresult, Boolean);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtPathCorridor_isValid(self, maxLookAhead:int, navquery:int, filter:int):Boolean")))
+void _wrap_dtPathCorridor_isValid() {
+  dtPathCorridor *arg1 = (dtPathCorridor *) 0 ;
+  int arg2 ;
+  dtNavMeshQuery *arg3 = (dtNavMeshQuery *) 0 ;
+  dtQueryFilter *arg4 = (dtQueryFilter *) 0 ;
+  bool result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, maxLookAhead);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, navquery);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, filter);
+  }
+  result = (bool)(arg1)->isValid(arg2,arg3,(dtQueryFilter const *)arg4);
+  {
+    AS3_DeclareVar(asresult, Boolean);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtPathCorridor_movePosition(self, npos:int, navquery:int, filter:int):void")))
+void _wrap_dtPathCorridor_movePosition() {
+  dtPathCorridor *arg1 = (dtPathCorridor *) 0 ;
+  float *arg2 = (float *) 0 ;
+  dtNavMeshQuery *arg3 = (dtNavMeshQuery *) 0 ;
+  dtQueryFilter *arg4 = (dtQueryFilter *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, npos);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, navquery);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, filter);
+  }
+  (arg1)->movePosition((float const *)arg2,arg3,(dtQueryFilter const *)arg4);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtPathCorridor_moveTargetPosition(self, npos:int, navquery:int, filter:int):void")))
+void _wrap_dtPathCorridor_moveTargetPosition() {
+  dtPathCorridor *arg1 = (dtPathCorridor *) 0 ;
+  float *arg2 = (float *) 0 ;
+  dtNavMeshQuery *arg3 = (dtNavMeshQuery *) 0 ;
+  dtQueryFilter *arg4 = (dtQueryFilter *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, npos);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, navquery);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, filter);
+  }
+  (arg1)->moveTargetPosition((float const *)arg2,arg3,(dtQueryFilter const *)arg4);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtPathCorridor_setCorridor(self, target:int, polys:int, npath:int):void")))
+void _wrap_dtPathCorridor_setCorridor() {
+  dtPathCorridor *arg1 = (dtPathCorridor *) 0 ;
+  float *arg2 = (float *) 0 ;
+  dtPolyRef *arg3 = (dtPolyRef *) 0 ;
+  int arg4 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, target);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, polys);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, npath);
+  }
+  (arg1)->setCorridor((float const *)arg2,(dtPolyRef const *)arg3,arg4);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtPathCorridor_getPos(self):int")))
+void _wrap_dtPathCorridor_getPos() {
+  dtPathCorridor *arg1 = (dtPathCorridor *) 0 ;
+  float *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float *)((dtPathCorridor const *)arg1)->getPos();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtPathCorridor_getTarget(self):int")))
+void _wrap_dtPathCorridor_getTarget() {
+  dtPathCorridor *arg1 = (dtPathCorridor *) 0 ;
+  float *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float *)((dtPathCorridor const *)arg1)->getTarget();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtPathCorridor_getFirstPoly(self):int")))
+void _wrap_dtPathCorridor_getFirstPoly() {
+  dtPathCorridor *arg1 = (dtPathCorridor *) 0 ;
+  dtPolyRef result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (dtPolyRef)((dtPathCorridor const *)arg1)->getFirstPoly();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtPathCorridor_getLastPoly(self):int")))
+void _wrap_dtPathCorridor_getLastPoly() {
+  dtPathCorridor *arg1 = (dtPathCorridor *) 0 ;
+  dtPolyRef result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (dtPolyRef)((dtPathCorridor const *)arg1)->getLastPoly();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtPathCorridor_getPath(self):int")))
+void _wrap_dtPathCorridor_getPath() {
+  dtPathCorridor *arg1 = (dtPathCorridor *) 0 ;
+  dtPolyRef *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (dtPolyRef *)((dtPathCorridor const *)arg1)->getPath();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtPathCorridor_getPathCount(self):int")))
+void _wrap_dtPathCorridor_getPathCount() {
+  dtPathCorridor *arg1 = (dtPathCorridor *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int)((dtPathCorridor const *)arg1)->getPathCount();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMergeCorridorStartMoved(path:int, npath:int, maxPath:int, visited:int, nvisited:int):int")))
+void _wrap_dtMergeCorridorStartMoved() {
+  dtPolyRef *arg1 = (dtPolyRef *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  dtPolyRef *arg4 = (dtPolyRef *) 0 ;
+  int arg5 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, path);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, npath);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, maxPath);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, visited);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, nvisited);
+  }
+  result = (int)dtMergeCorridorStartMoved(arg1,arg2,arg3,(unsigned int const *)arg4,arg5);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMergeCorridorEndMoved(path:int, npath:int, maxPath:int, visited:int, nvisited:int):int")))
+void _wrap_dtMergeCorridorEndMoved() {
+  dtPolyRef *arg1 = (dtPolyRef *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  dtPolyRef *arg4 = (dtPolyRef *) 0 ;
+  int arg5 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, path);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, npath);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, maxPath);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, visited);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, nvisited);
+  }
+  result = (int)dtMergeCorridorEndMoved(arg1,arg2,arg3,(unsigned int const *)arg4,arg5);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMergeCorridorStartShortcut(path:int, npath:int, maxPath:int, visited:int, nvisited:int):int")))
+void _wrap_dtMergeCorridorStartShortcut() {
+  dtPolyRef *arg1 = (dtPolyRef *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  dtPolyRef *arg4 = (dtPolyRef *) 0 ;
+  int arg5 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, path);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, npath);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, maxPath);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, visited);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, nvisited);
+  }
+  result = (int)dtMergeCorridorStartShortcut(arg1,arg2,arg3,(unsigned int const *)arg4,arg5);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DT_PATHQ_INVALID_get():int")))
+void _wrap_DT_PATHQ_INVALID_get() {
+  unsigned int result ;
+  
+  result = (unsigned int)(unsigned int)DT_PATHQ_INVALID;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_new_dtPathQueue():int")))
+void _wrap_new_dtPathQueue() {
+  dtPathQueue *result ;
+  
+  result = (dtPathQueue *)new dtPathQueue();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_delete_dtPathQueue(self):void")))
+void _wrap_delete_dtPathQueue() {
+  dtPathQueue *arg1 = (dtPathQueue *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  delete arg1;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtPathQueue_init(self, maxPathSize:int, maxSearchNodeCount:int, nav:int):Boolean")))
+void _wrap_dtPathQueue_init() {
+  dtPathQueue *arg1 = (dtPathQueue *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  dtNavMesh *arg4 = (dtNavMesh *) 0 ;
+  bool result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, maxPathSize);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, maxSearchNodeCount);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, nav);
+  }
+  result = (bool)(arg1)->init(arg2,arg3,arg4);
+  {
+    AS3_DeclareVar(asresult, Boolean);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtPathQueue_update(self, maxIters:int):void")))
+void _wrap_dtPathQueue_update() {
+  dtPathQueue *arg1 = (dtPathQueue *) 0 ;
+  int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, maxIters);
+  }
+  (arg1)->update(arg2);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtPathQueue_request(self, startRef:int, endRef:int, startPos:int, endPos:int, filter:int):int")))
+void _wrap_dtPathQueue_request() {
+  dtPathQueue *arg1 = (dtPathQueue *) 0 ;
+  dtPolyRef arg2 ;
+  dtPolyRef arg3 ;
+  float *arg4 = (float *) 0 ;
+  float *arg5 = (float *) 0 ;
+  dtQueryFilter *arg6 = (dtQueryFilter *) 0 ;
+  dtPathQueueRef result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, startRef);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, endRef);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, startPos);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, endPos);
+  }
+  {
+    AS3_GetScalarFromVar(arg6, filter);
+  }
+  result = (dtPathQueueRef)(arg1)->request(arg2,arg3,(float const *)arg4,(float const *)arg5,(dtQueryFilter const *)arg6);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtPathQueue_getRequestStatus(self, ref:int):int")))
+void _wrap_dtPathQueue_getRequestStatus() {
+  dtPathQueue *arg1 = (dtPathQueue *) 0 ;
+  dtPathQueueRef arg2 ;
+  dtStatus result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, ref);
+  }
+  result = (dtStatus)((dtPathQueue const *)arg1)->getRequestStatus(arg2);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtPathQueue_getPathResult(self, ref:int, path:int, pathSize:int, maxPath:int):int")))
+void _wrap_dtPathQueue_getPathResult() {
+  dtPathQueue *arg1 = (dtPathQueue *) 0 ;
+  dtPathQueueRef arg2 ;
+  dtPolyRef *arg3 = (dtPolyRef *) 0 ;
+  int *arg4 = (int *) 0 ;
+  int arg5 ;
+  dtStatus result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, ref);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, path);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, pathSize);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, maxPath);
+  }
+  result = (dtStatus)(arg1)->getPathResult(arg2,arg3,arg4,arg5);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtPathQueue_getNavQuery(self):int")))
+void _wrap_dtPathQueue_getNavQuery() {
+  dtPathQueue *arg1 = (dtPathQueue *) 0 ;
+  dtNavMeshQuery *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (dtNavMeshQuery *)((dtPathQueue const *)arg1)->getNavQuery();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_new_dtProximityGrid():int")))
+void _wrap_new_dtProximityGrid() {
+  dtProximityGrid *result ;
+  
+  result = (dtProximityGrid *)new dtProximityGrid();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_delete_dtProximityGrid(self):void")))
+void _wrap_delete_dtProximityGrid() {
+  dtProximityGrid *arg1 = (dtProximityGrid *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  delete arg1;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtProximityGrid_init(self, maxItems:int, cellSize:Number):Boolean")))
+void _wrap_dtProximityGrid_init() {
+  dtProximityGrid *arg1 = (dtProximityGrid *) 0 ;
+  int arg2 ;
+  float arg3 ;
+  bool result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, maxItems);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, cellSize);
+  }
+  result = (bool)(arg1)->init(arg2,arg3);
+  {
+    AS3_DeclareVar(asresult, Boolean);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtProximityGrid_clear(self):void")))
+void _wrap_dtProximityGrid_clear() {
+  dtProximityGrid *arg1 = (dtProximityGrid *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  (arg1)->clear();
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtProximityGrid_addItem(self, id:int, minx:Number, miny:Number, maxx:Number, maxy:Number):void")))
+void _wrap_dtProximityGrid_addItem() {
+  dtProximityGrid *arg1 = (dtProximityGrid *) 0 ;
+  unsigned short arg2 ;
+  float arg3 ;
+  float arg4 ;
+  float arg5 ;
+  float arg6 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, id);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, minx);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, miny);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, maxx);
+  }
+  {
+    AS3_GetScalarFromVar(arg6, maxy);
+  }
+  (arg1)->addItem(arg2,arg3,arg4,arg5,arg6);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtProximityGrid_queryItems(self, minx:Number, miny:Number, maxx:Number, maxy:Number, ids:int, maxIds:int):int")))
+void _wrap_dtProximityGrid_queryItems() {
+  dtProximityGrid *arg1 = (dtProximityGrid *) 0 ;
+  float arg2 ;
+  float arg3 ;
+  float arg4 ;
+  float arg5 ;
+  unsigned short *arg6 = (unsigned short *) 0 ;
+  int arg7 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, minx);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, miny);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, maxx);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, maxy);
+  }
+  {
+    AS3_GetScalarFromVar(arg6, ids);
+  }
+  {
+    AS3_GetScalarFromVar(arg7, maxIds);
+  }
+  result = (int)((dtProximityGrid const *)arg1)->queryItems(arg2,arg3,arg4,arg5,arg6,arg7);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtProximityGrid_getItemCountAt(self, x:int, y:int):int")))
+void _wrap_dtProximityGrid_getItemCountAt() {
+  dtProximityGrid *arg1 = (dtProximityGrid *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, x);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, y);
+  }
+  result = (int)((dtProximityGrid const *)arg1)->getItemCountAt(arg2,arg3);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtProximityGrid_getBounds(self):int")))
+void _wrap_dtProximityGrid_getBounds() {
+  dtProximityGrid *arg1 = (dtProximityGrid *) 0 ;
+  int *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int *)((dtProximityGrid const *)arg1)->getBounds();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtProximityGrid_getCellSize(self):Number")))
+void _wrap_dtProximityGrid_getCellSize() {
+  dtProximityGrid *arg1 = (dtProximityGrid *) 0 ;
+  float result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float)((dtProximityGrid const *)arg1)->getCellSize();
+  {
+    AS3_DeclareVar(asresult, Number);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtAllocProximityGrid():int")))
+void _wrap_dtAllocProximityGrid() {
+  dtProximityGrid *result ;
+  
+  result = (dtProximityGrid *)dtAllocProximityGrid();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtFreeProximityGrid(ptr:int):void")))
+void _wrap_dtFreeProximityGrid() {
+  dtProximityGrid *arg1 = (dtProximityGrid *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, ptr);
+  }
+  dtFreeProximityGrid(arg1);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DT_COMPRESSEDTILE_FREE_DATA():int")))
+void _wrap_DT_COMPRESSEDTILE_FREE_DATA() {
+  int result ;
+  
+  result = DT_COMPRESSEDTILE_FREE_DATA;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCompressedTile_salt_set(self, salt:int):void")))
+void _wrap_dtCompressedTile_salt_set() {
+  dtCompressedTile *arg1 = (dtCompressedTile *) 0 ;
+  unsigned int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, salt);
+  }
+  if (arg1) (arg1)->salt = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCompressedTile_salt_get(self):int")))
+void _wrap_dtCompressedTile_salt_get() {
+  dtCompressedTile *arg1 = (dtCompressedTile *) 0 ;
+  unsigned int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned int) ((arg1)->salt);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCompressedTile_header_set(self, header:int):void")))
+void _wrap_dtCompressedTile_header_set() {
+  dtCompressedTile *arg1 = (dtCompressedTile *) 0 ;
+  dtTileCacheLayerHeader *arg2 = (dtTileCacheLayerHeader *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, header);
+  }
+  if (arg1) (arg1)->header = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCompressedTile_header_get(self):int")))
+void _wrap_dtCompressedTile_header_get() {
+  dtCompressedTile *arg1 = (dtCompressedTile *) 0 ;
+  dtTileCacheLayerHeader *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (dtTileCacheLayerHeader *) ((arg1)->header);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCompressedTile_compressed_set(self, compressed:int):void")))
+void _wrap_dtCompressedTile_compressed_set() {
+  dtCompressedTile *arg1 = (dtCompressedTile *) 0 ;
+  unsigned char *arg2 = (unsigned char *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, compressed);
+  }
+  if (arg1) (arg1)->compressed = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCompressedTile_compressed_get(self):int")))
+void _wrap_dtCompressedTile_compressed_get() {
+  dtCompressedTile *arg1 = (dtCompressedTile *) 0 ;
+  unsigned char *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned char *) ((arg1)->compressed);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCompressedTile_compressedSize_set(self, compressedSize:int):void")))
+void _wrap_dtCompressedTile_compressedSize_set() {
+  dtCompressedTile *arg1 = (dtCompressedTile *) 0 ;
+  int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, compressedSize);
+  }
+  if (arg1) (arg1)->compressedSize = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCompressedTile_compressedSize_get(self):int")))
+void _wrap_dtCompressedTile_compressedSize_get() {
+  dtCompressedTile *arg1 = (dtCompressedTile *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int) ((arg1)->compressedSize);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCompressedTile_data_set(self, data:int):void")))
+void _wrap_dtCompressedTile_data_set() {
+  dtCompressedTile *arg1 = (dtCompressedTile *) 0 ;
+  unsigned char *arg2 = (unsigned char *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, data);
+  }
+  if (arg1) (arg1)->data = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCompressedTile_data_get(self):int")))
+void _wrap_dtCompressedTile_data_get() {
+  dtCompressedTile *arg1 = (dtCompressedTile *) 0 ;
+  unsigned char *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned char *) ((arg1)->data);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCompressedTile_dataSize_set(self, dataSize:int):void")))
+void _wrap_dtCompressedTile_dataSize_set() {
+  dtCompressedTile *arg1 = (dtCompressedTile *) 0 ;
+  int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, dataSize);
+  }
+  if (arg1) (arg1)->dataSize = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCompressedTile_dataSize_get(self):int")))
+void _wrap_dtCompressedTile_dataSize_get() {
+  dtCompressedTile *arg1 = (dtCompressedTile *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int) ((arg1)->dataSize);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCompressedTile_flags_set(self, flags:int):void")))
+void _wrap_dtCompressedTile_flags_set() {
+  dtCompressedTile *arg1 = (dtCompressedTile *) 0 ;
+  unsigned int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, flags);
+  }
+  if (arg1) (arg1)->flags = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCompressedTile_flags_get(self):int")))
+void _wrap_dtCompressedTile_flags_get() {
+  dtCompressedTile *arg1 = (dtCompressedTile *) 0 ;
+  unsigned int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned int) ((arg1)->flags);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCompressedTile_next_set(self, next:int):void")))
+void _wrap_dtCompressedTile_next_set() {
+  dtCompressedTile *arg1 = (dtCompressedTile *) 0 ;
+  dtCompressedTile *arg2 = (dtCompressedTile *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, next);
+  }
+  if (arg1) (arg1)->next = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtCompressedTile_next_get(self):int")))
+void _wrap_dtCompressedTile_next_get() {
+  dtCompressedTile *arg1 = (dtCompressedTile *) 0 ;
+  dtCompressedTile *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (dtCompressedTile *) ((arg1)->next);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_new_dtCompressedTile():int")))
+void _wrap_new_dtCompressedTile() {
+  dtCompressedTile *result ;
+  
+  result = (dtCompressedTile *)new dtCompressedTile();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_delete_dtCompressedTile(self):void")))
+void _wrap_delete_dtCompressedTile() {
+  dtCompressedTile *arg1 = (dtCompressedTile *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  delete arg1;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DT_OBSTACLE_EMPTY():int")))
+void _wrap_DT_OBSTACLE_EMPTY() {
+  int result ;
+  
+  result = DT_OBSTACLE_EMPTY;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DT_OBSTACLE_PROCESSING():int")))
+void _wrap_DT_OBSTACLE_PROCESSING() {
+  int result ;
+  
+  result = DT_OBSTACLE_PROCESSING;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DT_OBSTACLE_PROCESSED():int")))
+void _wrap_DT_OBSTACLE_PROCESSED() {
+  int result ;
+  
+  result = DT_OBSTACLE_PROCESSED;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DT_OBSTACLE_REMOVING():int")))
+void _wrap_DT_OBSTACLE_REMOVING() {
+  int result ;
+  
+  result = DT_OBSTACLE_REMOVING;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DT_MAX_TOUCHED_TILES_get():int")))
+void _wrap_DT_MAX_TOUCHED_TILES_get() {
+  int result ;
+  
+  result = (int)(int)DT_MAX_TOUCHED_TILES;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheObstacle_pos_set(self, pos:int):void")))
+void _wrap_dtTileCacheObstacle_pos_set() {
+  dtTileCacheObstacle *arg1 = (dtTileCacheObstacle *) 0 ;
+  float *arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, pos);
+  }
+  {
+    size_t ii;
+    float *b = (float *) arg1->pos;
+    for (ii = 0; ii < (size_t)3; ii++) b[ii] = *((float *) arg2 + ii);
+  }
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheObstacle_pos_get(self):int")))
+void _wrap_dtTileCacheObstacle_pos_get() {
+  dtTileCacheObstacle *arg1 = (dtTileCacheObstacle *) 0 ;
+  float *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float *)(float *) ((arg1)->pos);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheObstacle_radius_set(self, radius:Number):void")))
+void _wrap_dtTileCacheObstacle_radius_set() {
+  dtTileCacheObstacle *arg1 = (dtTileCacheObstacle *) 0 ;
+  float arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, radius);
+  }
+  if (arg1) (arg1)->radius = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheObstacle_radius_get(self):Number")))
+void _wrap_dtTileCacheObstacle_radius_get() {
+  dtTileCacheObstacle *arg1 = (dtTileCacheObstacle *) 0 ;
+  float result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float) ((arg1)->radius);
+  {
+    AS3_DeclareVar(asresult, Number);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheObstacle_height_set(self, height:Number):void")))
+void _wrap_dtTileCacheObstacle_height_set() {
+  dtTileCacheObstacle *arg1 = (dtTileCacheObstacle *) 0 ;
+  float arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, height);
+  }
+  if (arg1) (arg1)->height = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheObstacle_height_get(self):Number")))
+void _wrap_dtTileCacheObstacle_height_get() {
+  dtTileCacheObstacle *arg1 = (dtTileCacheObstacle *) 0 ;
+  float result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float) ((arg1)->height);
+  {
+    AS3_DeclareVar(asresult, Number);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheObstacle_touched_set(self, touched:int):void")))
+void _wrap_dtTileCacheObstacle_touched_set() {
+  dtTileCacheObstacle *arg1 = (dtTileCacheObstacle *) 0 ;
+  dtCompressedTileRef *arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, touched);
+  }
+  {
+    size_t ii;
+    dtCompressedTileRef *b = (dtCompressedTileRef *) arg1->touched;
+    for (ii = 0; ii < (size_t)DT_MAX_TOUCHED_TILES; ii++) b[ii] = *((dtCompressedTileRef *) arg2 + ii);
+  }
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheObstacle_touched_get(self):int")))
+void _wrap_dtTileCacheObstacle_touched_get() {
+  dtTileCacheObstacle *arg1 = (dtTileCacheObstacle *) 0 ;
+  dtCompressedTileRef *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (dtCompressedTileRef *)(dtCompressedTileRef *) ((arg1)->touched);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheObstacle_pending_set(self, pending:int):void")))
+void _wrap_dtTileCacheObstacle_pending_set() {
+  dtTileCacheObstacle *arg1 = (dtTileCacheObstacle *) 0 ;
+  dtCompressedTileRef *arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, pending);
+  }
+  {
+    size_t ii;
+    dtCompressedTileRef *b = (dtCompressedTileRef *) arg1->pending;
+    for (ii = 0; ii < (size_t)DT_MAX_TOUCHED_TILES; ii++) b[ii] = *((dtCompressedTileRef *) arg2 + ii);
+  }
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheObstacle_pending_get(self):int")))
+void _wrap_dtTileCacheObstacle_pending_get() {
+  dtTileCacheObstacle *arg1 = (dtTileCacheObstacle *) 0 ;
+  dtCompressedTileRef *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (dtCompressedTileRef *)(dtCompressedTileRef *) ((arg1)->pending);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheObstacle_salt_set(self, salt:int):void")))
+void _wrap_dtTileCacheObstacle_salt_set() {
+  dtTileCacheObstacle *arg1 = (dtTileCacheObstacle *) 0 ;
+  unsigned short arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, salt);
+  }
+  if (arg1) (arg1)->salt = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheObstacle_salt_get(self):int")))
+void _wrap_dtTileCacheObstacle_salt_get() {
+  dtTileCacheObstacle *arg1 = (dtTileCacheObstacle *) 0 ;
+  unsigned short result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned short) ((arg1)->salt);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheObstacle_state_set(self, state:String):void")))
+void _wrap_dtTileCacheObstacle_state_set() {
+  dtTileCacheObstacle *arg1 = (dtTileCacheObstacle *) 0 ;
+  unsigned char arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    inline_nonreentrant_as3(
+      "%0 = state.charCodeAt(0)" : "=r"(arg2)
+      );
+  }
+  if (arg1) (arg1)->state = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheObstacle_state_get(self):String")))
+void _wrap_dtTileCacheObstacle_state_get() {
+  dtTileCacheObstacle *arg1 = (dtTileCacheObstacle *) 0 ;
+  unsigned char result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned char) ((arg1)->state);
+  {
+    AS3_DeclareVar(asresult, String);
+    AS3_CopyCStringToVar(asresult, &result, 1);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheObstacle_ntouched_set(self, ntouched:String):void")))
+void _wrap_dtTileCacheObstacle_ntouched_set() {
+  dtTileCacheObstacle *arg1 = (dtTileCacheObstacle *) 0 ;
+  unsigned char arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    inline_nonreentrant_as3(
+      "%0 = ntouched.charCodeAt(0)" : "=r"(arg2)
+      );
+  }
+  if (arg1) (arg1)->ntouched = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheObstacle_ntouched_get(self):String")))
+void _wrap_dtTileCacheObstacle_ntouched_get() {
+  dtTileCacheObstacle *arg1 = (dtTileCacheObstacle *) 0 ;
+  unsigned char result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned char) ((arg1)->ntouched);
+  {
+    AS3_DeclareVar(asresult, String);
+    AS3_CopyCStringToVar(asresult, &result, 1);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheObstacle_npending_set(self, npending:String):void")))
+void _wrap_dtTileCacheObstacle_npending_set() {
+  dtTileCacheObstacle *arg1 = (dtTileCacheObstacle *) 0 ;
+  unsigned char arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    inline_nonreentrant_as3(
+      "%0 = npending.charCodeAt(0)" : "=r"(arg2)
+      );
+  }
+  if (arg1) (arg1)->npending = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheObstacle_npending_get(self):String")))
+void _wrap_dtTileCacheObstacle_npending_get() {
+  dtTileCacheObstacle *arg1 = (dtTileCacheObstacle *) 0 ;
+  unsigned char result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned char) ((arg1)->npending);
+  {
+    AS3_DeclareVar(asresult, String);
+    AS3_CopyCStringToVar(asresult, &result, 1);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheObstacle_next_set(self, next:int):void")))
+void _wrap_dtTileCacheObstacle_next_set() {
+  dtTileCacheObstacle *arg1 = (dtTileCacheObstacle *) 0 ;
+  dtTileCacheObstacle *arg2 = (dtTileCacheObstacle *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, next);
+  }
+  if (arg1) (arg1)->next = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheObstacle_next_get(self):int")))
+void _wrap_dtTileCacheObstacle_next_get() {
+  dtTileCacheObstacle *arg1 = (dtTileCacheObstacle *) 0 ;
+  dtTileCacheObstacle *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (dtTileCacheObstacle *) ((arg1)->next);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_new_dtTileCacheObstacle():int")))
+void _wrap_new_dtTileCacheObstacle() {
+  dtTileCacheObstacle *result ;
+  
+  result = (dtTileCacheObstacle *)new dtTileCacheObstacle();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_delete_dtTileCacheObstacle(self):void")))
+void _wrap_delete_dtTileCacheObstacle() {
+  dtTileCacheObstacle *arg1 = (dtTileCacheObstacle *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  delete arg1;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheParams_orig_set(self, orig:int):void")))
+void _wrap_dtTileCacheParams_orig_set() {
+  dtTileCacheParams *arg1 = (dtTileCacheParams *) 0 ;
+  float *arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, orig);
+  }
+  {
+    size_t ii;
+    float *b = (float *) arg1->orig;
+    for (ii = 0; ii < (size_t)3; ii++) b[ii] = *((float *) arg2 + ii);
+  }
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheParams_orig_get(self):int")))
+void _wrap_dtTileCacheParams_orig_get() {
+  dtTileCacheParams *arg1 = (dtTileCacheParams *) 0 ;
+  float *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float *)(float *) ((arg1)->orig);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheParams_cs_set(self, cs:Number):void")))
+void _wrap_dtTileCacheParams_cs_set() {
+  dtTileCacheParams *arg1 = (dtTileCacheParams *) 0 ;
+  float arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, cs);
+  }
+  if (arg1) (arg1)->cs = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheParams_cs_get(self):Number")))
+void _wrap_dtTileCacheParams_cs_get() {
+  dtTileCacheParams *arg1 = (dtTileCacheParams *) 0 ;
+  float result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float) ((arg1)->cs);
+  {
+    AS3_DeclareVar(asresult, Number);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheParams_ch_set(self, ch:Number):void")))
+void _wrap_dtTileCacheParams_ch_set() {
+  dtTileCacheParams *arg1 = (dtTileCacheParams *) 0 ;
+  float arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, ch);
+  }
+  if (arg1) (arg1)->ch = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheParams_ch_get(self):Number")))
+void _wrap_dtTileCacheParams_ch_get() {
+  dtTileCacheParams *arg1 = (dtTileCacheParams *) 0 ;
+  float result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float) ((arg1)->ch);
+  {
+    AS3_DeclareVar(asresult, Number);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheParams_width_set(self, width:int):void")))
+void _wrap_dtTileCacheParams_width_set() {
+  dtTileCacheParams *arg1 = (dtTileCacheParams *) 0 ;
+  int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, width);
+  }
+  if (arg1) (arg1)->width = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheParams_width_get(self):int")))
+void _wrap_dtTileCacheParams_width_get() {
+  dtTileCacheParams *arg1 = (dtTileCacheParams *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int) ((arg1)->width);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheParams_height_set(self, height:int):void")))
+void _wrap_dtTileCacheParams_height_set() {
+  dtTileCacheParams *arg1 = (dtTileCacheParams *) 0 ;
+  int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, height);
+  }
+  if (arg1) (arg1)->height = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheParams_height_get(self):int")))
+void _wrap_dtTileCacheParams_height_get() {
+  dtTileCacheParams *arg1 = (dtTileCacheParams *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int) ((arg1)->height);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheParams_walkableHeight_set(self, walkableHeight:Number):void")))
+void _wrap_dtTileCacheParams_walkableHeight_set() {
+  dtTileCacheParams *arg1 = (dtTileCacheParams *) 0 ;
+  float arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, walkableHeight);
+  }
+  if (arg1) (arg1)->walkableHeight = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheParams_walkableHeight_get(self):Number")))
+void _wrap_dtTileCacheParams_walkableHeight_get() {
+  dtTileCacheParams *arg1 = (dtTileCacheParams *) 0 ;
+  float result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float) ((arg1)->walkableHeight);
+  {
+    AS3_DeclareVar(asresult, Number);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheParams_walkableRadius_set(self, walkableRadius:Number):void")))
+void _wrap_dtTileCacheParams_walkableRadius_set() {
+  dtTileCacheParams *arg1 = (dtTileCacheParams *) 0 ;
+  float arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, walkableRadius);
+  }
+  if (arg1) (arg1)->walkableRadius = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheParams_walkableRadius_get(self):Number")))
+void _wrap_dtTileCacheParams_walkableRadius_get() {
+  dtTileCacheParams *arg1 = (dtTileCacheParams *) 0 ;
+  float result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float) ((arg1)->walkableRadius);
+  {
+    AS3_DeclareVar(asresult, Number);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheParams_walkableClimb_set(self, walkableClimb:Number):void")))
+void _wrap_dtTileCacheParams_walkableClimb_set() {
+  dtTileCacheParams *arg1 = (dtTileCacheParams *) 0 ;
+  float arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, walkableClimb);
+  }
+  if (arg1) (arg1)->walkableClimb = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheParams_walkableClimb_get(self):Number")))
+void _wrap_dtTileCacheParams_walkableClimb_get() {
+  dtTileCacheParams *arg1 = (dtTileCacheParams *) 0 ;
+  float result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float) ((arg1)->walkableClimb);
+  {
+    AS3_DeclareVar(asresult, Number);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheParams_maxSimplificationError_set(self, maxSimplificationError:Number):void")))
+void _wrap_dtTileCacheParams_maxSimplificationError_set() {
+  dtTileCacheParams *arg1 = (dtTileCacheParams *) 0 ;
+  float arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, maxSimplificationError);
+  }
+  if (arg1) (arg1)->maxSimplificationError = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheParams_maxSimplificationError_get(self):Number")))
+void _wrap_dtTileCacheParams_maxSimplificationError_get() {
+  dtTileCacheParams *arg1 = (dtTileCacheParams *) 0 ;
+  float result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float) ((arg1)->maxSimplificationError);
+  {
+    AS3_DeclareVar(asresult, Number);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheParams_maxTiles_set(self, maxTiles:int):void")))
+void _wrap_dtTileCacheParams_maxTiles_set() {
+  dtTileCacheParams *arg1 = (dtTileCacheParams *) 0 ;
+  int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, maxTiles);
+  }
+  if (arg1) (arg1)->maxTiles = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheParams_maxTiles_get(self):int")))
+void _wrap_dtTileCacheParams_maxTiles_get() {
+  dtTileCacheParams *arg1 = (dtTileCacheParams *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int) ((arg1)->maxTiles);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheParams_maxObstacles_set(self, maxObstacles:int):void")))
+void _wrap_dtTileCacheParams_maxObstacles_set() {
+  dtTileCacheParams *arg1 = (dtTileCacheParams *) 0 ;
+  int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, maxObstacles);
+  }
+  if (arg1) (arg1)->maxObstacles = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheParams_maxObstacles_get(self):int")))
+void _wrap_dtTileCacheParams_maxObstacles_get() {
+  dtTileCacheParams *arg1 = (dtTileCacheParams *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int) ((arg1)->maxObstacles);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_new_dtTileCacheParams():int")))
+void _wrap_new_dtTileCacheParams() {
+  dtTileCacheParams *result ;
+  
+  result = (dtTileCacheParams *)new dtTileCacheParams();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_delete_dtTileCacheParams(self):void")))
+void _wrap_delete_dtTileCacheParams() {
+  dtTileCacheParams *arg1 = (dtTileCacheParams *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  delete arg1;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheMeshProcess_process(self, params:int, polyAreas:int, polyFlags:int):void")))
+void _wrap_dtTileCacheMeshProcess_process() {
+  dtTileCacheMeshProcess *arg1 = (dtTileCacheMeshProcess *) 0 ;
+  dtNavMeshCreateParams *arg2 = (dtNavMeshCreateParams *) 0 ;
+  unsigned char *arg3 = (unsigned char *) 0 ;
+  unsigned short *arg4 = (unsigned short *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, params);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, polyAreas);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, polyFlags);
+  }
+  (arg1)->process(arg2,arg3,arg4);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_delete_dtTileCacheMeshProcess(self):void")))
+void _wrap_delete_dtTileCacheMeshProcess() {
+  dtTileCacheMeshProcess *arg1 = (dtTileCacheMeshProcess *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  delete arg1;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_new_dtTileCache():int")))
+void _wrap_new_dtTileCache() {
+  dtTileCache *result ;
+  
+  result = (dtTileCache *)new dtTileCache();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_delete_dtTileCache(self):void")))
+void _wrap_delete_dtTileCache() {
+  dtTileCache *arg1 = (dtTileCache *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  delete arg1;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCache_getAlloc(self):int")))
+void _wrap_dtTileCache_getAlloc() {
+  dtTileCache *arg1 = (dtTileCache *) 0 ;
+  dtTileCacheAlloc *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (dtTileCacheAlloc *)(arg1)->getAlloc();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCache_getCompressor(self):int")))
+void _wrap_dtTileCache_getCompressor() {
+  dtTileCache *arg1 = (dtTileCache *) 0 ;
+  dtTileCacheCompressor *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (dtTileCacheCompressor *)(arg1)->getCompressor();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCache_getParams(self):int")))
+void _wrap_dtTileCache_getParams() {
+  dtTileCache *arg1 = (dtTileCache *) 0 ;
+  dtTileCacheParams *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (dtTileCacheParams *)((dtTileCache const *)arg1)->getParams();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCache_getTileCount(self):int")))
+void _wrap_dtTileCache_getTileCount() {
+  dtTileCache *arg1 = (dtTileCache *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int)((dtTileCache const *)arg1)->getTileCount();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCache_getTile(self, i:int):int")))
+void _wrap_dtTileCache_getTile() {
+  dtTileCache *arg1 = (dtTileCache *) 0 ;
+  int arg2 ;
+  dtCompressedTile *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, i);
+  }
+  result = (dtCompressedTile *)((dtTileCache const *)arg1)->getTile(arg2);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCache_getObstacleCount(self):int")))
+void _wrap_dtTileCache_getObstacleCount() {
+  dtTileCache *arg1 = (dtTileCache *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int)((dtTileCache const *)arg1)->getObstacleCount();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCache_getObstacle(self, i:int):int")))
+void _wrap_dtTileCache_getObstacle() {
+  dtTileCache *arg1 = (dtTileCache *) 0 ;
+  int arg2 ;
+  dtTileCacheObstacle *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, i);
+  }
+  result = (dtTileCacheObstacle *)((dtTileCache const *)arg1)->getObstacle(arg2);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCache_getObstacleByRef(self, ref:int):int")))
+void _wrap_dtTileCache_getObstacleByRef() {
+  dtTileCache *arg1 = (dtTileCache *) 0 ;
+  dtObstacleRef arg2 ;
+  dtTileCacheObstacle *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, ref);
+  }
+  result = (dtTileCacheObstacle *)(arg1)->getObstacleByRef(arg2);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCache_getObstacleRef(self, obmin:int):int")))
+void _wrap_dtTileCache_getObstacleRef() {
+  dtTileCache *arg1 = (dtTileCache *) 0 ;
+  dtTileCacheObstacle *arg2 = (dtTileCacheObstacle *) 0 ;
+  dtObstacleRef result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, obmin);
+  }
+  result = (dtObstacleRef)((dtTileCache const *)arg1)->getObstacleRef((dtTileCacheObstacle const *)arg2);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCache_init(self, params:int, talloc:int, tcomp:int, tmproc:int):int")))
+void _wrap_dtTileCache_init() {
+  dtTileCache *arg1 = (dtTileCache *) 0 ;
+  dtTileCacheParams *arg2 = (dtTileCacheParams *) 0 ;
+  dtTileCacheAlloc *arg3 = (dtTileCacheAlloc *) 0 ;
+  dtTileCacheCompressor *arg4 = (dtTileCacheCompressor *) 0 ;
+  dtTileCacheMeshProcess *arg5 = (dtTileCacheMeshProcess *) 0 ;
+  dtStatus result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, params);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, talloc);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, tcomp);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, tmproc);
+  }
+  result = (dtStatus)(arg1)->init((dtTileCacheParams const *)arg2,arg3,arg4,arg5);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCache_getTilesAt(self, tx:int, ty:int, tiles:int, maxTiles:int):int")))
+void _wrap_dtTileCache_getTilesAt() {
+  dtTileCache *arg1 = (dtTileCache *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  dtCompressedTileRef *arg4 = (dtCompressedTileRef *) 0 ;
+  int arg5 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, tx);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, ty);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, tiles);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, maxTiles);
+  }
+  result = (int)((dtTileCache const *)arg1)->getTilesAt(arg2,arg3,arg4,arg5);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCache_getTileAt(self, tx:int, ty:int, tlayer:int):int")))
+void _wrap_dtTileCache_getTileAt() {
+  dtTileCache *arg1 = (dtTileCache *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  dtCompressedTile *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, tx);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, ty);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, tlayer);
+  }
+  result = (dtCompressedTile *)(arg1)->getTileAt(arg2,arg3,arg4);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCache_getTileRef(self, tile:int):int")))
+void _wrap_dtTileCache_getTileRef() {
+  dtTileCache *arg1 = (dtTileCache *) 0 ;
+  dtCompressedTile *arg2 = (dtCompressedTile *) 0 ;
+  dtCompressedTileRef result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, tile);
+  }
+  result = (dtCompressedTileRef)((dtTileCache const *)arg1)->getTileRef((dtCompressedTile const *)arg2);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCache_getTileByRef(self, ref:int):int")))
+void _wrap_dtTileCache_getTileByRef() {
+  dtTileCache *arg1 = (dtTileCache *) 0 ;
+  dtCompressedTileRef arg2 ;
+  dtCompressedTile *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, ref);
+  }
+  result = (dtCompressedTile *)((dtTileCache const *)arg1)->getTileByRef(arg2);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCache_addTile(self, data:int, dataSize:int, flags:String, result:int):int")))
+void _wrap_dtTileCache_addTile() {
+  dtTileCache *arg1 = (dtTileCache *) 0 ;
+  unsigned char *arg2 = (unsigned char *) 0 ;
+  int arg3 ;
+  unsigned char arg4 ;
+  dtCompressedTileRef *arg5 = (dtCompressedTileRef *) 0 ;
+  dtStatus result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, data);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, dataSize);
+  }
+  {
+    inline_nonreentrant_as3(
+      "%0 = flags.charCodeAt(0)" : "=r"(arg4)
+      );
+  }
+  {
+    AS3_GetScalarFromVar(arg5, result);
+  }
+  result = (dtStatus)(arg1)->addTile(arg2,arg3,arg4,arg5);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCache_removeTile(self, ref:int, data:int, dataSize:int):int")))
+void _wrap_dtTileCache_removeTile() {
+  dtTileCache *arg1 = (dtTileCache *) 0 ;
+  dtCompressedTileRef arg2 ;
+  unsigned char **arg3 = (unsigned char **) 0 ;
+  int *arg4 = (int *) 0 ;
+  dtStatus result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, ref);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, data);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, dataSize);
+  }
+  result = (dtStatus)(arg1)->removeTile(arg2,arg3,arg4);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCache_addObstacle(self, pos:int, radius:Number, height:Number, result:int):int")))
+void _wrap_dtTileCache_addObstacle() {
+  dtTileCache *arg1 = (dtTileCache *) 0 ;
+  float *arg2 = (float *) 0 ;
+  float arg3 ;
+  float arg4 ;
+  dtObstacleRef *arg5 = (dtObstacleRef *) 0 ;
+  dtStatus result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, pos);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, radius);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, height);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, result);
+  }
+  result = (dtStatus)(arg1)->addObstacle((float const *)arg2,arg3,arg4,arg5);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCache_removeObstacle(self, ref:int):int")))
+void _wrap_dtTileCache_removeObstacle() {
+  dtTileCache *arg1 = (dtTileCache *) 0 ;
+  dtObstacleRef arg2 ;
+  dtStatus result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, ref);
+  }
+  result = (dtStatus)(arg1)->removeObstacle(arg2);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCache_queryTiles(self, bmin:int, bmax:int, results:int, resultCount:int, maxResults:int):int")))
+void _wrap_dtTileCache_queryTiles() {
+  dtTileCache *arg1 = (dtTileCache *) 0 ;
+  float *arg2 = (float *) 0 ;
+  float *arg3 = (float *) 0 ;
+  dtCompressedTileRef *arg4 = (dtCompressedTileRef *) 0 ;
+  int *arg5 = (int *) 0 ;
+  int arg6 ;
+  dtStatus result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, bmin);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, bmax);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, results);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, resultCount);
+  }
+  {
+    AS3_GetScalarFromVar(arg6, maxResults);
+  }
+  result = (dtStatus)((dtTileCache const *)arg1)->queryTiles((float const *)arg2,(float const *)arg3,arg4,arg5,arg6);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCache_update(self, arg2:Number, navmesh:int):int")))
+void _wrap_dtTileCache_update() {
+  dtTileCache *arg1 = (dtTileCache *) 0 ;
+  float arg2 ;
+  dtNavMesh *arg3 = (dtNavMesh *) 0 ;
+  dtStatus result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, arg2);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, navmesh);
+  }
+  result = (dtStatus)(arg1)->update(arg2,arg3);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCache_buildNavMeshTilesAt(self, tx:int, ty:int, navmesh:int):int")))
+void _wrap_dtTileCache_buildNavMeshTilesAt() {
+  dtTileCache *arg1 = (dtTileCache *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  dtNavMesh *arg4 = (dtNavMesh *) 0 ;
+  dtStatus result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, tx);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, ty);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, navmesh);
+  }
+  result = (dtStatus)(arg1)->buildNavMeshTilesAt(arg2,arg3,arg4);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCache_buildNavMeshTile(self, ref:int, navmesh:int):int")))
+void _wrap_dtTileCache_buildNavMeshTile() {
+  dtTileCache *arg1 = (dtTileCache *) 0 ;
+  dtCompressedTileRef arg2 ;
+  dtNavMesh *arg3 = (dtNavMesh *) 0 ;
+  dtStatus result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, ref);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, navmesh);
+  }
+  result = (dtStatus)(arg1)->buildNavMeshTile(arg2,arg3);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCache_calcTightTileBounds(self, header:int, bmin:int, bmax:int):void")))
+void _wrap_dtTileCache_calcTightTileBounds() {
+  dtTileCache *arg1 = (dtTileCache *) 0 ;
+  dtTileCacheLayerHeader *arg2 = (dtTileCacheLayerHeader *) 0 ;
+  float *arg3 = (float *) 0 ;
+  float *arg4 = (float *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, header);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, bmin);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, bmax);
+  }
+  ((dtTileCache const *)arg1)->calcTightTileBounds((dtTileCacheLayerHeader const *)arg2,arg3,arg4);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCache_getObstacleBounds(self, ob:int, bmin:int, bmax:int):void")))
+void _wrap_dtTileCache_getObstacleBounds() {
+  dtTileCache *arg1 = (dtTileCache *) 0 ;
+  dtTileCacheObstacle *arg2 = (dtTileCacheObstacle *) 0 ;
+  float *arg3 = (float *) 0 ;
+  float *arg4 = (float *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, ob);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, bmin);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, bmax);
+  }
+  ((dtTileCache const *)arg1)->getObstacleBounds((dtTileCacheObstacle const *)arg2,arg3,arg4);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCache_encodeTileId(self, salt:int, it:int):int")))
+void _wrap_dtTileCache_encodeTileId() {
+  dtTileCache *arg1 = (dtTileCache *) 0 ;
+  unsigned int arg2 ;
+  unsigned int arg3 ;
+  dtCompressedTileRef result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, salt);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, it);
+  }
+  result = (dtCompressedTileRef)((dtTileCache const *)arg1)->encodeTileId(arg2,arg3);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCache_decodeTileIdSalt(self, ref:int):int")))
+void _wrap_dtTileCache_decodeTileIdSalt() {
+  dtTileCache *arg1 = (dtTileCache *) 0 ;
+  dtCompressedTileRef arg2 ;
+  unsigned int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, ref);
+  }
+  result = (unsigned int)((dtTileCache const *)arg1)->decodeTileIdSalt(arg2);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCache_decodeTileIdTile(self, ref:int):int")))
+void _wrap_dtTileCache_decodeTileIdTile() {
+  dtTileCache *arg1 = (dtTileCache *) 0 ;
+  dtCompressedTileRef arg2 ;
+  unsigned int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, ref);
+  }
+  result = (unsigned int)((dtTileCache const *)arg1)->decodeTileIdTile(arg2);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCache_encodeObstacleId(self, salt:int, it:int):int")))
+void _wrap_dtTileCache_encodeObstacleId() {
+  dtTileCache *arg1 = (dtTileCache *) 0 ;
+  unsigned int arg2 ;
+  unsigned int arg3 ;
+  dtObstacleRef result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, salt);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, it);
+  }
+  result = (dtObstacleRef)((dtTileCache const *)arg1)->encodeObstacleId(arg2,arg3);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCache_decodeObstacleIdSalt(self, ref:int):int")))
+void _wrap_dtTileCache_decodeObstacleIdSalt() {
+  dtTileCache *arg1 = (dtTileCache *) 0 ;
+  dtObstacleRef arg2 ;
+  unsigned int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, ref);
+  }
+  result = (unsigned int)((dtTileCache const *)arg1)->decodeObstacleIdSalt(arg2);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCache_decodeObstacleIdObstacle(self, ref:int):int")))
+void _wrap_dtTileCache_decodeObstacleIdObstacle() {
+  dtTileCache *arg1 = (dtTileCache *) 0 ;
+  dtObstacleRef arg2 ;
+  unsigned int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, ref);
+  }
+  result = (unsigned int)((dtTileCache const *)arg1)->decodeObstacleIdObstacle(arg2);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtAllocTileCache():int")))
+void _wrap_dtAllocTileCache() {
+  dtTileCache *result ;
+  
+  result = (dtTileCache *)dtAllocTileCache();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtFreeTileCache(tc:int):void")))
+void _wrap_dtFreeTileCache() {
+  dtTileCache *arg1 = (dtTileCache *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, tc);
+  }
+  dtFreeTileCache(arg1);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DT_TILECACHE_MAGIC_get():int")))
+void _wrap_DT_TILECACHE_MAGIC_get() {
+  int result ;
+  
+  result = (int)(int)DT_TILECACHE_MAGIC;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DT_TILECACHE_VERSION_get():int")))
+void _wrap_DT_TILECACHE_VERSION_get() {
+  int result ;
+  
+  result = (int)(int)DT_TILECACHE_VERSION;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DT_TILECACHE_NULL_AREA_get():String")))
+void _wrap_DT_TILECACHE_NULL_AREA_get() {
+  unsigned char result ;
+  
+  result = (unsigned char)(unsigned char)DT_TILECACHE_NULL_AREA;
+  {
+    AS3_DeclareVar(asresult, String);
+    AS3_CopyCStringToVar(asresult, &result, 1);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DT_TILECACHE_WALKABLE_AREA_get():String")))
+void _wrap_DT_TILECACHE_WALKABLE_AREA_get() {
+  unsigned char result ;
+  
+  result = (unsigned char)(unsigned char)DT_TILECACHE_WALKABLE_AREA;
+  {
+    AS3_DeclareVar(asresult, String);
+    AS3_CopyCStringToVar(asresult, &result, 1);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DT_TILECACHE_NULL_IDX_get():int")))
+void _wrap_DT_TILECACHE_NULL_IDX_get() {
+  unsigned short result ;
+  
+  result = (unsigned short)(unsigned short)DT_TILECACHE_NULL_IDX;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheLayerHeader_magic_set(self, magic:int):void")))
+void _wrap_dtTileCacheLayerHeader_magic_set() {
+  dtTileCacheLayerHeader *arg1 = (dtTileCacheLayerHeader *) 0 ;
+  int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, magic);
+  }
+  if (arg1) (arg1)->magic = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheLayerHeader_magic_get(self):int")))
+void _wrap_dtTileCacheLayerHeader_magic_get() {
+  dtTileCacheLayerHeader *arg1 = (dtTileCacheLayerHeader *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int) ((arg1)->magic);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheLayerHeader_version_set(self, version:int):void")))
+void _wrap_dtTileCacheLayerHeader_version_set() {
+  dtTileCacheLayerHeader *arg1 = (dtTileCacheLayerHeader *) 0 ;
+  int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, version);
+  }
+  if (arg1) (arg1)->version = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheLayerHeader_version_get(self):int")))
+void _wrap_dtTileCacheLayerHeader_version_get() {
+  dtTileCacheLayerHeader *arg1 = (dtTileCacheLayerHeader *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int) ((arg1)->version);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheLayerHeader_tx_set(self, tx:int):void")))
+void _wrap_dtTileCacheLayerHeader_tx_set() {
+  dtTileCacheLayerHeader *arg1 = (dtTileCacheLayerHeader *) 0 ;
+  int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, tx);
+  }
+  if (arg1) (arg1)->tx = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheLayerHeader_tx_get(self):int")))
+void _wrap_dtTileCacheLayerHeader_tx_get() {
+  dtTileCacheLayerHeader *arg1 = (dtTileCacheLayerHeader *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int) ((arg1)->tx);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheLayerHeader_ty_set(self, ty:int):void")))
+void _wrap_dtTileCacheLayerHeader_ty_set() {
+  dtTileCacheLayerHeader *arg1 = (dtTileCacheLayerHeader *) 0 ;
+  int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, ty);
+  }
+  if (arg1) (arg1)->ty = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheLayerHeader_ty_get(self):int")))
+void _wrap_dtTileCacheLayerHeader_ty_get() {
+  dtTileCacheLayerHeader *arg1 = (dtTileCacheLayerHeader *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int) ((arg1)->ty);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheLayerHeader_tlayer_set(self, tlayer:int):void")))
+void _wrap_dtTileCacheLayerHeader_tlayer_set() {
+  dtTileCacheLayerHeader *arg1 = (dtTileCacheLayerHeader *) 0 ;
+  int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, tlayer);
+  }
+  if (arg1) (arg1)->tlayer = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheLayerHeader_tlayer_get(self):int")))
+void _wrap_dtTileCacheLayerHeader_tlayer_get() {
+  dtTileCacheLayerHeader *arg1 = (dtTileCacheLayerHeader *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int) ((arg1)->tlayer);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheLayerHeader_bmin_set(self, bmin:int):void")))
+void _wrap_dtTileCacheLayerHeader_bmin_set() {
+  dtTileCacheLayerHeader *arg1 = (dtTileCacheLayerHeader *) 0 ;
+  float *arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, bmin);
+  }
+  {
+    size_t ii;
+    float *b = (float *) arg1->bmin;
+    for (ii = 0; ii < (size_t)3; ii++) b[ii] = *((float *) arg2 + ii);
+  }
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheLayerHeader_bmin_get(self):int")))
+void _wrap_dtTileCacheLayerHeader_bmin_get() {
+  dtTileCacheLayerHeader *arg1 = (dtTileCacheLayerHeader *) 0 ;
+  float *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float *)(float *) ((arg1)->bmin);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheLayerHeader_bmax_set(self, bmax:int):void")))
+void _wrap_dtTileCacheLayerHeader_bmax_set() {
+  dtTileCacheLayerHeader *arg1 = (dtTileCacheLayerHeader *) 0 ;
+  float *arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, bmax);
+  }
+  {
+    size_t ii;
+    float *b = (float *) arg1->bmax;
+    for (ii = 0; ii < (size_t)3; ii++) b[ii] = *((float *) arg2 + ii);
+  }
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheLayerHeader_bmax_get(self):int")))
+void _wrap_dtTileCacheLayerHeader_bmax_get() {
+  dtTileCacheLayerHeader *arg1 = (dtTileCacheLayerHeader *) 0 ;
+  float *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float *)(float *) ((arg1)->bmax);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheLayerHeader_hmin_set(self, hmin:int):void")))
+void _wrap_dtTileCacheLayerHeader_hmin_set() {
+  dtTileCacheLayerHeader *arg1 = (dtTileCacheLayerHeader *) 0 ;
+  unsigned short arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, hmin);
+  }
+  if (arg1) (arg1)->hmin = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheLayerHeader_hmin_get(self):int")))
+void _wrap_dtTileCacheLayerHeader_hmin_get() {
+  dtTileCacheLayerHeader *arg1 = (dtTileCacheLayerHeader *) 0 ;
+  unsigned short result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned short) ((arg1)->hmin);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheLayerHeader_hmax_set(self, hmax:int):void")))
+void _wrap_dtTileCacheLayerHeader_hmax_set() {
+  dtTileCacheLayerHeader *arg1 = (dtTileCacheLayerHeader *) 0 ;
+  unsigned short arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, hmax);
+  }
+  if (arg1) (arg1)->hmax = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheLayerHeader_hmax_get(self):int")))
+void _wrap_dtTileCacheLayerHeader_hmax_get() {
+  dtTileCacheLayerHeader *arg1 = (dtTileCacheLayerHeader *) 0 ;
+  unsigned short result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned short) ((arg1)->hmax);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheLayerHeader_width_set(self, width:String):void")))
+void _wrap_dtTileCacheLayerHeader_width_set() {
+  dtTileCacheLayerHeader *arg1 = (dtTileCacheLayerHeader *) 0 ;
+  unsigned char arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    inline_nonreentrant_as3(
+      "%0 = width.charCodeAt(0)" : "=r"(arg2)
+      );
+  }
+  if (arg1) (arg1)->width = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheLayerHeader_width_get(self):String")))
+void _wrap_dtTileCacheLayerHeader_width_get() {
+  dtTileCacheLayerHeader *arg1 = (dtTileCacheLayerHeader *) 0 ;
+  unsigned char result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned char) ((arg1)->width);
+  {
+    AS3_DeclareVar(asresult, String);
+    AS3_CopyCStringToVar(asresult, &result, 1);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheLayerHeader_height_set(self, height:String):void")))
+void _wrap_dtTileCacheLayerHeader_height_set() {
+  dtTileCacheLayerHeader *arg1 = (dtTileCacheLayerHeader *) 0 ;
+  unsigned char arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    inline_nonreentrant_as3(
+      "%0 = height.charCodeAt(0)" : "=r"(arg2)
+      );
+  }
+  if (arg1) (arg1)->height = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheLayerHeader_height_get(self):String")))
+void _wrap_dtTileCacheLayerHeader_height_get() {
+  dtTileCacheLayerHeader *arg1 = (dtTileCacheLayerHeader *) 0 ;
+  unsigned char result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned char) ((arg1)->height);
+  {
+    AS3_DeclareVar(asresult, String);
+    AS3_CopyCStringToVar(asresult, &result, 1);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheLayerHeader_minx_set(self, minx:String):void")))
+void _wrap_dtTileCacheLayerHeader_minx_set() {
+  dtTileCacheLayerHeader *arg1 = (dtTileCacheLayerHeader *) 0 ;
+  unsigned char arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    inline_nonreentrant_as3(
+      "%0 = minx.charCodeAt(0)" : "=r"(arg2)
+      );
+  }
+  if (arg1) (arg1)->minx = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheLayerHeader_minx_get(self):String")))
+void _wrap_dtTileCacheLayerHeader_minx_get() {
+  dtTileCacheLayerHeader *arg1 = (dtTileCacheLayerHeader *) 0 ;
+  unsigned char result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned char) ((arg1)->minx);
+  {
+    AS3_DeclareVar(asresult, String);
+    AS3_CopyCStringToVar(asresult, &result, 1);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheLayerHeader_maxx_set(self, maxx:String):void")))
+void _wrap_dtTileCacheLayerHeader_maxx_set() {
+  dtTileCacheLayerHeader *arg1 = (dtTileCacheLayerHeader *) 0 ;
+  unsigned char arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    inline_nonreentrant_as3(
+      "%0 = maxx.charCodeAt(0)" : "=r"(arg2)
+      );
+  }
+  if (arg1) (arg1)->maxx = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheLayerHeader_maxx_get(self):String")))
+void _wrap_dtTileCacheLayerHeader_maxx_get() {
+  dtTileCacheLayerHeader *arg1 = (dtTileCacheLayerHeader *) 0 ;
+  unsigned char result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned char) ((arg1)->maxx);
+  {
+    AS3_DeclareVar(asresult, String);
+    AS3_CopyCStringToVar(asresult, &result, 1);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheLayerHeader_miny_set(self, miny:String):void")))
+void _wrap_dtTileCacheLayerHeader_miny_set() {
+  dtTileCacheLayerHeader *arg1 = (dtTileCacheLayerHeader *) 0 ;
+  unsigned char arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    inline_nonreentrant_as3(
+      "%0 = miny.charCodeAt(0)" : "=r"(arg2)
+      );
+  }
+  if (arg1) (arg1)->miny = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheLayerHeader_miny_get(self):String")))
+void _wrap_dtTileCacheLayerHeader_miny_get() {
+  dtTileCacheLayerHeader *arg1 = (dtTileCacheLayerHeader *) 0 ;
+  unsigned char result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned char) ((arg1)->miny);
+  {
+    AS3_DeclareVar(asresult, String);
+    AS3_CopyCStringToVar(asresult, &result, 1);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheLayerHeader_maxy_set(self, maxy:String):void")))
+void _wrap_dtTileCacheLayerHeader_maxy_set() {
+  dtTileCacheLayerHeader *arg1 = (dtTileCacheLayerHeader *) 0 ;
+  unsigned char arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    inline_nonreentrant_as3(
+      "%0 = maxy.charCodeAt(0)" : "=r"(arg2)
+      );
+  }
+  if (arg1) (arg1)->maxy = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheLayerHeader_maxy_get(self):String")))
+void _wrap_dtTileCacheLayerHeader_maxy_get() {
+  dtTileCacheLayerHeader *arg1 = (dtTileCacheLayerHeader *) 0 ;
+  unsigned char result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned char) ((arg1)->maxy);
+  {
+    AS3_DeclareVar(asresult, String);
+    AS3_CopyCStringToVar(asresult, &result, 1);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_new_dtTileCacheLayerHeader():int")))
+void _wrap_new_dtTileCacheLayerHeader() {
+  dtTileCacheLayerHeader *result ;
+  
+  result = (dtTileCacheLayerHeader *)new dtTileCacheLayerHeader();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_delete_dtTileCacheLayerHeader(self):void")))
+void _wrap_delete_dtTileCacheLayerHeader() {
+  dtTileCacheLayerHeader *arg1 = (dtTileCacheLayerHeader *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  delete arg1;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheLayer_header_set(self, header:int):void")))
+void _wrap_dtTileCacheLayer_header_set() {
+  dtTileCacheLayer *arg1 = (dtTileCacheLayer *) 0 ;
+  dtTileCacheLayerHeader *arg2 = (dtTileCacheLayerHeader *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, header);
+  }
+  if (arg1) (arg1)->header = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheLayer_header_get(self):int")))
+void _wrap_dtTileCacheLayer_header_get() {
+  dtTileCacheLayer *arg1 = (dtTileCacheLayer *) 0 ;
+  dtTileCacheLayerHeader *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (dtTileCacheLayerHeader *) ((arg1)->header);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheLayer_regCount_set(self, regCount:String):void")))
+void _wrap_dtTileCacheLayer_regCount_set() {
+  dtTileCacheLayer *arg1 = (dtTileCacheLayer *) 0 ;
+  unsigned char arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    inline_nonreentrant_as3(
+      "%0 = regCount.charCodeAt(0)" : "=r"(arg2)
+      );
+  }
+  if (arg1) (arg1)->regCount = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheLayer_regCount_get(self):String")))
+void _wrap_dtTileCacheLayer_regCount_get() {
+  dtTileCacheLayer *arg1 = (dtTileCacheLayer *) 0 ;
+  unsigned char result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned char) ((arg1)->regCount);
+  {
+    AS3_DeclareVar(asresult, String);
+    AS3_CopyCStringToVar(asresult, &result, 1);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheLayer_heights_set(self, heights:int):void")))
+void _wrap_dtTileCacheLayer_heights_set() {
+  dtTileCacheLayer *arg1 = (dtTileCacheLayer *) 0 ;
+  unsigned char *arg2 = (unsigned char *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, heights);
+  }
+  if (arg1) (arg1)->heights = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheLayer_heights_get(self):int")))
+void _wrap_dtTileCacheLayer_heights_get() {
+  dtTileCacheLayer *arg1 = (dtTileCacheLayer *) 0 ;
+  unsigned char *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned char *) ((arg1)->heights);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheLayer_areas_set(self, areas:int):void")))
+void _wrap_dtTileCacheLayer_areas_set() {
+  dtTileCacheLayer *arg1 = (dtTileCacheLayer *) 0 ;
+  unsigned char *arg2 = (unsigned char *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, areas);
+  }
+  if (arg1) (arg1)->areas = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheLayer_areas_get(self):int")))
+void _wrap_dtTileCacheLayer_areas_get() {
+  dtTileCacheLayer *arg1 = (dtTileCacheLayer *) 0 ;
+  unsigned char *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned char *) ((arg1)->areas);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheLayer_cons_set(self, cons:int):void")))
+void _wrap_dtTileCacheLayer_cons_set() {
+  dtTileCacheLayer *arg1 = (dtTileCacheLayer *) 0 ;
+  unsigned char *arg2 = (unsigned char *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, cons);
+  }
+  if (arg1) (arg1)->cons = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheLayer_cons_get(self):int")))
+void _wrap_dtTileCacheLayer_cons_get() {
+  dtTileCacheLayer *arg1 = (dtTileCacheLayer *) 0 ;
+  unsigned char *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned char *) ((arg1)->cons);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheLayer_regs_set(self, regs:int):void")))
+void _wrap_dtTileCacheLayer_regs_set() {
+  dtTileCacheLayer *arg1 = (dtTileCacheLayer *) 0 ;
+  unsigned char *arg2 = (unsigned char *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, regs);
+  }
+  if (arg1) (arg1)->regs = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheLayer_regs_get(self):int")))
+void _wrap_dtTileCacheLayer_regs_get() {
+  dtTileCacheLayer *arg1 = (dtTileCacheLayer *) 0 ;
+  unsigned char *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned char *) ((arg1)->regs);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_new_dtTileCacheLayer():int")))
+void _wrap_new_dtTileCacheLayer() {
+  dtTileCacheLayer *result ;
+  
+  result = (dtTileCacheLayer *)new dtTileCacheLayer();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_delete_dtTileCacheLayer(self):void")))
+void _wrap_delete_dtTileCacheLayer() {
+  dtTileCacheLayer *arg1 = (dtTileCacheLayer *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  delete arg1;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheContour_nverts_set(self, nverts:int):void")))
+void _wrap_dtTileCacheContour_nverts_set() {
+  dtTileCacheContour *arg1 = (dtTileCacheContour *) 0 ;
+  int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, nverts);
+  }
+  if (arg1) (arg1)->nverts = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheContour_nverts_get(self):int")))
+void _wrap_dtTileCacheContour_nverts_get() {
+  dtTileCacheContour *arg1 = (dtTileCacheContour *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int) ((arg1)->nverts);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheContour_verts_set(self, verts:int):void")))
+void _wrap_dtTileCacheContour_verts_set() {
+  dtTileCacheContour *arg1 = (dtTileCacheContour *) 0 ;
+  unsigned char *arg2 = (unsigned char *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, verts);
+  }
+  if (arg1) (arg1)->verts = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheContour_verts_get(self):int")))
+void _wrap_dtTileCacheContour_verts_get() {
+  dtTileCacheContour *arg1 = (dtTileCacheContour *) 0 ;
+  unsigned char *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned char *) ((arg1)->verts);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheContour_reg_set(self, reg:String):void")))
+void _wrap_dtTileCacheContour_reg_set() {
+  dtTileCacheContour *arg1 = (dtTileCacheContour *) 0 ;
+  unsigned char arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    inline_nonreentrant_as3(
+      "%0 = reg.charCodeAt(0)" : "=r"(arg2)
+      );
+  }
+  if (arg1) (arg1)->reg = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheContour_reg_get(self):String")))
+void _wrap_dtTileCacheContour_reg_get() {
+  dtTileCacheContour *arg1 = (dtTileCacheContour *) 0 ;
+  unsigned char result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned char) ((arg1)->reg);
+  {
+    AS3_DeclareVar(asresult, String);
+    AS3_CopyCStringToVar(asresult, &result, 1);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheContour_area_set(self, area:String):void")))
+void _wrap_dtTileCacheContour_area_set() {
+  dtTileCacheContour *arg1 = (dtTileCacheContour *) 0 ;
+  unsigned char arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    inline_nonreentrant_as3(
+      "%0 = area.charCodeAt(0)" : "=r"(arg2)
+      );
+  }
+  if (arg1) (arg1)->area = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheContour_area_get(self):String")))
+void _wrap_dtTileCacheContour_area_get() {
+  dtTileCacheContour *arg1 = (dtTileCacheContour *) 0 ;
+  unsigned char result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned char) ((arg1)->area);
+  {
+    AS3_DeclareVar(asresult, String);
+    AS3_CopyCStringToVar(asresult, &result, 1);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_new_dtTileCacheContour():int")))
+void _wrap_new_dtTileCacheContour() {
+  dtTileCacheContour *result ;
+  
+  result = (dtTileCacheContour *)new dtTileCacheContour();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_delete_dtTileCacheContour(self):void")))
+void _wrap_delete_dtTileCacheContour() {
+  dtTileCacheContour *arg1 = (dtTileCacheContour *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  delete arg1;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheContourSet_nconts_set(self, nconts:int):void")))
+void _wrap_dtTileCacheContourSet_nconts_set() {
+  dtTileCacheContourSet *arg1 = (dtTileCacheContourSet *) 0 ;
+  int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, nconts);
+  }
+  if (arg1) (arg1)->nconts = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheContourSet_nconts_get(self):int")))
+void _wrap_dtTileCacheContourSet_nconts_get() {
+  dtTileCacheContourSet *arg1 = (dtTileCacheContourSet *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int) ((arg1)->nconts);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheContourSet_conts_set(self, conts:int):void")))
+void _wrap_dtTileCacheContourSet_conts_set() {
+  dtTileCacheContourSet *arg1 = (dtTileCacheContourSet *) 0 ;
+  dtTileCacheContour *arg2 = (dtTileCacheContour *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, conts);
+  }
+  if (arg1) (arg1)->conts = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheContourSet_conts_get(self):int")))
+void _wrap_dtTileCacheContourSet_conts_get() {
+  dtTileCacheContourSet *arg1 = (dtTileCacheContourSet *) 0 ;
+  dtTileCacheContour *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (dtTileCacheContour *) ((arg1)->conts);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_new_dtTileCacheContourSet():int")))
+void _wrap_new_dtTileCacheContourSet() {
+  dtTileCacheContourSet *result ;
+  
+  result = (dtTileCacheContourSet *)new dtTileCacheContourSet();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_delete_dtTileCacheContourSet(self):void")))
+void _wrap_delete_dtTileCacheContourSet() {
+  dtTileCacheContourSet *arg1 = (dtTileCacheContourSet *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  delete arg1;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCachePolyMesh_nvp_set(self, nvp:int):void")))
+void _wrap_dtTileCachePolyMesh_nvp_set() {
+  dtTileCachePolyMesh *arg1 = (dtTileCachePolyMesh *) 0 ;
+  int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, nvp);
+  }
+  if (arg1) (arg1)->nvp = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCachePolyMesh_nvp_get(self):int")))
+void _wrap_dtTileCachePolyMesh_nvp_get() {
+  dtTileCachePolyMesh *arg1 = (dtTileCachePolyMesh *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int) ((arg1)->nvp);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCachePolyMesh_nverts_set(self, nverts:int):void")))
+void _wrap_dtTileCachePolyMesh_nverts_set() {
+  dtTileCachePolyMesh *arg1 = (dtTileCachePolyMesh *) 0 ;
+  int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, nverts);
+  }
+  if (arg1) (arg1)->nverts = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCachePolyMesh_nverts_get(self):int")))
+void _wrap_dtTileCachePolyMesh_nverts_get() {
+  dtTileCachePolyMesh *arg1 = (dtTileCachePolyMesh *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int) ((arg1)->nverts);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCachePolyMesh_npolys_set(self, npolys:int):void")))
+void _wrap_dtTileCachePolyMesh_npolys_set() {
+  dtTileCachePolyMesh *arg1 = (dtTileCachePolyMesh *) 0 ;
+  int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, npolys);
+  }
+  if (arg1) (arg1)->npolys = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCachePolyMesh_npolys_get(self):int")))
+void _wrap_dtTileCachePolyMesh_npolys_get() {
+  dtTileCachePolyMesh *arg1 = (dtTileCachePolyMesh *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int) ((arg1)->npolys);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCachePolyMesh_verts_set(self, verts:int):void")))
+void _wrap_dtTileCachePolyMesh_verts_set() {
+  dtTileCachePolyMesh *arg1 = (dtTileCachePolyMesh *) 0 ;
+  unsigned short *arg2 = (unsigned short *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, verts);
+  }
+  if (arg1) (arg1)->verts = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCachePolyMesh_verts_get(self):int")))
+void _wrap_dtTileCachePolyMesh_verts_get() {
+  dtTileCachePolyMesh *arg1 = (dtTileCachePolyMesh *) 0 ;
+  unsigned short *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned short *) ((arg1)->verts);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCachePolyMesh_polys_set(self, polys:int):void")))
+void _wrap_dtTileCachePolyMesh_polys_set() {
+  dtTileCachePolyMesh *arg1 = (dtTileCachePolyMesh *) 0 ;
+  unsigned short *arg2 = (unsigned short *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, polys);
+  }
+  if (arg1) (arg1)->polys = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCachePolyMesh_polys_get(self):int")))
+void _wrap_dtTileCachePolyMesh_polys_get() {
+  dtTileCachePolyMesh *arg1 = (dtTileCachePolyMesh *) 0 ;
+  unsigned short *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned short *) ((arg1)->polys);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCachePolyMesh_flags_set(self, flags:int):void")))
+void _wrap_dtTileCachePolyMesh_flags_set() {
+  dtTileCachePolyMesh *arg1 = (dtTileCachePolyMesh *) 0 ;
+  unsigned short *arg2 = (unsigned short *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, flags);
+  }
+  if (arg1) (arg1)->flags = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCachePolyMesh_flags_get(self):int")))
+void _wrap_dtTileCachePolyMesh_flags_get() {
+  dtTileCachePolyMesh *arg1 = (dtTileCachePolyMesh *) 0 ;
+  unsigned short *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned short *) ((arg1)->flags);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCachePolyMesh_areas_set(self, areas:int):void")))
+void _wrap_dtTileCachePolyMesh_areas_set() {
+  dtTileCachePolyMesh *arg1 = (dtTileCachePolyMesh *) 0 ;
+  unsigned char *arg2 = (unsigned char *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, areas);
+  }
+  if (arg1) (arg1)->areas = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCachePolyMesh_areas_get(self):int")))
+void _wrap_dtTileCachePolyMesh_areas_get() {
+  dtTileCachePolyMesh *arg1 = (dtTileCachePolyMesh *) 0 ;
+  unsigned char *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned char *) ((arg1)->areas);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_new_dtTileCachePolyMesh():int")))
+void _wrap_new_dtTileCachePolyMesh() {
+  dtTileCachePolyMesh *result ;
+  
+  result = (dtTileCachePolyMesh *)new dtTileCachePolyMesh();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_delete_dtTileCachePolyMesh(self):void")))
+void _wrap_delete_dtTileCachePolyMesh() {
+  dtTileCachePolyMesh *arg1 = (dtTileCachePolyMesh *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  delete arg1;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheAlloc_reset(self):void")))
+void _wrap_dtTileCacheAlloc_reset() {
+  dtTileCacheAlloc *arg1 = (dtTileCacheAlloc *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  (arg1)->reset();
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheAlloc_alloc(self, size:int):int")))
+void _wrap_dtTileCacheAlloc_alloc() {
+  dtTileCacheAlloc *arg1 = (dtTileCacheAlloc *) 0 ;
+  int arg2 ;
+  void *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, size);
+  }
+  result = (void *)(arg1)->alloc(arg2);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheAlloc_free(self, ptr:int):void")))
+void _wrap_dtTileCacheAlloc_free() {
+  dtTileCacheAlloc *arg1 = (dtTileCacheAlloc *) 0 ;
+  void *arg2 = (void *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, ptr);
+  }
+  (arg1)->free(arg2);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_new_dtTileCacheAlloc():int")))
+void _wrap_new_dtTileCacheAlloc() {
+  dtTileCacheAlloc *result ;
+  
+  result = (dtTileCacheAlloc *)new dtTileCacheAlloc();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_delete_dtTileCacheAlloc(self):void")))
+void _wrap_delete_dtTileCacheAlloc() {
+  dtTileCacheAlloc *arg1 = (dtTileCacheAlloc *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  delete arg1;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheCompressor_maxCompressedSize(self, bufferSize:int):int")))
+void _wrap_dtTileCacheCompressor_maxCompressedSize() {
+  dtTileCacheCompressor *arg1 = (dtTileCacheCompressor *) 0 ;
+  int arg2 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, bufferSize);
+  }
+  result = (int)(arg1)->maxCompressedSize(arg2);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheCompressor_compress(self, buffer:int, bufferSize:int, compressed:int, maxCompressedSize:int, compressedSize:int):int")))
+void _wrap_dtTileCacheCompressor_compress() {
+  dtTileCacheCompressor *arg1 = (dtTileCacheCompressor *) 0 ;
+  unsigned char *arg2 = (unsigned char *) 0 ;
+  int arg3 ;
+  unsigned char *arg4 = (unsigned char *) 0 ;
+  int arg5 ;
+  int *arg6 = (int *) 0 ;
+  dtStatus result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, buffer);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, bufferSize);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, compressed);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, maxCompressedSize);
+  }
+  {
+    AS3_GetScalarFromVar(arg6, compressedSize);
+  }
+  result = (dtStatus)(arg1)->compress((unsigned char const *)arg2,arg3,arg4,arg5,arg6);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheCompressor_decompress(self, compressed:int, compressedSize:int, buffer:int, maxBufferSize:int, bufferSize:int):int")))
+void _wrap_dtTileCacheCompressor_decompress() {
+  dtTileCacheCompressor *arg1 = (dtTileCacheCompressor *) 0 ;
+  unsigned char *arg2 = (unsigned char *) 0 ;
+  int arg3 ;
+  unsigned char *arg4 = (unsigned char *) 0 ;
+  int arg5 ;
+  int *arg6 = (int *) 0 ;
+  dtStatus result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, compressed);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, compressedSize);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, buffer);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, maxBufferSize);
+  }
+  {
+    AS3_GetScalarFromVar(arg6, bufferSize);
+  }
+  result = (dtStatus)(arg1)->decompress((unsigned char const *)arg2,arg3,arg4,arg5,arg6);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_delete_dtTileCacheCompressor(self):void")))
+void _wrap_delete_dtTileCacheCompressor() {
+  dtTileCacheCompressor *arg1 = (dtTileCacheCompressor *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  delete arg1;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtBuildTileCacheLayer(comp:int, header:int, heights:int, areas:int, cons:int, outData:int, outDataSize:int):int")))
+void _wrap_dtBuildTileCacheLayer() {
+  dtTileCacheCompressor *arg1 = (dtTileCacheCompressor *) 0 ;
+  dtTileCacheLayerHeader *arg2 = (dtTileCacheLayerHeader *) 0 ;
+  unsigned char *arg3 = (unsigned char *) 0 ;
+  unsigned char *arg4 = (unsigned char *) 0 ;
+  unsigned char *arg5 = (unsigned char *) 0 ;
+  unsigned char **arg6 = (unsigned char **) 0 ;
+  int *arg7 = (int *) 0 ;
+  dtStatus result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, comp);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, header);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, heights);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, areas);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, cons);
+  }
+  {
+    AS3_GetScalarFromVar(arg6, outData);
+  }
+  {
+    AS3_GetScalarFromVar(arg7, outDataSize);
+  }
+  result = (dtStatus)dtBuildTileCacheLayer(arg1,arg2,(unsigned char const *)arg3,(unsigned char const *)arg4,(unsigned char const *)arg5,arg6,arg7);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtFreeTileCacheLayer(alloc:int, layer:int):void")))
+void _wrap_dtFreeTileCacheLayer() {
+  dtTileCacheAlloc *arg1 = (dtTileCacheAlloc *) 0 ;
+  dtTileCacheLayer *arg2 = (dtTileCacheLayer *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, alloc);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, layer);
+  }
+  dtFreeTileCacheLayer(arg1,arg2);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtDecompressTileCacheLayer(alloc:int, comp:int, compressed:int, compressedSize:int, layerOut:int):int")))
+void _wrap_dtDecompressTileCacheLayer() {
+  dtTileCacheAlloc *arg1 = (dtTileCacheAlloc *) 0 ;
+  dtTileCacheCompressor *arg2 = (dtTileCacheCompressor *) 0 ;
+  unsigned char *arg3 = (unsigned char *) 0 ;
+  int arg4 ;
+  dtTileCacheLayer **arg5 = (dtTileCacheLayer **) 0 ;
+  dtStatus result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, alloc);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, comp);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, compressed);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, compressedSize);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, layerOut);
+  }
+  result = (dtStatus)dtDecompressTileCacheLayer(arg1,arg2,arg3,arg4,arg5);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtAllocTileCacheContourSet(alloc:int):int")))
+void _wrap_dtAllocTileCacheContourSet() {
+  dtTileCacheAlloc *arg1 = (dtTileCacheAlloc *) 0 ;
+  dtTileCacheContourSet *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, alloc);
+  }
+  result = (dtTileCacheContourSet *)dtAllocTileCacheContourSet(arg1);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtFreeTileCacheContourSet(alloc:int, cset:int):void")))
+void _wrap_dtFreeTileCacheContourSet() {
+  dtTileCacheAlloc *arg1 = (dtTileCacheAlloc *) 0 ;
+  dtTileCacheContourSet *arg2 = (dtTileCacheContourSet *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, alloc);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, cset);
+  }
+  dtFreeTileCacheContourSet(arg1,arg2);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtAllocTileCachePolyMesh(alloc:int):int")))
+void _wrap_dtAllocTileCachePolyMesh() {
+  dtTileCacheAlloc *arg1 = (dtTileCacheAlloc *) 0 ;
+  dtTileCachePolyMesh *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, alloc);
+  }
+  result = (dtTileCachePolyMesh *)dtAllocTileCachePolyMesh(arg1);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtFreeTileCachePolyMesh(alloc:int, lmesh:int):void")))
+void _wrap_dtFreeTileCachePolyMesh() {
+  dtTileCacheAlloc *arg1 = (dtTileCacheAlloc *) 0 ;
+  dtTileCachePolyMesh *arg2 = (dtTileCachePolyMesh *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, alloc);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, lmesh);
+  }
+  dtFreeTileCachePolyMesh(arg1,arg2);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtMarkCylinderArea(layer:int, orig:int, cs:Number, ch:Number, pos:int, radius:Number, height:Number, areaId:String):int")))
+void _wrap_dtMarkCylinderArea() {
+  dtTileCacheLayer *arg1 = 0 ;
+  float *arg2 = (float *) 0 ;
+  float arg3 ;
+  float arg4 ;
+  float *arg5 = (float *) 0 ;
+  float arg6 ;
+  float arg7 ;
+  unsigned char arg8 ;
+  dtStatus result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, layer);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, orig);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, cs);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, ch);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, pos);
+  }
+  {
+    AS3_GetScalarFromVar(arg6, radius);
+  }
+  {
+    AS3_GetScalarFromVar(arg7, height);
+  }
+  {
+    inline_nonreentrant_as3(
+      "%0 = areaId.charCodeAt(0)" : "=r"(arg8)
+      );
+  }
+  result = (dtStatus)dtMarkCylinderArea(*arg1,(float const *)arg2,arg3,arg4,(float const *)arg5,arg6,arg7,arg8);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtBuildTileCacheRegions(alloc:int, layer:int, walkableClimb:int):int")))
+void _wrap_dtBuildTileCacheRegions() {
+  dtTileCacheAlloc *arg1 = (dtTileCacheAlloc *) 0 ;
+  dtTileCacheLayer *arg2 = 0 ;
+  int arg3 ;
+  dtStatus result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, alloc);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, layer);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, walkableClimb);
+  }
+  result = (dtStatus)dtBuildTileCacheRegions(arg1,*arg2,arg3);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtBuildTileCacheContours(alloc:int, layer:int, walkableClimb:int, maxError:Number, lcset:int):int")))
+void _wrap_dtBuildTileCacheContours() {
+  dtTileCacheAlloc *arg1 = (dtTileCacheAlloc *) 0 ;
+  dtTileCacheLayer *arg2 = 0 ;
+  int arg3 ;
+  float arg4 ;
+  dtTileCacheContourSet *arg5 = 0 ;
+  dtStatus result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, alloc);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, layer);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, walkableClimb);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, maxError);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, lcset);
+  }
+  result = (dtStatus)dtBuildTileCacheContours(arg1,*arg2,arg3,arg4,*arg5);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtBuildTileCachePolyMesh(alloc:int, lcset:int, mesh:int):int")))
+void _wrap_dtBuildTileCachePolyMesh() {
+  dtTileCacheAlloc *arg1 = (dtTileCacheAlloc *) 0 ;
+  dtTileCacheContourSet *arg2 = 0 ;
+  dtTileCachePolyMesh *arg3 = 0 ;
+  dtStatus result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, alloc);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, lcset);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, mesh);
+  }
+  result = (dtStatus)dtBuildTileCachePolyMesh(arg1,*arg2,*arg3);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_dtTileCacheHeaderSwapEndian(data:int, dataSize:int):Boolean")))
+void _wrap_dtTileCacheHeaderSwapEndian() {
+  unsigned char *arg1 = (unsigned char *) 0 ;
+  int arg2 ;
+  bool result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, data);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, dataSize);
+  }
+  result = (bool)dtTileCacheHeaderSwapEndian(arg1,arg2);
+  {
+    AS3_DeclareVar(asresult, Boolean);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
 
 __attribute__((annotate("as3sig:public function _wrap_RC_PI_get():Number")))
 void _wrap_RC_PI_get() {
@@ -7393,6 +28804,286 @@ void _wrap_rcMergePolyMeshDetails() {
 }
 
 
+__attribute__((annotate("as3sig:public function _wrap_RC_ALLOC_PERM():int")))
+void _wrap_RC_ALLOC_PERM() {
+  int result ;
+  
+  result = RC_ALLOC_PERM;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_RC_ALLOC_TEMP():int")))
+void _wrap_RC_ALLOC_TEMP() {
+  int result ;
+  
+  result = RC_ALLOC_TEMP;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_rcAllocSetCustom_allocFunc_func_ptr(f:Function):void")))
+void *_wrap_rcAllocSetCustom_allocFunc_func_ptr (int arg1, enum rcAllocHint arg2) {
+  void *result ;
+  
+  {
+    AS3_DeclareVar(arg1, int);
+    AS3_CopyScalarToVar(arg1, arg1);
+  }
+  {
+    AS3_DeclareVar(arg2, int);
+    AS3_CopyScalarToVar(arg2, arg2);
+  }
+  inline_as3(
+    "var asresult = f(arg1, arg2);"
+    );
+  {
+    AS3_GetScalarFromVar(result, asresult);
+  }
+  return result;
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_rcAllocSetCustom_freeFunc_func_ptr(f:Function):void")))
+void _wrap_rcAllocSetCustom_freeFunc_func_ptr (void *arg1) {
+  {
+    AS3_DeclareVar(arg1, int);
+    AS3_CopyScalarToVar(arg1, arg1);
+  }
+  inline_as3(
+    "f(arg1);"
+    );
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_rcAllocSetCustom(allocFunc:Function, freeFunc:Function):void")))
+void _wrap_rcAllocSetCustom() {
+  rcAllocFunc *arg1 = (rcAllocFunc *) 0 ;
+  rcFreeFunc *arg2 = (rcFreeFunc *) 0 ;
+  
+  {
+    swig_as3(
+      "var f:Function = allocFunc;"
+      "var ptr:int = SWIG_AS3GetCCallPtr(f);"
+      "if (!ptr) {"
+      "  var wrap = function() { _wrap_rcAllocSetCustom_allocFunc_func_ptr(allocFunc);};"
+      "  SWIG_AS3RegCCallWrapper(f, wrap);"
+      "  ptr = SWIG_AS3GetCCallPtr(f);"
+      "}"
+      "%0 = ptr;"
+      :"=r"(arg1)
+      );
+  }
+  {
+    swig_as3(
+      "var f:Function = freeFunc;"
+      "var ptr:int = SWIG_AS3GetCCallPtr(f);"
+      "if (!ptr) {"
+      "  var wrap = function() { _wrap_rcAllocSetCustom_freeFunc_func_ptr(freeFunc);};"
+      "  SWIG_AS3RegCCallWrapper(f, wrap);"
+      "  ptr = SWIG_AS3GetCCallPtr(f);"
+      "}"
+      "%0 = ptr;"
+      :"=r"(arg2)
+      );
+  }
+  rcAllocSetCustom(arg1,arg2);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_rcAlloc(size:int, hint:int):int")))
+void _wrap_rcAlloc() {
+  int arg1 ;
+  rcAllocHint arg2 ;
+  void *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, size);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, hint);
+  }
+  result = (void *)rcAlloc(arg1,arg2);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_rcFree(ptr:int):void")))
+void _wrap_rcFree() {
+  void *arg1 = (void *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, ptr);
+  }
+  rcFree(arg1);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_new_rcIntArray():int")))
+void _wrap_new_rcIntArray() {
+  rcIntArray *result ;
+  
+  result = (rcIntArray *)new rcIntArray();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_delete_rcIntArray(self):void")))
+void _wrap_delete_rcIntArray() {
+  rcIntArray *arg1 = (rcIntArray *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  delete arg1;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_rcIntArray_resize(self, n:int):void")))
+void _wrap_rcIntArray_resize() {
+  rcIntArray *arg1 = (rcIntArray *) 0 ;
+  int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, n);
+  }
+  (arg1)->resize(arg2);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_rcIntArray_push(self, item:int):void")))
+void _wrap_rcIntArray_push() {
+  rcIntArray *arg1 = (rcIntArray *) 0 ;
+  int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, item);
+  }
+  (arg1)->push(arg2);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_rcIntArray_pop(self):int")))
+void _wrap_rcIntArray_pop() {
+  rcIntArray *arg1 = (rcIntArray *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int)(arg1)->pop();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_rcIntArray_valueAt(self, i:int):int")))
+void _wrap_rcIntArray_valueAt() {
+  rcIntArray *arg1 = (rcIntArray *) 0 ;
+  int arg2 ;
+  int *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, i);
+  }
+  result = (int *) &((rcIntArray const *)arg1)->operator [](arg2);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_rcIntArray_size(self):int")))
+void _wrap_rcIntArray_size() {
+  rcIntArray *arg1 = (rcIntArray *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int)((rcIntArray const *)arg1)->size();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
 __attribute__((annotate("as3sig:public function _wrap_new_AS3_rcContext():int")))
 void _wrap_new_AS3_rcContext() {
   AS3_rcContext *result ;
@@ -7416,6 +29107,1539 @@ void _wrap_delete_AS3_rcContext() {
     AS3_GetScalarFromVar(arg1, self);
   }
   delete arg1;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_rcChunkyTriMeshNode_bmin_set(self, bmin:int):void")))
+void _wrap_rcChunkyTriMeshNode_bmin_set() {
+  rcChunkyTriMeshNode *arg1 = (rcChunkyTriMeshNode *) 0 ;
+  float *arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, bmin);
+  }
+  {
+    size_t ii;
+    float *b = (float *) arg1->bmin;
+    for (ii = 0; ii < (size_t)2; ii++) b[ii] = *((float *) arg2 + ii);
+  }
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_rcChunkyTriMeshNode_bmin_get(self):int")))
+void _wrap_rcChunkyTriMeshNode_bmin_get() {
+  rcChunkyTriMeshNode *arg1 = (rcChunkyTriMeshNode *) 0 ;
+  float *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float *)(float *) ((arg1)->bmin);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_rcChunkyTriMeshNode_bmax_set(self, bmax:int):void")))
+void _wrap_rcChunkyTriMeshNode_bmax_set() {
+  rcChunkyTriMeshNode *arg1 = (rcChunkyTriMeshNode *) 0 ;
+  float *arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, bmax);
+  }
+  {
+    size_t ii;
+    float *b = (float *) arg1->bmax;
+    for (ii = 0; ii < (size_t)2; ii++) b[ii] = *((float *) arg2 + ii);
+  }
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_rcChunkyTriMeshNode_bmax_get(self):int")))
+void _wrap_rcChunkyTriMeshNode_bmax_get() {
+  rcChunkyTriMeshNode *arg1 = (rcChunkyTriMeshNode *) 0 ;
+  float *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float *)(float *) ((arg1)->bmax);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_rcChunkyTriMeshNode_i_set(self, i:int):void")))
+void _wrap_rcChunkyTriMeshNode_i_set() {
+  rcChunkyTriMeshNode *arg1 = (rcChunkyTriMeshNode *) 0 ;
+  int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, i);
+  }
+  if (arg1) (arg1)->i = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_rcChunkyTriMeshNode_i_get(self):int")))
+void _wrap_rcChunkyTriMeshNode_i_get() {
+  rcChunkyTriMeshNode *arg1 = (rcChunkyTriMeshNode *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int) ((arg1)->i);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_rcChunkyTriMeshNode_n_set(self, n:int):void")))
+void _wrap_rcChunkyTriMeshNode_n_set() {
+  rcChunkyTriMeshNode *arg1 = (rcChunkyTriMeshNode *) 0 ;
+  int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, n);
+  }
+  if (arg1) (arg1)->n = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_rcChunkyTriMeshNode_n_get(self):int")))
+void _wrap_rcChunkyTriMeshNode_n_get() {
+  rcChunkyTriMeshNode *arg1 = (rcChunkyTriMeshNode *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int) ((arg1)->n);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_new_rcChunkyTriMeshNode():int")))
+void _wrap_new_rcChunkyTriMeshNode() {
+  rcChunkyTriMeshNode *result ;
+  
+  result = (rcChunkyTriMeshNode *)new rcChunkyTriMeshNode();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_delete_rcChunkyTriMeshNode(self):void")))
+void _wrap_delete_rcChunkyTriMeshNode() {
+  rcChunkyTriMeshNode *arg1 = (rcChunkyTriMeshNode *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  delete arg1;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_new_rcChunkyTriMesh():int")))
+void _wrap_new_rcChunkyTriMesh() {
+  rcChunkyTriMesh *result ;
+  
+  result = (rcChunkyTriMesh *)new rcChunkyTriMesh();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_delete_rcChunkyTriMesh(self):void")))
+void _wrap_delete_rcChunkyTriMesh() {
+  rcChunkyTriMesh *arg1 = (rcChunkyTriMesh *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  delete arg1;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_rcChunkyTriMesh_nodes_set(self, nodes:int):void")))
+void _wrap_rcChunkyTriMesh_nodes_set() {
+  rcChunkyTriMesh *arg1 = (rcChunkyTriMesh *) 0 ;
+  rcChunkyTriMeshNode *arg2 = (rcChunkyTriMeshNode *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, nodes);
+  }
+  if (arg1) (arg1)->nodes = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_rcChunkyTriMesh_nodes_get(self):int")))
+void _wrap_rcChunkyTriMesh_nodes_get() {
+  rcChunkyTriMesh *arg1 = (rcChunkyTriMesh *) 0 ;
+  rcChunkyTriMeshNode *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (rcChunkyTriMeshNode *) ((arg1)->nodes);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_rcChunkyTriMesh_nnodes_set(self, nnodes:int):void")))
+void _wrap_rcChunkyTriMesh_nnodes_set() {
+  rcChunkyTriMesh *arg1 = (rcChunkyTriMesh *) 0 ;
+  int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, nnodes);
+  }
+  if (arg1) (arg1)->nnodes = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_rcChunkyTriMesh_nnodes_get(self):int")))
+void _wrap_rcChunkyTriMesh_nnodes_get() {
+  rcChunkyTriMesh *arg1 = (rcChunkyTriMesh *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int) ((arg1)->nnodes);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_rcChunkyTriMesh_tris_set(self, tris:int):void")))
+void _wrap_rcChunkyTriMesh_tris_set() {
+  rcChunkyTriMesh *arg1 = (rcChunkyTriMesh *) 0 ;
+  int *arg2 = (int *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, tris);
+  }
+  if (arg1) (arg1)->tris = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_rcChunkyTriMesh_tris_get(self):int")))
+void _wrap_rcChunkyTriMesh_tris_get() {
+  rcChunkyTriMesh *arg1 = (rcChunkyTriMesh *) 0 ;
+  int *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int *) ((arg1)->tris);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_rcChunkyTriMesh_ntris_set(self, ntris:int):void")))
+void _wrap_rcChunkyTriMesh_ntris_set() {
+  rcChunkyTriMesh *arg1 = (rcChunkyTriMesh *) 0 ;
+  int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, ntris);
+  }
+  if (arg1) (arg1)->ntris = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_rcChunkyTriMesh_ntris_get(self):int")))
+void _wrap_rcChunkyTriMesh_ntris_get() {
+  rcChunkyTriMesh *arg1 = (rcChunkyTriMesh *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int) ((arg1)->ntris);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_rcChunkyTriMesh_maxTrisPerChunk_set(self, maxTrisPerChunk:int):void")))
+void _wrap_rcChunkyTriMesh_maxTrisPerChunk_set() {
+  rcChunkyTriMesh *arg1 = (rcChunkyTriMesh *) 0 ;
+  int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, maxTrisPerChunk);
+  }
+  if (arg1) (arg1)->maxTrisPerChunk = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_rcChunkyTriMesh_maxTrisPerChunk_get(self):int")))
+void _wrap_rcChunkyTriMesh_maxTrisPerChunk_get() {
+  rcChunkyTriMesh *arg1 = (rcChunkyTriMesh *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int) ((arg1)->maxTrisPerChunk);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_rcCreateChunkyTriMesh(verts:int, tris:int, ntris:int, trisPerChunk:int, cm:int):Boolean")))
+void _wrap_rcCreateChunkyTriMesh() {
+  float *arg1 = (float *) 0 ;
+  int *arg2 = (int *) 0 ;
+  int arg3 ;
+  int arg4 ;
+  rcChunkyTriMesh *arg5 = (rcChunkyTriMesh *) 0 ;
+  bool result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, verts);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, tris);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, ntris);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, trisPerChunk);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, cm);
+  }
+  result = (bool)rcCreateChunkyTriMesh((float const *)arg1,(int const *)arg2,arg3,arg4,arg5);
+  {
+    AS3_DeclareVar(asresult, Boolean);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_rcGetChunksOverlappingRect(cm:int, bmin:int, bmax:int, ids:int, maxIds:int):int")))
+void _wrap_rcGetChunksOverlappingRect() {
+  rcChunkyTriMesh *arg1 = (rcChunkyTriMesh *) 0 ;
+  float *arg2 ;
+  float *arg3 ;
+  int *arg4 = (int *) 0 ;
+  int arg5 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, cm);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, bmin);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, bmax);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, ids);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, maxIds);
+  }
+  result = (int)rcGetChunksOverlappingRect((rcChunkyTriMesh const *)arg1,arg2,arg3,arg4,arg5);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_rcGetChunksOverlappingSegment(cm:int, p:int, q:int, ids:int, maxIds:int):int")))
+void _wrap_rcGetChunksOverlappingSegment() {
+  rcChunkyTriMesh *arg1 = (rcChunkyTriMesh *) 0 ;
+  float *arg2 ;
+  float *arg3 ;
+  int *arg4 = (int *) 0 ;
+  int arg5 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, cm);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, p);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, q);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, ids);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, maxIds);
+  }
+  result = (int)rcGetChunksOverlappingSegment((rcChunkyTriMesh const *)arg1,arg2,arg3,arg4,arg5);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_new_rcMeshLoaderObj():int")))
+void _wrap_new_rcMeshLoaderObj() {
+  rcMeshLoaderObj *result ;
+  
+  result = (rcMeshLoaderObj *)new rcMeshLoaderObj();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_delete_rcMeshLoaderObj(self):void")))
+void _wrap_delete_rcMeshLoaderObj() {
+  rcMeshLoaderObj *arg1 = (rcMeshLoaderObj *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  delete arg1;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_rcMeshLoaderObj_load(self, fileName:String):Boolean")))
+void _wrap_rcMeshLoaderObj_load() {
+  rcMeshLoaderObj *arg1 = (rcMeshLoaderObj *) 0 ;
+  char *arg2 = (char *) 0 ;
+  bool result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_MallocString(arg2, fileName);
+  }
+  result = (bool)(arg1)->load((char const *)arg2);
+  {
+    free(arg2);
+  }
+  {
+    AS3_DeclareVar(asresult, Boolean);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_rcMeshLoaderObj_getVerts(self):int")))
+void _wrap_rcMeshLoaderObj_getVerts() {
+  rcMeshLoaderObj *arg1 = (rcMeshLoaderObj *) 0 ;
+  float *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float *)((rcMeshLoaderObj const *)arg1)->getVerts();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_rcMeshLoaderObj_getNormals(self):int")))
+void _wrap_rcMeshLoaderObj_getNormals() {
+  rcMeshLoaderObj *arg1 = (rcMeshLoaderObj *) 0 ;
+  float *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float *)((rcMeshLoaderObj const *)arg1)->getNormals();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_rcMeshLoaderObj_getTris(self):int")))
+void _wrap_rcMeshLoaderObj_getTris() {
+  rcMeshLoaderObj *arg1 = (rcMeshLoaderObj *) 0 ;
+  int *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int *)((rcMeshLoaderObj const *)arg1)->getTris();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_rcMeshLoaderObj_getVertCount(self):int")))
+void _wrap_rcMeshLoaderObj_getVertCount() {
+  rcMeshLoaderObj *arg1 = (rcMeshLoaderObj *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int)((rcMeshLoaderObj const *)arg1)->getVertCount();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_rcMeshLoaderObj_getTriCount(self):int")))
+void _wrap_rcMeshLoaderObj_getTriCount() {
+  rcMeshLoaderObj *arg1 = (rcMeshLoaderObj *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int)((rcMeshLoaderObj const *)arg1)->getTriCount();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_rcMeshLoaderObj_getFileName(self):String")))
+void _wrap_rcMeshLoaderObj_getFileName() {
+  rcMeshLoaderObj *arg1 = (rcMeshLoaderObj *) 0 ;
+  char *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (char *)((rcMeshLoaderObj const *)arg1)->getFileName();
+  {
+    int len = strlen(result);
+    AS3_DeclareVar(asresult, String);
+    AS3_CopyCStringToVar(asresult, result, len);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_MAX_CONVEXVOL_PTS_get():int")))
+void _wrap_MAX_CONVEXVOL_PTS_get() {
+  int result ;
+  
+  result = (int)(int)MAX_CONVEXVOL_PTS;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_ConvexVolume_verts_set(self, verts:int):void")))
+void _wrap_ConvexVolume_verts_set() {
+  ConvexVolume *arg1 = (ConvexVolume *) 0 ;
+  float *arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, verts);
+  }
+  {
+    size_t ii;
+    float *b = (float *) arg1->verts;
+    for (ii = 0; ii < (size_t)MAX_CONVEXVOL_PTS*3; ii++) b[ii] = *((float *) arg2 + ii);
+  }
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_ConvexVolume_verts_get(self):int")))
+void _wrap_ConvexVolume_verts_get() {
+  ConvexVolume *arg1 = (ConvexVolume *) 0 ;
+  float *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float *)(float *) ((arg1)->verts);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_ConvexVolume_hmin_set(self, hmin:Number):void")))
+void _wrap_ConvexVolume_hmin_set() {
+  ConvexVolume *arg1 = (ConvexVolume *) 0 ;
+  float arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, hmin);
+  }
+  if (arg1) (arg1)->hmin = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_ConvexVolume_hmin_get(self):Number")))
+void _wrap_ConvexVolume_hmin_get() {
+  ConvexVolume *arg1 = (ConvexVolume *) 0 ;
+  float result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float) ((arg1)->hmin);
+  {
+    AS3_DeclareVar(asresult, Number);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_ConvexVolume_hmax_set(self, hmax:Number):void")))
+void _wrap_ConvexVolume_hmax_set() {
+  ConvexVolume *arg1 = (ConvexVolume *) 0 ;
+  float arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, hmax);
+  }
+  if (arg1) (arg1)->hmax = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_ConvexVolume_hmax_get(self):Number")))
+void _wrap_ConvexVolume_hmax_get() {
+  ConvexVolume *arg1 = (ConvexVolume *) 0 ;
+  float result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float) ((arg1)->hmax);
+  {
+    AS3_DeclareVar(asresult, Number);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_ConvexVolume_nverts_set(self, nverts:int):void")))
+void _wrap_ConvexVolume_nverts_set() {
+  ConvexVolume *arg1 = (ConvexVolume *) 0 ;
+  int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, nverts);
+  }
+  if (arg1) (arg1)->nverts = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_ConvexVolume_nverts_get(self):int")))
+void _wrap_ConvexVolume_nverts_get() {
+  ConvexVolume *arg1 = (ConvexVolume *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int) ((arg1)->nverts);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_ConvexVolume_area_set(self, area:int):void")))
+void _wrap_ConvexVolume_area_set() {
+  ConvexVolume *arg1 = (ConvexVolume *) 0 ;
+  int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, area);
+  }
+  if (arg1) (arg1)->area = arg2;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_ConvexVolume_area_get(self):int")))
+void _wrap_ConvexVolume_area_get() {
+  ConvexVolume *arg1 = (ConvexVolume *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int) ((arg1)->area);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_new_ConvexVolume():int")))
+void _wrap_new_ConvexVolume() {
+  ConvexVolume *result ;
+  
+  result = (ConvexVolume *)new ConvexVolume();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_delete_ConvexVolume(self):void")))
+void _wrap_delete_ConvexVolume() {
+  ConvexVolume *arg1 = (ConvexVolume *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  delete arg1;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_new_InputGeom():int")))
+void _wrap_new_InputGeom() {
+  InputGeom *result ;
+  
+  result = (InputGeom *)new InputGeom();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_delete_InputGeom(self):void")))
+void _wrap_delete_InputGeom() {
+  InputGeom *arg1 = (InputGeom *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  delete arg1;
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_InputGeom_loadMesh(self, ctx:int, filepath:String):Boolean")))
+void _wrap_InputGeom_loadMesh() {
+  InputGeom *arg1 = (InputGeom *) 0 ;
+  rcContext *arg2 = (rcContext *) 0 ;
+  char *arg3 = (char *) 0 ;
+  bool result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, ctx);
+  }
+  {
+    AS3_MallocString(arg3, filepath);
+  }
+  result = (bool)(arg1)->loadMesh(arg2,(char const *)arg3);
+  {
+    free(arg3);
+  }
+  {
+    AS3_DeclareVar(asresult, Boolean);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_InputGeom_load(self, ctx:int, filepath:String):Boolean")))
+void _wrap_InputGeom_load() {
+  InputGeom *arg1 = (InputGeom *) 0 ;
+  rcContext *arg2 = (rcContext *) 0 ;
+  char *arg3 = (char *) 0 ;
+  bool result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, ctx);
+  }
+  {
+    AS3_MallocString(arg3, filepath);
+  }
+  result = (bool)(arg1)->load(arg2,(char const *)arg3);
+  {
+    free(arg3);
+  }
+  {
+    AS3_DeclareVar(asresult, Boolean);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_InputGeom_save(self, filepath:String):Boolean")))
+void _wrap_InputGeom_save() {
+  InputGeom *arg1 = (InputGeom *) 0 ;
+  char *arg2 = (char *) 0 ;
+  bool result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_MallocString(arg2, filepath);
+  }
+  result = (bool)(arg1)->save((char const *)arg2);
+  {
+    free(arg2);
+  }
+  {
+    AS3_DeclareVar(asresult, Boolean);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_InputGeom_getMesh(self):int")))
+void _wrap_InputGeom_getMesh() {
+  InputGeom *arg1 = (InputGeom *) 0 ;
+  rcMeshLoaderObj *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (rcMeshLoaderObj *)((InputGeom const *)arg1)->getMesh();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_InputGeom_getMeshBoundsMin(self):int")))
+void _wrap_InputGeom_getMeshBoundsMin() {
+  InputGeom *arg1 = (InputGeom *) 0 ;
+  float *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float *)((InputGeom const *)arg1)->getMeshBoundsMin();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_InputGeom_getMeshBoundsMax(self):int")))
+void _wrap_InputGeom_getMeshBoundsMax() {
+  InputGeom *arg1 = (InputGeom *) 0 ;
+  float *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float *)((InputGeom const *)arg1)->getMeshBoundsMax();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_InputGeom_getChunkyMesh(self):int")))
+void _wrap_InputGeom_getChunkyMesh() {
+  InputGeom *arg1 = (InputGeom *) 0 ;
+  rcChunkyTriMesh *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (rcChunkyTriMesh *)((InputGeom const *)arg1)->getChunkyMesh();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_InputGeom_raycastMesh(self, src:int, dst:int, tmin:int):Boolean")))
+void _wrap_InputGeom_raycastMesh() {
+  InputGeom *arg1 = (InputGeom *) 0 ;
+  float *arg2 = (float *) 0 ;
+  float *arg3 = (float *) 0 ;
+  float *arg4 = 0 ;
+  bool result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, src);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, dst);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, tmin);
+  }
+  result = (bool)(arg1)->raycastMesh(arg2,arg3,*arg4);
+  {
+    AS3_DeclareVar(asresult, Boolean);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_InputGeom_getOffMeshConnectionCount(self):int")))
+void _wrap_InputGeom_getOffMeshConnectionCount() {
+  InputGeom *arg1 = (InputGeom *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int)((InputGeom const *)arg1)->getOffMeshConnectionCount();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_InputGeom_getOffMeshConnectionVerts(self):int")))
+void _wrap_InputGeom_getOffMeshConnectionVerts() {
+  InputGeom *arg1 = (InputGeom *) 0 ;
+  float *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float *)((InputGeom const *)arg1)->getOffMeshConnectionVerts();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_InputGeom_getOffMeshConnectionRads(self):int")))
+void _wrap_InputGeom_getOffMeshConnectionRads() {
+  InputGeom *arg1 = (InputGeom *) 0 ;
+  float *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (float *)((InputGeom const *)arg1)->getOffMeshConnectionRads();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_InputGeom_getOffMeshConnectionDirs(self):int")))
+void _wrap_InputGeom_getOffMeshConnectionDirs() {
+  InputGeom *arg1 = (InputGeom *) 0 ;
+  unsigned char *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned char *)((InputGeom const *)arg1)->getOffMeshConnectionDirs();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_InputGeom_getOffMeshConnectionAreas(self):int")))
+void _wrap_InputGeom_getOffMeshConnectionAreas() {
+  InputGeom *arg1 = (InputGeom *) 0 ;
+  unsigned char *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned char *)((InputGeom const *)arg1)->getOffMeshConnectionAreas();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_InputGeom_getOffMeshConnectionFlags(self):int")))
+void _wrap_InputGeom_getOffMeshConnectionFlags() {
+  InputGeom *arg1 = (InputGeom *) 0 ;
+  unsigned short *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned short *)((InputGeom const *)arg1)->getOffMeshConnectionFlags();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_InputGeom_getOffMeshConnectionId(self):int")))
+void _wrap_InputGeom_getOffMeshConnectionId() {
+  InputGeom *arg1 = (InputGeom *) 0 ;
+  unsigned int *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (unsigned int *)((InputGeom const *)arg1)->getOffMeshConnectionId();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_InputGeom_addOffMeshConnection(self, spos:int, epos:int, rad:Number, bidir:String, area:String, flags:int):void")))
+void _wrap_InputGeom_addOffMeshConnection() {
+  InputGeom *arg1 = (InputGeom *) 0 ;
+  float *arg2 = (float *) 0 ;
+  float *arg3 = (float *) 0 ;
+  float arg4 ;
+  unsigned char arg5 ;
+  unsigned char arg6 ;
+  unsigned short arg7 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, spos);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, epos);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, rad);
+  }
+  {
+    inline_nonreentrant_as3(
+      "%0 = bidir.charCodeAt(0)" : "=r"(arg5)
+      );
+  }
+  {
+    inline_nonreentrant_as3(
+      "%0 = area.charCodeAt(0)" : "=r"(arg6)
+      );
+  }
+  {
+    AS3_GetScalarFromVar(arg7, flags);
+  }
+  (arg1)->addOffMeshConnection((float const *)arg2,(float const *)arg3,arg4,arg5,arg6,arg7);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_InputGeom_deleteOffMeshConnection(self, i:int):void")))
+void _wrap_InputGeom_deleteOffMeshConnection() {
+  InputGeom *arg1 = (InputGeom *) 0 ;
+  int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, i);
+  }
+  (arg1)->deleteOffMeshConnection(arg2);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_InputGeom_drawOffMeshConnections(self, dd:int, hilight:Boolean):void")))
+void _wrap_InputGeom_drawOffMeshConnections() {
+  InputGeom *arg1 = (InputGeom *) 0 ;
+  duDebugDraw *arg2 = (duDebugDraw *) 0 ;
+  bool arg3 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, dd);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, hilight);
+  }
+  (arg1)->drawOffMeshConnections(arg2,arg3);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_InputGeom_getConvexVolumeCount(self):int")))
+void _wrap_InputGeom_getConvexVolumeCount() {
+  InputGeom *arg1 = (InputGeom *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int)((InputGeom const *)arg1)->getConvexVolumeCount();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_InputGeom_getConvexVolumes(self):int")))
+void _wrap_InputGeom_getConvexVolumes() {
+  InputGeom *arg1 = (InputGeom *) 0 ;
+  ConvexVolume *result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (ConvexVolume *)((InputGeom const *)arg1)->getConvexVolumes();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_InputGeom_addConvexVolume(self, verts:int, nverts:int, minh:Number, maxh:Number, area:String):void")))
+void _wrap_InputGeom_addConvexVolume() {
+  InputGeom *arg1 = (InputGeom *) 0 ;
+  float *arg2 = (float *) 0 ;
+  int arg3 ;
+  float arg4 ;
+  float arg5 ;
+  unsigned char arg6 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, verts);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, nverts);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, minh);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, maxh);
+  }
+  {
+    inline_nonreentrant_as3(
+      "%0 = area.charCodeAt(0)" : "=r"(arg6)
+      );
+  }
+  (arg1)->addConvexVolume((float const *)arg2,arg3,arg4,arg5,arg6);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_InputGeom_deleteConvexVolume(self, i:int):void")))
+void _wrap_InputGeom_deleteConvexVolume() {
+  InputGeom *arg1 = (InputGeom *) 0 ;
+  int arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, i);
+  }
+  (arg1)->deleteConvexVolume(arg2);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_InputGeom_drawConvexVolumes(self, dd:int, hilight:Boolean):void")))
+void _wrap_InputGeom_drawConvexVolumes() {
+  InputGeom *arg1 = (InputGeom *) 0 ;
+  duDebugDraw *arg2 = (duDebugDraw *) 0 ;
+  bool arg3 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, dd);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, hilight);
+  }
+  (arg1)->drawConvexVolumes(arg2,arg3);
   {
     
   }
@@ -8165,6 +31389,21 @@ void _wrap_Sample_m_detailSampleMaxError_get() {
 }
 
 
+__attribute__((annotate("as3sig:public function _wrap_new_Sample():int")))
+void _wrap_new_Sample() {
+  Sample *result ;
+  
+  result = (Sample *)new Sample();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
 __attribute__((annotate("as3sig:public function _wrap_delete_Sample(self):void")))
 void _wrap_delete_Sample() {
   Sample *arg1 = (Sample *) 0 ;
@@ -8469,6 +31708,55 @@ void _wrap_Sample_getBoundsMax() {
 }
 
 
+__attribute__((annotate("as3sig:public function _wrap_Sample_resetCommonSettings(self):void")))
+void _wrap_Sample_resetCommonSettings() {
+  Sample *arg1 = (Sample *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  (arg1)->resetCommonSettings();
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_Sample_handleCommonSettings(self):void")))
+void _wrap_Sample_handleCommonSettings() {
+  Sample *arg1 = (Sample *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  (arg1)->handleCommonSettings();
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_new_Sample_TempObstacles():int")))
+void _wrap_new_Sample_TempObstacles() {
+  Sample_TempObstacles *result ;
+  
+  result = (Sample_TempObstacles *)new Sample_TempObstacles();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
 __attribute__((annotate("as3sig:public function _wrap_delete_Sample_TempObstacles(self):void")))
 void _wrap_delete_Sample_TempObstacles() {
   Sample_TempObstacles *arg1 = (Sample_TempObstacles *) 0 ;
@@ -8564,6 +31852,115 @@ void _wrap_Sample_TempObstacles_handleUpdate() {
 }
 
 
+__attribute__((annotate("as3sig:public function _wrap_Sample_TempObstacles_getTilePos(self, pos:int, tx:int, ty:int):void")))
+void _wrap_Sample_TempObstacles_getTilePos() {
+  Sample_TempObstacles *arg1 = (Sample_TempObstacles *) 0 ;
+  float *arg2 = (float *) 0 ;
+  int *arg3 = 0 ;
+  int *arg4 = 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, pos);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, tx);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, ty);
+  }
+  (arg1)->getTilePos((float const *)arg2,*arg3,*arg4);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_Sample_TempObstacles_getObstacleCount(self):int")))
+void _wrap_Sample_TempObstacles_getObstacleCount() {
+  Sample_TempObstacles *arg1 = (Sample_TempObstacles *) 0 ;
+  int result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  result = (int)(arg1)->getObstacleCount();
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_Sample_TempObstacles_addTempObstacle(self, pos:int):int")))
+void _wrap_Sample_TempObstacles_addTempObstacle() {
+  Sample_TempObstacles *arg1 = (Sample_TempObstacles *) 0 ;
+  float *arg2 = (float *) 0 ;
+  dtObstacleRef result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, pos);
+  }
+  result = (dtObstacleRef)(arg1)->addTempObstacle((float const *)arg2);
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_Sample_TempObstacles_removeTempObstacle(self, id:int):void")))
+void _wrap_Sample_TempObstacles_removeTempObstacle() {
+  Sample_TempObstacles *arg1 = (Sample_TempObstacles *) 0 ;
+  dtObstacleRef arg2 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, id);
+  }
+  (arg1)->removeTempObstacle(arg2);
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_Sample_TempObstacles_clearAllTempObstacles(self):void")))
+void _wrap_Sample_TempObstacles_clearAllTempObstacles() {
+  Sample_TempObstacles *arg1 = (Sample_TempObstacles *) 0 ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, self);
+  }
+  (arg1)->clearAllTempObstacles();
+  {
+    
+  }
+  {
+    AS3_ReturnAS3Var(undefined);
+  }
+}
+
+
 __attribute__((annotate("as3sig:public function _wrap_Sample_TempObstacles_m_tileSize_set(self, m_tileSize:Number):void")))
 void _wrap_Sample_TempObstacles_m_tileSize_set() {
   Sample_TempObstacles *arg1 = (Sample_TempObstacles *) 0 ;
@@ -8636,534 +32033,6 @@ void _wrap_Sample_TempObstacles_m_maxObstacles_get() {
   result = (float) ((arg1)->m_maxObstacles);
   {
     AS3_DeclareVar(asresult, Number);
-    AS3_CopyScalarToVar(asresult, result);
-  }
-  {
-    AS3_ReturnAS3Var(asresult);
-  }
-}
-
-
-__attribute__((annotate("as3sig:public function _wrap_MAX_CONVEXVOL_PTS_get():int")))
-void _wrap_MAX_CONVEXVOL_PTS_get() {
-  int result ;
-  
-  result = (int)(int)MAX_CONVEXVOL_PTS;
-  {
-    AS3_DeclareVar(asresult, int);
-    AS3_CopyScalarToVar(asresult, result);
-  }
-  {
-    AS3_ReturnAS3Var(asresult);
-  }
-}
-
-
-__attribute__((annotate("as3sig:public function _wrap_ConvexVolume_verts_set(self, verts:int):void")))
-void _wrap_ConvexVolume_verts_set() {
-  ConvexVolume *arg1 = (ConvexVolume *) 0 ;
-  float *arg2 ;
-  
-  {
-    AS3_GetScalarFromVar(arg1, self);
-  }
-  {
-    AS3_GetScalarFromVar(arg2, verts);
-  }
-  {
-    size_t ii;
-    float *b = (float *) arg1->verts;
-    for (ii = 0; ii < (size_t)MAX_CONVEXVOL_PTS*3; ii++) b[ii] = *((float *) arg2 + ii);
-  }
-  {
-    
-  }
-  {
-    AS3_ReturnAS3Var(undefined);
-  }
-}
-
-
-__attribute__((annotate("as3sig:public function _wrap_ConvexVolume_verts_get(self):int")))
-void _wrap_ConvexVolume_verts_get() {
-  ConvexVolume *arg1 = (ConvexVolume *) 0 ;
-  float *result ;
-  
-  {
-    AS3_GetScalarFromVar(arg1, self);
-  }
-  result = (float *)(float *) ((arg1)->verts);
-  {
-    AS3_DeclareVar(asresult, int);
-    AS3_CopyScalarToVar(asresult, result);
-  }
-  {
-    AS3_ReturnAS3Var(asresult);
-  }
-}
-
-
-__attribute__((annotate("as3sig:public function _wrap_ConvexVolume_hmin_set(self, hmin:Number):void")))
-void _wrap_ConvexVolume_hmin_set() {
-  ConvexVolume *arg1 = (ConvexVolume *) 0 ;
-  float arg2 ;
-  
-  {
-    AS3_GetScalarFromVar(arg1, self);
-  }
-  {
-    AS3_GetScalarFromVar(arg2, hmin);
-  }
-  if (arg1) (arg1)->hmin = arg2;
-  {
-    
-  }
-  {
-    AS3_ReturnAS3Var(undefined);
-  }
-}
-
-
-__attribute__((annotate("as3sig:public function _wrap_ConvexVolume_hmin_get(self):Number")))
-void _wrap_ConvexVolume_hmin_get() {
-  ConvexVolume *arg1 = (ConvexVolume *) 0 ;
-  float result ;
-  
-  {
-    AS3_GetScalarFromVar(arg1, self);
-  }
-  result = (float) ((arg1)->hmin);
-  {
-    AS3_DeclareVar(asresult, Number);
-    AS3_CopyScalarToVar(asresult, result);
-  }
-  {
-    AS3_ReturnAS3Var(asresult);
-  }
-}
-
-
-__attribute__((annotate("as3sig:public function _wrap_ConvexVolume_hmax_set(self, hmax:Number):void")))
-void _wrap_ConvexVolume_hmax_set() {
-  ConvexVolume *arg1 = (ConvexVolume *) 0 ;
-  float arg2 ;
-  
-  {
-    AS3_GetScalarFromVar(arg1, self);
-  }
-  {
-    AS3_GetScalarFromVar(arg2, hmax);
-  }
-  if (arg1) (arg1)->hmax = arg2;
-  {
-    
-  }
-  {
-    AS3_ReturnAS3Var(undefined);
-  }
-}
-
-
-__attribute__((annotate("as3sig:public function _wrap_ConvexVolume_hmax_get(self):Number")))
-void _wrap_ConvexVolume_hmax_get() {
-  ConvexVolume *arg1 = (ConvexVolume *) 0 ;
-  float result ;
-  
-  {
-    AS3_GetScalarFromVar(arg1, self);
-  }
-  result = (float) ((arg1)->hmax);
-  {
-    AS3_DeclareVar(asresult, Number);
-    AS3_CopyScalarToVar(asresult, result);
-  }
-  {
-    AS3_ReturnAS3Var(asresult);
-  }
-}
-
-
-__attribute__((annotate("as3sig:public function _wrap_ConvexVolume_nverts_set(self, nverts:int):void")))
-void _wrap_ConvexVolume_nverts_set() {
-  ConvexVolume *arg1 = (ConvexVolume *) 0 ;
-  int arg2 ;
-  
-  {
-    AS3_GetScalarFromVar(arg1, self);
-  }
-  {
-    AS3_GetScalarFromVar(arg2, nverts);
-  }
-  if (arg1) (arg1)->nverts = arg2;
-  {
-    
-  }
-  {
-    AS3_ReturnAS3Var(undefined);
-  }
-}
-
-
-__attribute__((annotate("as3sig:public function _wrap_ConvexVolume_nverts_get(self):int")))
-void _wrap_ConvexVolume_nverts_get() {
-  ConvexVolume *arg1 = (ConvexVolume *) 0 ;
-  int result ;
-  
-  {
-    AS3_GetScalarFromVar(arg1, self);
-  }
-  result = (int) ((arg1)->nverts);
-  {
-    AS3_DeclareVar(asresult, int);
-    AS3_CopyScalarToVar(asresult, result);
-  }
-  {
-    AS3_ReturnAS3Var(asresult);
-  }
-}
-
-
-__attribute__((annotate("as3sig:public function _wrap_ConvexVolume_area_set(self, area:int):void")))
-void _wrap_ConvexVolume_area_set() {
-  ConvexVolume *arg1 = (ConvexVolume *) 0 ;
-  int arg2 ;
-  
-  {
-    AS3_GetScalarFromVar(arg1, self);
-  }
-  {
-    AS3_GetScalarFromVar(arg2, area);
-  }
-  if (arg1) (arg1)->area = arg2;
-  {
-    
-  }
-  {
-    AS3_ReturnAS3Var(undefined);
-  }
-}
-
-
-__attribute__((annotate("as3sig:public function _wrap_ConvexVolume_area_get(self):int")))
-void _wrap_ConvexVolume_area_get() {
-  ConvexVolume *arg1 = (ConvexVolume *) 0 ;
-  int result ;
-  
-  {
-    AS3_GetScalarFromVar(arg1, self);
-  }
-  result = (int) ((arg1)->area);
-  {
-    AS3_DeclareVar(asresult, int);
-    AS3_CopyScalarToVar(asresult, result);
-  }
-  {
-    AS3_ReturnAS3Var(asresult);
-  }
-}
-
-
-__attribute__((annotate("as3sig:public function _wrap_new_ConvexVolume():int")))
-void _wrap_new_ConvexVolume() {
-  ConvexVolume *result ;
-  
-  result = (ConvexVolume *)new ConvexVolume();
-  {
-    AS3_DeclareVar(asresult, int);
-    AS3_CopyScalarToVar(asresult, result);
-  }
-  {
-    AS3_ReturnAS3Var(asresult);
-  }
-}
-
-
-__attribute__((annotate("as3sig:public function _wrap_delete_ConvexVolume(self):void")))
-void _wrap_delete_ConvexVolume() {
-  ConvexVolume *arg1 = (ConvexVolume *) 0 ;
-  
-  {
-    AS3_GetScalarFromVar(arg1, self);
-  }
-  delete arg1;
-  {
-    
-  }
-  {
-    AS3_ReturnAS3Var(undefined);
-  }
-}
-
-
-__attribute__((annotate("as3sig:public function _wrap_InputGeom_loadMesh(self, ctx:int, filepath:String):Boolean")))
-void _wrap_InputGeom_loadMesh() {
-  InputGeom *arg1 = (InputGeom *) 0 ;
-  rcContext *arg2 = (rcContext *) 0 ;
-  char *arg3 = (char *) 0 ;
-  bool result ;
-  
-  {
-    AS3_GetScalarFromVar(arg1, self);
-  }
-  {
-    AS3_GetScalarFromVar(arg2, ctx);
-  }
-  {
-    AS3_MallocString(arg3, filepath);
-  }
-  result = (bool)(arg1)->loadMesh(arg2,(char const *)arg3);
-  {
-    free(arg3);
-  }
-  {
-    AS3_DeclareVar(asresult, Boolean);
-    AS3_CopyScalarToVar(asresult, result);
-  }
-  {
-    AS3_ReturnAS3Var(asresult);
-  }
-}
-
-
-__attribute__((annotate("as3sig:public function _wrap_InputGeom_getMesh(self):int")))
-void _wrap_InputGeom_getMesh() {
-  InputGeom *arg1 = (InputGeom *) 0 ;
-  rcMeshLoaderObj *result ;
-  
-  {
-    AS3_GetScalarFromVar(arg1, self);
-  }
-  result = (rcMeshLoaderObj *)((InputGeom const *)arg1)->getMesh();
-  {
-    AS3_DeclareVar(asresult, int);
-    AS3_CopyScalarToVar(asresult, result);
-  }
-  {
-    AS3_ReturnAS3Var(asresult);
-  }
-}
-
-
-__attribute__((annotate("as3sig:public function _wrap_InputGeom_getMeshBoundsMin(self):int")))
-void _wrap_InputGeom_getMeshBoundsMin() {
-  InputGeom *arg1 = (InputGeom *) 0 ;
-  float *result ;
-  
-  {
-    AS3_GetScalarFromVar(arg1, self);
-  }
-  result = (float *)((InputGeom const *)arg1)->getMeshBoundsMin();
-  {
-    AS3_DeclareVar(asresult, int);
-    AS3_CopyScalarToVar(asresult, result);
-  }
-  {
-    AS3_ReturnAS3Var(asresult);
-  }
-}
-
-
-__attribute__((annotate("as3sig:public function _wrap_InputGeom_getMeshBoundsMax(self):int")))
-void _wrap_InputGeom_getMeshBoundsMax() {
-  InputGeom *arg1 = (InputGeom *) 0 ;
-  float *result ;
-  
-  {
-    AS3_GetScalarFromVar(arg1, self);
-  }
-  result = (float *)((InputGeom const *)arg1)->getMeshBoundsMax();
-  {
-    AS3_DeclareVar(asresult, int);
-    AS3_CopyScalarToVar(asresult, result);
-  }
-  {
-    AS3_ReturnAS3Var(asresult);
-  }
-}
-
-
-__attribute__((annotate("as3sig:public function _wrap_InputGeom_getChunkyMesh(self):int")))
-void _wrap_InputGeom_getChunkyMesh() {
-  InputGeom *arg1 = (InputGeom *) 0 ;
-  rcChunkyTriMesh *result ;
-  
-  {
-    AS3_GetScalarFromVar(arg1, self);
-  }
-  result = (rcChunkyTriMesh *)((InputGeom const *)arg1)->getChunkyMesh();
-  {
-    AS3_DeclareVar(asresult, int);
-    AS3_CopyScalarToVar(asresult, result);
-  }
-  {
-    AS3_ReturnAS3Var(asresult);
-  }
-}
-
-
-__attribute__((annotate("as3sig:public function _wrap_InputGeom_getOffMeshConnectionCount(self):int")))
-void _wrap_InputGeom_getOffMeshConnectionCount() {
-  InputGeom *arg1 = (InputGeom *) 0 ;
-  int result ;
-  
-  {
-    AS3_GetScalarFromVar(arg1, self);
-  }
-  result = (int)((InputGeom const *)arg1)->getOffMeshConnectionCount();
-  {
-    AS3_DeclareVar(asresult, int);
-    AS3_CopyScalarToVar(asresult, result);
-  }
-  {
-    AS3_ReturnAS3Var(asresult);
-  }
-}
-
-
-__attribute__((annotate("as3sig:public function _wrap_InputGeom_getOffMeshConnectionVerts(self):int")))
-void _wrap_InputGeom_getOffMeshConnectionVerts() {
-  InputGeom *arg1 = (InputGeom *) 0 ;
-  float *result ;
-  
-  {
-    AS3_GetScalarFromVar(arg1, self);
-  }
-  result = (float *)((InputGeom const *)arg1)->getOffMeshConnectionVerts();
-  {
-    AS3_DeclareVar(asresult, int);
-    AS3_CopyScalarToVar(asresult, result);
-  }
-  {
-    AS3_ReturnAS3Var(asresult);
-  }
-}
-
-
-__attribute__((annotate("as3sig:public function _wrap_InputGeom_getOffMeshConnectionRads(self):int")))
-void _wrap_InputGeom_getOffMeshConnectionRads() {
-  InputGeom *arg1 = (InputGeom *) 0 ;
-  float *result ;
-  
-  {
-    AS3_GetScalarFromVar(arg1, self);
-  }
-  result = (float *)((InputGeom const *)arg1)->getOffMeshConnectionRads();
-  {
-    AS3_DeclareVar(asresult, int);
-    AS3_CopyScalarToVar(asresult, result);
-  }
-  {
-    AS3_ReturnAS3Var(asresult);
-  }
-}
-
-
-__attribute__((annotate("as3sig:public function _wrap_InputGeom_getOffMeshConnectionDirs(self):int")))
-void _wrap_InputGeom_getOffMeshConnectionDirs() {
-  InputGeom *arg1 = (InputGeom *) 0 ;
-  unsigned char *result ;
-  
-  {
-    AS3_GetScalarFromVar(arg1, self);
-  }
-  result = (unsigned char *)((InputGeom const *)arg1)->getOffMeshConnectionDirs();
-  {
-    AS3_DeclareVar(asresult, int);
-    AS3_CopyScalarToVar(asresult, result);
-  }
-  {
-    AS3_ReturnAS3Var(asresult);
-  }
-}
-
-
-__attribute__((annotate("as3sig:public function _wrap_InputGeom_getOffMeshConnectionAreas(self):int")))
-void _wrap_InputGeom_getOffMeshConnectionAreas() {
-  InputGeom *arg1 = (InputGeom *) 0 ;
-  unsigned char *result ;
-  
-  {
-    AS3_GetScalarFromVar(arg1, self);
-  }
-  result = (unsigned char *)((InputGeom const *)arg1)->getOffMeshConnectionAreas();
-  {
-    AS3_DeclareVar(asresult, int);
-    AS3_CopyScalarToVar(asresult, result);
-  }
-  {
-    AS3_ReturnAS3Var(asresult);
-  }
-}
-
-
-__attribute__((annotate("as3sig:public function _wrap_InputGeom_getOffMeshConnectionFlags(self):int")))
-void _wrap_InputGeom_getOffMeshConnectionFlags() {
-  InputGeom *arg1 = (InputGeom *) 0 ;
-  unsigned short *result ;
-  
-  {
-    AS3_GetScalarFromVar(arg1, self);
-  }
-  result = (unsigned short *)((InputGeom const *)arg1)->getOffMeshConnectionFlags();
-  {
-    AS3_DeclareVar(asresult, int);
-    AS3_CopyScalarToVar(asresult, result);
-  }
-  {
-    AS3_ReturnAS3Var(asresult);
-  }
-}
-
-
-__attribute__((annotate("as3sig:public function _wrap_InputGeom_getOffMeshConnectionId(self):int")))
-void _wrap_InputGeom_getOffMeshConnectionId() {
-  InputGeom *arg1 = (InputGeom *) 0 ;
-  unsigned int *result ;
-  
-  {
-    AS3_GetScalarFromVar(arg1, self);
-  }
-  result = (unsigned int *)((InputGeom const *)arg1)->getOffMeshConnectionId();
-  {
-    AS3_DeclareVar(asresult, int);
-    AS3_CopyScalarToVar(asresult, result);
-  }
-  {
-    AS3_ReturnAS3Var(asresult);
-  }
-}
-
-
-__attribute__((annotate("as3sig:public function _wrap_InputGeom_getConvexVolumeCount(self):int")))
-void _wrap_InputGeom_getConvexVolumeCount() {
-  InputGeom *arg1 = (InputGeom *) 0 ;
-  int result ;
-  
-  {
-    AS3_GetScalarFromVar(arg1, self);
-  }
-  result = (int)((InputGeom const *)arg1)->getConvexVolumeCount();
-  {
-    AS3_DeclareVar(asresult, int);
-    AS3_CopyScalarToVar(asresult, result);
-  }
-  {
-    AS3_ReturnAS3Var(asresult);
-  }
-}
-
-
-__attribute__((annotate("as3sig:public function _wrap_InputGeom_getConvexVolumes(self):int")))
-void _wrap_InputGeom_getConvexVolumes() {
-  InputGeom *arg1 = (InputGeom *) 0 ;
-  ConvexVolume *result ;
-  
-  {
-    AS3_GetScalarFromVar(arg1, self);
-  }
-  result = (ConvexVolume *)((InputGeom const *)arg1)->getConvexVolumes();
-  {
-    AS3_DeclareVar(asresult, int);
     AS3_CopyScalarToVar(asresult, result);
   }
   {

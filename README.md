@@ -31,6 +31,10 @@ Compiling the swc
 ==================
 - open cygwin from Crossbridge
 - change directory to your RecastAS3\recast_alchemy directory
-- run the command: make all FLASCC=/cygdrive/c/sdk/Crossbridge_1.0.1/sdk/ FLEX=/cygdrive/c/sdk/flex_sdk_4.6.0.23201B_air_3.2/
+run once:
+set FLASCC=/cygdrive/c/sdk/Crossbridge_1.0.1/sdk/
+set FLEX=/cygdrive/c/sdk/flex_sdk_4.6.0.23201B_air_3.2/
+run to complile:
+make all FLASCC=$FLASCC FLEX=$FLEX
 	(changing the locations as necessary)
 - swc is outputed to recast_alchemy/recast.swc
