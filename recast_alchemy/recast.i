@@ -106,10 +106,13 @@ void findNearestPoly2() {
    AS3_Trace(as3bMaxZ);
 */
 
-  result = (dtStatus)((dtNavMeshQuery const *)arg1)->findNearestPoly((float const *)arg2,(float const *)arg3,(dtQueryFilter const *)arg4,(dtPolyRef *)arg5,(float *)arg6);
+  result = (dtStatus)((dtNavMeshQuery const *)arg1)->findNearestPoly((float const *)arg2,(float const *)arg3,(dtQueryFilter const *)arg4,arg5,arg6);
   {
     AS3_DeclareVar(asresult, int);
     AS3_CopyScalarToVar(asresult, result);
+
+    AS3_DeclareVar(asTargetRef, int);
+    AS3_CopyScalarToVar(asTargetRef, arg5);
   }
   {
     AS3_ReturnAS3Var(asresult);

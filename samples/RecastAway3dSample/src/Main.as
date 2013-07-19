@@ -37,10 +37,12 @@ package
 	import flash.ui.Keyboard;
 	import flash.utils.ByteArray;
 	import flash.utils.Dictionary;
+	import flash.utils.getTimer;
 	import org.recastnavigation.AS3_rcContext;
 	import org.recastnavigation.CModule;
 	import org.recastnavigation.dtCrowd;
 	import org.recastnavigation.dtCrowdAgent;
+	import org.recastnavigation.dtCrowdAgentDebugInfo;
 	import org.recastnavigation.dtCrowdAgentParams;
 	import org.recastnavigation.dtNavMeshQuery;
 	import org.recastnavigation.findNearestPoly2;
@@ -54,7 +56,7 @@ package
 	public class Main extends Sprite 
 	{
 		
-		[Embed(source="../assets/dungeon.obj",mimeType="application/octet-stream")]
+		[Embed(source="../assets/nav_test.obj",mimeType="application/octet-stream")]
 		private var myObjFile:Class;
 		
 		//Diffuse map texture
@@ -67,7 +69,7 @@ package
 		[Embed(source="../assets/checkers.png")]
 		private var Normal:Class;
 		
-		private static var OBJ_FILE:String = "nav_test.obj";// "dungeon.obj"; //dungeon
+		private static var OBJ_FILE:String = "nav_test.obj";// "dungeon.obj"; //nav_test, dungeon
 		private static var OBJ_HEIGHT:Number = -2.2; //since we are doing 2d, need to pass an appropriate surface height of the obj mesh
 		
 		private static var MAX_AGENTS:int = 60;
@@ -152,6 +154,9 @@ package
 			crowd = new dtCrowd();
 			crowd.swigCPtr = sample.getCrowd();
 			crowd.init(MAX_AGENTS, MAX_AGENT_RADIUS, sample.getNavMesh() );
+			
+			var debug:dtCrowdAgentDebugInfo = dtCrowdAgentDebugInfo.create();
+			crowdDebugPtr = debug.swigCPtr;
 		}
 		
 		private function initEngine():void
@@ -258,7 +263,7 @@ package
 				geomMesh.pickingCollider = PickingColliderType.AS3_BEST_HIT;
 				geomMesh.addEventListener(MouseEvent3D.CLICK, onMeshClick );
 				//geomMesh.y = -50;
-				//geomMesh.rotationY = 180;
+				//geomMesh.rotationY = -180; 
 				//geomMesh.material =  new TextureMaterial(Cast.bitmapTexture(Diffuse));
 				//geomMesh.material = geomMaterial;
 				geomMesh.material = new ColorMaterial(0xcccccc);
@@ -272,7 +277,7 @@ package
 		
 		private function onMeshClick(e:MouseEvent3D):void
 		{
-			trace(e.scenePosition);
+			//trace(e.scenePosition);
 			
 			if ( e.shiftKey ) //add agent
 			{
@@ -282,11 +287,47 @@ package
 				var agent:dtCrowdAgent = new dtCrowdAgent();
 				agent.swigCPtr = crowd.getAgent(idx);
 				
-				trace("agent added at " + CModule.readFloat( agent.npos ), CModule.readFloat( agent.npos + 4 ), CModule.readFloat( agent.npos + 8));
+				trace("agent added at ",e.scenePosition," added to:",CModule.readFloat( agent.npos ), CModule.readFloat( agent.npos + 4 ), CModule.readFloat( agent.npos + 8));
 				//agentObjectsByAgendIdx[ idx ].x = CModule.readFloat( agent.npos );
 				//agentObjectsByAgendIdx[ idx ].y = CModule.readFloat( agent.npos +4 );
 				//agentObjectsByAgendIdx[ idx ].z = CModule.readFloat( agent.npos +8 );
 			}
+			else
+			{
+				
+				for ( var idx2:Object in agentObjectsByAgendIdx ) //iteratore through each object key
+				{
+					moveAgentNear(int(idx2), e.scenePosition);
+				}
+			}
+		}
+		
+		private function moveAgentNear(idx:int, scenePosition:Vector3D):void
+		{
+			
+			var posPtr:int = CModule.alloca(12);
+			CModule.writeFloat(posPtr, scenePosition.x);
+			CModule.writeFloat(posPtr + 4, scenePosition.y);
+			CModule.writeFloat(posPtr + 8, scenePosition.z);
+			
+			var navquery:dtNavMeshQuery  = new dtNavMeshQuery();
+			navquery.swigCPtr =  sample.getNavMeshQuery();
+			
+			var targetRef:int = CModule.alloca(4);
+			var targetPos:int = CModule.alloca(12);
+			
+			var status:int = navquery.findNearestPoly(posPtr, crowd.getQueryExtents(), crowd.getFilter(), targetRef, targetPos);
+			//var status:int = findNearestPoly2(navquery,posPtr, crowd.getQueryExtents(), crowd.getFilter(), targetRef, targetPos);
+			
+			
+			//trace(CModule.readFloat(targetPos), CModule.readFloat(targetPos+4), CModule.readFloat(targetPos+8));
+			
+			var test1:int = CModule.read32(targetRef);
+			var test2:Number = CModule.readFloat(targetPos);
+		
+			if ( targetRef > 0)
+				crowd.requestMoveTarget(idx,targetRef, targetPos);
+			
 		}
 		
 		private function addAgentNear(scenePosition:Vector3D):int
@@ -328,12 +369,13 @@ package
 			
 			trace(CModule.readFloat(targetPos), CModule.readFloat(targetPos+4), CModule.readFloat(targetPos+8));
 			
-			var test1:Number = CModule.readFloat(targetRef);
+			var test1:int = CModule.read32(targetRef);
 			var test2:Number = CModule.readFloat(targetPos);
 		
 			if (targetRef > 0)
 				crowd.requestMoveTarget(idx, targetRef, targetPos);
 			
+				
 			agentObjectsByAgendIdx[ idx ] = cubeMesh;
 			
 			return idx;
@@ -369,8 +411,42 @@ package
 				cameraController.incrementStrafe(strafeSpeed);
 			}
 			
+			updateCrowd();
+			crowd.update(0.3, 0);
+			
+			updateAgents();
+			
 			
 			view.render();
+		}
+		
+		private function updateCrowd():void
+		{
+			var now:Number = getTimer() / 1000.0;
+            var passedTime:Number = now - mLastFrameTimestamp;
+            mLastFrameTimestamp = now;
+			
+			
+			crowd.update(passedTime, crowdDebugPtr);
+			
+		}
+		
+		/**
+		 * updates the position of the agent render objects with the recast agent positions
+		 */
+		private function updateAgents():void
+		{
+			//todo - change this to a vector or use domain memory to speed this up
+			for ( var idx:Object in agentObjectsByAgendIdx ) //iteratore through each object key
+			{
+				var agent:dtCrowdAgent = new dtCrowdAgent();
+				agent.swigCPtr = crowd.getAgent(int(idx));
+				
+				//trace("agent at:",CModule.readFloat( agent.npos ), CModule.readFloat( agent.npos + 4 ), CModule.readFloat( agent.npos + 8));
+				agentObjectsByAgendIdx[ idx ].x = CModule.readFloat( agent.npos );
+				agentObjectsByAgendIdx[ idx ].y = CModule.readFloat( agent.npos +4 );
+				agentObjectsByAgendIdx[ idx ].z = CModule.readFloat( agent.npos +8 );
+			}
 		}
 		
 		private function initListeners():void
@@ -476,7 +552,8 @@ package
 		private var sample:Sample_TempObstacles;
 		private var geom:InputGeom;
 		private var crowd:dtCrowd;
-		
+		private var crowdDebugPtr:int;
+		private var mLastFrameTimestamp:Number;
 		private var agentObjectsByAgendIdx:Dictionary = new Dictionary();
 		
 		//engine variables
