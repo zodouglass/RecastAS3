@@ -98,6 +98,8 @@ package
 		{
 			if( crowd )
 				crowd.update(deltaTime, crowdDebugPtr);
+				
+			sample.handleUpdate(deltaTime); //update the tileCache
 		}
 		
 		//todo - this should take 2 params, position, and dtCrowdAgentParams

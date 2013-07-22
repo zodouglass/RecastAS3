@@ -77,6 +77,7 @@ package
 			
 			//load the object file mesh
 			var b:ByteArray = new myObjFile();
+			recastManager.m_agentRadius = 1.5;
 			recastManager.loadMesh(OBJ_FILE, b);
 		}
 		
@@ -160,8 +161,8 @@ package
 		
 		private function onMiddleClick(e:MouseEvent):void
 		{
-			var obstacleRadius:Number = Math.random() * 20;
-			var obstacleHeight:Number = 50;
+			var obstacleRadius:Number = 5 + Math.random() * 20;
+			var obstacleHeight:Number = 20;
 			var oid:int = recastManager.addObstacle(new Vector3D(world.mouseX, WORLD_Z * SCALE, world.mouseY), obstacleRadius, obstacleHeight);
 			obstacleRefs.push(oid);
 			
