@@ -45,80 +45,131 @@
 	#include "Sample_TempObstacles.h"
 
 
-void findNearestPoly2() __attribute__((used,
-	annotate("as3sig:public function findNearestPoly2(self, center:int, extents:int, filter:int, nearestRef:int, nearestPt:int):int"),
-	annotate("as3package:org.recastnavigation")));
+//utility method for getting the navigation mesh triangles for debug rendering
+void getTiles() __attribute__((used,
+  annotate("as3sig:public function getTiles(samplePtr):Array"),
+  annotate("as3package:org.recastnavigation.util")));
 
-void findNearestPoly2() {
-  dtNavMeshQuery *arg1 = (dtNavMeshQuery *) 0 ;
-  float *arg2 = (float *) 0 ;
-  float *arg3 = (float *) 0 ;
-  dtQueryFilter *arg4 = (dtQueryFilter *) 0 ;
-  dtPolyRef *arg5 = (dtPolyRef *) 0 ;
-  float *arg6 = (float *) 0 ;
-  int arg5Loc;
-  int arg6Loc;
-  dtStatus result ;
+void getTiles() {
+
+  Sample_TempObstacles* sample = ( Sample_TempObstacles* ) 0;
+  AS3_GetScalarFromVar(sample, samplePtr);
   
+  //AS3_Val result = AS3_Array("");
+  inline_as3(
+      "var result:Array = [];\n"
+      : : 
+  );
+  
+
+
+  const dtNavMesh* mesh = sample->getNavMesh();
+  if( !mesh )
+    AS3_Trace("nav mesh not defined");
+
+  for (int i = 0; i < mesh->getMaxTiles(); ++i)
   {
-    AS3_GetScalarFromVar(arg1, self);
-  }
-  {
-    AS3_GetScalarFromVar(arg2, center);
-  }
-  {
-    AS3_GetScalarFromVar(arg3, extents);
-  }
-  {
-    AS3_GetScalarFromVar(arg4, filter);
-  }
-  {
-    AS3_GetScalarFromVar(arg5, nearestRef);
-  }
-  {
-    AS3_GetScalarFromVar(arg6, nearestPt);
+    const dtMeshTile* tile = mesh->getTile(i);
+    if (!tile->header) continue;
+    dtPolyRef base = mesh->getPolyRefBase(tile);
+
+
+    AS3_DeclareVar(vertCount, int);
+    AS3_CopyScalarToVar(vertCount, tile->header->vertCount);
+
+    inline_as3(
+        "var as3polys:Array = [];\n"
+        "var as3tileverts:Array = [];"
+        "var as3Tile:Object = {polys: as3polys, vertCount: vertCount};\n"
+        : : 
+    );
+    for( int l=0; l < tile->header->vertCount*3; l+=3)
+    {
+      AS3_DeclareVar(x, Number);
+      AS3_CopyScalarToVar(x, tile->verts[l]);
+
+      AS3_DeclareVar(y, Number);
+      AS3_CopyScalarToVar(y, tile->verts[l+1]);
+
+      AS3_DeclareVar(z, Number);
+      AS3_CopyScalarToVar(z, tile->verts[l+2]);
+
+      inline_as3(
+          "var pos:Object = {x: x, y: y, z: z};\n"
+          "as3tileverts.push(pos);\n"
+          : : 
+      );
+
+    }
+
+    inline_as3(
+          "as3Tile.verts = as3tileverts;\n"
+          "result.push(as3Tile);\n"
+          : : 
+      );
+
+    for (int j = 0; j < tile->header->polyCount; ++j)
+    {
+      
+      const dtPoly* poly = &tile->polys[j];
+
+      // AS3_Val as3verts = AS3_Array("");
+      inline_as3(
+          "var as3verts:Array = [];\n"
+          : : 
+      );
+      
+      const unsigned int ip = (unsigned int)(poly - tile->polys);
+      const dtPolyDetail* pd = &tile->detailMeshes[ip];
+     
+      for (int i = 0; i < pd->triCount; ++i)
+      {
+        const unsigned char* t = &tile->detailTris[(pd->triBase+i)*4];
+        for (int j = 0; j < 3; ++j)
+        {
+          float* v;
+          if (t[j] < poly->vertCount)
+            v = &tile->verts[poly->verts[t[j]]*3];//dd->vertex(&tile->verts[poly->verts[t[j]]*3], c);
+          else
+            v = &tile->detailVerts[(pd->vertBase+t[j]-poly->vertCount)*3]; //dd->vertex(&tile->detailVerts[(pd->vertBase+t[j]-poly->vertCount)*3], c);
+            
+          
+          AS3_DeclareVar(v0, Number);
+          AS3_CopyScalarToVar(v0, v[0]);
+
+          AS3_DeclareVar(v1, Number);
+          AS3_CopyScalarToVar(v1, v[1]);
+
+          AS3_DeclareVar(v2, Number);
+          AS3_CopyScalarToVar(v2, v[2]);
+          //TODO - this should get the index of the value in tile->verts, rather than creating duplicate verts.
+          inline_as3(
+              "as3verts.push(v0);\n"
+              "as3verts.push(v1);\n"
+              "as3verts.push(v2);\n"
+              : : 
+          );
+
+        }
+      }
+
+     // AS3_Val as3poly = AS3_Object("triCount: IntType, verts: AS3ValType", pd->triCount, as3verts);
+     // AS3_Set(as3polys, AS3_Int(j), as3poly);
+
+      AS3_DeclareVar(triCount, int);
+      AS3_CopyScalarToVar(triCount, pd->triCount);
+      inline_as3(
+          "var as3poly:Object = {triCount: triCount, verts: as3verts};\n"
+          "as3polys.push(as3poly);\n"
+          : : 
+      );
+    }
   }
 
-//test trace
-/*
-   float bmin[3], bmax[3];
-	dtVsub(bmin, (float const *)arg2, (float const *)arg3);
-	dtVadd(bmax, (float const *)arg2, (float const *)arg3);
 
-   AS3_DeclareVar(as3bMinX, Number);
-   AS3_DeclareVar(as3bMinY, Number);
-   AS3_DeclareVar(as3bMinZ, Number);
-   AS3_DeclareVar(as3bMaxX, Number);
-   AS3_DeclareVar(as3bMaxY, Number);
-   AS3_DeclareVar(as3bMaxZ, Number);
-   AS3_CopyScalarToVar( as3bMinX, bmin[0] );
-   AS3_CopyScalarToVar( as3bMinY, bmin[1] );
-   AS3_CopyScalarToVar( as3bMinZ, bmin[2] );
-
-   AS3_CopyScalarToVar( as3bMaxX, bmax[0] );
-   AS3_CopyScalarToVar( as3bMaxY, bmax[1] );
-   AS3_CopyScalarToVar( as3bMaxZ, bmax[2] );
-   AS3_Trace(as3bMinX);
-   AS3_Trace(as3bMinY);
-   AS3_Trace(as3bMinZ);
-   AS3_Trace(as3bMaxX);
-   AS3_Trace(as3bMaxY);
-   AS3_Trace(as3bMaxZ);
-*/
-
-  result = (dtStatus)((dtNavMeshQuery const *)arg1)->findNearestPoly((float const *)arg2,(float const *)arg3,(dtQueryFilter const *)arg4,arg5,arg6);
-  {
-    AS3_DeclareVar(asresult, int);
-    AS3_CopyScalarToVar(asresult, result);
-
-    AS3_DeclareVar(asTargetRef, int);
-    AS3_CopyScalarToVar(asTargetRef, arg5);
-  }
-  {
-    AS3_ReturnAS3Var(asresult);
-  }
+ // return result;
+  AS3_ReturnAS3Var(result);
 }
-
 
 %}
 
@@ -216,4 +267,5 @@ void findNearestPoly2() {
 %include "MeshLoaderObj.h"
 %include "InputGeom.h"
 %include "Sample.h"
+%ignore addTempObstacle(const float* pos);
 %include "Sample_TempObstacles.h"

@@ -1,0 +1,11 @@
+# Blender v2.68 (sub 0) OBJ File: ''
+# www.blender.org
+mtllib nav_test2.mtl
+o Plane
+v 7.429199 0.000000 7.429199
+v -7.429199 0.000000 7.429199
+v 7.429199 0.000000 -7.429199
+v -7.429199 0.000000 -7.429199
+usemtl None
+s off
+f 2 1 3 4

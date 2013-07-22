@@ -11,7 +11,5 @@
 ./demo/InputGeom.h:87: Warning 501: Previous declaration is InputGeom::drawOffMeshConnections(duDebugDraw *,bool)
 ./demo/InputGeom.h:97: Warning 501: Overloaded declaration ignored.  InputGeom::drawConvexVolumes(duDebugDraw *)
 ./demo/InputGeom.h:97: Warning 501: Previous declaration is InputGeom::drawConvexVolumes(duDebugDraw *,bool)
-./demo/Sample_TempObstacles.h:64: Warning 501: Overloaded declaration ignored.  Sample_TempObstacles::addTempObstacle(float const *,float const,float const)
-./demo/Sample_TempObstacles.h:63: Warning 501: Previous declaration is Sample_TempObstacles::addTempObstacle(float const *)
 ./demo/Sample_TempObstacles.h:66: Warning 501: Overloaded declaration ignored.  Sample_TempObstacles::removeTempObstacle(float const *,float const *)
 ./demo/Sample_TempObstacles.h:65: Warning 501: Previous declaration is Sample_TempObstacles::removeTempObstacle(dtObstacleRef)

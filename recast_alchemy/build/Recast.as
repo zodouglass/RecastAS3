@@ -6443,8 +6443,8 @@ public class Sample_TempObstacles extends Sample {
 		return _wrap_Sample_TempObstacles_getObstacleCount(swigCPtr);
 	}
 
-	public function addTempObstacle(pos:int):int {
-		return _wrap_Sample_TempObstacles_addTempObstacle(swigCPtr, pos);
+	public function addTempObstacle(pos:int, radius:Number, height:Number):int {
+		return _wrap_Sample_TempObstacles_addTempObstacle(swigCPtr, pos, radius, height);
 	}
 
 	public function removeTempObstacle(id:int):void {

@@ -412,7 +412,6 @@ package
 			}
 			
 			updateCrowd();
-			crowd.update(0.3, 0);
 			
 			updateAgents();
 			
