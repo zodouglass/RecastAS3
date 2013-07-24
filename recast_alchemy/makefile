@@ -1,7 +1,6 @@
 include Makefile.common
 
-CC="$(FLASCC)/usr/bin/g++"
-#CFLAGS=-O3 -g -Wall -swc --combine -o
+CC="$(FLASCC)/usr/bin/g++" -O4
 CFLAGS=-O4
 #OUTPUT_SWC=recast.swc
 OUTPUT_SWC=-emit-swc=recast.navigation -o recast.swc
@@ -97,19 +96,8 @@ RecastDemo:
 clean:
 	rm ./obj/*.o
 
-
-swc: 
-	${CC} ${ALL_INCS} $(BASE_CFLAGS) ${CFLAGS} main.cpp ${OUTPUT_SWC} ${ALL_OBJS}
-	#${CC} ${ALL_INCS} $(BASE_CFLAGS) ${CFLAGS} as3api.cpp main.cpp ${OUTPUT_SWC} ${ALL_OBJS} -lm
-
 swig:
 	
-	#swig from swig.h and swigmain.cpp
-	#"$(FLASCC)/usr/bin/swig" -as3 -module Recast -outdir . -includeall $(ALL_INCS) -ignoremissing -o Recast_wrapper.c swig.h
-	#$(AS3COMPILERARGS) -import $(call nativepath,$(FLASCC)/usr/lib/builtin.abc) -import $(call nativepath,$(FLASCC)/usr/lib/playerglobal.abc) Recast.as
-	#mv Recast.as Recast.as3
-	#"$(FLASCC)/usr/bin/g++" $(BASE_CFLAGS) Recast.abc Recast_wrapper.c swigmain.cpp -emit-swc=recast.navigation.Recast -o Recast.swc
-
 	#swig from recast.i file
 	# Generate the SWIG wrappers
 	PATH="$(call unixpath,$(FLASCC)/usr/bin):$(PATH)" swig -as3 -package org.recastnavigation -c++ -DBT_USE_DOUBLE_PRECISION $(ALL_INCS) -module Recast recast.i &> build/swig.log
@@ -120,7 +108,7 @@ swig:
 	java -jar $(call nativepath,$(FLASCC)/usr/lib/asc2.jar) -import $(call nativepath,$(FLASCC)/usr/lib/builtin.abc) -import $(call nativepath,$(FLASCC)/usr/lib/playerglobal.abc) build/Recast.as
 
 	# Compile the SWIG C++ wrappers
-	PATH="$(call unixpath,$(FLASCC)/usr/bin):$(PATH)" g++ $(BASE_CFLAGS) -DBT_USE_DOUBLE_PRECISION $(ALL_INCS) build/Recast_wrap.cxx -O4 -c &> build/swig_wrapper.log
+	PATH="$(call unixpath,$(FLASCC)/usr/bin):$(PATH)" g++ $(BASE_CFLAGS) $(CFLAGS) -DBT_USE_DOUBLE_PRECISION $(ALL_INCS) build/Recast_wrap.cxx -c &> build/swig_wrapper.log
 	mv Recast_wrap.o build
 
 	# protect the required symbols in the LTO exports file
@@ -133,6 +121,6 @@ swig:
 	$(ALL_OBJS) ./build/Recast_wrap.o ./build/Recast.abc \
 	-Wl,--start-group \
 	-Wl,--end-group \
-	-emit-swc=org.recastnavigation -O4 $(EXTRA_OPTS) -o build/Recast.swc &> build/swc.log
-	#-emit-swc=org.recastnavigation -O4 -flto-api=build/exports.txt $(EXTRA_OPTS) -o build/Recast.swc &> build/swc.log
+	-emit-swc=org.recastnavigation $(CFLAGS) $(EXTRA_OPTS) -o build/Recast.swc &> build/swc.log #without -flto opion
+	#-emit-swc=org.recastnavigation $(CFLAGS) -flto-api=build/exports.txt $(EXTRA_OPTS) -o build/Recast.swc &> build/swc.log #with -flto option
 

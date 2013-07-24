@@ -224,6 +224,11 @@ void getTiles() {
 %include "DetourCommon.h"
 %include "DetourNavMesh.h"
 %include "DetourNavMeshBuilder.h"
+%ignore passFilter(const dtPolyRef ref, const dtMeshTile* tile, const dtPoly* poly) const;
+%ignore getCost(const float* pa, const float* pb,
+          const dtPolyRef prevRef, const dtMeshTile* prevTile, const dtPoly* prevPoly,
+          const dtPolyRef curRef, const dtMeshTile* curTile, const dtPoly* curPoly,
+          const dtPolyRef nextRef, const dtMeshTile* nextTile, const dtPoly* nextPoly) const;
 %include "DetourNavMeshQuery.h"
 %ignore dtNodePool::getNodeAtIdx(unsigned int) const;
 %rename (equals) dtNodeQueue::operator=;

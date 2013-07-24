@@ -123,6 +123,7 @@ package
 			params.separationWeight = 2.0;
 			params.obstacleAvoidanceType = String.fromCharCode(3.0); //0, 3.0, 1
 			var updateFlags:uint = 0;
+			//todo - need to add class for enum 
 			updateFlags |= _wrap_DT_CROWD_ANTICIPATE_TURNS();
 			updateFlags |= _wrap_DT_CROWD_OPTIMIZE_VIS();
 			updateFlags |= _wrap_DT_CROWD_OPTIMIZE_TOPO();
@@ -145,8 +146,8 @@ package
 			//const dtQueryFilter* filter = crowd->getFilter();
 			//const float* ext = crowd->getQueryExtents();
 
-			var targetRef:int = CModule.alloca(4);
-			var targetPos:int = CModule.alloca(12);
+			var targetRef:int;// = CModule.alloca(4);
+			var targetPos:int;// = CModule.alloca(12);
 			
 			var statusPtr:int = navquery.findNearestPoly(posPtr, crowd.getQueryExtents(), crowd.getFilter(), targetRef, targetPos);
 			//var status:int = findNearestPoly2(navquery, posPtr, crowd.getQueryExtents(), crowd.getFilter(), targetRef, targetPos);

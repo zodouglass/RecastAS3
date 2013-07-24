@@ -30,6 +30,7 @@ Requirements
 Compiling the swc
 ==================
 - open cygwin from Crossbridge
+- make sure the 64bit Java version is at the front of your PATH ev. If you have a 32-bit java under windows/system32 that is before your JAVA_HOME ev, than the 32 bit will take priority.
 - change directory to your RecastAS3\recast_alchemy directory
 run once:
 set FLASCC=/cygdrive/c/sdk/Crossbridge_1.0.1/sdk/
@@ -37,4 +38,4 @@ set FLEX=/cygdrive/c/sdk/flex_sdk_4.6.0.23201B_air_3.2/
 run to complile:
 make all FLASCC=$FLASCC FLEX=$FLEX
 	(changing the locations as necessary)
-- swc is outputed to recast_alchemy/recast.swc
+- swc is outputed to recast_alchemy/build/recast.swc

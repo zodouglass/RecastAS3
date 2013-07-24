@@ -2535,14 +2535,6 @@ public class dtQueryFilter {
 		return obj;
 	}
 
-	public function passFilter(ref:int, tile:int, poly:int):Boolean {
-		return _wrap_dtQueryFilter_passFilter(swigCPtr, ref, tile, poly);
-	}
-
-	public function getCost(pa:int, pb:int, prevRef:int, prevTile:int, prevPoly:int, curRef:int, curTile:int, curPoly:int, nextRef:int, nextTile:int, nextPoly:int):Number {
-		return _wrap_dtQueryFilter_getCost(swigCPtr, pa, pb, prevRef, prevTile, prevPoly, curRef, curTile, curPoly, nextRef, nextTile, nextPoly);
-	}
-
 	public function getAreaCost(i:int):Number {
 		return _wrap_dtQueryFilter_getAreaCost(swigCPtr, i);
 	}
