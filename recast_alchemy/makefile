@@ -15,20 +15,20 @@ RECAST_DEMO_OBJS=${OUTPUT_OBJ}/ChunkyTriMesh.o ${OUTPUT_OBJ}/MeshLoaderObj.o ${O
 
 ALL_OBJS=${DETOUR_OBJS} ${DETOUR_CROWD_OBJS} ${DETOUR_TILE_OBJS} ${RECAST_OBJS} ${DEBUG_DRAW_OBJS} ${RECAST_DEMO_OBJS}
 
-RECAST_INC=-I../recastnavigation/Recast/Include
-DETOUR_INC=-I../recastnavigation/Detour/Include -I../recastnavigation/DetourCrowd/Include -I../recastnavigation/DetourTileCache/Include
-DEBUG_INC=-I../recastnavigation/DebugUtils/Include
+RECAST_INC=-I../recastnavigation_r351/Recast/Include
+DETOUR_INC=-I../recastnavigation_r351/Detour/Include -I../recastnavigation_r351/DetourCrowd/Include -I../recastnavigation_r351/DetourTileCache/Include
+DEBUG_INC=-I../recastnavigation_r351/DebugUtils/Include
 #DEMO_INC=-I../RecastDemo/Include
 DEMO_INC=-I./demo
 ALL_INCS=${RECAST_INC} ${DETOUR_INC} ${DEBUG_INC} ${DEMO_INC}
 
-RECAST_SOURCE=../recastnavigation/Recast/Source
+RECAST_SOURCE=../recastnavigation_r351/Recast/Source
 #RECAST_DEMO_SOURCE=../RecastDemo/Source
 RECAST_DEMO_SOURCE=./demo
-DETOUR_SOURCE=../recastnavigation/Detour/Source
-DETOUR_CROWD_SOURCE=../recastnavigation/DetourCrowd/Source
-DETOUR_TC_SOURCE=../recastnavigation/DetourTileCache/Source
-DEBUG_SOURCE=../recastnavigation/DebugUtils/Source
+DETOUR_SOURCE=../recastnavigation_r351/Detour/Source
+DETOUR_CROWD_SOURCE=../recastnavigation_r351/DetourCrowd/Source
+DETOUR_TC_SOURCE=../recastnavigation_r351/DetourTileCache/Source
+DEBUG_SOURCE=../recastnavigation_r351/DebugUtils/Source
 
 
 all: recompile
@@ -121,6 +121,6 @@ swig:
 	$(ALL_OBJS) ./build/Recast_wrap.o ./build/Recast.abc \
 	-Wl,--start-group \
 	-Wl,--end-group \
-	-emit-swc=org.recastnavigation $(CFLAGS) $(EXTRA_OPTS) -o build/Recast.swc &> build/swc.log #without -flto opion
+	-emit-swc=org.recastnavigation $(CFLAGS) $(EXTRA_OPTS) -swf-version=17 -o build/Recast.swc &> build/swc.log #without -flto opion
 	#-emit-swc=org.recastnavigation $(CFLAGS) -flto-api=build/exports.txt $(EXTRA_OPTS) -o build/Recast.swc &> build/swc.log #with -flto option
 

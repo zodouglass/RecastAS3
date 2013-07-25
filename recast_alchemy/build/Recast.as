@@ -454,6 +454,10 @@ public class Recast {
 		return _wrap_dtIntersectSegmentPoly2D(p0, p1, verts, nverts, tmin, tmax, segMin, segMax);
 	}
 
+	public static function dtIntersectSegSeg2D(ap:int, aq:int, bp:int, bq:int, s:int, t:int):Boolean {
+		return _wrap_dtIntersectSegSeg2D(ap, aq, bp, bq, s, t);
+	}
+
 	public static function dtPointInPolygon(pt:int, verts:int, nverts:int):Boolean {
 		return _wrap_dtPointInPolygon(pt, verts, nverts);
 	}
@@ -552,6 +556,14 @@ public class Recast {
 
 	public static function get DT_STRAIGHTPATH_OFFMESH_CONNECTION():int{
 		return _wrap_DT_STRAIGHTPATH_OFFMESH_CONNECTION();
+	}
+
+	public static function get DT_STRAIGHTPATH_AREA_CROSSINGS():int{
+		return _wrap_DT_STRAIGHTPATH_AREA_CROSSINGS();
+	}
+
+	public static function get DT_STRAIGHTPATH_ALL_CROSSINGS():int{
+		return _wrap_DT_STRAIGHTPATH_ALL_CROSSINGS();
 	}
 
 	public static function get DT_POLYTYPE_GROUND():int{
@@ -2586,8 +2598,8 @@ public class dtNavMeshQuery {
 		return _wrap_dtNavMeshQuery_findPath(swigCPtr, startRef, endRef, startPos, endPos, filter, path, pathCount, maxPath);
 	}
 
-	public function findStraightPath(startPos:int, endPos:int, path:int, pathSize:int, straightPath:int, straightPathFlags:int, straightPathRefs:int, straightPathCount:int, maxStraightPath:int):int {
-		return _wrap_dtNavMeshQuery_findStraightPath(swigCPtr, startPos, endPos, path, pathSize, straightPath, straightPathFlags, straightPathRefs, straightPathCount, maxStraightPath);
+	public function findStraightPath(startPos:int, endPos:int, path:int, pathSize:int, straightPath:int, straightPathFlags:int, straightPathRefs:int, straightPathCount:int, maxStraightPath:int, options:int):int {
+		return _wrap_dtNavMeshQuery_findStraightPath(swigCPtr, startPos, endPos, path, pathSize, straightPath, straightPathFlags, straightPathRefs, straightPathCount, maxStraightPath, options);
 	}
 
 	public function initSlicedFindPath(startRef:int, endRef:int, startPos:int, endPos:int, filter:int):int {

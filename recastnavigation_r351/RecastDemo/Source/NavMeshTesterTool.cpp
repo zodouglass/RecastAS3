@@ -155,6 +155,7 @@ NavMeshTesterTool::NavMeshTesterTool() :
 	m_navQuery(0),
 	m_pathFindStatus(DT_FAILURE),
 	m_toolMode(TOOLMODE_PATHFIND_FOLLOW),
+	m_straightPathOptions(0),
 	m_startRef(0),
 	m_endRef(0),
 	m_npolys(0),
@@ -217,6 +218,28 @@ void NavMeshTesterTool::handleMenu()
 	{
 		m_toolMode = TOOLMODE_PATHFIND_STRAIGHT;
 		recalc();
+	}
+	if (m_toolMode == TOOLMODE_PATHFIND_STRAIGHT)
+	{
+		imguiIndent();
+		imguiLabel("Vertices at crossings");
+		if (imguiCheck("None", m_straightPathOptions == 0))
+		{
+			m_straightPathOptions = 0;
+			recalc();
+		}
+		if (imguiCheck("Area", m_straightPathOptions == DT_STRAIGHTPATH_AREA_CROSSINGS))
+		{
+			m_straightPathOptions = DT_STRAIGHTPATH_AREA_CROSSINGS;
+			recalc();
+		}
+		if (imguiCheck("All", m_straightPathOptions == DT_STRAIGHTPATH_ALL_CROSSINGS))
+		{
+			m_straightPathOptions = DT_STRAIGHTPATH_ALL_CROSSINGS;
+			recalc();
+		}
+
+		imguiUnindent();
 	}
 	if (imguiCheck("Pathfind Sliced", m_toolMode == TOOLMODE_PATHFIND_SLICED))
 	{
@@ -423,9 +446,8 @@ void NavMeshTesterTool::handleToggle()
 		if (m_pathIterPolyCount)
 		{
 			// Iterate over the path to find smooth path on the detail mesh surface.
-			
-			m_navQuery->closestPointOnPolyBoundary(m_startRef, m_spos, m_iterPos);
-			m_navQuery->closestPointOnPolyBoundary(m_pathIterPolys[m_pathIterPolyCount-1], m_epos, m_targetPos);
+			m_navQuery->closestPointOnPoly(m_startRef, m_spos, m_iterPos);
+			m_navQuery->closestPointOnPoly(m_pathIterPolys[m_pathIterPolyCount-1], m_epos, m_targetPos);
 			
 			m_nsmoothPath = 0;
 			
@@ -631,8 +653,8 @@ void NavMeshTesterTool::recalc()
 				int npolys = m_npolys;
 				
 				float iterPos[3], targetPos[3];
-				m_navQuery->closestPointOnPolyBoundary(m_startRef, m_spos, iterPos);
-				m_navQuery->closestPointOnPolyBoundary(polys[npolys-1], m_epos, targetPos);
+				m_navQuery->closestPointOnPoly(m_startRef, m_spos, iterPos);
+				m_navQuery->closestPointOnPoly(polys[npolys-1], m_epos, targetPos);
 				
 				static const float STEP_SIZE = 0.5f;
 				static const float SLOP = 0.01f;
@@ -773,7 +795,7 @@ void NavMeshTesterTool::recalc()
 				
 				m_navQuery->findStraightPath(m_spos, epos, m_polys, m_npolys,
 											 m_straightPath, m_straightPathFlags,
-											 m_straightPathPolys, &m_nstraightPath, MAX_POLYS);
+											 m_straightPathPolys, &m_nstraightPath, MAX_POLYS, m_straightPathOptions);
 			}
 		}
 		else
@@ -982,8 +1004,12 @@ void NavMeshTesterTool::handleRender()
 		
 		if (m_npolys)
 		{
-			for (int i = 1; i < m_npolys-1; ++i)
+			for (int i = 0; i < m_npolys; ++i)
+			{
+				if (m_polys[i] == m_startRef || m_polys[i] == m_endRef)
+					continue;
 				duDebugDrawNavMeshPoly(&dd, *m_navMesh, m_polys[i], pathCol);
+			}
 		}
 				
 		if (m_nsmoothPath)
@@ -1030,15 +1056,20 @@ void NavMeshTesterTool::handleRender()
 			dd.depthMask(true);
 		}
 	}
-	else if (m_toolMode == TOOLMODE_PATHFIND_STRAIGHT || m_toolMode == TOOLMODE_PATHFIND_SLICED)
+	else if (m_toolMode == TOOLMODE_PATHFIND_STRAIGHT ||
+			 m_toolMode == TOOLMODE_PATHFIND_SLICED)
 	{
 		duDebugDrawNavMeshPoly(&dd, *m_navMesh, m_startRef, startCol);
 		duDebugDrawNavMeshPoly(&dd, *m_navMesh, m_endRef, endCol);
 		
 		if (m_npolys)
 		{
-			for (int i = 1; i < m_npolys-1; ++i)
+			for (int i = 0; i < m_npolys; ++i)
+			{
+				if (m_polys[i] == m_startRef || m_polys[i] == m_endRef)
+					continue;
 				duDebugDrawNavMeshPoly(&dd, *m_navMesh, m_polys[i], pathCol);
+			}
 		}
 		
 		if (m_nstraightPath)
@@ -1053,7 +1084,7 @@ void NavMeshTesterTool::handleRender()
 				if (m_straightPathFlags[i] & DT_STRAIGHTPATH_OFFMESH_CONNECTION)
 					col = offMeshCol;
 				else
-					col = pathCol;
+					col = spathCol;
 				
 				dd.vertex(m_straightPath[i*3], m_straightPath[i*3+1]+0.4f, m_straightPath[i*3+2], col);
 				dd.vertex(m_straightPath[(i+1)*3], m_straightPath[(i+1)*3+1]+0.4f, m_straightPath[(i+1)*3+2], col);
@@ -1070,7 +1101,7 @@ void NavMeshTesterTool::handleRender()
 				else if (m_straightPathFlags[i] & DT_STRAIGHTPATH_OFFMESH_CONNECTION)
 					col = offMeshCol;
 				else
-					col = pathCol;
+					col = spathCol;
 				dd.vertex(m_straightPath[i*3], m_straightPath[i*3+1]+0.4f, m_straightPath[i*3+2], spathCol);
 			}
 			dd.end();

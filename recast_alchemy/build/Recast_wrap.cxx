@@ -3293,6 +3293,45 @@ void _wrap_dtIntersectSegmentPoly2D() {
 }
 
 
+__attribute__((annotate("as3sig:public function _wrap_dtIntersectSegSeg2D(ap:int, aq:int, bp:int, bq:int, s:int, t:int):Boolean")))
+void _wrap_dtIntersectSegSeg2D() {
+  float *arg1 = (float *) 0 ;
+  float *arg2 = (float *) 0 ;
+  float *arg3 = (float *) 0 ;
+  float *arg4 = (float *) 0 ;
+  float *arg5 = 0 ;
+  float *arg6 = 0 ;
+  bool result ;
+  
+  {
+    AS3_GetScalarFromVar(arg1, ap);
+  }
+  {
+    AS3_GetScalarFromVar(arg2, aq);
+  }
+  {
+    AS3_GetScalarFromVar(arg3, bp);
+  }
+  {
+    AS3_GetScalarFromVar(arg4, bq);
+  }
+  {
+    AS3_GetScalarFromVar(arg5, s);
+  }
+  {
+    AS3_GetScalarFromVar(arg6, t);
+  }
+  result = (bool)dtIntersectSegSeg2D((float const *)arg1,(float const *)arg2,(float const *)arg3,(float const *)arg4,*arg5,*arg6);
+  {
+    AS3_DeclareVar(asresult, Boolean);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
 __attribute__((annotate("as3sig:public function _wrap_dtPointInPolygon(pt:int, verts:int, nverts:int):Boolean")))
 void _wrap_dtPointInPolygon() {
   float *arg1 = (float *) 0 ;
@@ -3782,6 +3821,36 @@ void _wrap_DT_STRAIGHTPATH_OFFMESH_CONNECTION() {
   int result ;
   
   result = DT_STRAIGHTPATH_OFFMESH_CONNECTION;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DT_STRAIGHTPATH_AREA_CROSSINGS():int")))
+void _wrap_DT_STRAIGHTPATH_AREA_CROSSINGS() {
+  int result ;
+  
+  result = DT_STRAIGHTPATH_AREA_CROSSINGS;
+  {
+    AS3_DeclareVar(asresult, int);
+    AS3_CopyScalarToVar(asresult, result);
+  }
+  {
+    AS3_ReturnAS3Var(asresult);
+  }
+}
+
+
+__attribute__((annotate("as3sig:public function _wrap_DT_STRAIGHTPATH_ALL_CROSSINGS():int")))
+void _wrap_DT_STRAIGHTPATH_ALL_CROSSINGS() {
+  int result ;
+  
+  result = DT_STRAIGHTPATH_ALL_CROSSINGS;
   {
     AS3_DeclareVar(asresult, int);
     AS3_CopyScalarToVar(asresult, result);
@@ -9359,7 +9428,7 @@ void _wrap_dtNavMeshQuery_findPath() {
 }
 
 
-__attribute__((annotate("as3sig:public function _wrap_dtNavMeshQuery_findStraightPath(self, startPos:int, endPos:int, path:int, pathSize:int, straightPath:int, straightPathFlags:int, straightPathRefs:int, straightPathCount:int, maxStraightPath:int):int")))
+__attribute__((annotate("as3sig:public function _wrap_dtNavMeshQuery_findStraightPath(self, startPos:int, endPos:int, path:int, pathSize:int, straightPath:int, straightPathFlags:int, straightPathRefs:int, straightPathCount:int, maxStraightPath:int, options:int):int")))
 void _wrap_dtNavMeshQuery_findStraightPath() {
   dtNavMeshQuery *arg1 = (dtNavMeshQuery *) 0 ;
   float *arg2 = (float *) 0 ;
@@ -9371,6 +9440,7 @@ void _wrap_dtNavMeshQuery_findStraightPath() {
   dtPolyRef *arg8 = (dtPolyRef *) 0 ;
   int *arg9 = (int *) 0 ;
   int arg10 ;
+  int arg11 ;
   dtStatus result ;
   
   {
@@ -9403,7 +9473,10 @@ void _wrap_dtNavMeshQuery_findStraightPath() {
   {
     AS3_GetScalarFromVar(arg10, maxStraightPath);
   }
-  result = (dtStatus)((dtNavMeshQuery const *)arg1)->findStraightPath((float const *)arg2,(float const *)arg3,(dtPolyRef const *)arg4,arg5,arg6,arg7,arg8,arg9,arg10);
+  {
+    AS3_GetScalarFromVar(arg11, options);
+  }
+  result = (dtStatus)((dtNavMeshQuery const *)arg1)->findStraightPath((float const *)arg2,(float const *)arg3,(dtPolyRef const *)arg4,arg5,arg6,arg7,arg8,arg9,arg10,arg11);
   {
     AS3_DeclareVar(asresult, int);
     AS3_CopyScalarToVar(asresult, result);

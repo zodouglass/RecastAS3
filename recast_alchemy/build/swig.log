@@ -1,12 +1,14 @@
-../recastnavigation/DebugUtils/Include/RecastDebugDraw.h:40: Warning 501: Overloaded declaration ignored.  duDebugDrawRegionConnections(duDebugDraw *,rcContourSet const &)
-../recastnavigation/DebugUtils/Include/RecastDebugDraw.h:40: Warning 501: Previous declaration is duDebugDrawRegionConnections(duDebugDraw *,rcContourSet const &,float const)
-../recastnavigation/DebugUtils/Include/RecastDebugDraw.h:41: Warning 501: Overloaded declaration ignored.  duDebugDrawRawContours(duDebugDraw *,rcContourSet const &)
-../recastnavigation/DebugUtils/Include/RecastDebugDraw.h:41: Warning 501: Previous declaration is duDebugDrawRawContours(duDebugDraw *,rcContourSet const &,float const)
-../recastnavigation/DebugUtils/Include/RecastDebugDraw.h:42: Warning 501: Overloaded declaration ignored.  duDebugDrawContours(duDebugDraw *,rcContourSet const &)
-../recastnavigation/DebugUtils/Include/RecastDebugDraw.h:42: Warning 501: Previous declaration is duDebugDrawContours(duDebugDraw *,rcContourSet const &,float const)
-../recastnavigation/Recast/Include/Recast.h:131: Warning 314: 'label' is an AS3 keyword, renaming to '_label'
-../recastnavigation/Recast/Include/Recast.h:135: Warning 314: 'label' is an AS3 keyword, renaming to '_label'
-../recastnavigation/Recast/Include/Recast.h:140: Warning 314: 'label' is an AS3 keyword, renaming to '_label'
+../recastnavigation_r351/DebugUtils/Include/RecastDebugDraw.h:40: Warning 501: Overloaded declaration ignored.  duDebugDrawRegionConnections(duDebugDraw *,rcContourSet const &)
+../recastnavigation_r351/DebugUtils/Include/RecastDebugDraw.h:40: Warning 501: Previous declaration is duDebugDrawRegionConnections(duDebugDraw *,rcContourSet const &,float const)
+../recastnavigation_r351/DebugUtils/Include/RecastDebugDraw.h:41: Warning 501: Overloaded declaration ignored.  duDebugDrawRawContours(duDebugDraw *,rcContourSet const &)
+../recastnavigation_r351/DebugUtils/Include/RecastDebugDraw.h:41: Warning 501: Previous declaration is duDebugDrawRawContours(duDebugDraw *,rcContourSet const &,float const)
+../recastnavigation_r351/DebugUtils/Include/RecastDebugDraw.h:42: Warning 501: Overloaded declaration ignored.  duDebugDrawContours(duDebugDraw *,rcContourSet const &)
+../recastnavigation_r351/DebugUtils/Include/RecastDebugDraw.h:42: Warning 501: Previous declaration is duDebugDrawContours(duDebugDraw *,rcContourSet const &,float const)
+../recastnavigation_r351/Detour/Include/DetourNavMeshQuery.h:166: Warning 501: Overloaded declaration ignored.  dtNavMeshQuery::findStraightPath(float const *,float const *,dtPolyRef const *,int const,float *,unsigned char *,dtPolyRef *,int *,int const) const
+../recastnavigation_r351/Detour/Include/DetourNavMeshQuery.h:166: Warning 501: Previous declaration is dtNavMeshQuery::findStraightPath(float const *,float const *,dtPolyRef const *,int const,float *,unsigned char *,dtPolyRef *,int *,int const,int const) const
+../recastnavigation_r351/Recast/Include/Recast.h:131: Warning 314: 'label' is an AS3 keyword, renaming to '_label'
+../recastnavigation_r351/Recast/Include/Recast.h:135: Warning 314: 'label' is an AS3 keyword, renaming to '_label'
+../recastnavigation_r351/Recast/Include/Recast.h:140: Warning 314: 'label' is an AS3 keyword, renaming to '_label'
 ./demo/InputGeom.h:87: Warning 501: Overloaded declaration ignored.  InputGeom::drawOffMeshConnections(duDebugDraw *)
 ./demo/InputGeom.h:87: Warning 501: Previous declaration is InputGeom::drawOffMeshConnections(duDebugDraw *,bool)
 ./demo/InputGeom.h:97: Warning 501: Overloaded declaration ignored.  InputGeom::drawConvexVolumes(duDebugDraw *)
