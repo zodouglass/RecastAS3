@@ -51,7 +51,7 @@
   </includeLibraries>
   <!-- SWC Libraries -->
   <libraryPaths>
-    <element path="..\..\recast_alchemy\build\Recast.swc" />
+    <element path="lib\Recast_r351.swc" />
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>

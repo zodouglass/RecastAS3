@@ -45,7 +45,6 @@ package
 	import org.recastnavigation.dtCrowdAgentDebugInfo;
 	import org.recastnavigation.dtCrowdAgentParams;
 	import org.recastnavigation.dtNavMeshQuery;
-	import org.recastnavigation.findNearestPoly2;
 	import org.recastnavigation.InputGeom;
 	import org.recastnavigation.Sample_TempObstacles;
 	

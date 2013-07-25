@@ -52,7 +52,7 @@
   <!-- SWC Libraries -->
   <libraryPaths>
     <element path="lib\away3d-core-fp11_4_1_4.swc" />
-    <element path="..\..\recast_alchemy\build\Recast.swc" />
+    <element path="lib\Recast_r351.swc" />
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>
